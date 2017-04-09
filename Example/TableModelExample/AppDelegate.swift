@@ -7,25 +7,25 @@
 //
 
 import UIKit
+import TableModel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        /// - TODO: later
-//        let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json")!
-//        let data = try! Data(contentsOf: url)
-//        let menu = try! Menu(data: data)
-//        
-//        let example = Example()
-//        
-//        let menuVC = MenuViewController(menu: menu, delegate: example)
-//        let navigationVC = UINavigationController(rootViewController: menuVC)
-//        
-//        window?.rootViewController = navigationVC
+        let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json")!
+        let data = try! Data(contentsOf: url)
+        let table = try! Table(jsonData: data)
+        
+        let delegate = TableModelDelegate()
+        let menuVC = SettingsTableViewController(table: table, delegate: delegate)
+        let navigationVC = UINavigationController(rootViewController: menuVC)
+        
+        window?.rootViewController = navigationVC
         
         return true
     }

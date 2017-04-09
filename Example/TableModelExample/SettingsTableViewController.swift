@@ -7,26 +7,22 @@
 //
 
 import UIKit
+import TableModel
 
-/// - TODO: later
-//class SettingsTableViewController: TableViewController {
-//    
-//    
-//    
-//}
+class SettingsTableViewController: TableViewController {
+    
+}
 
-//public class TableModelDataSource: MenuViewControllerDelegate {
-//    
-//    public init() {}
-//    
-//    public func cellType(forIdentifier identifier: String) -> UITableViewCell.Type? {
-//        switch identifier {
-//        case "airplaneMode":
-//            return CustomCell.self
-//        default:
-//            //            return SubtitleCell.self
-//            return nil
-//        }
-//    }
-//    
-//}
+class TableModelDelegate: TableViewControllerDelegate {
+    
+    func cellType(forIdentifier identifier: String) -> UITableViewCell.Type? {
+        switch identifier {
+        case "airplaneMode":
+            return CustomCell.self
+        default:
+//            return SubtitleCell.self
+            return nil
+        }
+    }
+    
+}

@@ -1,7 +1,7 @@
 import UIKit
+import TableModel
 
-/*
-public class CustomCell: UITableViewCell, MenuCell {
+public class CustomCell: UITableViewCell, TableCell {
     
     let label = UILabel()
     
@@ -27,9 +27,8 @@ public class CustomCell: UITableViewCell, MenuCell {
         label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
-    public func configure(with item: MenuItem) {
+    public func configure(with item: Item) {
         label.text = "Hello"
     }
     
 }
-*/
