@@ -1,32 +1,33 @@
 import Foundation
+import Mappable
 
-public struct Table: Convertible {
+public struct Table: Mappable {
     let identifier: String
     let data: [String : Any]?
     
     let sections: [Section]
     
-    public init(dictionary: [String : Any]) throws {
-        identifier = try dictionary.value(forKey: "id")
-        data = try? dictionary.value(forKey: "data")
-        sections = try dictionary.objectsArray(forKey: "sections")
+    public init(map: [String : Any]) throws {
+        identifier = try map.value(forKey: "id")
+        data = try? map.value(forKey: "data")
+        sections = try map.objectsArray(forKey: "sections")
     }
 }
 
-public struct Section: Convertible {
+public struct Section: Mappable {
     let identifier: String
     let data: [String : Any]?
     
     let items: [Item]
     
-    public init(dictionary: [String : Any]) throws {
-        identifier = try dictionary.value(forKey: "id")
-        data = try? dictionary.value(forKey: "data")
-        items = try dictionary.objectsArray(forKey: "items")
+    public init(map: [String : Any]) throws {
+        identifier = try map.value(forKey: "id")
+        data = try? map.value(forKey: "data")
+        items = try map.objectsArray(forKey: "items")
     }
 }
 
-public struct Item: Convertible {
+public struct Item: Mappable {
     let identifier: String
     let data: [String : Any]
     
@@ -37,14 +38,14 @@ public struct Item: Convertible {
     var title: String?
     var detail: String?
     
-    public init(dictionary: [String : Any]) throws {
-        identifier = try dictionary.value(forKey: "id")
-        table = try? dictionary.object(forKey: "table")
-        data = try dictionary.value(forKey: "data")
+    public init(map: [String : Any]) throws {
+        identifier = try map.value(forKey: "id")
+        table = try? map.object(forKey: "table")
+        data = try map.value(forKey: "data")
         
-        style = try dictionary.value(forKey: "style")
-        image = try? dictionary.value(forKey: "image")
-        title = try? dictionary.value(forKey: "title")
-        detail = try? dictionary.value(forKey: "detail")
+        style = try map.value(forKey: "style")
+        image = try? map.value(forKey: "image")
+        title = try? map.value(forKey: "title")
+        detail = try? map.value(forKey: "detail")
     }
 }
