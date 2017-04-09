@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8B3276011E9AD82A00FD9502 /* TableModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3275FF1E9AD82A00FD9502 /* TableModelTests.swift */; };
 		8B32760A1E9ADD4A00FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276091E9ADD4A00FD9502 /* Mappable.framework */; };
+		8B3276251E9AED1400FD9502 /* TableModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3276241E9AED1400FD9502 /* TableModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B893AB81E98665F00B3101B /* TableModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B893AAE1E98665F00B3101B /* TableModel.framework */; };
 		8B8AFF2F1E9866ED0090B362 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2A1E9866ED0090B362 /* Cells.swift */; };
 		8B8AFF321E9866ED0090B362 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2D1E9866ED0090B362 /* TableModel.swift */; };
@@ -35,9 +36,9 @@
 		8B3276101E9AE13200FD9502 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B3276121E9AE14D00FD9502 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		8B3276131E9AE1BA00FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = SOURCE_ROOT; };
+		8B3276241E9AED1400FD9502 /* TableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableModel.h; path = Sources/TableModel.h; sourceTree = SOURCE_ROOT; };
+		8B3276261E9AED4100FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
 		8B893AAE1E98665F00B3101B /* TableModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TableModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B893AB11E98665F00B3101B /* TableModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TableModel.h; path = Sources/TableModel.h; sourceTree = "<group>"; };
-		8B893AB21E98665F00B3101B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Sources/Info.plist; sourceTree = "<group>"; };
 		8B893AB71E98665F00B3101B /* TableModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8AFF2A1E9866ED0090B362 /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		8B8AFF2D1E9866ED0090B362 /* TableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
@@ -126,8 +127,8 @@
 		8B893AB01E98665F00B3101B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8B893AB11E98665F00B3101B /* TableModel.h */,
-				8B893AB21E98665F00B3101B /* Info.plist */,
+				8B3276241E9AED1400FD9502 /* TableModel.h */,
+				8B3276261E9AED4100FD9502 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			path = ../TableModel;
@@ -151,6 +152,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B3276251E9AED1400FD9502 /* TableModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
