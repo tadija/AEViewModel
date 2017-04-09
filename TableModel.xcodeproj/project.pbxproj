@@ -10,6 +10,7 @@
 		8B3276011E9AD82A00FD9502 /* TableModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3275FF1E9AD82A00FD9502 /* TableModelTests.swift */; };
 		8B32760A1E9ADD4A00FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276091E9ADD4A00FD9502 /* Mappable.framework */; };
 		8B3276251E9AED1400FD9502 /* TableModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3276241E9AED1400FD9502 /* TableModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B3276271E9AEEF000FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276091E9ADD4A00FD9502 /* Mappable.framework */; };
 		8B893AB81E98665F00B3101B /* TableModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B893AAE1E98665F00B3101B /* TableModel.framework */; };
 		8B8AFF2F1E9866ED0090B362 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2A1E9866ED0090B362 /* Cells.swift */; };
 		8B8AFF321E9866ED0090B362 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2D1E9866ED0090B362 /* TableModel.swift */; };
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B3276271E9AEEF000FD9502 /* Mappable.framework in Frameworks */,
 				8B893AB81E98665F00B3101B /* TableModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +458,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = VL46Q749LJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableModelTests;
@@ -469,6 +475,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = VL46Q749LJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableModelTests;
