@@ -94,6 +94,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8B32764A1E9AF40F00FD9502 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B893A841E98606700B3101B /* LaunchScreen.storyboard */,
+				8B893A7F1E98606700B3101B /* Main.storyboard */,
+				8B893A821E98606700B3101B /* Assets.xcassets */,
+				8B893A871E98606700B3101B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8B893A6F1E98606700B3101B = {
 			isa = PBXGroup;
 			children = (
@@ -116,13 +127,10 @@
 			isa = PBXGroup;
 			children = (
 				8B893A7B1E98606700B3101B /* AppDelegate.swift */,
-				8B893A7F1E98606700B3101B /* Main.storyboard */,
 				8B893A8F1E9860E900B3101B /* SettingsTableViewController.swift */,
 				8B893A951E98645700B3101B /* CustomCell.swift */,
-				8B893A821E98606700B3101B /* Assets.xcassets */,
-				8B893A841E98606700B3101B /* LaunchScreen.storyboard */,
-				8B893A871E98606700B3101B /* Info.plist */,
 				8B893A8D1E9860C300B3101B /* settings-menu.json */,
+				8B32764A1E9AF40F00FD9502 /* Supporting Files */,
 			);
 			path = TableModelExample;
 			sourceTree = "<group>";
