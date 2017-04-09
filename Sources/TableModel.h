@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Mappable/Mappable.h>
 
-//! Project version number for TableModel.
 FOUNDATION_EXPORT double TableModelVersionNumber;
-
-//! Project version string for TableModel.
 FOUNDATION_EXPORT const unsigned char TableModelVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <TableModel/PublicHeader.h>
-
-
