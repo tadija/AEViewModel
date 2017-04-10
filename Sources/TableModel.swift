@@ -30,16 +30,23 @@ public struct Item: Mappable {
     var submodel: TableModel?
     let data: [String : Any]
     
-    var image: String?
+    var imageName: String?
     var title: String?
     var detail: String?
+    
+    var image: UIImage? {
+        guard let imageName = imageName else {
+            return nil
+        }
+        return UIImage(named: imageName)
+    }
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
         submodel = try? map.object(forKey: "table")
         data = try map.value(forKey: "data")
         
-        image = try? map.value(forKey: "image")
+        imageName = try? map.value(forKey: "image")
         title = try? map.value(forKey: "title")
         detail = try? map.value(forKey: "detail")
     }

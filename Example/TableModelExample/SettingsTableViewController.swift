@@ -15,13 +15,12 @@ class SettingsTableViewController: TableViewController {
 
 class TableModelDelegate: TableViewControllerDelegate {
     
-    func cellType(forIdentifier identifier: String) -> TableModelCell.Type? {
+    func cellType(forIdentifier identifier: String) -> TableModelCell.Type {
         switch identifier {
         case "airplaneMode":
             return CustomCell.self
         default:
-//            return SubtitleCell.self
-            return nil
+            return SubtitleCell.self
         }
     }
     

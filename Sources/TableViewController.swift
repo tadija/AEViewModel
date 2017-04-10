@@ -1,7 +1,7 @@
 import UIKit
 
 public protocol TableViewControllerDelegate: class {
-    func cellType(forIdentifier identifier: String) -> TableModelCell.Type?
+    func cellType(forIdentifier identifier: String) -> TableModelCell.Type
 }
 
 open class TableViewController: UITableViewController {
@@ -60,10 +60,6 @@ extension TableViewController {
         
         if let cell = cell as? TableModelCell {
             cell.configure(with: item)
-        } else {
-            cell.imageView?.image = UIImage(named: item.image ?? "")
-            cell.textLabel?.text = item.title
-            cell.detailTextLabel?.text = item.detail
         }
         
         return cell
