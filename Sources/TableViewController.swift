@@ -36,7 +36,7 @@ open class TableViewController: UITableViewController {
         if let cellType = delegate?.cellType(forIdentifier: item.identifier) {
             tableView.register(cellType.self, forCellReuseIdentifier: item.identifier)
         } else {
-            if let styleIdentifier = item.style, let style = ItemStyle(rawValue: styleIdentifier) {
+            if let styleIdentifier = item.style, let style = TableModelCellStyle(rawValue: styleIdentifier) {
                 switch style {
                 case .subtitle:
                     tableView.register(SubtitleCell.self, forCellReuseIdentifier: item.identifier)
@@ -65,7 +65,7 @@ extension TableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         
-        if let cell = cell as? TableCell {
+        if let cell = cell as? TableModelCell {
             cell.configure(with: item)
         } else {
             cell.imageView?.image = UIImage(named: item.image ?? "")
