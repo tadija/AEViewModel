@@ -1,49 +1,49 @@
 {
-    "id": "settings",
-    "data": {
-        "title": "Settings"
-    },
-    "sections": [
-                 {
-                 "id": "general",
-                 "data": {
-                 "header-title": "General"
-                 },
-                 "items": [
-                           {
-                           "id": "airplaneMode",
-                           "image": "IconOrange",
-                           "title": "Airplane Mode",
-                           "style": "custom",
-                           "data": {
-                           "enabled": false
-                           }
-                           },
-                           {
-                           "id": "wifi",
-                           "image": "IconBlue",
-                           "title": "Wi-Fi",
-                           "detail": "Off",
-                           "data": {
-                           "current-network": "Off"
-                           },
-                           "style": "subtitle",
-                           "menu": [
-                                    {
-                                    "id": "wifiSubmenu",
-                                    "sections": [
-                                                 {
-                                                 "id": "activeNetworks",
-                                                 "items": [
-                                                           {"id": "wifiSwitch"},
-                                                           {"id": "currentNetwork"}
-                                                           ]
-                                                 }
-                                                 ]
-                                    }
-                                    ]
-                           }
-                           ]
-                 }
-                 ]
+  "id": "settings",
+  "title": "Settings",
+  "sections": [
+    {
+      "id": "general",
+      "header-title": "General",
+      "items": [
+        {
+          "id": "airplaneMode",
+          "image": "IconOrange",
+          "title": "Airplane Mode",
+          "data": {
+            "enabled": false
+          }
+        },
+        {
+          "id": "wifi",
+          "image": "IconBlue",
+          "title": "Wi-Fi",
+          "detail": "Off",
+          "data": {
+            "current-network": "Off"
+          },
+          "menu": [
+            {
+              "id": "wifiSubmenu",
+              "title": "Wi-Fi",
+              "sections": [
+                {
+                  "id": "activeNetworks",
+                  "items": [
+                    {
+                      "id": "wifiSwitch",
+                      "title": "Wi-Fi"
+                    },
+                    {
+                      "id": "currentNetwork"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

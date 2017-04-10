@@ -15,7 +15,7 @@ open class TableViewController: UITableViewController {
         
         super.init(style: style)
         
-        self.title = model.data?["title"] as? String
+        self.title = model.title
         registerCells()
     }
     

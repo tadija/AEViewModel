@@ -6,10 +6,13 @@ public struct TableModel: Mappable {
     public let sections: [Section]
     public let data: [String : Any]?
     
+    public var title: String?
+    
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
         sections = try map.objectsArray(forKey: "sections")
         data = try? map.value(forKey: "data")
+        title = try? map.value(forKey: "title")
     }
     
     public func item(at indexPath: IndexPath) -> Item {
@@ -23,10 +26,13 @@ public struct Section: Mappable {
     public let items: [Item]
     public let data: [String : Any]?
     
+    public var headerTitle: String?
+    
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
         items = try map.objectsArray(forKey: "items")
         data = try? map.value(forKey: "data")
+        headerTitle = try? map.value(forKey: "header-title")
     }
 }
 
