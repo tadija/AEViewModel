@@ -4,7 +4,7 @@ public protocol TableModelDelegate: class {
     func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle
 }
 
-open class TableViewController: UITableViewController {
+open class TableModelViewController: UITableViewController {
     public var model: TableModel!
     public weak var modelDelegate: TableModelDelegate?
     
@@ -51,7 +51,7 @@ open class TableViewController: UITableViewController {
     }
 }
 
-extension TableViewController {
+extension TableModelViewController {
     open override func numberOfSections(in tableView: UITableView) -> Int {
         return model.sections.count
     }

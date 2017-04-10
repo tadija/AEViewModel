@@ -9,6 +9,6 @@
 import UIKit
 import TableModel
 
-class SettingsTableViewController: TableViewController {
+class SettingsTableViewController: TableModelViewController {
     
 }
