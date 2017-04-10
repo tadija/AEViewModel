@@ -3,11 +3,22 @@
   "title": "Settings",
   "sections": [
     {
+      "id": "profile",
+      "items": [
+        {
+          "id": "profile",
+          "image": "IconGray",
+          "title": "Marko Tadic",
+          "detail": "Apple ID, iCloud, iTunes & App Store"
+        }
+      ]
+    },
+    {
       "id": "general",
       "header-title": "General",
       "items": [
         {
-          "id": "airplaneMode",
+          "id": "airplane",
           "image": "IconOrange",
           "title": "Airplane Mode",
           "data": {
@@ -42,6 +53,17 @@
               ]
             }
           ]
+        },
+        {
+          "id": "bluetooth",
+          "image": "IconBlue",
+          "title": "Bluetooth",
+          "detail": "On"
+        },
+        {
+          "id": "cellular",
+          "image": "IconGreen",
+          "title": "Cellular"
         }
       ]
     }

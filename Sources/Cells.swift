@@ -22,7 +22,7 @@ public class SubtitleCell: UITableViewCell, TableModelCell {
 
 public class LeftDetailCell: UITableViewCell, TableModelCell {
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        super.init(style: .value2, reuseIdentifier: reuseIdentifier)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -32,7 +32,7 @@ public class LeftDetailCell: UITableViewCell, TableModelCell {
 
 public class RightDetailCell: UITableViewCell, TableModelCell {
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .value2, reuseIdentifier: reuseIdentifier)
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
     }
     
     required public init?(coder aDecoder: NSCoder) {

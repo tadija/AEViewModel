@@ -11,12 +11,30 @@ import TableModel
 
 class SettingsTableDelegate: TableModelDelegate {
     
+    enum CellIdentifier: String {
+        case profile
+        case airplane
+        case wifi
+        case bluetooth
+        case cellular
+    }
+    
     func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        switch identifier {
-        case "airplaneMode":
-            return .customClass(type: CustomCell.self)
-        default:
-            return .subtitle
+        if let cellID = CellIdentifier(rawValue: identifier) {
+            switch cellID {
+            case .profile:
+                return .subtitle
+            case .airplane:
+                return .rightSwitch
+            case .wifi:
+                return .rightDetail
+            case .bluetooth:
+                return .rightDetail
+            case .cellular:
+                return .default
+            }
+        } else {
+            return .default
         }
     }
     
