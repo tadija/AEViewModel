@@ -37,18 +37,23 @@ open class TableViewController: UITableViewController {
         if let style = delegate?.cellStyle(forIdentifier: item.identifier) {
             switch style {
             case .default:
-                tableView.register(UITableViewCell.self, forCellReuseIdentifier: item.identifier)
+                tableView.register(DefaultCell.self, forCellReuseIdentifier: item.identifier)
             case .subtitle:
                 tableView.register(SubtitleCell.self, forCellReuseIdentifier: item.identifier)
+            case .leftDetail:
+                tableView.register(LeftDetailCell.self, forCellReuseIdentifier: item.identifier)
+            case .rightDetail:
+                tableView.register(RightDetailCell.self, forCellReuseIdentifier: item.identifier)
+            case .rightSwitch:
+                /// - TODO: implement `RightSwitchCell` later
+                tableView.register(DefaultCell.self, forCellReuseIdentifier: item.identifier)
             case .customClass(let cellClass):
                 tableView.register(cellClass, forCellReuseIdentifier: item.identifier)
             case .customNib(let cellNib):
                 tableView.register(cellNib, forCellReuseIdentifier: item.identifier)
-            default:
-                tableView.register(UITableViewCell.self, forCellReuseIdentifier: item.identifier)
             }
         } else {
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: item.identifier)
+            tableView.register(DefaultCell.self, forCellReuseIdentifier: item.identifier)
         }
     }
     
