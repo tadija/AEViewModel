@@ -3,6 +3,8 @@ import TableModel
 
 public class CustomCell: UITableViewCell, TableModelCell {
     
+    public let style: TableModelCellStyle = .customClass
+    
     let label = UILabel()
     
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
