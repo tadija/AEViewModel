@@ -1,17 +1,16 @@
 import UIKit
 
-public enum TableModelCellStyle: String {
+public enum TableModelCellStyle {
     case `default`
     case subtitle
     case leftDetail
     case rightDetail
     case rightSwitch
-    case customClass
-    case customNib
+    case customClass(type: TableModelCell.Type)
+    case customNib(nib: UINib?)
 }
 
 public protocol TableModelCell: class {
-    var style: TableModelCellStyle { get }
     func configure(with item: Item)
 }
 
