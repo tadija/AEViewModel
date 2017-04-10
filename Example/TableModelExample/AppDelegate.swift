@@ -13,6 +13,8 @@ import TableModel
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    let settingsTableDelegate = SettingsTableDelegate()
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -20,9 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json")!
         let data = try! Data(contentsOf: url)
         let model = try! TableModel(jsonData: data)
-        
-        let modelDelegate = SettingsTableDelegate()
-        let menuVC = SettingsTableViewController(model: model, modelDelegate: modelDelegate)
+
+        let menuVC = SettingsTableViewController(style: .grouped)
+        menuVC.model = model
+        menuVC.modelDelegate = settingsTableDelegate
         let navigationVC = UINavigationController(rootViewController: menuVC)
         
         window?.rootViewController = navigationVC

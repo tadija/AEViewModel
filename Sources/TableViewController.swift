@@ -5,22 +5,14 @@ public protocol TableModelDelegate: class {
 }
 
 open class TableViewController: UITableViewController {
-    
-    public let model: TableModel
+    public var model: TableModel!
     public weak var modelDelegate: TableModelDelegate?
     
-    public init(model: TableModel, style: UITableViewStyle = .grouped, modelDelegate: TableModelDelegate) {
-        self.model = model
-        self.modelDelegate = modelDelegate
-        
-        super.init(style: style)
-        
-        self.title = model.title
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+
+        title = model.title
         registerCells()
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func registerCells() {
@@ -57,7 +49,6 @@ open class TableViewController: UITableViewController {
             tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
         }
     }
-    
 }
 
 extension TableViewController {
@@ -79,6 +70,6 @@ extension TableViewController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.sections[section].data?["header-title"] as? String
+        return model.sections[section].headerTitle
     }
 }
