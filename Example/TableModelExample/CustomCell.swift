@@ -1,7 +1,7 @@
 import UIKit
 import TableModel
 
-public class CustomCell: UITableViewCell, TableCell {
+public class CustomCell: UITableViewCell, TableModelCell {
     
     let label = UILabel()
     

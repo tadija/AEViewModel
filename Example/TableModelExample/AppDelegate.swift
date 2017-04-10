@@ -19,10 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json")!
         let data = try! Data(contentsOf: url)
-        let table = try! Table(jsonData: data)
+        let model = try! TableModel(jsonData: data)
         
         let delegate = TableModelDelegate()
-        let menuVC = SettingsTableViewController(table: table, delegate: delegate)
+        let menuVC = SettingsTableViewController(model: model, delegate: delegate)
         let navigationVC = UINavigationController(rootViewController: menuVC)
         
         window?.rootViewController = navigationVC
