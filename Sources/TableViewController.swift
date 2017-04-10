@@ -1,6 +1,6 @@
 import UIKit
 
-public protocol TableViewControllerDelegate: class {
+public protocol TableModelDelegate: class {
     func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle
 }
 
@@ -8,9 +8,9 @@ open class TableViewController: UITableViewController {
     
     let model: TableModel
     
-    public weak var delegate: TableViewControllerDelegate?
+    public weak var delegate: TableModelDelegate?
     
-    public init(model: TableModel, style: UITableViewStyle = .grouped, delegate: TableViewControllerDelegate) {
+    public init(model: TableModel, style: UITableViewStyle = .grouped, delegate: TableModelDelegate) {
         self.model = model
         self.delegate = delegate
         

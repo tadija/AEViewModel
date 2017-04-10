@@ -28,7 +28,7 @@ public struct Section: Mappable {
 public struct Item: Mappable {
     let identifier: String
     var submodel: TableModel?
-    let data: [String : Any]
+    let data: [String : Any]?
     
     var imageName: String?
     var title: String?
@@ -44,7 +44,7 @@ public struct Item: Mappable {
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
         submodel = try? map.object(forKey: "table")
-        data = try map.value(forKey: "data")
+        data = try? map.value(forKey: "data")
         
         imageName = try? map.value(forKey: "image")
         title = try? map.value(forKey: "title")

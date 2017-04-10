@@ -1,9 +1,6 @@
 import UIKit
 
 public class SubtitleCell: UITableViewCell, TableModelCell {
-    
-    public let style: TableModelCellStyle = .subtitle
-    
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
@@ -11,5 +8,4 @@ public class SubtitleCell: UITableViewCell, TableModelCell {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

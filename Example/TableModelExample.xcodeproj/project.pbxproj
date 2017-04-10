@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8B3276481E9AF35700FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; };
 		8B3276491E9AF35700FD9502 /* Mappable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B3276501E9C376F00FD9502 /* SettingsTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B32764F1E9C376F00FD9502 /* SettingsTableDelegate.swift */; };
 		8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A7B1E98606700B3101B /* AppDelegate.swift */; };
 		8B893A811E98606700B3101B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A7F1E98606700B3101B /* Main.storyboard */; };
 		8B893A831E98606700B3101B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A821E98606700B3101B /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		8B3276421E9AF2BF00FD9502 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = ../Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
+		8B32764F1E9C376F00FD9502 /* SettingsTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableDelegate.swift; sourceTree = "<group>"; };
 		8B893A781E98606700B3101B /* TableModelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableModelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893A7B1E98606700B3101B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B893A801E98606700B3101B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				8B893A7B1E98606700B3101B /* AppDelegate.swift */,
 				8B893A8F1E9860E900B3101B /* SettingsTableViewController.swift */,
+				8B32764F1E9C376F00FD9502 /* SettingsTableDelegate.swift */,
 				8B893A951E98645700B3101B /* CustomCell.swift */,
 				8B893A8D1E9860C300B3101B /* settings-menu.json */,
 				8B32764A1E9AF40F00FD9502 /* Supporting Files */,
@@ -244,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B893A901E9860E900B3101B /* SettingsTableViewController.swift in Sources */,
+				8B3276501E9C376F00FD9502 /* SettingsTableDelegate.swift in Sources */,
 				8B893A961E98645700B3101B /* CustomCell.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
 			);

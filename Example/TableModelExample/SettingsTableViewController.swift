@@ -12,16 +12,3 @@ import TableModel
 class SettingsTableViewController: TableViewController {
     
 }
-
-class TableModelDelegate: TableViewControllerDelegate {
-    
-    func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        switch identifier {
-        case "airplaneMode":
-            return .customClass(type: CustomCell.self)
-        default:
-            return .subtitle
-        }
-    }
-    
-}
