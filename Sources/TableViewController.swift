@@ -1,7 +1,7 @@
 import UIKit
 
 public protocol TableViewControllerDelegate: class {
-    func cellType(forIdentifier identifier: String) -> UITableViewCell.Type?
+    func cellType(forIdentifier identifier: String) -> TableModelCell.Type?
 }
 
 open class TableViewController: UITableViewController {
@@ -27,6 +27,7 @@ open class TableViewController: UITableViewController {
     private func registerCells() {
         model.sections.forEach { section in
             section.items.forEach { item in
+                /// - TODO: optimize this logic
                 registerCell(with: item)
             }
         }
@@ -34,18 +35,10 @@ open class TableViewController: UITableViewController {
     
     private func registerCell(with item: Item) {
         if let cellType = delegate?.cellType(forIdentifier: item.identifier) {
+            /// - TODO: handle registering cell from nib
             tableView.register(cellType.self, forCellReuseIdentifier: item.identifier)
         } else {
-            if let styleIdentifier = item.style, let style = TableModelCellStyle(rawValue: styleIdentifier) {
-                switch style {
-                case .subtitle:
-                    tableView.register(SubtitleCell.self, forCellReuseIdentifier: item.identifier)
-                default:
-                    tableView.register(UITableViewCell.self, forCellReuseIdentifier: item.identifier)
-                }
-            } else {
-                tableView.register(UITableViewCell.self, forCellReuseIdentifier: item.identifier)
-            }
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: item.identifier)
         }
     }
     
