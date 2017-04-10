@@ -2,21 +2,26 @@ import Foundation
 import Mappable
 
 public struct TableModel: Mappable {
-    let identifier: String
-    let sections: [Section]
-    let data: [String : Any]?
+    public let identifier: String
+    public let sections: [Section]
+    public let data: [String : Any]?
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
         sections = try map.objectsArray(forKey: "sections")
         data = try? map.value(forKey: "data")
     }
+    
+    public func item(at indexPath: IndexPath) -> Item {
+        let item = sections[indexPath.section].items[indexPath.item]
+        return item
+    }
 }
 
 public struct Section: Mappable {
-    let identifier: String
-    let items: [Item]
-    let data: [String : Any]?
+    public let identifier: String
+    public let items: [Item]
+    public let data: [String : Any]?
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
@@ -26,15 +31,15 @@ public struct Section: Mappable {
 }
 
 public struct Item: Mappable {
-    let identifier: String
-    var submodel: TableModel?
-    let data: [String : Any]?
+    public let identifier: String
+    public var submodel: TableModel?
+    public let data: [String : Any]?
     
-    var imageName: String?
-    var title: String?
-    var detail: String?
+    public var imageName: String?
+    public var title: String?
+    public var detail: String?
     
-    var image: UIImage? {
+    public var image: UIImage? {
         guard let imageName = imageName else {
             return nil
         }

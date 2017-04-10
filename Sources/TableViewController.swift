@@ -6,13 +6,12 @@ public protocol TableModelDelegate: class {
 
 open class TableViewController: UITableViewController {
     
-    let model: TableModel
+    public let model: TableModel
+    public weak var modelDelegate: TableModelDelegate?
     
-    public weak var delegate: TableModelDelegate?
-    
-    public init(model: TableModel, style: UITableViewStyle = .grouped, delegate: TableModelDelegate) {
+    public init(model: TableModel, style: UITableViewStyle = .grouped, modelDelegate: TableModelDelegate) {
         self.model = model
-        self.delegate = delegate
+        self.modelDelegate = modelDelegate
         
         super.init(style: style)
         
@@ -34,7 +33,7 @@ open class TableViewController: UITableViewController {
     }
     
     private func registerCell(with item: Item) {
-        if let style = delegate?.cellStyle(forIdentifier: item.identifier) {
+        if let style = modelDelegate?.cellStyle(forIdentifier: item.identifier) {
             switch style {
             case .default:
                 tableView.register(DefaultCell.self, forCellReuseIdentifier: item.identifier)
@@ -69,14 +68,11 @@ extension TableViewController {
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = model.sections[indexPath.section].items[indexPath.item]
-        
+        let item = model.item(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
-        
         if let cell = cell as? TableModelCell {
             cell.configure(with: item)
         }
-        
         return cell
     }
     

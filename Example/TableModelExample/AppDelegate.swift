@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let data = try! Data(contentsOf: url)
         let model = try! TableModel(jsonData: data)
         
-        let delegate = SettingsTableDelegate()
-        let menuVC = SettingsTableViewController(model: model, delegate: delegate)
+        let modelDelegate = SettingsTableDelegate()
+        let menuVC = SettingsTableViewController(model: model, modelDelegate: modelDelegate)
         let navigationVC = UINavigationController(rootViewController: menuVC)
         
         window?.rootViewController = navigationVC
