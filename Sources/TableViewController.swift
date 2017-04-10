@@ -24,35 +24,37 @@ open class TableViewController: UITableViewController {
     }
     
     private func registerCells() {
+        var uniqueIdentifiers: Set<String> = Set<String>()
         model.sections.forEach { section in
-            section.items.forEach { item in
-                /// - TODO: optimize this logic
-                registerCell(with: item)
-            }
+            let identifiers = section.items.map{ $0.identifier }
+            uniqueIdentifiers.formUnion(identifiers)
+        }
+        uniqueIdentifiers.forEach { identifier in
+            registerCell(with: identifier)
         }
     }
     
-    private func registerCell(with item: Item) {
-        if let style = modelDelegate?.cellStyle(forIdentifier: item.identifier) {
+    private func registerCell(with identifier: String) {
+        if let style = modelDelegate?.cellStyle(forIdentifier: identifier) {
             switch style {
             case .default:
-                tableView.register(DefaultCell.self, forCellReuseIdentifier: item.identifier)
+                tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
             case .subtitle:
-                tableView.register(SubtitleCell.self, forCellReuseIdentifier: item.identifier)
+                tableView.register(SubtitleCell.self, forCellReuseIdentifier: identifier)
             case .leftDetail:
-                tableView.register(LeftDetailCell.self, forCellReuseIdentifier: item.identifier)
+                tableView.register(LeftDetailCell.self, forCellReuseIdentifier: identifier)
             case .rightDetail:
-                tableView.register(RightDetailCell.self, forCellReuseIdentifier: item.identifier)
+                tableView.register(RightDetailCell.self, forCellReuseIdentifier: identifier)
             case .rightSwitch:
                 /// - TODO: implement `RightSwitchCell` later
-                tableView.register(DefaultCell.self, forCellReuseIdentifier: item.identifier)
+                tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
             case .customClass(let cellClass):
-                tableView.register(cellClass, forCellReuseIdentifier: item.identifier)
+                tableView.register(cellClass, forCellReuseIdentifier: identifier)
             case .customNib(let cellNib):
-                tableView.register(cellNib, forCellReuseIdentifier: item.identifier)
+                tableView.register(cellNib, forCellReuseIdentifier: identifier)
             }
         } else {
-            tableView.register(DefaultCell.self, forCellReuseIdentifier: item.identifier)
+            tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
         }
     }
     
