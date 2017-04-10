@@ -1,37 +1,34 @@
 import Foundation
 import Mappable
 
-public struct Table: Mappable {
+public struct TableModel: Mappable {
     let identifier: String
-    let data: [String : Any]?
-    
     let sections: [Section]
+    let data: [String : Any]?
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
-        data = try? map.value(forKey: "data")
         sections = try map.objectsArray(forKey: "sections")
+        data = try? map.value(forKey: "data")
     }
 }
 
 public struct Section: Mappable {
     let identifier: String
-    let data: [String : Any]?
-    
     let items: [Item]
+    let data: [String : Any]?
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
-        data = try? map.value(forKey: "data")
         items = try map.objectsArray(forKey: "items")
+        data = try? map.value(forKey: "data")
     }
 }
 
 public struct Item: Mappable {
     let identifier: String
+    var submodel: TableModel?
     let data: [String : Any]
-    
-    var table: Table?
     
     var style: String?
     var image: String?
@@ -40,7 +37,7 @@ public struct Item: Mappable {
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
-        table = try? map.object(forKey: "table")
+        submodel = try? map.object(forKey: "table")
         data = try map.value(forKey: "data")
         
         style = try map.value(forKey: "style")

@@ -6,17 +6,17 @@ public protocol TableViewControllerDelegate: class {
 
 open class TableViewController: UITableViewController {
     
-    let table: Table
+    let model: TableModel
     
     public weak var delegate: TableViewControllerDelegate?
     
-    public init(table: Table, style: UITableViewStyle = .grouped, delegate: TableViewControllerDelegate) {
-        self.table = table
+    public init(model: TableModel, style: UITableViewStyle = .grouped, delegate: TableViewControllerDelegate) {
+        self.model = model
         self.delegate = delegate
         
         super.init(style: style)
         
-        self.title = table.data?["title"] as? String
+        self.title = model.data?["title"] as? String
         registerCells()
     }
     
@@ -25,7 +25,7 @@ open class TableViewController: UITableViewController {
     }
     
     private func registerCells() {
-        table.sections.forEach { section in
+        model.sections.forEach { section in
             section.items.forEach { item in
                 registerCell(with: item)
             }
@@ -53,15 +53,15 @@ open class TableViewController: UITableViewController {
 
 extension TableViewController {
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return table.sections.count
+        return model.sections.count
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return table.sections[section].items.count
+        return model.sections[section].items.count
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = table.sections[indexPath.section].items[indexPath.item]
+        let item = model.sections[indexPath.section].items[indexPath.item]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         
@@ -77,6 +77,6 @@ extension TableViewController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return table.sections[section].data?["header-title"] as? String
+        return model.sections[section].data?["header-title"] as? String
     }
 }
