@@ -2,11 +2,12 @@ import UIKit
 
 public protocol TableModelDelegate: class {
     func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle
+    func handleAction(with item: Item, from cell: TableModelCell?)
 }
 
 open class TableModelViewController: UITableViewController {
     public var model: TableModel!
-    public weak var modelDelegate: TableModelDelegate?
+    public var modelDelegate: TableModelDelegate?
     var cellDelegates = [String : Any]()
     
     open override func viewDidLoad() {
@@ -75,5 +76,13 @@ extension TableModelViewController {
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return model.sections[section].headerTitle
+    }
+}
+
+extension TableModelViewController {
+    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = model.item(at: indexPath)
+        let cell = tableView.cellForRow(at: indexPath) as? TableModelCell
+        modelDelegate?.handleAction(with: item, from: cell)
     }
 }

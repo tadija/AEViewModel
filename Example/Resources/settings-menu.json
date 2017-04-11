@@ -45,7 +45,8 @@
                     "title": "Wi-Fi"
                   },
                   {
-                    "id": "currentNetwork"
+                    "id": "currentNetwork",
+                    "title": "ae 5GHz"
                   }
                 ]
               }
