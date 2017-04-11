@@ -38,8 +38,7 @@ open class TableModelViewController: UITableViewController {
             case .rightDetail:
                 tableView.register(RightDetailCell.self, forCellReuseIdentifier: identifier)
             case .rightSwitch:
-                /// - TODO: implement `RightSwitchCell` later
-                tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
+                tableView.register(RightSwitchCell.self, forCellReuseIdentifier: identifier)
             case .customClass(let cellClass):
                 tableView.register(cellClass, forCellReuseIdentifier: identifier)
             case .customNib(let cellNib):
