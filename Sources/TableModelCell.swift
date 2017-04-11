@@ -9,5 +9,9 @@ extension TableModelCell where Self: UITableViewCell {
         imageView?.image = item.image
         textLabel?.text = item.title
         detailTextLabel?.text = item.detail
+        
+        if (item.submodel?.sections.count ?? 0) > 0 {
+            accessoryType = .disclosureIndicator
+        }
     }
 }

@@ -17,6 +17,9 @@ class SettingsTableDelegate: TableModelDelegate {
         case wifi
         case bluetooth
         case cellular
+        case hotspot
+        case vpn
+        case carrier
     }
     
     func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
@@ -32,6 +35,12 @@ class SettingsTableDelegate: TableModelDelegate {
                 return .rightDetail
             case .cellular:
                 return .default
+            case .hotspot:
+                return .rightDetail
+            case .vpn:
+                return .toggle(delegate: self)
+            case .carrier:
+                return .rightDetail
             }
         } else {
             return .default

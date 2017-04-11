@@ -54,20 +54,10 @@ public class ToggleCell: UITableViewCell, TableModelCell {
     
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        configureUI()
-        toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
-    }
-    
-    func configureUI() {
+        
         selectionStyle = .none
-        
-        textLabel?.backgroundColor = .clear
-        detailTextLabel?.backgroundColor = .clear
-        
-        contentView.addSubview(toggle)
-        toggle.translatesAutoresizingMaskIntoConstraints = false
-        toggle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -17).isActive = true
-        toggle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        accessoryView = toggle
+        toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
     }
     
     func callDelegate() {

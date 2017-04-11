@@ -33,26 +33,24 @@
           "data": {
             "current-network": "Off"
           },
-          "menu": [
-            {
-              "id": "wifiSubmenu",
-              "title": "Wi-Fi",
-              "sections": [
-                {
-                  "id": "activeNetworks",
-                  "items": [
-                    {
-                      "id": "wifiSwitch",
-                      "title": "Wi-Fi"
-                    },
-                    {
-                      "id": "currentNetwork"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "table": {
+            "id": "wifiSubmenu",
+            "title": "Wi-Fi",
+            "sections": [
+              {
+                "id": "activeNetworks",
+                "items": [
+                  {
+                    "id": "wifiSwitch",
+                    "title": "Wi-Fi"
+                  },
+                  {
+                    "id": "currentNetwork"
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "id": "bluetooth",
@@ -64,6 +62,26 @@
           "id": "cellular",
           "image": "IconGreen",
           "title": "Cellular"
+        },
+        {
+          "id": "hotspot",
+          "image": "IconGreen",
+          "title": "Personal Hotspot",
+          "detail": "Off"
+        },
+        {
+          "id": "vpn",
+          "image": "IconBlue",
+          "title": "VPN",
+          "data": {
+            "enabled": false
+          }
+        },
+        {
+          "id": "carrier",
+          "image": "IconGreen",
+          "title": "Carrier",
+          "detail": "Telenor SRB"
         }
       ]
     }
