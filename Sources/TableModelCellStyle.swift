@@ -5,7 +5,7 @@ public enum TableModelCellStyle {
     case subtitle
     case leftDetail
     case rightDetail
-    case rightSwitch
+    case toggle(delegate: ToggleCellDelegate)
     case customClass(type: TableModelCell.Type)
     case customNib(nib: UINib?)
 }

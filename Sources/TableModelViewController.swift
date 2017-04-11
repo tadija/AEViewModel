@@ -7,6 +7,7 @@ public protocol TableModelDelegate: class {
 open class TableModelViewController: UITableViewController {
     public var model: TableModel!
     public weak var modelDelegate: TableModelDelegate?
+    var cellDelegates = [String : Any]()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +38,9 @@ open class TableModelViewController: UITableViewController {
                 tableView.register(LeftDetailCell.self, forCellReuseIdentifier: identifier)
             case .rightDetail:
                 tableView.register(RightDetailCell.self, forCellReuseIdentifier: identifier)
-            case .rightSwitch:
-                tableView.register(RightSwitchCell.self, forCellReuseIdentifier: identifier)
+            case .toggle(let toggleDelegate):
+                cellDelegates[identifier] = toggleDelegate
+                tableView.register(ToggleCell.self, forCellReuseIdentifier: identifier)
             case .customClass(let cellClass):
                 tableView.register(cellClass, forCellReuseIdentifier: identifier)
             case .customNib(let cellNib):
@@ -62,6 +64,9 @@ extension TableModelViewController {
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = model.item(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
+        if let toggleCell = cell as? ToggleCell {
+            toggleCell.delegate = cellDelegates[item.identifier] as? ToggleCellDelegate
+        }
         if let cell = cell as? TableModelCell {
             cell.configure(with: item)
         }

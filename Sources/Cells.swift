@@ -40,8 +40,13 @@ public class RightDetailCell: UITableViewCell, TableModelCell {
     }
 }
 
-public class RightSwitchCell: UITableViewCell, TableModelCell {
-    let switchButton = UISwitch()
+public protocol ToggleCellDelegate: class {
+    func didChangeValue(sender: ToggleCell)
+}
+
+public class ToggleCell: UITableViewCell, TableModelCell {
+    public let toggle = UISwitch()
+    public weak var delegate: ToggleCellDelegate?
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -50,15 +55,22 @@ public class RightSwitchCell: UITableViewCell, TableModelCell {
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         configureUI()
+        toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
     }
     
     func configureUI() {
+        selectionStyle = .none
+        
         textLabel?.backgroundColor = .clear
         detailTextLabel?.backgroundColor = .clear
         
-        switchButton.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(switchButton)
-        switchButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -17).isActive = true
-        switchButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        contentView.addSubview(toggle)
+        toggle.translatesAutoresizingMaskIntoConstraints = false
+        toggle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -17).isActive = true
+        toggle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    }
+    
+    func callDelegate() {
+        delegate?.didChangeValue(sender: self)
     }
 }

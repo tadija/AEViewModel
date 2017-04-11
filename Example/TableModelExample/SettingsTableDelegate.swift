@@ -25,7 +25,7 @@ class SettingsTableDelegate: TableModelDelegate {
             case .profile:
                 return .subtitle
             case .airplane:
-                return .rightSwitch
+                return .toggle(delegate: self)
             case .wifi:
                 return .rightDetail
             case .bluetooth:
@@ -36,6 +36,14 @@ class SettingsTableDelegate: TableModelDelegate {
         } else {
             return .default
         }
+    }
+    
+}
+
+extension SettingsTableDelegate: ToggleCellDelegate {
+    
+    func didChangeValue(sender: ToggleCell) {
+        print("\(sender): toggle - \(sender.toggle.isOn)")
     }
     
 }
