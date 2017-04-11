@@ -21,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let data = try! Data(contentsOf: url)
         let model = try! TableModel(jsonData: data)
         
-        let settingsVC = SettingsTableViewController(style: .grouped)
-        settingsVC.model = model
+        let settingsVC = SettingsTableViewController(style: .grouped, model: model)
         let navigationVC = UINavigationController(rootViewController: settingsVC)
         
         window?.rootViewController = navigationVC

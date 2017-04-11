@@ -5,10 +5,16 @@ public protocol TableModelDelegate: class {
     func handleAction(with item: Item, from cell: TableModelCell?)
 }
 
-open class TableModelViewController: UITableViewController {
+open class TableModelViewController: UITableViewController, TableModelDelegate {
     public var model: TableModel!
-    public var modelDelegate: TableModelDelegate?
+    public weak var modelDelegate: TableModelDelegate?
     var cellDelegates = [String : Any]()
+    
+    public convenience init(style: UITableViewStyle, model: TableModel) {
+        self.init(style: style)
+        self.model = model
+        self.modelDelegate = self
+    }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +56,14 @@ open class TableModelViewController: UITableViewController {
         } else {
             tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
         }
+    }
+    
+    open func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
+        fatalError("This method is abstract and must be implemented by subclass")
+    }
+    
+    open func handleAction(with item: Item, from cell: TableModelCell?) {
+        fatalError("This method is abstract and must be implemented by subclass")
     }
 }
 

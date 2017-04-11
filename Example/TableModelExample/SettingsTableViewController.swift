@@ -9,12 +9,7 @@
 import UIKit
 import TableModel
 
-class SettingsTableViewController: TableModelViewController, TableModelDelegate {
-    
-    override func viewDidLoad() {
-        modelDelegate = self
-        super.viewDidLoad()
-    }
+class SettingsTableViewController: TableModelViewController {
  
     enum CellIdentifier: String {
         case profile
@@ -27,7 +22,7 @@ class SettingsTableViewController: TableModelViewController, TableModelDelegate 
         case carrier
     }
     
-    func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
+    override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
         if let cellID = CellIdentifier(rawValue: identifier) {
             switch cellID {
             case .profile:
@@ -52,7 +47,7 @@ class SettingsTableViewController: TableModelViewController, TableModelDelegate 
         }
     }
     
-    func handleAction(with item: Item, from cell: TableModelCell?) {
+    override func handleAction(with item: Item, from cell: TableModelCell?) {
         if let cellID = CellIdentifier(rawValue: item.identifier) {
             switch cellID {
             case .wifi:
