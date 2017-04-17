@@ -124,7 +124,69 @@
         {
           "id": "cellular",
           "image": "IconGreen",
-          "title": "Cellular"
+          "title": "Cellular",
+          "table": {
+            "id": "cellularSubmenu",
+            "title": "Cellular",
+            "sections": [
+              {
+                "id": "cellularDataSection",
+                "items": [
+                  {
+                    "id": "cellularData",
+                    "title": "Cellular Data"
+                  },
+                  {
+                    "id": "cellularDataOptions",
+                    "title": "Cellular Data Options",
+                    "detail": "Roaming Off"
+                  }
+                ]
+              },
+              {
+                "id": "personalHotspotSection",
+                "items": [
+                  {
+                    "id": "personalHotspot",
+                    "title": "Personal Hotspot",
+                    "detail": "Off"
+                  }
+                ]
+              },
+              {
+                "id": "callTime",
+                "header-title": "Call Time",
+                "items": [
+                  {
+                    "id": "currentPeriodCallTime",
+                    "title": "Current Period",
+                    "detail": "17 Hours, 31 Minutes"
+                  },
+                  {
+                    "id": "lifetimeCallTime",
+                    "title": "Lifetime",
+                    "detail": "17 Hours, 31 Minutes"
+                  }
+                ]
+              },
+              {
+                "id": "cellularDataUsage",
+                "header-title": "Cellular Data Usage",
+                "items": [
+                  {
+                    "id": "currentPeriodDataUsage",
+                    "title": "Current Period",
+                    "detail": "15.1 GB"
+                  },
+                  {
+                    "id": "currentPeriodRoaming",
+                    "title": "Current Period Roaming",
+                    "detail": "425 MB"
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "id": "hotspot",
