@@ -106,7 +106,34 @@
           "id": "hotspot",
           "image": "IconGreen",
           "title": "Personal Hotspot",
-          "detail": "Off"
+          "detail": "Off",
+          "table": {
+            "id": "hotspotSubmenu",
+            "title": "Personal Hotspot",
+            "sections": [
+              {
+                "id": "hotspotSwitchSection",
+                "footer-title": "Turn on Personal Hotspot to share your iPhone's internet connection. Additional usage charges may apply. Other devices signed into your iCloud account will be able to use Personal Hotspot without having to turn it on manually.",
+                "items": [
+                  {
+                    "id": "hotspotSwitch",
+                    "title": "Personal Hotspot"
+                  }
+                ]
+              },
+              {
+                "id": "wifiPasswordSection",
+                "footer-image": "HotspotFooter",
+                "items": [
+                  {
+                    "id": "hotspotWifiPassword",
+                    "title": "Wi-Fi Password",
+                    "detail": "MyPassword"
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "id": "vpn",
