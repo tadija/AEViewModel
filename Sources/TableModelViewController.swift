@@ -89,11 +89,11 @@ extension TableModelViewController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.sections[section].headerTitle
+        return model.sections[section].header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.sections[section].footerTitle
+        return model.sections[section].footer
     }
 }
 

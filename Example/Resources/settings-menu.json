@@ -15,7 +15,7 @@
     },
     {
       "id": "general",
-      "header-title": "General",
+      "header": "General",
       "items": [
         {
           "id": "airplane",
@@ -52,7 +52,7 @@
               },
               {
                 "id": "chooseNetwork",
-                "header-title": "Choose a network...",
+                "header": "Choose a network...",
                 "items": [
                   {
                     "id": "appleNetwork",
@@ -66,7 +66,7 @@
               },
               {
                 "id": "joinNetworksSwitchSection",
-                "footer-title": "Known networks will be joined automatically. If no known networks are available, you will be asked before joining a new network.",
+                "footer": "Known networks will be joined automatically. If no known networks are available, you will be asked before joining a new network.",
                 "items": [
                   {
                     "id": "joinNetworksSwitch",
@@ -88,7 +88,7 @@
             "sections": [
               {
                 "id": "bluetoothSwitchSection",
-                "footer-title": "Now discoverable as \"aePhone6S\".",
+                "footer": "Now discoverable as \"aePhone6S\".",
                 "items": [
                   {
                     "id": "bluetoothSwitch",
@@ -98,7 +98,7 @@
               },
               {
                 "id": "myDevices",
-                "header-title": "My Devices",
+                "header": "My Devices",
                 "items": [
                   {
                     "id": "aePods",
@@ -114,7 +114,7 @@
               },
               {
                 "id": "otherDevices",
-                "header-title": "Other Devices",
+                "header": "Other Devices",
                 "items": [
                 ]
               }
@@ -155,7 +155,7 @@
               },
               {
                 "id": "callTime",
-                "header-title": "Call Time",
+                "header": "Call Time",
                 "items": [
                   {
                     "id": "currentPeriodCallTime",
@@ -171,7 +171,7 @@
               },
               {
                 "id": "cellularDataUsage",
-                "header-title": "Cellular Data Usage",
+                "header": "Cellular Data Usage",
                 "items": [
                   {
                     "id": "currentPeriodDataUsage",
@@ -199,7 +199,7 @@
             "sections": [
               {
                 "id": "hotspotSwitchSection",
-                "footer-title": "Turn on Personal Hotspot to share your iPhone's internet connection. Additional usage charges may apply. Other devices signed into your iCloud account will be able to use Personal Hotspot without having to turn it on manually.",
+                "footer": "Turn on Personal Hotspot to share your iPhone's internet connection. Additional usage charges may apply. Other devices signed into your iCloud account will be able to use Personal Hotspot without having to turn it on manually.",
                 "items": [
                   {
                     "id": "hotspotSwitch",
@@ -240,7 +240,7 @@
             "sections": [
               {
                 "id": "carrierSwitchSection",
-                "header-title": "Carriers",
+                "header": "Carriers",
                 "items": [
                   {
                     "id": "carrierSwitch",
