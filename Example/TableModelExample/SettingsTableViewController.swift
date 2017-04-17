@@ -22,6 +22,8 @@ class SettingsTableViewController: TableModelViewController {
         case carrier
     }
     
+    // MARK: - TableModelDelegate
+    
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
         if let cellID = CellIdentifier(rawValue: identifier) {
             switch cellID {
@@ -50,16 +52,20 @@ class SettingsTableViewController: TableModelViewController {
     override func handleAction(with item: Item, from cell: TableModelCell?) {
         if let cellID = CellIdentifier(rawValue: item.identifier) {
             switch cellID {
-            case .wifi:
-                if let model = item.submodel {
-                    let tmvc = TableModelViewController(style: .grouped)
-                    tmvc.model = model
-                    tmvc.modelDelegate = modelDelegate
-                    navigationController?.pushViewController(tmvc, animated: true)
-                }
+            case .wifi, .carrier:
+                pushSubmenu(with: item)
             default:
                 break
             }
+        }
+    }
+    
+    private func pushSubmenu(with item: Item) {
+        if let model = item.submodel {
+            let tmvc = TableModelViewController(style: .grouped)
+            tmvc.model = model
+            tmvc.modelDelegate = modelDelegate
+            navigationController?.pushViewController(tmvc, animated: true)
         }
     }
     

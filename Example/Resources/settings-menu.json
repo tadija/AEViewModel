@@ -82,7 +82,23 @@
           "id": "carrier",
           "image": "IconGreen",
           "title": "Carrier",
-          "detail": "Telenor SRB"
+          "detail": "Telenor SRB",
+          "table": {
+            "id": "carrierSubmenu",
+            "title": "Network Selection",
+            "sections": [
+              {
+                "id": "automaticSwitch",
+                "header-title": "Carriers",
+                "items": [
+                  {
+                    "id": "carrierSwitch",
+                    "title": "Automatic"
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     }
