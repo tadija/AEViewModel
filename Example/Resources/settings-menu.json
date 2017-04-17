@@ -57,7 +57,45 @@
           "id": "bluetooth",
           "image": "IconBlue",
           "title": "Bluetooth",
-          "detail": "On"
+          "detail": "On",
+          "table": {
+            "id": "bluetoothSubmenu",
+            "title": "Bluetooth",
+            "sections": [
+              {
+                "id": "bluetoothSwitchSection",
+                "footer-title": "Now discoverable as \"aePhone6S\".",
+                "items": [
+                  {
+                    "id": "bluetoothSwitch",
+                    "title": "Bluetooth"
+                  }
+                ]
+              },
+              {
+                "id": "myDevices",
+                "header-title": "My Devices",
+                "items": [
+                  {
+                    "id": "aePods",
+                    "title": "aePods",
+                    "detail": "Not Connected"
+                  },
+                  {
+                    "id": "aeWatch",
+                    "title": "aeWatch",
+                    "detail": "Connected"
+                  }
+                ]
+              },
+              {
+                "id": "otherDevices",
+                "header-title": "Other Devices",
+                "items": [
+                ]
+              }
+            ]
+          }
         },
         {
           "id": "cellular",
@@ -88,7 +126,7 @@
             "title": "Network Selection",
             "sections": [
               {
-                "id": "automaticSwitch",
+                "id": "carrierSwitchSection",
                 "header-title": "Carriers",
                 "items": [
                   {

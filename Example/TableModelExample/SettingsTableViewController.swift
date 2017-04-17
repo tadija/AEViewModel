@@ -52,7 +52,7 @@ class SettingsTableViewController: TableModelViewController {
     override func handleAction(with item: Item, from cell: TableModelCell?) {
         if let cellID = CellIdentifier(rawValue: item.identifier) {
             switch cellID {
-            case .wifi, .carrier:
+            case .wifi, .bluetooth, .carrier:
                 pushSubmenu(with: item)
             default:
                 break
