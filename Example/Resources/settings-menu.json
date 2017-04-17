@@ -49,6 +49,30 @@
                     "title": "ae 5GHz"
                   }
                 ]
+              },
+              {
+                "id": "chooseNetwork",
+                "header-title": "Choose a network...",
+                "items": [
+                  {
+                    "id": "appleNetwork",
+                    "title": "Apple"
+                  },
+                  {
+                    "id": "twitterNetwork",
+                    "title": "Twitter"
+                  }
+                ]
+              },
+              {
+                "id": "joinNetworksSwitchSection",
+                "footer-title": "Known networks will be joined automatically. If no known networks are available, you will be asked before joining a new network.",
+                "items": [
+                  {
+                    "id": "joinNetworksSwitch",
+                    "title": "Ask to Join Networks"
+                  }
+                ]
               }
             ]
           }
