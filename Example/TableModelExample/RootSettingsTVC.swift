@@ -1,5 +1,5 @@
 //
-//  Settings.swift
+//  RootSettingsTVC.swift
 //  TableModelExample
 //
 //  Created by Marko Tadić on 4/8/17.
@@ -9,9 +9,9 @@
 import UIKit
 import TableModel
 
-class SettingsTableViewController: TableModelViewController {
+class RootSettingsTVC: TableModelViewController {
  
-    enum CellIdentifier: String {
+    enum CellID: String {
         case profile
         case airplane
         case wifi
@@ -25,7 +25,7 @@ class SettingsTableViewController: TableModelViewController {
     // MARK: - TableModelDelegate
     
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        if let cellID = CellIdentifier(rawValue: identifier) {
+        if let cellID = CellID(rawValue: identifier) {
             switch cellID {
             case .profile:
                 return .subtitle
@@ -50,28 +50,30 @@ class SettingsTableViewController: TableModelViewController {
     }
     
     override func handleAction(with item: Item, from cell: TableModelCell?) {
-        if let cellID = CellIdentifier(rawValue: item.identifier) {
+        if let cellID = CellID(rawValue: item.identifier) {
             switch cellID {
-            case .wifi, .bluetooth, .cellular, .hotspot, .carrier:
-                pushSubmenu(with: item)
+            case .wifi:
+                let tmvc = WiFiSettingsTVC(style: .grouped)
+                pushSubmenu(with: item, in: tmvc)
+            case .bluetooth, .cellular, .hotspot, .carrier:
+                let tmvc = TableModelViewController(style: .grouped)
+                pushSubmenu(with: item, in: tmvc)
             default:
                 break
             }
         }
     }
     
-    private func pushSubmenu(with item: Item) {
+    private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {
         if let model = item.submodel {
-            let tmvc = TableModelViewController(style: .grouped)
             tmvc.model = model
-            tmvc.modelDelegate = modelDelegate
             navigationController?.pushViewController(tmvc, animated: true)
         }
     }
     
 }
 
-extension SettingsTableViewController: ToggleCellDelegate {
+extension RootSettingsTVC: ToggleCellDelegate {
     func didChangeValue(sender: ToggleCell) {
         print("\(sender): toggle - \(sender.toggle.isOn)")
     }

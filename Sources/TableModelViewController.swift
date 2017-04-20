@@ -10,10 +10,18 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
     public weak var modelDelegate: TableModelDelegate?
     var cellDelegates = [String : Any]()
     
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override init(style: UITableViewStyle) {
+        super.init(style: style)
+        modelDelegate = self
+    }
+    
     public convenience init(style: UITableViewStyle, model: TableModel) {
         self.init(style: style)
         self.model = model
-        self.modelDelegate = self
     }
     
     open override func viewDidLoad() {
@@ -59,11 +67,11 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
     }
     
     open func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        fatalError("This method is abstract and must be implemented by subclass")
+        return .default
     }
     
     open func handleAction(with item: Item, from cell: TableModelCell?) {
-        fatalError("This method is abstract and must be implemented by subclass")
+        print("This method is abstract and must be implemented by subclass")
     }
 }
 
