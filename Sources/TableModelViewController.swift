@@ -1,14 +1,7 @@
 import UIKit
 
-public protocol TableModelDelegate: class {
-    func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle
-    func configureCell(_ cell: TableModelCell, with item: Item)
-    func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell)
-}
-
-open class TableModelViewController: UITableViewController, TableModelDelegate {
+open class TableModelViewController: UITableViewController {
     public var model: TableModel?
-    public weak var modelDelegate: TableModelDelegate?
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,7 +20,7 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
     }
     
     private func commonInit() {
-        modelDelegate = self
+        /// - Note: nothing for now...
     }
     
     open override func viewDidLoad() {
@@ -49,25 +42,21 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
     }
     
     private func registerCell(with identifier: String) {
-        if let style = modelDelegate?.cellStyle(forIdentifier: identifier) {
-            switch style {
-            case .default:
-                tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
-            case .subtitle:
-                tableView.register(SubtitleCell.self, forCellReuseIdentifier: identifier)
-            case .leftDetail:
-                tableView.register(LeftDetailCell.self, forCellReuseIdentifier: identifier)
-            case .rightDetail:
-                tableView.register(RightDetailCell.self, forCellReuseIdentifier: identifier)
-            case .toggle:
-                tableView.register(ToggleCell.self, forCellReuseIdentifier: identifier)
-            case .customClass(let cellClass):
-                tableView.register(cellClass, forCellReuseIdentifier: identifier)
-            case .customNib(let cellNib):
-                tableView.register(cellNib, forCellReuseIdentifier: identifier)
-            }
-        } else {
+        switch cellStyle(forIdentifier: identifier) {
+        case .default:
             tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
+        case .subtitle:
+            tableView.register(SubtitleCell.self, forCellReuseIdentifier: identifier)
+        case .leftDetail:
+            tableView.register(LeftDetailCell.self, forCellReuseIdentifier: identifier)
+        case .rightDetail:
+            tableView.register(RightDetailCell.self, forCellReuseIdentifier: identifier)
+        case .toggle:
+            tableView.register(ToggleCell.self, forCellReuseIdentifier: identifier)
+        case .customClass(let cellClass):
+            tableView.register(cellClass, forCellReuseIdentifier: identifier)
+        case .customNib(let cellNib):
+            tableView.register(cellNib, forCellReuseIdentifier: identifier)
         }
     }
     
@@ -112,7 +101,7 @@ extension TableModelViewController {
         (cell as? ToggleCell)?.delegate = self
         
         if let cell = cell as? TableModelCell {
-            modelDelegate?.configureCell(cell, with: item)
+            configureCell(cell, with: item)
         }
         
         return cell
@@ -134,14 +123,14 @@ extension TableModelViewController {
             let cell = tableView.cellForRow(at: indexPath) as? TableModelCell
         else { return }
         
-        modelDelegate?.handleEvent(.primaryActionTriggered, with: item, sender: cell)
+        handleEvent(.primaryActionTriggered, with: item, sender: cell)
     }
 }
 
 extension TableModelViewController: ToggleCellDelegate {
     public func didChangeValue(sender: ToggleCell) {
         if let item = item(from: sender) {
-            modelDelegate?.handleEvent(.valueChanged, with: item, sender: sender)
+            handleEvent(.valueChanged, with: item, sender: sender)
         }
     }
 }
