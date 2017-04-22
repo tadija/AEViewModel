@@ -34,7 +34,7 @@ class WiFiSettingsTVC: TableModelViewController {
         }
     }
     
-    override func handleAction(with item: Item, from cell: TableModelCell?) {
+    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
         if let cellID = CellID(rawValue: item.identifier) {
             switch cellID {
             case .wifiNetwork:

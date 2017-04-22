@@ -2,7 +2,7 @@ import UIKit
 
 public protocol TableModelDelegate: class {
     func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle
-    func handleAction(with item: Item, from cell: TableModelCell?)
+    func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell)
 }
 
 open class TableModelViewController: UITableViewController, TableModelDelegate {
@@ -76,7 +76,7 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
         return .default
     }
     
-    open func handleAction(with item: Item, from cell: TableModelCell?) {
+    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
         print("This method is abstract and must be implemented by subclass")
     }
 }
@@ -119,9 +119,11 @@ extension TableModelViewController {
 
 extension TableModelViewController {
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let item = model?.item(at: indexPath) {
+        guard
+            let item = model?.item(at: indexPath),
             let cell = tableView.cellForRow(at: indexPath) as? TableModelCell
-            modelDelegate?.handleAction(with: item, from: cell)
-        }
+        else { return }
+        
+        modelDelegate?.handleEvent(.primaryActionTriggered, with: item, sender: cell)
     }
 }
