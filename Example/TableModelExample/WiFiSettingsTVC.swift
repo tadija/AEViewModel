@@ -13,7 +13,7 @@ class WiFiSettingsTVC: TableModelViewController {
     
     // MARK: - Types
     
-    enum CellID: String {
+    enum CellType: String {
         case wifiSwitch
         case wifiNetwork
         case joinNetworksSwitch
@@ -22,8 +22,8 @@ class WiFiSettingsTVC: TableModelViewController {
     // MARK: - Override
     
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        if let cellID = CellID(rawValue: identifier) {
-            switch cellID {
+        if let cellType = CellType(rawValue: identifier) {
+            switch cellType {
             case .wifiSwitch:
                 return .toggle
             case .wifiNetwork:
@@ -37,8 +37,8 @@ class WiFiSettingsTVC: TableModelViewController {
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
-        if let cellID = CellID(rawValue: item.identifier) {
-            switch cellID {
+        if let cellType = CellType(rawValue: item.identifier) {
+            switch cellType {
             case .wifiSwitch, .joinNetworksSwitch:
                 if event == .valueChanged {
                     print("handleEvent with id: \(item.identifier)")

@@ -13,7 +13,7 @@ class RootSettingsTVC: TableModelViewController {
  
     // MARK: - Types
     
-    enum CellID: String {
+    enum CellType: String {
         case profile
         case airplane
         case wifi
@@ -27,8 +27,8 @@ class RootSettingsTVC: TableModelViewController {
     // MARK: - Override
     
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        if let cellID = CellID(rawValue: identifier) {
-            switch cellID {
+        if let cellType = CellType(rawValue: identifier) {
+            switch cellType {
             case .profile:
                 return .subtitle
             case .airplane:
@@ -60,18 +60,18 @@ class RootSettingsTVC: TableModelViewController {
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
-        if let cellID = CellID(rawValue: item.identifier) {
-            switch cellID {
+        if let cellType = CellType(rawValue: item.identifier) {
+            switch cellType {
             case .airplane, .vpn:
                 if event == .valueChanged {
                     print("handleEvent with id: \(item.identifier)")
                 }
             case .wifi:
-                let tmvc = WiFiSettingsTVC(style: .grouped)
-                pushSubmenu(with: item, in: tmvc)
+                let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
+                pushSubmenu(with: item, in: wifiSubmenu)
             case .bluetooth, .cellular, .hotspot, .carrier:
-                let tmvc = TableModelViewController(style: .grouped)
-                pushSubmenu(with: item, in: tmvc)
+                let defaultSubmenu = TableModelViewController(style: .grouped)
+                pushSubmenu(with: item, in: defaultSubmenu)
             default:
                 break
             }
