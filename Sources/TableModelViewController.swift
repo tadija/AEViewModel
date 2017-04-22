@@ -6,7 +6,7 @@ public protocol TableModelDelegate: class {
 }
 
 open class TableModelViewController: UITableViewController, TableModelDelegate {
-    public var model: TableModel!
+    public var model: TableModel?
     public weak var modelDelegate: TableModelDelegate?
     var cellDelegates = [String : Any]()
     
@@ -33,13 +33,13 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = model.title
+        title = model?.title
         registerCells()
     }
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
-        model.sections.forEach { section in
+        model?.sections.forEach { section in
             let identifiers = section.items.map{ $0.identifier }
             uniqueIdentifiers.formUnion(identifiers)
         }
@@ -83,38 +83,45 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
 
 extension TableModelViewController {
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.sections.count
+        return model?.sections.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.sections[section].items.count
+        return model?.sections[section].items.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = model.item(at: indexPath)
+        guard let item = model?.item(at: indexPath) else {
+            return UITableViewCell()
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
+        
         if let toggleCell = cell as? ToggleCell {
             toggleCell.delegate = cellDelegates[item.identifier] as? ToggleCellDelegate
         }
+        
         if let cell = cell as? TableModelCell {
             cell.configure(with: item)
         }
+        
         return cell
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.sections[section].header
+        return model?.sections[section].header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model.sections[section].footer
+        return model?.sections[section].footer
     }
 }
 
 extension TableModelViewController {
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = model.item(at: indexPath)
-        let cell = tableView.cellForRow(at: indexPath) as? TableModelCell
-        modelDelegate?.handleAction(with: item, from: cell)
+        if let item = model?.item(at: indexPath) {
+            let cell = tableView.cellForRow(at: indexPath) as? TableModelCell
+            modelDelegate?.handleAction(with: item, from: cell)
+        }
     }
 }
