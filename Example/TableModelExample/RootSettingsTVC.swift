@@ -49,10 +49,18 @@ class RootSettingsTVC: TableModelViewController {
         }
     }
     
+    override func configureCell(_ cell: TableModelCell, with item: Item) {
+        super.configureCell(cell, with: item)
+        
+        if let toggleCell = cell as? ToggleCell {
+            toggleCell.toggle.onTintColor = UIColor.orange
+        }
+    }
+    
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
         if let cellID = CellID(rawValue: item.identifier) {
             switch cellID {
-            case .airplane:
+            case .airplane, .vpn:
                 if event == .valueChanged {
                     print("handleEvent with id: \(item.identifier)")
                 }

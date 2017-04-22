@@ -2,6 +2,7 @@ import UIKit
 
 public protocol TableModelDelegate: class {
     func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle
+    func configureCell(_ cell: TableModelCell, with item: Item)
     func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell)
 }
 
@@ -74,6 +75,10 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
         return .default
     }
     
+    open func configureCell(_ cell: TableModelCell, with item: Item) {
+        cell.configure(with: item)
+    }
+    
     open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
         print("This method is abstract and must be implemented by subclass")
     }
@@ -103,13 +108,11 @@ extension TableModelViewController {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
-        
-        if let toggleCell = cell as? ToggleCell {
-            toggleCell.delegate = self
-        }
+
+        (cell as? ToggleCell)?.delegate = self
         
         if let cell = cell as? TableModelCell {
-            cell.configure(with: item)
+            modelDelegate?.configureCell(cell, with: item)
         }
         
         return cell
