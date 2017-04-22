@@ -45,8 +45,16 @@ public protocol ToggleCellDelegate: class {
 }
 
 public class ToggleCell: UITableViewCell, TableModelCell {
+    
+    // MARK: - Outlets
+    
     public let toggle = UISwitch()
+    
+    // MARK: - Properties
+    
     public weak var delegate: ToggleCellDelegate?
+    
+    // MARK: - Init
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -60,7 +68,10 @@ public class ToggleCell: UITableViewCell, TableModelCell {
         toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
     }
     
-    func callDelegate() {
+    // MARK: - Helpers
+    
+    @objc
+    private func callDelegate() {
         delegate?.didChangeValue(sender: self)
     }
 }

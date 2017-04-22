@@ -1,7 +1,12 @@
 import UIKit
 
 open class TableModelViewController: UITableViewController {
+    
+    // MARK: - Properties
+    
     public var model: TableModel?
+    
+    // MARK: - Init
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -23,12 +28,41 @@ open class TableModelViewController: UITableViewController {
         /// - Note: nothing for now...
     }
     
+    // MARK: - Lifecycle
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
 
         title = model?.title
         registerCells()
     }
+    
+    // MARK: - Abstract
+    
+    open func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
+        return .default
+    }
+    
+    open func configureCell(_ cell: TableModelCell, with item: Item) {
+        cell.configure(with: item)
+    }
+    
+    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
+        print("This method is abstract and must be implemented by subclass")
+    }
+    
+    // MARK: - API
+    
+    public func item(from cell: TableModelCell) -> Item? {
+        guard
+            let tableViewCell = cell as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: tableViewCell),
+            let item = model?.item(at: indexPath)
+        else { return nil }
+        return item
+    }
+    
+    // MARK: - Helpers
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
@@ -59,30 +93,12 @@ open class TableModelViewController: UITableViewController {
             tableView.register(cellNib, forCellReuseIdentifier: identifier)
         }
     }
-    
-    open func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        return .default
-    }
-    
-    open func configureCell(_ cell: TableModelCell, with item: Item) {
-        cell.configure(with: item)
-    }
-    
-    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
-        print("This method is abstract and must be implemented by subclass")
-    }
-    
-    public func item(from cell: TableModelCell) -> Item? {
-        guard
-            let tableViewCell = cell as? UITableViewCell,
-            let indexPath = tableView.indexPath(for: tableViewCell),
-            let item = model?.item(at: indexPath)
-        else { return nil }
-        return item
-    }
 }
 
 extension TableModelViewController {
+    
+    // MARK: - UITableViewControllerDataSource
+    
     open override func numberOfSections(in tableView: UITableView) -> Int {
         return model?.sections.count ?? 0
     }
@@ -117,6 +133,9 @@ extension TableModelViewController {
 }
 
 extension TableModelViewController {
+    
+    // MARK: - UITableViewControllerDelegate
+    
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
             let item = model?.item(at: indexPath),
@@ -128,6 +147,9 @@ extension TableModelViewController {
 }
 
 extension TableModelViewController: ToggleCellDelegate {
+    
+    // MARK: - ToggleCellDelegate
+    
     public func didChangeValue(sender: ToggleCell) {
         if let item = item(from: sender) {
             handleEvent(.valueChanged, with: item, sender: sender)

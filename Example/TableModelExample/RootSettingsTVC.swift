@@ -11,6 +11,8 @@ import TableModel
 
 class RootSettingsTVC: TableModelViewController {
  
+    // MARK: - Types
+    
     enum CellID: String {
         case profile
         case airplane
@@ -22,7 +24,7 @@ class RootSettingsTVC: TableModelViewController {
         case carrier
     }
     
-    // MARK: - TableModelDelegate
+    // MARK: - Override
     
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
         if let cellID = CellID(rawValue: identifier) {
@@ -75,6 +77,8 @@ class RootSettingsTVC: TableModelViewController {
             }
         }
     }
+    
+    // MARK: - Helpers
     
     private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {
         if let model = item.submodel {

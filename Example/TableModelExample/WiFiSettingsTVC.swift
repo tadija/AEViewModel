@@ -11,13 +11,15 @@ import TableModel
 
 class WiFiSettingsTVC: TableModelViewController {
     
+    // MARK: - Types
+    
     enum CellID: String {
         case wifiSwitch
         case wifiNetwork
         case joinNetworksSwitch
     }
     
-    // MARK: - TableModelDelegate
+    // MARK: - Override
     
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
         if let cellID = CellID(rawValue: identifier) {
@@ -47,6 +49,8 @@ class WiFiSettingsTVC: TableModelViewController {
             }
         }
     }
+    
+    // MARK: - Helpers
     
     private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {
         if let model = item.submodel {
