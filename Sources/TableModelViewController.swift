@@ -8,7 +8,6 @@ public protocol TableModelDelegate: class {
 open class TableModelViewController: UITableViewController, TableModelDelegate {
     public var model: TableModel?
     public weak var modelDelegate: TableModelDelegate?
-    var cellDelegates = [String : Any]()
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -59,8 +58,7 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
                 tableView.register(LeftDetailCell.self, forCellReuseIdentifier: identifier)
             case .rightDetail:
                 tableView.register(RightDetailCell.self, forCellReuseIdentifier: identifier)
-            case .toggle(let toggleDelegate):
-                cellDelegates[identifier] = toggleDelegate
+            case .toggle:
                 tableView.register(ToggleCell.self, forCellReuseIdentifier: identifier)
             case .customClass(let cellClass):
                 tableView.register(cellClass, forCellReuseIdentifier: identifier)
@@ -78,6 +76,15 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
     
     open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
         print("This method is abstract and must be implemented by subclass")
+    }
+    
+    public func item(from cell: TableModelCell) -> Item? {
+        guard
+            let tableViewCell = cell as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: tableViewCell),
+            let item = model?.item(at: indexPath)
+        else { return nil }
+        return item
     }
 }
 
@@ -98,7 +105,7 @@ extension TableModelViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         
         if let toggleCell = cell as? ToggleCell {
-            toggleCell.delegate = cellDelegates[item.identifier] as? ToggleCellDelegate
+            toggleCell.delegate = self
         }
         
         if let cell = cell as? TableModelCell {
@@ -125,5 +132,13 @@ extension TableModelViewController {
         else { return }
         
         modelDelegate?.handleEvent(.primaryActionTriggered, with: item, sender: cell)
+    }
+}
+
+extension TableModelViewController: ToggleCellDelegate {
+    public func didChangeValue(sender: ToggleCell) {
+        if let item = item(from: sender) {
+            modelDelegate?.handleEvent(.valueChanged, with: item, sender: sender)
+        }
     }
 }

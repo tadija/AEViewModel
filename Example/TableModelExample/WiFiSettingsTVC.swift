@@ -23,11 +23,11 @@ class WiFiSettingsTVC: TableModelViewController {
         if let cellID = CellID(rawValue: identifier) {
             switch cellID {
             case .wifiSwitch:
-                return .toggle(delegate: self)
+                return .toggle
             case .wifiNetwork:
                 return .default
             case .joinNetworksSwitch:
-                return .toggle(delegate: self)
+                return .toggle
             }
         } else {
             return .default
@@ -37,11 +37,13 @@ class WiFiSettingsTVC: TableModelViewController {
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
         if let cellID = CellID(rawValue: item.identifier) {
             switch cellID {
+            case .wifiSwitch, .joinNetworksSwitch:
+                if event == .valueChanged {
+                    print("handleEvent with id: \(item.identifier)")
+                }
             case .wifiNetwork:
                 let tmvc = TableModelViewController(style: .grouped)
                 pushSubmenu(with: item, in: tmvc)
-            default:
-                break
             }
         }
     }
@@ -53,10 +55,4 @@ class WiFiSettingsTVC: TableModelViewController {
         }
     }
     
-}
-
-extension WiFiSettingsTVC: ToggleCellDelegate {
-    func didChangeValue(sender: ToggleCell) {
-        print("\(sender): toggle - \(sender.toggle.isOn)")
-    }
 }

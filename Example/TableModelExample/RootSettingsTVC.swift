@@ -30,7 +30,7 @@ class RootSettingsTVC: TableModelViewController {
             case .profile:
                 return .subtitle
             case .airplane:
-                return .toggle(delegate: self)
+                return .toggle
             case .wifi:
                 return .rightDetail
             case .bluetooth:
@@ -40,7 +40,7 @@ class RootSettingsTVC: TableModelViewController {
             case .hotspot:
                 return .rightDetail
             case .vpn:
-                return .toggle(delegate: self)
+                return .toggle
             case .carrier:
                 return .rightDetail
             }
@@ -52,6 +52,10 @@ class RootSettingsTVC: TableModelViewController {
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
         if let cellID = CellID(rawValue: item.identifier) {
             switch cellID {
+            case .airplane:
+                if event == .valueChanged {
+                    print("handleEvent with id: \(item.identifier)")
+                }
             case .wifi:
                 let tmvc = WiFiSettingsTVC(style: .grouped)
                 pushSubmenu(with: item, in: tmvc)
@@ -71,10 +75,4 @@ class RootSettingsTVC: TableModelViewController {
         }
     }
     
-}
-
-extension RootSettingsTVC: ToggleCellDelegate {
-    func didChangeValue(sender: ToggleCell) {
-        print("\(sender): toggle - \(sender.toggle.isOn)")
-    }
 }
