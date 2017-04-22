@@ -11,17 +11,23 @@ open class TableModelViewController: UITableViewController, TableModelDelegate {
     var cellDelegates = [String : Any]()
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        commonInit()
     }
     
     public override init(style: UITableViewStyle) {
         super.init(style: style)
-        modelDelegate = self
+        commonInit()
     }
     
     public convenience init(style: UITableViewStyle, model: TableModel) {
         self.init(style: style)
         self.model = model
+        commonInit()
+    }
+    
+    private func commonInit() {
+        modelDelegate = self
     }
     
     open override func viewDidLoad() {

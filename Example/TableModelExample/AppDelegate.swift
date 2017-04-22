@@ -21,10 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let data = try! Data(contentsOf: url)
         let model = try! TableModel(jsonData: data)
         
-        let settingsVC = RootSettingsTVC(style: .grouped, model: model)
-        let navigationVC = UINavigationController(rootViewController: settingsVC)
+//        let settingsVC = RootSettingsTVC(style: .grouped, model: model)
+//        let navigationVC = UINavigationController(rootViewController: settingsVC)
+//        window?.rootViewController = navigationVC
         
-        window?.rootViewController = navigationVC
+        guard
+            let nvc = window?.rootViewController as? UINavigationController,
+            let tvc = nvc.viewControllers.first as? TableModelViewController
+        else { return false }
+        tvc.model = model
         
         return true
     }
