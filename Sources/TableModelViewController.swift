@@ -40,11 +40,11 @@ open class TableModelViewController: UITableViewController {
     // MARK: - Abstract
     
     open func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        return .default
+        return .basic
     }
     
     open func configureCell(_ cell: TableModelCell, with item: Item) {
-        cell.configure(with: item)
+        cell.updateUI(with: item)
     }
     
     open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
@@ -77,16 +77,16 @@ open class TableModelViewController: UITableViewController {
     
     private func registerCell(with identifier: String) {
         switch cellStyle(forIdentifier: identifier) {
-        case .default:
-            tableView.register(DefaultCell.self, forCellReuseIdentifier: identifier)
+        case .basic:
+            tableView.register(BaseTableCell.self, forCellReuseIdentifier: identifier)
         case .subtitle:
-            tableView.register(SubtitleCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(SubtitleTableCell.self, forCellReuseIdentifier: identifier)
         case .leftDetail:
-            tableView.register(LeftDetailCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(LeftDetailTableCell.self, forCellReuseIdentifier: identifier)
         case .rightDetail:
-            tableView.register(RightDetailCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(RightDetailTableCell.self, forCellReuseIdentifier: identifier)
         case .toggle:
-            tableView.register(ToggleCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(ToggleTableCell.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellNib):
@@ -115,7 +115,7 @@ extension TableModelViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
 
-        (cell as? ToggleCell)?.delegate = self
+        (cell as? ToggleTableCell)?.delegate = self
         
         if let cell = cell as? TableModelCell {
             configureCell(cell, with: item)
@@ -149,11 +149,11 @@ extension TableModelViewController {
     
 }
 
-extension TableModelViewController: ToggleCellDelegate {
+extension TableModelViewController: ToggleTableCellDelegate {
     
     // MARK: - ToggleCellDelegate
     
-    public func didChangeValue(sender: ToggleCell) {
+    public func didChangeValue(sender: ToggleTableCell) {
         if let item = item(from: sender) {
             handleEvent(.valueChanged, with: item, sender: sender)
         }

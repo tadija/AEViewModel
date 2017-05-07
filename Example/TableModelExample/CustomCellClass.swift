@@ -9,25 +9,20 @@
 import UIKit
 import TableModel
 
-class CustomCellClass: UITableViewCell, TableModelCell {
+class CustomCellClass: SubtitleTableCell {
     
-    // MARK: - Init
+    // MARK: - TableModelCell
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        configureUI()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureUI() {
-        let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
-        imageView?.setImage(from: url)
-        
+    override func configureUI() {
         textLabel?.font = UIFont.preferredFont(forTextStyle: .title2)
         detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
+    }
+    
+    override func updateUI(with item: Item) {
+        super.updateUI(with: item)
+        
+        let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
+        imageView?.setImage(from: url)
     }
     
     // MARK: - Lifecycle

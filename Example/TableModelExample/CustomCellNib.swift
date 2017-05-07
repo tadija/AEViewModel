@@ -9,7 +9,7 @@
 import UIKit
 import TableModel
 
-class CustomCellNib: UITableViewCell, TableModelCell {
+class CustomCellNib: BaseTableCell {
     
     // MARK: - Outlets
     
@@ -17,18 +17,14 @@ class CustomCellNib: UITableViewCell, TableModelCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     
-    // MARK: - Lifecycle
+    // MARK: - TableModelCell
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    override func configureUI() {
         customImageView.layer.cornerRadius = 28
         customImageView.layer.masksToBounds = true
     }
     
-    // MARK: - TableModelCell
-    
-    func configure(with item: Item) {
+    override func updateUI(with item: Item) {
         customImageView.image = item.image
         title.text = item.title
         subtitle.text = item.detail

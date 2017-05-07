@@ -27,12 +27,12 @@ class WiFiSettingsTVC: TableModelViewController {
             case .wifiSwitch:
                 return .toggle
             case .wifiNetwork:
-                return .default
+                return .basic
             case .joinNetworksSwitch:
                 return .toggle
             }
         } else {
-            return .default
+            return .basic
         }
     }
     

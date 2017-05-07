@@ -1,7 +1,7 @@
 import UIKit
 
 public enum TableModelCellStyle {
-    case `default`
+    case basic
     case subtitle
     case leftDetail
     case rightDetail

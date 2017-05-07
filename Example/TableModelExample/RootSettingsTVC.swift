@@ -49,7 +49,7 @@ class RootSettingsTVC: TableModelViewController {
             case .bluetooth:
                 return .rightDetail
             case .cellular:
-                return .default
+                return .basic
             case .hotspot:
                 return .rightDetail
             case .vpn:
@@ -58,14 +58,14 @@ class RootSettingsTVC: TableModelViewController {
                 return .rightDetail
             }
         } else {
-            return .default
+            return .basic
         }
     }
     
     override func configureCell(_ cell: TableModelCell, with item: Item) {
         super.configureCell(cell, with: item)
         
-        if let toggleCell = cell as? ToggleCell {
+        if let toggleCell = cell as? ToggleTableCell {
             toggleCell.toggle.onTintColor = UIColor.orange
         }
     }
