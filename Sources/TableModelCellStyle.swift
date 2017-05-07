@@ -1,11 +1,11 @@
 import UIKit
 
 public enum TableModelCellStyle {
-    case `default`
+    case basic
     case subtitle
     case leftDetail
     case rightDetail
-    case toggle(delegate: ToggleCellDelegate)
+    case toggle
     case customClass(type: TableModelCell.Type)
     case customNib(nib: UINib?)
 }

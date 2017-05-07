@@ -11,40 +11,46 @@ import TableModel
 
 class WiFiSettingsTVC: TableModelViewController {
     
-    enum CellID: String {
+    // MARK: - Types
+    
+    enum CellType: String {
         case wifiSwitch
         case wifiNetwork
         case joinNetworksSwitch
     }
     
-    // MARK: - TableModelDelegate
+    // MARK: - Override
     
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        if let cellID = CellID(rawValue: identifier) {
-            switch cellID {
+        if let cellType = CellType(rawValue: identifier) {
+            switch cellType {
             case .wifiSwitch:
-                return .toggle(delegate: self)
+                return .toggle
             case .wifiNetwork:
-                return .default
+                return .basic
             case .joinNetworksSwitch:
-                return .toggle(delegate: self)
+                return .toggle
             }
         } else {
-            return .default
+            return .basic
         }
     }
     
-    override func handleAction(with item: Item, from cell: TableModelCell?) {
-        if let cellID = CellID(rawValue: item.identifier) {
-            switch cellID {
+    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
+        if let cellType = CellType(rawValue: item.identifier) {
+            switch cellType {
+            case .wifiSwitch, .joinNetworksSwitch:
+                if event == .valueChanged {
+                    print("handleEvent with id: \(item.identifier)")
+                }
             case .wifiNetwork:
                 let tmvc = TableModelViewController(style: .grouped)
                 pushSubmenu(with: item, in: tmvc)
-            default:
-                break
             }
         }
     }
+    
+    // MARK: - Helpers
     
     private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {
         if let model = item.submodel {
@@ -53,10 +59,4 @@ class WiFiSettingsTVC: TableModelViewController {
         }
     }
     
-}
-
-extension WiFiSettingsTVC: ToggleCellDelegate {
-    func didChangeValue(sender: ToggleCell) {
-        print("\(sender): toggle - \(sender.toggle.isOn)")
-    }
 }

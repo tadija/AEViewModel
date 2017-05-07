@@ -11,7 +11,9 @@ import TableModel
 
 class RootSettingsTVC: TableModelViewController {
  
-    enum CellID: String {
+    // MARK: - Types
+    
+    enum CellType: String {
         case profile
         case airplane
         case wifi
@@ -22,47 +24,72 @@ class RootSettingsTVC: TableModelViewController {
         case carrier
     }
     
-    // MARK: - TableModelDelegate
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
+    }
+    
+    // MARK: - Override
     
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
-        if let cellID = CellID(rawValue: identifier) {
-            switch cellID {
+        if let cellType = CellType(rawValue: identifier) {
+            switch cellType {
             case .profile:
-                return .subtitle
+//                return .customClass(type: CustomCellClass.self)
+                let nib = UINib(nibName: "CustomCellNib", bundle: nil)
+                return .customNib(nib: nib)
             case .airplane:
-                return .toggle(delegate: self)
+                return .toggle
             case .wifi:
                 return .rightDetail
             case .bluetooth:
                 return .rightDetail
             case .cellular:
-                return .default
+                return .basic
             case .hotspot:
                 return .rightDetail
             case .vpn:
-                return .toggle(delegate: self)
+                return .toggle
             case .carrier:
                 return .rightDetail
             }
         } else {
-            return .default
+            return .basic
         }
     }
     
-    override func handleAction(with item: Item, from cell: TableModelCell?) {
-        if let cellID = CellID(rawValue: item.identifier) {
-            switch cellID {
+    override func configureCell(_ cell: TableModelCell, with item: Item) {
+        super.configureCell(cell, with: item)
+        
+        if let toggleCell = cell as? ToggleTableCell {
+            toggleCell.toggle.onTintColor = UIColor.orange
+        }
+    }
+    
+    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
+        if let cellType = CellType(rawValue: item.identifier) {
+            switch cellType {
+            case .airplane, .vpn:
+                if event == .valueChanged {
+                    print("handleEvent with id: \(item.identifier)")
+                }
             case .wifi:
-                let tmvc = WiFiSettingsTVC(style: .grouped)
-                pushSubmenu(with: item, in: tmvc)
+                let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
+                pushSubmenu(with: item, in: wifiSubmenu)
             case .bluetooth, .cellular, .hotspot, .carrier:
-                let tmvc = TableModelViewController(style: .grouped)
-                pushSubmenu(with: item, in: tmvc)
+                let defaultSubmenu = TableModelViewController(style: .grouped)
+                pushSubmenu(with: item, in: defaultSubmenu)
             default:
                 break
             }
         }
     }
+    
+    // MARK: - Helpers
     
     private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {
         if let model = item.submodel {
@@ -71,10 +98,4 @@ class RootSettingsTVC: TableModelViewController {
         }
     }
     
-}
-
-extension RootSettingsTVC: ToggleCellDelegate {
-    func didChangeValue(sender: ToggleCell) {
-        print("\(sender): toggle - \(sender.toggle.isOn)")
-    }
 }

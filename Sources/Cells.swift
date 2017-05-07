@@ -1,66 +1,95 @@
 import UIKit
 
-public class DefaultCell: UITableViewCell, TableModelCell {
+open class BaseTableCell: UITableViewCell, TableModelCell {
+    
+    // MARK: - Init
+    
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
-    }
-}
-
-public class SubtitleCell: UITableViewCell, TableModelCell {
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configureUI()
     }
     
+    // MARK: - Lifecycle
+    
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        configureUI()
+    }
+    
+    // MARK: - TableModelCell
+    
+    open func configureUI() {}
+    
+    open func updateUI(with item: Item) {
+        imageView?.image = item.image
+        textLabel?.text = item.title
+        detailTextLabel?.text = item.detail
+        
+        if (item.submodel?.sections.count ?? 0) > 0 {
+            accessoryType = .disclosureIndicator
+        }
+    }
+    
+}
+
+open class SubtitleTableCell: BaseTableCell {
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
 }
 
-public class LeftDetailCell: UITableViewCell, TableModelCell {
+open class LeftDetailTableCell: BaseTableCell {
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
-    
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value2, reuseIdentifier: reuseIdentifier)
     }
 }
 
-public class RightDetailCell: UITableViewCell, TableModelCell {
+open class RightDetailTableCell: BaseTableCell {
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
-    
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
     }
 }
 
-public protocol ToggleCellDelegate: class {
-    func didChangeValue(sender: ToggleCell)
+public protocol ToggleTableCellDelegate: class {
+    func didChangeValue(sender: ToggleTableCell)
 }
 
-public class ToggleCell: UITableViewCell, TableModelCell {
+open class ToggleTableCell: BaseTableCell {
+    
+    // MARK: - Outlets
+    
     public let toggle = UISwitch()
-    public weak var delegate: ToggleCellDelegate?
     
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    // MARK: - Properties
     
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        
+    public weak var delegate: ToggleTableCellDelegate?
+    
+    // MARK: - TableModelCell
+    
+    open override func configureUI() {
         selectionStyle = .none
         accessoryView = toggle
+        
         toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
     }
     
-    func callDelegate() {
+    // MARK: - Helpers
+    
+    @objc private func callDelegate() {
         delegate?.didChangeValue(sender: self)
     }
+    
 }
