@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0E708B1EBFA0EA000153CD /* CustomCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E708A1EBFA0EA000153CD /* CustomCellNib.xib */; };
 		8B3276481E9AF35700FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; };
 		8B3276491E9AF35700FD9502 /* Mappable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A7B1E98606700B3101B /* AppDelegate.swift */; };
@@ -16,6 +17,8 @@
 		8B893A8E1E9860C300B3101B /* settings-menu.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A8D1E9860C300B3101B /* settings-menu.json */; };
 		8B893A901E9860E900B3101B /* RootSettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */; };
 		8B893A961E98645700B3101B /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A951E98645700B3101B /* CustomCell.swift */; };
+		8BB518001EAC19B700A181AE /* CustomCellClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* CustomCellClass.swift */; };
+		8BB518031EAC19BD00A181AE /* CustomCellNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB518021EAC19BD00A181AE /* CustomCellNib.swift */; };
 		8BD8F6851E9A5D6000C9BBA3 /* TableModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD8F6821E9A5D5200C9BBA3 /* TableModel.framework */; };
 		8BD8F6861E9A5D6000C9BBA3 /* TableModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD8F6821E9A5D5200C9BBA3 /* TableModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8BF8AACC1EA9533900A14F02 /* WiFiSettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8AACB1EA9533900A14F02 /* WiFiSettingsTVC.swift */; };
@@ -61,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B0E708A1EBFA0EA000153CD /* CustomCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellNib.xib; sourceTree = "<group>"; };
 		8B3276421E9AF2BF00FD9502 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = ../Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
 		8B893A781E98606700B3101B /* TableModelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableModelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893A7B1E98606700B3101B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 		8B893A8D1E9860C300B3101B /* settings-menu.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "settings-menu.json"; path = "../Resources/settings-menu.json"; sourceTree = "<group>"; };
 		8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootSettingsTVC.swift; sourceTree = "<group>"; };
 		8B893A951E98645700B3101B /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		8BB517FF1EAC19B700A181AE /* CustomCellClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellClass.swift; sourceTree = "<group>"; };
+		8BB518021EAC19BD00A181AE /* CustomCellNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellNib.swift; sourceTree = "<group>"; };
 		8BD8F67C1E9A5D5200C9BBA3 /* TableModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TableModel.xcodeproj; path = ../TableModel.xcodeproj; sourceTree = "<group>"; };
 		8BF8AACB1EA9533900A14F02 /* WiFiSettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiSettingsTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +138,9 @@
 				8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */,
 				8BF8AACB1EA9533900A14F02 /* WiFiSettingsTVC.swift */,
 				8B893A951E98645700B3101B /* CustomCell.swift */,
+				8BB517FF1EAC19B700A181AE /* CustomCellClass.swift */,
+				8BB518021EAC19BD00A181AE /* CustomCellNib.swift */,
+				8B0E708A1EBFA0EA000153CD /* CustomCellNib.xib */,
 				8B893A8D1E9860C300B3101B /* settings-menu.json */,
 				8B32764A1E9AF40F00FD9502 /* Supporting Files */,
 			);
@@ -236,6 +245,7 @@
 				8B893A8E1E9860C300B3101B /* settings-menu.json in Resources */,
 				8B893A831E98606700B3101B /* Assets.xcassets in Resources */,
 				8B893A811E98606700B3101B /* Main.storyboard in Resources */,
+				8B0E708B1EBFA0EA000153CD /* CustomCellNib.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +260,8 @@
 				8BF8AACC1EA9533900A14F02 /* WiFiSettingsTVC.swift in Sources */,
 				8B893A961E98645700B3101B /* CustomCell.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
+				8BB518031EAC19BD00A181AE /* CustomCellNib.swift in Sources */,
+				8BB518001EAC19B700A181AE /* CustomCellClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

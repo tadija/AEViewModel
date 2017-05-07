@@ -24,13 +24,24 @@ class RootSettingsTVC: TableModelViewController {
         case carrier
     }
     
+    // MARK: - Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
+    }
+    
     // MARK: - Override
     
     override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
         if let cellType = CellType(rawValue: identifier) {
             switch cellType {
             case .profile:
-                return .subtitle
+//                return .customClass(type: CustomCellClass.self)
+                let nib = UINib(nibName: "CustomCellNib", bundle: nil)
+                return .customNib(nib: nib)
             case .airplane:
                 return .toggle
             case .wifi:

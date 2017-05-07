@@ -35,3 +35,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
+
+// MARK: - Helpers
+
+extension UIImageView {
+    func setImage(from url: URL) {
+        URLSession.shared.dataTask(with: url) { (data, _, _) in
+            if let data = data {
+                let image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self.image = image
+                }
+            }
+        }.resume()
+    }
+}
