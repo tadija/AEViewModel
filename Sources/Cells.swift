@@ -70,8 +70,8 @@ public class ToggleCell: UITableViewCell, TableModelCell {
     
     // MARK: - Helpers
     
-    @objc
-    private func callDelegate() {
+    @objc private func callDelegate() {
         delegate?.didChangeValue(sender: self)
     }
+    
 }

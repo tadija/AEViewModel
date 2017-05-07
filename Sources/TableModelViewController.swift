@@ -93,6 +93,7 @@ open class TableModelViewController: UITableViewController {
             tableView.register(cellNib, forCellReuseIdentifier: identifier)
         }
     }
+    
 }
 
 extension TableModelViewController {
@@ -130,6 +131,7 @@ extension TableModelViewController {
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return model?.sections[section].footer
     }
+    
 }
 
 extension TableModelViewController {
@@ -144,6 +146,7 @@ extension TableModelViewController {
         
         handleEvent(.primaryActionTriggered, with: item, sender: cell)
     }
+    
 }
 
 extension TableModelViewController: ToggleCellDelegate {
@@ -155,4 +158,5 @@ extension TableModelViewController: ToggleCellDelegate {
             handleEvent(.valueChanged, with: item, sender: sender)
         }
     }
+    
 }

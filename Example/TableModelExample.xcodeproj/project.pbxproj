@@ -16,7 +16,6 @@
 		8B893A861E98606700B3101B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A841E98606700B3101B /* LaunchScreen.storyboard */; };
 		8B893A8E1E9860C300B3101B /* settings-menu.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A8D1E9860C300B3101B /* settings-menu.json */; };
 		8B893A901E9860E900B3101B /* RootSettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */; };
-		8B893A961E98645700B3101B /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A951E98645700B3101B /* CustomCell.swift */; };
 		8BB518001EAC19B700A181AE /* CustomCellClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* CustomCellClass.swift */; };
 		8BB518031EAC19BD00A181AE /* CustomCellNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB518021EAC19BD00A181AE /* CustomCellNib.swift */; };
 		8BD8F6851E9A5D6000C9BBA3 /* TableModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD8F6821E9A5D5200C9BBA3 /* TableModel.framework */; };
@@ -74,7 +73,6 @@
 		8B893A871E98606700B3101B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B893A8D1E9860C300B3101B /* settings-menu.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "settings-menu.json"; path = "../Resources/settings-menu.json"; sourceTree = "<group>"; };
 		8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootSettingsTVC.swift; sourceTree = "<group>"; };
-		8B893A951E98645700B3101B /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		8BB517FF1EAC19B700A181AE /* CustomCellClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellClass.swift; sourceTree = "<group>"; };
 		8BB518021EAC19BD00A181AE /* CustomCellNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellNib.swift; sourceTree = "<group>"; };
 		8BD8F67C1E9A5D5200C9BBA3 /* TableModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TableModel.xcodeproj; path = ../TableModel.xcodeproj; sourceTree = "<group>"; };
@@ -94,6 +92,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B0E708D1EBFC3B0000153CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8B893A8D1E9860C300B3101B /* settings-menu.json */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8B0E708E1EBFC3BD000153CD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B893A7F1E98606700B3101B /* Main.storyboard */,
+				8B0E70901EBFC405000153CD /* Cells */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8B0E708F1EBFC3FE000153CD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */,
+				8BF8AACB1EA9533900A14F02 /* WiFiSettingsTVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8B0E70901EBFC405000153CD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8BB517FF1EAC19B700A181AE /* CustomCellClass.swift */,
+				8BB518021EAC19BD00A181AE /* CustomCellNib.swift */,
+				8B0E708A1EBFA0EA000153CD /* CustomCellNib.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		8B3276411E9AF2BF00FD9502 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				8B893A841E98606700B3101B /* LaunchScreen.storyboard */,
-				8B893A7F1E98606700B3101B /* Main.storyboard */,
 				8B893A821E98606700B3101B /* Assets.xcassets */,
 				8B893A871E98606700B3101B /* Info.plist */,
 			);
@@ -135,13 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				8B893A7B1E98606700B3101B /* AppDelegate.swift */,
-				8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */,
-				8BF8AACB1EA9533900A14F02 /* WiFiSettingsTVC.swift */,
-				8B893A951E98645700B3101B /* CustomCell.swift */,
-				8BB517FF1EAC19B700A181AE /* CustomCellClass.swift */,
-				8BB518021EAC19BD00A181AE /* CustomCellNib.swift */,
-				8B0E708A1EBFA0EA000153CD /* CustomCellNib.xib */,
-				8B893A8D1E9860C300B3101B /* settings-menu.json */,
+				8B0E708D1EBFC3B0000153CD /* Model */,
+				8B0E708E1EBFC3BD000153CD /* View */,
+				8B0E708F1EBFC3FE000153CD /* Controller */,
 				8B32764A1E9AF40F00FD9502 /* Supporting Files */,
 			);
 			path = TableModelExample;
@@ -258,7 +287,6 @@
 			files = (
 				8B893A901E9860E900B3101B /* RootSettingsTVC.swift in Sources */,
 				8BF8AACC1EA9533900A14F02 /* WiFiSettingsTVC.swift in Sources */,
-				8B893A961E98645700B3101B /* CustomCell.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
 				8BB518031EAC19BD00A181AE /* CustomCellNib.swift in Sources */,
 				8BB518001EAC19B700A181AE /* CustomCellClass.swift in Sources */,
