@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B0E708B1EBFA0EA000153CD /* CustomCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E708A1EBFA0EA000153CD /* CustomCellNib.xib */; };
+		8B0E70931EBFE0A0000153CD /* SettingsMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E70921EBFE0A0000153CD /* SettingsMenuModel.swift */; };
 		8B3276481E9AF35700FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; };
 		8B3276491E9AF35700FD9502 /* Mappable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A7B1E98606700B3101B /* AppDelegate.swift */; };
@@ -64,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		8B0E708A1EBFA0EA000153CD /* CustomCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellNib.xib; sourceTree = "<group>"; };
+		8B0E70921EBFE0A0000153CD /* SettingsMenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuModel.swift; sourceTree = "<group>"; };
 		8B3276421E9AF2BF00FD9502 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = ../Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
 		8B893A781E98606700B3101B /* TableModelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableModelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893A7B1E98606700B3101B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				8B893A8D1E9860C300B3101B /* settings-menu.json */,
+				8B0E70921EBFE0A0000153CD /* SettingsMenuModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B893A901E9860E900B3101B /* RootSettingsTVC.swift in Sources */,
+				8B0E70931EBFE0A0000153CD /* SettingsMenuModel.swift in Sources */,
 				8BF8AACC1EA9533900A14F02 /* WiFiSettingsTVC.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
 				8BB518031EAC19BD00A181AE /* CustomCellNib.swift in Sources */,

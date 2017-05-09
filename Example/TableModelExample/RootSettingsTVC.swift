@@ -29,7 +29,8 @@ class RootSettingsTVC: TableModelViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        loadModelFromJSON()
+//        loadModelFromJSON()
+        loadModelFromCode()
     }
     
     override func viewDidLoad() {
@@ -104,6 +105,13 @@ class RootSettingsTVC: TableModelViewController {
             let model = try? TableModel(jsonData: data)
         else {
             fatalError("Unable to load settings from settings-menu.json")
+        }
+        self.model = model
+    }
+    
+    private func loadModelFromCode() {
+        guard let model = TableModel.create() else {
+            fatalError("Unable to load settings from code")
         }
         self.model = model
     }
