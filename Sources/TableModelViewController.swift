@@ -66,9 +66,10 @@ open class TableModelViewController: UITableViewController {
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
-        model?.sections.forEach { section in
-            let identifiers = section.items.map{ $0.identifier }
-            uniqueIdentifiers.formUnion(identifiers)
+        model?.sections?.forEach { section in
+            if let identifiers = section.items?.flatMap({ $0.identifier }) {
+                uniqueIdentifiers.formUnion(identifiers)
+            }
         }
         uniqueIdentifiers.forEach { identifier in
             registerCell(with: identifier)
@@ -101,11 +102,11 @@ extension TableModelViewController {
     // MARK: - UITableViewControllerDataSource
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return model?.sections.count ?? 0
+        return model?.sections?.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.sections[section].items.count ?? 0
+        return model?.sections?[section].items?.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -125,11 +126,11 @@ extension TableModelViewController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model?.sections[section].header
+        return model?.sections?[section].header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model?.sections[section].footer
+        return model?.sections?[section].footer
     }
     
 }

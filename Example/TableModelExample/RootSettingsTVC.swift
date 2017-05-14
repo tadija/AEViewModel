@@ -110,10 +110,7 @@ class RootSettingsTVC: TableModelViewController {
     }
     
     private func loadModelFromCode() {
-        guard let model = TableModel.create() else {
-            fatalError("Unable to load settings from code")
-        }
-        self.model = model
+        self.model = TableModel.settings
     }
     
     private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {

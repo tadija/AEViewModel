@@ -56,3 +56,48 @@ extension TableModel {
     }
     
 }
+
+extension TableModel {
+    
+    static var settings: TableModel {
+        var settings = TableModel("settings")
+        settings.sections = [Section.user, Section.general]
+        return settings
+    }
+    
+}
+
+extension Section {
+    
+    static var user: Section {
+        var section = Section("profile")
+        section.items = [Item.profile]
+        return section
+    }
+    
+    static var general: Section {
+        var section = Section("general")
+        section.items = [Item.airplane]
+        return section
+    }
+    
+}
+
+extension Item {
+    
+    static var profile: Item {
+        var item = Item("profile")
+        item.imageName = "IconGray"
+        item.title = "Marko Tadic"
+        item.detail = "Apple ID, iCloud, iTunes & App Store"
+        return item
+    }
+    
+    static var airplane: Item {
+        var item = Item("airplane")
+        item.imageName = "IconOrange"
+        item.title = "Airplane Mode"
+        return item
+    }
+    
+}

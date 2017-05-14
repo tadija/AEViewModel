@@ -3,10 +3,14 @@ import Mappable
 
 public struct TableModel: Mappable {
     public let identifier: String
-    public let sections: [Section]
-    public let data: [String : Any]?
+    public var sections: [Section]?
+    public var data: [String : Any]?
     
     public var title: String?
+    
+    public init(_ identifier: String) {
+        self.identifier = identifier
+    }
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
@@ -15,19 +19,23 @@ public struct TableModel: Mappable {
         title = try? map.value(forKey: "title")
     }
     
-    public func item(at indexPath: IndexPath) -> Item {
-        let item = sections[indexPath.section].items[indexPath.item]
+    public func item(at indexPath: IndexPath) -> Item? {
+        let item = sections?[indexPath.section].items?[indexPath.item]
         return item
     }
 }
 
 public struct Section: Mappable {
     public let identifier: String
-    public let items: [Item]
-    public let data: [String : Any]?
+    public var items: [Item]?
+    public var data: [String : Any]?
     
     public var header: String?
     public var footer: String?
+    
+    public init(_ identifier: String) {
+        self.identifier = identifier
+    }
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
@@ -41,7 +49,7 @@ public struct Section: Mappable {
 public struct Item: Mappable {
     public let identifier: String
     public var submodel: TableModel?
-    public let data: [String : Any]?
+    public var data: [String : Any]?
     
     public var imageName: String?
     public var title: String?
@@ -52,6 +60,10 @@ public struct Item: Mappable {
             return nil
         }
         return UIImage(named: imageName)
+    }
+    
+    public init(_ identifier: String) {
+        self.identifier = identifier
     }
     
     public init(map: [String : Any]) throws {
