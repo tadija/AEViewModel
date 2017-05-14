@@ -11,57 +11,9 @@ import TableModel
 
 extension TableModel {
     
-    static func create() -> TableModel? {
-        let model: TableModel?
-        do {
-            model = try TableModel(map: [
-                // Model
-                "id" : "settings",
-                "title" : "Settings",
-                
-                // Sections
-                "sections" : [
-                    
-                    // Profile
-                    [
-                        "id" : "profile",
-                        "items" : [
-                            [
-                                "id": "profile",
-                                "image": "IconGray",
-                                "title": "Marko Tadic",
-                                "detail": "Apple ID, iCloud, iTunes & App Store"
-                            ]
-                        ]
-                    ],
-                    
-                    // General
-                    [
-                        "id" : "general",
-                        "items" : [
-                            [
-                                "id": "airplane",
-                                "image": "IconOrange",
-                                "title": "Airplane Mode"
-                            ]
-                        ]
-                    ]
-                ]
-            ])
-        } catch {
-            model = nil
-            print(error)
-        }
-        return model
-    }
-    
-}
-
-extension TableModel {
-    
     static var settings: TableModel {
         var settings = TableModel("settings")
-        settings.sections = [Section.user, Section.general]
+        settings.sections = [.user, .general]
         return settings
     }
     
@@ -71,13 +23,13 @@ extension Section {
     
     static var user: Section {
         var section = Section("profile")
-        section.items = [Item.profile]
+        section.items = [.profile]
         return section
     }
     
     static var general: Section {
         var section = Section("general")
-        section.items = [Item.airplane]
+        section.items = [.airplane, .wifi]
         return section
     }
     
@@ -97,6 +49,14 @@ extension Item {
         var item = Item("airplane")
         item.imageName = "IconOrange"
         item.title = "Airplane Mode"
+        return item
+    }
+    
+    static var wifi: Item {
+        var item = Item("wifi")
+        item.imageName = "IconBlue"
+        item.title = "Wi-Fi"
+        item.detail = "Off"
         return item
     }
     
