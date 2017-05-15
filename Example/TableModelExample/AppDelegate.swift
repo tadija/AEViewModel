@@ -16,21 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let model = try! TableModel(jsonData: data)
-        
-//        let settingsVC = RootSettingsTVC(style: .grouped, model: model)
-//        let navigationVC = UINavigationController(rootViewController: settingsVC)
-//        window?.rootViewController = navigationVC
-        
-        guard
-            let nvc = window?.rootViewController as? UINavigationController,
-            let tvc = nvc.viewControllers.first as? TableModelViewController
-        else { return false }
-        tvc.model = model
-        
         return true
     }
 

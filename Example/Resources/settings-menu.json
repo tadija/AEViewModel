@@ -3,7 +3,7 @@
   "title": "Settings",
   "sections": [
     {
-      "id": "profile",
+      "id": "user",
       "items": [
         {
           "id": "profile",
@@ -14,8 +14,7 @@
       ]
     },
     {
-      "id": "general",
-      "header": "General",
+      "id": "device",
       "items": [
         {
           "id": "airplane",

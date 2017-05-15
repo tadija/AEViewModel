@@ -26,6 +26,13 @@ class RootSettingsTVC: TableModelViewController {
     
     // MARK: - Lifecycle
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+//        loadModelFromJSON()
+        loadModelFromCode()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,6 +97,21 @@ class RootSettingsTVC: TableModelViewController {
     }
     
     // MARK: - Helpers
+    
+    private func loadModelFromJSON() {
+        guard
+            let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json"),
+            let data = try? Data(contentsOf: url),
+            let model = try? TableModel(jsonData: data)
+        else {
+            fatalError("Unable to load settings from settings-menu.json")
+        }
+        self.model = model
+    }
+    
+    private func loadModelFromCode() {
+        self.model = TableModel.settings
+    }
     
     private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {
         if let model = item.submodel {
