@@ -1,7 +1,13 @@
 import Foundation
 import Mappable
 
-public struct Table: Mappable {
+public protocol Model: Mappable {
+    var identifier: String { get }
+    var data: [String : Any]? { get set }
+    init(_ identifier: String)
+}
+
+public struct Table: Model {
     public let identifier: String
     public var sections: [Section]?
     public var data: [String : Any]?
@@ -25,7 +31,7 @@ public struct Table: Mappable {
     }
 }
 
-public struct Section: Mappable {
+public struct Section: Model {
     public let identifier: String
     public var items: [Item]?
     public var data: [String : Any]?
@@ -46,7 +52,7 @@ public struct Section: Mappable {
     }
 }
 
-public struct Item: Mappable {
+public struct Item: Model {
     public let identifier: String
     public var submodel: Table?
     public var data: [String : Any]?
