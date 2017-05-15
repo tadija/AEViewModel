@@ -15,7 +15,7 @@
 - [Swift Package Manager](https://swift.org/package-manager/):
 
 ```swift
-.Package(url: "https://github.com/tadija/table-model.git", majorVersion: 0)
+.Package(url: "https://github.com/tadija/table.git", majorVersion: 0)
 ```
 
 ## License
