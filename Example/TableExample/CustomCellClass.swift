@@ -1,17 +1,17 @@
 //
 //  CustomCellClass.swift
-//  TableModelExample
+//  TableExample
 //
 //  Created by Marko Tadić on 4/23/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import TableModel
+import Table
 
 class CustomCellClass: SubtitleTableCell {
     
-    // MARK: - TableModelCell
+    // MARK: - TableCell
     
     override func configureUI() {
         textLabel?.font = UIFont.preferredFont(forTextStyle: .title2)

@@ -1,7 +1,13 @@
 import Foundation
 import Mappable
 
-public struct TableModel: Mappable {
+public protocol Model: Mappable {
+    var identifier: String { get }
+    var data: [String : Any]? { get set }
+    init(_ identifier: String)
+}
+
+public struct Table: Model {
     public let identifier: String
     public var sections: [Section]?
     public var data: [String : Any]?
@@ -14,7 +20,7 @@ public struct TableModel: Mappable {
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
-        sections = try map.objectsArray(forKey: "sections")
+        sections = try map.mappableArray(forKey: "sections")
         data = try? map.value(forKey: "data")
         title = try? map.value(forKey: "title")
     }
@@ -25,7 +31,7 @@ public struct TableModel: Mappable {
     }
 }
 
-public struct Section: Mappable {
+public struct Section: Model {
     public let identifier: String
     public var items: [Item]?
     public var data: [String : Any]?
@@ -39,16 +45,16 @@ public struct Section: Mappable {
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
-        items = try map.objectsArray(forKey: "items")
+        items = try map.mappableArray(forKey: "items")
         data = try? map.value(forKey: "data")
         header = try? map.value(forKey: "header")
         footer = try? map.value(forKey: "footer")
     }
 }
 
-public struct Item: Mappable {
+public struct Item: Model {
     public let identifier: String
-    public var submodel: TableModel?
+    public var submodel: Table?
     public var data: [String : Any]?
     
     public var imageName: String?
@@ -68,7 +74,7 @@ public struct Item: Mappable {
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
-        submodel = try? map.object(forKey: "table")
+        submodel = try? map.mappable(forKey: "table")
         data = try? map.value(forKey: "data")
         
         imageName = try? map.value(forKey: "image")

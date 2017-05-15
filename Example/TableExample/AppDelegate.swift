@@ -1,13 +1,13 @@
 //
 //  AppDelegate.swift
-//  TableModelExample
+//  TableExample
 //
 //  Created by Marko Tadić on 4/8/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import TableModel
+import Table
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

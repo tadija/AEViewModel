@@ -1,18 +1,18 @@
 //
 //  SettingsMenuModel.swift
-//  TableModelExample
+//  TableExample
 //
 //  Created by Marko Tadić on 5/8/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import Foundation
-import TableModel
+import Table
 
-extension TableModel {
+extension Table {
     
-    static var settings: TableModel {
-        var settings = TableModel("settings")
+    static var settings: Table {
+        var settings = Table("settings")
         settings.sections = [.user, .device]
         return settings
     }

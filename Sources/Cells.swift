@@ -1,6 +1,6 @@
 import UIKit
 
-open class BaseTableCell: UITableViewCell, TableModelCell {
+open class BaseTableCell: UITableViewCell, TableCell {
     
     // MARK: - Init
     
@@ -20,7 +20,7 @@ open class BaseTableCell: UITableViewCell, TableModelCell {
         configureUI()
     }
     
-    // MARK: - TableModelCell
+    // MARK: - TableCell
     
     open func configureUI() {}
     
@@ -77,7 +77,7 @@ open class ToggleTableCell: BaseTableCell {
     
     public weak var delegate: ToggleTableCellDelegate?
     
-    // MARK: - TableModelCell
+    // MARK: - TableCell
     
     open override func configureUI() {
         selectionStyle = .none
