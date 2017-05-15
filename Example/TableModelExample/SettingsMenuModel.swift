@@ -13,7 +13,7 @@ extension TableModel {
     
     static var settings: TableModel {
         var settings = TableModel("settings")
-        settings.sections = [.user, .general]
+        settings.sections = [.user, .device]
         return settings
     }
     
@@ -22,13 +22,13 @@ extension TableModel {
 extension Section {
     
     static var user: Section {
-        var section = Section("profile")
+        var section = Section("user")
         section.items = [.profile]
         return section
     }
     
-    static var general: Section {
-        var section = Section("general")
+    static var device: Section {
+        var section = Section("device")
         section.items = [.airplane, .wifi]
         return section
     }
