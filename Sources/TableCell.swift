@@ -1,6 +1,6 @@
 import UIKit
 
-public protocol TableModelCell: class {
+public protocol TableCell: class {
     func configureUI()
     func updateUI(with item: Item)
 }

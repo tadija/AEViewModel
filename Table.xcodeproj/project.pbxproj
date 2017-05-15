@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B3276011E9AD82A00FD9502 /* TableModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3275FF1E9AD82A00FD9502 /* TableModelTests.swift */; };
+		8B3276011E9AD82A00FD9502 /* TableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3275FF1E9AD82A00FD9502 /* TableTests.swift */; };
 		8B32760A1E9ADD4A00FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276091E9ADD4A00FD9502 /* Mappable.framework */; };
-		8B3276251E9AED1400FD9502 /* TableModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3276241E9AED1400FD9502 /* TableModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B3276251E9AED1400FD9502 /* Table.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3276241E9AED1400FD9502 /* Table.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B3276271E9AEEF000FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276091E9ADD4A00FD9502 /* Mappable.framework */; };
-		8B32764E1E9C284B00FD9502 /* TableModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B32764D1E9C284B00FD9502 /* TableModelCell.swift */; };
-		8B3276531E9C518000FD9502 /* TableModelCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3276521E9C518000FD9502 /* TableModelCellStyle.swift */; };
-		8B893AB81E98665F00B3101B /* TableModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B893AAE1E98665F00B3101B /* TableModel.framework */; };
+		8B32764E1E9C284B00FD9502 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B32764D1E9C284B00FD9502 /* TableCell.swift */; };
+		8B3276531E9C518000FD9502 /* TableCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3276521E9C518000FD9502 /* TableCellStyle.swift */; };
+		8B893AB81E98665F00B3101B /* Table.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B893AAE1E98665F00B3101B /* Table.framework */; };
 		8B8AFF2F1E9866ED0090B362 /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2A1E9866ED0090B362 /* Cells.swift */; };
-		8B8AFF321E9866ED0090B362 /* TableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2D1E9866ED0090B362 /* TableModel.swift */; };
-		8B8AFF331E9866ED0090B362 /* TableModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2E1E9866ED0090B362 /* TableModelViewController.swift */; };
+		8B8AFF321E9866ED0090B362 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2D1E9866ED0090B362 /* Table.swift */; };
+		8B8AFF331E9866ED0090B362 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AFF2E1E9866ED0090B362 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,12 +25,12 @@
 			containerPortal = 8B893AA51E98665F00B3101B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B893AAD1E98665F00B3101B;
-			remoteInfo = TableModel;
+			remoteInfo = Table;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8B3275FF1E9AD82A00FD9502 /* TableModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableModelTests.swift; path = TableModelTests/TableModelTests.swift; sourceTree = "<group>"; };
+		8B3275FF1E9AD82A00FD9502 /* TableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableTests.swift; path = TableTests/TableTests.swift; sourceTree = "<group>"; };
 		8B3276061E9ADB2C00FD9502 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B3276071E9ADB3800FD9502 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8B3276091E9ADD4A00FD9502 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
@@ -39,15 +39,15 @@
 		8B3276101E9AE13200FD9502 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B3276121E9AE14D00FD9502 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		8B3276131E9AE1BA00FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = SOURCE_ROOT; };
-		8B3276241E9AED1400FD9502 /* TableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableModel.h; path = Sources/TableModel.h; sourceTree = SOURCE_ROOT; };
+		8B3276241E9AED1400FD9502 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Table.h; path = Sources/Table.h; sourceTree = SOURCE_ROOT; };
 		8B3276261E9AED4100FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
-		8B32764D1E9C284B00FD9502 /* TableModelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableModelCell.swift; sourceTree = "<group>"; };
-		8B3276521E9C518000FD9502 /* TableModelCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableModelCellStyle.swift; sourceTree = "<group>"; };
-		8B893AAE1E98665F00B3101B /* TableModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TableModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B893AB71E98665F00B3101B /* TableModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B32764D1E9C284B00FD9502 /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		8B3276521E9C518000FD9502 /* TableCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellStyle.swift; sourceTree = "<group>"; };
+		8B893AAE1E98665F00B3101B /* Table.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Table.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B893AB71E98665F00B3101B /* TableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8AFF2A1E9866ED0090B362 /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
-		8B8AFF2D1E9866ED0090B362 /* TableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableModel.swift; sourceTree = "<group>"; };
-		8B8AFF2E1E9866ED0090B362 /* TableModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableModelViewController.swift; sourceTree = "<group>"; };
+		8B8AFF2D1E9866ED0090B362 /* Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		8B8AFF2E1E9866ED0090B362 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B3276271E9AEEF000FD9502 /* Mappable.framework in Frameworks */,
-				8B893AB81E98665F00B3101B /* TableModel.framework in Frameworks */,
+				8B893AB81E98665F00B3101B /* Table.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +74,7 @@
 		8B3275FC1E9AD82A00FD9502 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				8B3275FF1E9AD82A00FD9502 /* TableModelTests.swift */,
+				8B3275FF1E9AD82A00FD9502 /* TableTests.swift */,
 				8B3275FD1E9AD82A00FD9502 /* Supporting Files */,
 			);
 			path = Tests;
@@ -86,7 +86,7 @@
 				8B3276131E9AE1BA00FD9502 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			path = TableModelTests;
+			path = TableTests;
 			sourceTree = "<group>";
 		};
 		8B3276081E9ADD4A00FD9502 /* Frameworks */ = {
@@ -124,8 +124,8 @@
 		8B893AAF1E98665F00B3101B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B893AAE1E98665F00B3101B /* TableModel.framework */,
-				8B893AB71E98665F00B3101B /* TableModelTests.xctest */,
+				8B893AAE1E98665F00B3101B /* Table.framework */,
+				8B893AB71E98665F00B3101B /* TableTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,20 +133,20 @@
 		8B893AB01E98665F00B3101B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8B3276241E9AED1400FD9502 /* TableModel.h */,
+				8B3276241E9AED1400FD9502 /* Table.h */,
 				8B3276261E9AED4100FD9502 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			path = ../TableModel;
+			path = ../Table;
 			sourceTree = "<group>";
 		};
 		8B8AFF291E9866ED0090B362 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8B8AFF2D1E9866ED0090B362 /* TableModel.swift */,
-				8B3276521E9C518000FD9502 /* TableModelCellStyle.swift */,
-				8B32764D1E9C284B00FD9502 /* TableModelCell.swift */,
-				8B8AFF2E1E9866ED0090B362 /* TableModelViewController.swift */,
+				8B8AFF2D1E9866ED0090B362 /* Table.swift */,
+				8B3276521E9C518000FD9502 /* TableCellStyle.swift */,
+				8B32764D1E9C284B00FD9502 /* TableCell.swift */,
+				8B8AFF2E1E9866ED0090B362 /* TableViewController.swift */,
 				8B8AFF2A1E9866ED0090B362 /* Cells.swift */,
 				8B893AB01E98665F00B3101B /* Supporting Files */,
 			);
@@ -160,16 +160,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B3276251E9AED1400FD9502 /* TableModel.h in Headers */,
+				8B3276251E9AED1400FD9502 /* Table.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8B893AAD1E98665F00B3101B /* TableModel */ = {
+		8B893AAD1E98665F00B3101B /* Table */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B893AC21E98665F00B3101B /* Build configuration list for PBXNativeTarget "TableModel" */;
+			buildConfigurationList = 8B893AC21E98665F00B3101B /* Build configuration list for PBXNativeTarget "Table" */;
 			buildPhases = (
 				8B893AA91E98665F00B3101B /* Sources */,
 				8B893AAA1E98665F00B3101B /* Frameworks */,
@@ -181,14 +181,14 @@
 			);
 			dependencies = (
 			);
-			name = TableModel;
-			productName = TableModel;
-			productReference = 8B893AAE1E98665F00B3101B /* TableModel.framework */;
+			name = Table;
+			productName = Table;
+			productReference = 8B893AAE1E98665F00B3101B /* Table.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8B893AB61E98665F00B3101B /* TableModelTests */ = {
+		8B893AB61E98665F00B3101B /* TableTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B893AC51E98665F00B3101B /* Build configuration list for PBXNativeTarget "TableModelTests" */;
+			buildConfigurationList = 8B893AC51E98665F00B3101B /* Build configuration list for PBXNativeTarget "TableTests" */;
 			buildPhases = (
 				8B893AB31E98665F00B3101B /* Sources */,
 				8B893AB41E98665F00B3101B /* Frameworks */,
@@ -199,9 +199,9 @@
 			dependencies = (
 				8B893ABA1E98665F00B3101B /* PBXTargetDependency */,
 			);
-			name = TableModelTests;
-			productName = TableModelTests;
-			productReference = 8B893AB71E98665F00B3101B /* TableModelTests.xctest */;
+			name = TableTests;
+			productName = TableTests;
+			productReference = 8B893AB71E98665F00B3101B /* TableTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -225,7 +225,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8B893AA81E98665F00B3101B /* Build configuration list for PBXProject "TableModel" */;
+			buildConfigurationList = 8B893AA81E98665F00B3101B /* Build configuration list for PBXProject "Table" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -237,8 +237,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8B893AAD1E98665F00B3101B /* TableModel */,
-				8B893AB61E98665F00B3101B /* TableModelTests */,
+				8B893AAD1E98665F00B3101B /* Table */,
+				8B893AB61E98665F00B3101B /* TableTests */,
 			);
 		};
 /* End PBXProject section */
@@ -283,10 +283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B32764E1E9C284B00FD9502 /* TableModelCell.swift in Sources */,
-				8B8AFF321E9866ED0090B362 /* TableModel.swift in Sources */,
-				8B3276531E9C518000FD9502 /* TableModelCellStyle.swift in Sources */,
-				8B8AFF331E9866ED0090B362 /* TableModelViewController.swift in Sources */,
+				8B32764E1E9C284B00FD9502 /* TableCell.swift in Sources */,
+				8B8AFF321E9866ED0090B362 /* Table.swift in Sources */,
+				8B3276531E9C518000FD9502 /* TableCellStyle.swift in Sources */,
+				8B8AFF331E9866ED0090B362 /* TableViewController.swift in Sources */,
 				8B8AFF2F1E9866ED0090B362 /* Cells.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,7 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B3276011E9AD82A00FD9502 /* TableModelTests.swift in Sources */,
+				8B3276011E9AD82A00FD9502 /* TableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +304,7 @@
 /* Begin PBXTargetDependency section */
 		8B893ABA1E98665F00B3101B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B893AAD1E98665F00B3101B /* TableModel */;
+			target = 8B893AAD1E98665F00B3101B /* Table */;
 			targetProxy = 8B893AB91E98665F00B3101B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -428,7 +428,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableModel;
+				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.Table;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -453,7 +453,7 @@
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableModel;
+				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.Table;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -472,7 +472,7 @@
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableModelTests;
+				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -489,7 +489,7 @@
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableModelTests;
+				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -498,7 +498,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B893AA81E98665F00B3101B /* Build configuration list for PBXProject "TableModel" */ = {
+		8B893AA81E98665F00B3101B /* Build configuration list for PBXProject "Table" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B893AC01E98665F00B3101B /* Debug */,
@@ -507,7 +507,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B893AC21E98665F00B3101B /* Build configuration list for PBXNativeTarget "TableModel" */ = {
+		8B893AC21E98665F00B3101B /* Build configuration list for PBXNativeTarget "Table" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B893AC31E98665F00B3101B /* Debug */,
@@ -516,7 +516,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B893AC51E98665F00B3101B /* Build configuration list for PBXNativeTarget "TableModelTests" */ = {
+		8B893AC51E98665F00B3101B /* Build configuration list for PBXNativeTarget "TableTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B893AC61E98665F00B3101B /* Debug */,

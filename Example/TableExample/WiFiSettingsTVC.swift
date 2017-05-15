@@ -1,15 +1,15 @@
 //
 //  WiFiSettingsTVC.swift
-//  TableModelExample
+//  TableExample
 //
 //  Created by Marko Tadić on 4/20/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import TableModel
+import Table
 
-class WiFiSettingsTVC: TableModelViewController {
+class WiFiSettingsTVC: TableViewController {
     
     // MARK: - Types
     
@@ -21,7 +21,7 @@ class WiFiSettingsTVC: TableModelViewController {
     
     // MARK: - Override
     
-    override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
+    override func cellStyle(forIdentifier identifier: String) -> TableCellStyle {
         if let cellType = CellType(rawValue: identifier) {
             switch cellType {
             case .wifiSwitch:
@@ -36,7 +36,7 @@ class WiFiSettingsTVC: TableModelViewController {
         }
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
+    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
         if let cellType = CellType(rawValue: item.identifier) {
             switch cellType {
             case .wifiSwitch, .joinNetworksSwitch:
@@ -44,7 +44,7 @@ class WiFiSettingsTVC: TableModelViewController {
                     print("handleEvent with id: \(item.identifier)")
                 }
             case .wifiNetwork:
-                let tmvc = TableModelViewController(style: .grouped)
+                let tmvc = TableViewController(style: .grouped)
                 pushSubmenu(with: item, in: tmvc)
             }
         }
@@ -52,7 +52,7 @@ class WiFiSettingsTVC: TableModelViewController {
     
     // MARK: - Helpers
     
-    private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {
+    private func pushSubmenu(with item: Item, in tmvc: TableViewController) {
         if let model = item.submodel {
             tmvc.model = model
             navigationController?.pushViewController(tmvc, animated: true)

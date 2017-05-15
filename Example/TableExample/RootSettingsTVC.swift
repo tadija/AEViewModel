@@ -1,15 +1,15 @@
 //
 //  RootSettingsTVC.swift
-//  TableModelExample
+//  TableExample
 //
 //  Created by Marko Tadić on 4/8/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import TableModel
+import Table
 
-class RootSettingsTVC: TableModelViewController {
+class RootSettingsTVC: TableViewController {
  
     // MARK: - Types
     
@@ -42,7 +42,7 @@ class RootSettingsTVC: TableModelViewController {
     
     // MARK: - Override
     
-    override func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
+    override func cellStyle(forIdentifier identifier: String) -> TableCellStyle {
         if let cellType = CellType(rawValue: identifier) {
             switch cellType {
             case .profile:
@@ -69,7 +69,7 @@ class RootSettingsTVC: TableModelViewController {
         }
     }
     
-    override func configureCell(_ cell: TableModelCell, with item: Item) {
+    override func configureCell(_ cell: TableCell, with item: Item) {
         super.configureCell(cell, with: item)
         
         if let toggleCell = cell as? ToggleTableCell {
@@ -77,7 +77,7 @@ class RootSettingsTVC: TableModelViewController {
         }
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
+    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
         if let cellType = CellType(rawValue: item.identifier) {
             switch cellType {
             case .airplane, .vpn:
@@ -88,7 +88,7 @@ class RootSettingsTVC: TableModelViewController {
                 let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
                 pushSubmenu(with: item, in: wifiSubmenu)
             case .bluetooth, .cellular, .hotspot, .carrier:
-                let defaultSubmenu = TableModelViewController(style: .grouped)
+                let defaultSubmenu = TableViewController(style: .grouped)
                 pushSubmenu(with: item, in: defaultSubmenu)
             default:
                 break
@@ -102,7 +102,7 @@ class RootSettingsTVC: TableModelViewController {
         guard
             let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json"),
             let data = try? Data(contentsOf: url),
-            let model = try? TableModel(jsonData: data)
+            let model = try? Table(jsonData: data)
         else {
             fatalError("Unable to load settings from settings-menu.json")
         }
@@ -110,10 +110,10 @@ class RootSettingsTVC: TableModelViewController {
     }
     
     private func loadModelFromCode() {
-        self.model = TableModel.settings
+        self.model = Table.settings
     }
     
-    private func pushSubmenu(with item: Item, in tmvc: TableModelViewController) {
+    private func pushSubmenu(with item: Item, in tmvc: TableViewController) {
         if let model = item.submodel {
             tmvc.model = model
             navigationController?.pushViewController(tmvc, animated: true)

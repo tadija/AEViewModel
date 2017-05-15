@@ -1,4 +1,4 @@
-# TableModel
+# Table
 
 **Swift package for convenient making of static tables**
 

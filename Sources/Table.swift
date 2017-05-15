@@ -1,7 +1,7 @@
 import Foundation
 import Mappable
 
-public struct TableModel: Mappable {
+public struct Table: Mappable {
     public let identifier: String
     public var sections: [Section]?
     public var data: [String : Any]?
@@ -48,7 +48,7 @@ public struct Section: Mappable {
 
 public struct Item: Mappable {
     public let identifier: String
-    public var submodel: TableModel?
+    public var submodel: Table?
     public var data: [String : Any]?
     
     public var imageName: String?

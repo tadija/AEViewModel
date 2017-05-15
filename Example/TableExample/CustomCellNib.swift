@@ -1,13 +1,13 @@
 //
 //  CustomCellNib.swift
-//  TableModelExample
+//  TableExample
 //
 //  Created by Marko Tadić on 4/23/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import TableModel
+import Table
 
 class CustomCellNib: BaseTableCell {
     
@@ -17,7 +17,7 @@ class CustomCellNib: BaseTableCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     
-    // MARK: - TableModelCell
+    // MARK: - TableCell
     
     override func configureUI() {
         customImageView.layer.cornerRadius = 28

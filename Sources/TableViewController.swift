@@ -1,10 +1,10 @@
 import UIKit
 
-open class TableModelViewController: UITableViewController {
+open class TableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    public var model: TableModel?
+    public var model: Table?
     
     // MARK: - Init
     
@@ -18,7 +18,7 @@ open class TableModelViewController: UITableViewController {
         commonInit()
     }
     
-    public convenience init(style: UITableViewStyle, model: TableModel) {
+    public convenience init(style: UITableViewStyle, model: Table) {
         self.init(style: style)
         self.model = model
         commonInit()
@@ -39,21 +39,21 @@ open class TableModelViewController: UITableViewController {
     
     // MARK: - Abstract
     
-    open func cellStyle(forIdentifier identifier: String) -> TableModelCellStyle {
+    open func cellStyle(forIdentifier identifier: String) -> TableCellStyle {
         return .basic
     }
     
-    open func configureCell(_ cell: TableModelCell, with item: Item) {
+    open func configureCell(_ cell: TableCell, with item: Item) {
         cell.updateUI(with: item)
     }
     
-    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableModelCell) {
+    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
         print("This method is abstract and must be implemented by subclass")
     }
     
     // MARK: - API
     
-    public func item(from cell: TableModelCell) -> Item? {
+    public func item(from cell: TableCell) -> Item? {
         guard
             let tableViewCell = cell as? UITableViewCell,
             let indexPath = tableView.indexPath(for: tableViewCell),
@@ -97,7 +97,7 @@ open class TableModelViewController: UITableViewController {
     
 }
 
-extension TableModelViewController {
+extension TableViewController {
     
     // MARK: - UITableViewControllerDataSource
     
@@ -118,7 +118,7 @@ extension TableModelViewController {
 
         (cell as? ToggleTableCell)?.delegate = self
         
-        if let cell = cell as? TableModelCell {
+        if let cell = cell as? TableCell {
             configureCell(cell, with: item)
         }
         
@@ -135,14 +135,14 @@ extension TableModelViewController {
     
 }
 
-extension TableModelViewController {
+extension TableViewController {
     
     // MARK: - UITableViewControllerDelegate
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
             let item = model?.item(at: indexPath),
-            let cell = tableView.cellForRow(at: indexPath) as? TableModelCell
+            let cell = tableView.cellForRow(at: indexPath) as? TableCell
         else { return }
         
         handleEvent(.primaryActionTriggered, with: item, sender: cell)
@@ -150,7 +150,7 @@ extension TableModelViewController {
     
 }
 
-extension TableModelViewController: ToggleTableCellDelegate {
+extension TableViewController: ToggleTableCellDelegate {
     
     // MARK: - ToggleCellDelegate
     
