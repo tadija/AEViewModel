@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-class CustomCellClass: SubtitleTableCell {
+class CustomCellClass: TableCellSubtitle {
     
     // MARK: - TableCell
     

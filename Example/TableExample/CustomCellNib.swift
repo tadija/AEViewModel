@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-class CustomCellNib: BaseTableCell {
+class CustomCellNib: TableCellBase {
     
     // MARK: - Outlets
     

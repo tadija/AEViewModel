@@ -5,7 +5,7 @@ public protocol TableCell: class {
     func updateUI(with item: Item)
 }
 
-open class BaseTableCell: UITableViewCell, TableCell {
+open class TableCellBase: UITableViewCell, TableCell {
     
     // MARK: - Init
     
@@ -41,7 +41,7 @@ open class BaseTableCell: UITableViewCell, TableCell {
     
 }
 
-open class SubtitleTableCell: BaseTableCell {
+open class TableCellSubtitle: TableCellBase {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -50,7 +50,7 @@ open class SubtitleTableCell: BaseTableCell {
     }
 }
 
-open class LeftDetailTableCell: BaseTableCell {
+open class TableCellLeftDetail: TableCellBase {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -59,7 +59,7 @@ open class LeftDetailTableCell: BaseTableCell {
     }
 }
 
-open class RightDetailTableCell: BaseTableCell {
+open class TableCellRightDetail: TableCellBase {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -68,11 +68,11 @@ open class RightDetailTableCell: BaseTableCell {
     }
 }
 
-public protocol ToggleTableCellDelegate: class {
-    func didChangeValue(sender: ToggleTableCell)
+public protocol TableCellToggleDelegate: class {
+    func didChangeValue(sender: TableCellToggle)
 }
 
-open class ToggleTableCell: BaseTableCell {
+open class TableCellToggle: TableCellBase {
     
     // MARK: - Outlets
     
@@ -80,7 +80,7 @@ open class ToggleTableCell: BaseTableCell {
     
     // MARK: - Properties
     
-    public weak var delegate: ToggleTableCellDelegate?
+    public weak var delegate: TableCellToggleDelegate?
     
     // MARK: - TableCell
     

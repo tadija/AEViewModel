@@ -79,15 +79,15 @@ open class TableViewController: UITableViewController {
     private func registerCell(with identifier: String) {
         switch cellStyle(forIdentifier: identifier) {
         case .basic:
-            tableView.register(BaseTableCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellBase.self, forCellReuseIdentifier: identifier)
         case .subtitle:
-            tableView.register(SubtitleTableCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellSubtitle.self, forCellReuseIdentifier: identifier)
         case .leftDetail:
-            tableView.register(LeftDetailTableCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellLeftDetail.self, forCellReuseIdentifier: identifier)
         case .rightDetail:
-            tableView.register(RightDetailTableCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellRightDetail.self, forCellReuseIdentifier: identifier)
         case .toggle:
-            tableView.register(ToggleTableCell.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellToggle.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellNib):
@@ -116,7 +116,7 @@ extension TableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
 
-        (cell as? ToggleTableCell)?.delegate = self
+        (cell as? TableCellToggle)?.delegate = self
         
         if let cell = cell as? TableCell {
             configureCell(cell, with: item)
@@ -150,11 +150,11 @@ extension TableViewController {
     
 }
 
-extension TableViewController: ToggleTableCellDelegate {
+extension TableViewController: TableCellToggleDelegate {
     
     // MARK: - ToggleCellDelegate
     
-    public func didChangeValue(sender: ToggleTableCell) {
+    public func didChangeValue(sender: TableCellToggle) {
         if let item = item(from: sender) {
             handleEvent(.valueChanged, with: item, sender: sender)
         }

@@ -72,7 +72,7 @@ class RootSettingsTVC: TableViewController {
     override func configureCell(_ cell: TableCell, with item: Item) {
         super.configureCell(cell, with: item)
         
-        if let toggleCell = cell as? ToggleTableCell {
+        if let toggleCell = cell as? TableCellToggle {
             toggleCell.toggle.onTintColor = UIColor.orange
         }
     }
