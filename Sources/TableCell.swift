@@ -5,96 +5,114 @@ public protocol TableCell: class {
     func updateUI(with item: Item)
 }
 
-open class TableCellBase: UITableViewCell, TableCell {
+open class Cell {
+    private init() {}
+}
+
+extension Cell {
     
-    // MARK: - Init
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    public enum Style {
+        case basic
+        case subtitle
+        case leftDetail
+        case rightDetail
+        case toggle
+        case customClass(type: TableCell.Type)
+        case customNib(nib: UINib?)
     }
     
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureUI()
-    }
-    
-    // MARK: - Lifecycle
-    
-    open override func awakeFromNib() {
-        super.awakeFromNib()
-        configureUI()
-    }
-    
-    // MARK: - TableCell
-    
-    open func configureUI() {}
-    
-    open func updateUI(with item: Item) {
-        imageView?.image = item.image
-        textLabel?.text = item.title
-        detailTextLabel?.text = item.detail
+    open class Basic: UITableViewCell, TableCell {
         
-        if (item.submodel?.sections?.count ?? 0) > 0 {
-            accessoryType = .disclosureIndicator
+        // MARK: - Init
+        
+        required public init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        
+        public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+            super.init(style: style, reuseIdentifier: reuseIdentifier)
+            configureUI()
+        }
+        
+        // MARK: - Lifecycle
+        
+        open override func awakeFromNib() {
+            super.awakeFromNib()
+            configureUI()
+        }
+        
+        // MARK: - TableCell
+        
+        open func configureUI() {}
+        
+        open func updateUI(with item: Item) {
+            imageView?.image = item.image
+            textLabel?.text = item.title
+            detailTextLabel?.text = item.detail
+            
+            if (item.table?.sections?.count ?? 0) > 0 {
+                accessoryType = .disclosureIndicator
+            }
+        }
+        
+    }
+    
+    open class Subtitle: Basic {
+        required public init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+            super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         }
     }
     
-}
-
-open class TableCellSubtitle: TableCellBase {
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    open class LeftDetail: Basic {
+        required public init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+            super.init(style: .value2, reuseIdentifier: reuseIdentifier)
+        }
     }
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    
+    open class RightDetail: Basic {
+        required public init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+            super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        }
     }
-}
-
-open class TableCellLeftDetail: TableCellBase {
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .value2, reuseIdentifier: reuseIdentifier)
-    }
-}
-
-open class TableCellRightDetail: TableCellBase {
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-    }
-}
-
-public protocol TableCellToggleDelegate: class {
-    func didChangeValue(sender: TableCellToggle)
-}
-
-open class TableCellToggle: TableCellBase {
     
-    // MARK: - Outlets
-    
-    public let toggle = UISwitch()
-    
-    // MARK: - Properties
-    
-    public weak var delegate: TableCellToggleDelegate?
-    
-    // MARK: - TableCell
-    
-    open override func configureUI() {
-        selectionStyle = .none
-        accessoryView = toggle
+    open class Toggle: Basic {
         
-        toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
+        // MARK: - Outlets
+        
+        public let toggle = UISwitch()
+        
+        // MARK: - Properties
+        
+        public weak var delegate: ToggleCellDelegate?
+        
+        // MARK: - TableCell
+        
+        open override func configureUI() {
+            selectionStyle = .none
+            accessoryView = toggle
+            
+            toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
+        }
+        
+        // MARK: - Helpers
+        
+        @objc private func callDelegate() {
+            delegate?.didChangeValue(sender: self)
+        }
+        
     }
     
-    // MARK: - Helpers
-    
-    @objc private func callDelegate() {
-        delegate?.didChangeValue(sender: self)
-    }
-    
+}
+
+public protocol ToggleCellDelegate: class {
+    func didChangeValue(sender: Cell.Toggle)
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-open class TableViewController: UITableViewController {
+open class ViewController: UITableViewController {
     
     // MARK: - Properties
     
@@ -39,11 +39,11 @@ open class TableViewController: UITableViewController {
     
     // MARK: - Abstract
     
-    open func cellStyle(forIdentifier identifier: String) -> TableCellStyle {
+    open func cellStyle(forIdentifier identifier: String) -> Cell.Style {
         return .basic
     }
     
-    open func configureCell(_ cell: TableCell, with item: Item) {
+    open func updateCell(_ cell: TableCell, with item: Item) {
         cell.updateUI(with: item)
     }
     
@@ -79,15 +79,15 @@ open class TableViewController: UITableViewController {
     private func registerCell(with identifier: String) {
         switch cellStyle(forIdentifier: identifier) {
         case .basic:
-            tableView.register(TableCellBase.self, forCellReuseIdentifier: identifier)
+            tableView.register(Cell.Basic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
-            tableView.register(TableCellSubtitle.self, forCellReuseIdentifier: identifier)
+            tableView.register(Cell.Subtitle.self, forCellReuseIdentifier: identifier)
         case .leftDetail:
-            tableView.register(TableCellLeftDetail.self, forCellReuseIdentifier: identifier)
+            tableView.register(Cell.LeftDetail.self, forCellReuseIdentifier: identifier)
         case .rightDetail:
-            tableView.register(TableCellRightDetail.self, forCellReuseIdentifier: identifier)
+            tableView.register(Cell.RightDetail.self, forCellReuseIdentifier: identifier)
         case .toggle:
-            tableView.register(TableCellToggle.self, forCellReuseIdentifier: identifier)
+            tableView.register(Cell.Toggle.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellNib):
@@ -97,7 +97,7 @@ open class TableViewController: UITableViewController {
     
 }
 
-extension TableViewController {
+extension ViewController {
     
     // MARK: - UITableViewControllerDataSource
     
@@ -116,10 +116,10 @@ extension TableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
 
-        (cell as? TableCellToggle)?.delegate = self
+        (cell as? Cell.Toggle)?.delegate = self
         
         if let cell = cell as? TableCell {
-            configureCell(cell, with: item)
+            updateCell(cell, with: item)
         }
         
         return cell
@@ -135,7 +135,7 @@ extension TableViewController {
     
 }
 
-extension TableViewController {
+extension ViewController {
     
     // MARK: - UITableViewControllerDelegate
     
@@ -150,11 +150,11 @@ extension TableViewController {
     
 }
 
-extension TableViewController: TableCellToggleDelegate {
+extension ViewController: ToggleCellDelegate {
     
     // MARK: - ToggleCellDelegate
     
-    public func didChangeValue(sender: TableCellToggle) {
+    public func didChangeValue(sender: Cell.Toggle) {
         if let item = item(from: sender) {
             handleEvent(.valueChanged, with: item, sender: sender)
         }
