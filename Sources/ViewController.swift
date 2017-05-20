@@ -2,6 +2,10 @@ import UIKit
 
 open class ViewController: UITableViewController {
     
+    // MARK: - Types
+    
+    public struct id {}
+    
     // MARK: - Properties
     
     public var model: Table?
@@ -39,7 +43,7 @@ open class ViewController: UITableViewController {
     
     // MARK: - Abstract
     
-    open func cellStyle(forIdentifier identifier: String) -> Cell.Style {
+    open func cellType(forIdentifier identifier: String) -> Cell.`Type` {
         return .basic
     }
     
@@ -77,7 +81,7 @@ open class ViewController: UITableViewController {
     }
     
     private func registerCell(with identifier: String) {
-        switch cellStyle(forIdentifier: identifier) {
+        switch cellType(forIdentifier: identifier) {
         case .basic:
             tableView.register(Cell.Basic.self, forCellReuseIdentifier: identifier)
         case .subtitle:

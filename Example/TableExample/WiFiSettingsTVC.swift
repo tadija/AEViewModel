@@ -9,44 +9,36 @@
 import UIKit
 import Table
 
+extension ViewController.id {
+    static let wifiSwitch = "wifiSwitch"
+    static let wifiNetwork = "wifiNetwork"
+    static let joinNetworksSwitch = "joinNetworksSwitch"
+}
+
 class WiFiSettingsTVC: ViewController {
-    
-    // MARK: - Types
-    
-    enum CellType: String {
-        case wifiSwitch
-        case wifiNetwork
-        case joinNetworksSwitch
-    }
     
     // MARK: - Override
     
-    override func cellStyle(forIdentifier identifier: String) -> Cell.Style {
-        if let cellType = CellType(rawValue: identifier) {
-            switch cellType {
-            case .wifiSwitch:
-                return .toggle
-            case .wifiNetwork:
-                return .basic
-            case .joinNetworksSwitch:
-                return .toggle
-            }
-        } else {
+    override func cellType(forIdentifier identifier: String) -> Cell.`Type` {
+        switch identifier {
+        case id.wifiSwitch, id.joinNetworksSwitch:
+            return .toggle
+        default:
             return .basic
         }
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
-        if let cellType = CellType(rawValue: item.identifier) {
-            switch cellType {
-            case .wifiSwitch, .joinNetworksSwitch:
-                if event == .valueChanged {
-                    print("handleEvent with id: \(item.identifier)")
-                }
-            case .wifiNetwork:
-                let tmvc = ViewController(style: .grouped)
-                pushSubmenu(with: item, in: tmvc)
+        switch item.identifier {
+        case id.wifiSwitch, id.joinNetworksSwitch:
+            if event == .valueChanged {
+                print("handleEvent with id: \(item.identifier)")
             }
+        case id.wifiNetwork:
+            let tmvc = ViewController(style: .grouped)
+            pushSubmenu(with: item, in: tmvc)
+        default:
+            break
         }
     }
     
