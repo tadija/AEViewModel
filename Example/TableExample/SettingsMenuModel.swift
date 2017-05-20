@@ -11,25 +11,25 @@ import Table
 
 extension Table {
     
-    static var settings: Table {
-        var settings = Table("settings")
-        settings.sections = [.user, .device]
-        return settings
+    static var Settings: Table {
+        var table = Table("settings")
+        table.sections = [.User, .Device]
+        return table
     }
     
 }
 
 extension Section {
     
-    static var user: Section {
+    static var User: Section {
         var section = Section("user")
-        section.items = [.profile]
+        section.items = [.Profile]
         return section
     }
     
-    static var device: Section {
+    static var Device: Section {
         var section = Section("device")
-        section.items = [.airplane, .wifi]
+        section.items = [.Airplane, .Wifi]
         return section
     }
     
@@ -37,7 +37,7 @@ extension Section {
 
 extension Item {
     
-    static var profile: Item {
+    static var Profile: Item {
         var item = Item("profile")
         item.imageName = "IconGray"
         item.title = "Marko Tadic"
@@ -45,14 +45,14 @@ extension Item {
         return item
     }
     
-    static var airplane: Item {
+    static var Airplane: Item {
         var item = Item("airplane")
         item.imageName = "IconOrange"
         item.title = "Airplane Mode"
         return item
     }
     
-    static var wifi: Item {
+    static var Wifi: Item {
         var item = Item("wifi")
         item.imageName = "IconBlue"
         item.title = "Wi-Fi"

@@ -94,7 +94,7 @@ class RootSettingsTVC: ViewController {
     }
     
     private func loadModelFromCode() {
-        self.model = Table.settings
+        self.model = Table.Settings
     }
     
     private func pushSubmenu(with item: Item, in tmvc: ViewController) {
