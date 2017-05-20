@@ -1,5 +1,5 @@
 //
-//  SettingsMenuModel.swift
+//  StaticModel.swift
 //  TableExample
 //
 //  Created by Marko Tadić on 5/8/17.

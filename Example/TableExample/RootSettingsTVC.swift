@@ -84,7 +84,7 @@ class RootSettingsTVC: ViewController {
     
     private func loadModelFromJSON() {
         guard
-            let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json"),
+            let url = Bundle.main.url(forResource: "JSONModel", withExtension: "json"),
             let data = try? Data(contentsOf: url),
             let model = try? Table(jsonData: data)
         else {
