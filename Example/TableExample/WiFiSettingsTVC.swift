@@ -9,52 +9,44 @@
 import UIKit
 import Table
 
-class WiFiSettingsTVC: TableViewController {
-    
-    // MARK: - Types
-    
-    enum CellType: String {
-        case wifiSwitch
-        case wifiNetwork
-        case joinNetworksSwitch
-    }
+extension ViewController.id {
+    static let wifiSwitch = "wifiSwitch"
+    static let wifiNetwork = "wifiNetwork"
+    static let joinNetworksSwitch = "joinNetworksSwitch"
+}
+
+class WiFiSettingsTVC: ViewController {
     
     // MARK: - Override
     
-    override func cellStyle(forIdentifier identifier: String) -> TableCellStyle {
-        if let cellType = CellType(rawValue: identifier) {
-            switch cellType {
-            case .wifiSwitch:
-                return .toggle
-            case .wifiNetwork:
-                return .basic
-            case .joinNetworksSwitch:
-                return .toggle
-            }
-        } else {
+    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+        switch identifier {
+        case id.wifiSwitch, id.joinNetworksSwitch:
+            return .toggle
+        default:
             return .basic
         }
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
-        if let cellType = CellType(rawValue: item.identifier) {
-            switch cellType {
-            case .wifiSwitch, .joinNetworksSwitch:
-                if event == .valueChanged {
-                    print("handleEvent with id: \(item.identifier)")
-                }
-            case .wifiNetwork:
-                let tmvc = TableViewController(style: .grouped)
-                pushSubmenu(with: item, in: tmvc)
+        switch item.identifier {
+        case id.wifiSwitch, id.joinNetworksSwitch:
+            if event == .valueChanged {
+                print("handleEvent with id: \(item.identifier)")
             }
+        case id.wifiNetwork:
+            let tmvc = ViewController(style: .grouped)
+            pushSubmenu(with: item, in: tmvc)
+        default:
+            break
         }
     }
     
     // MARK: - Helpers
     
-    private func pushSubmenu(with item: Item, in tmvc: TableViewController) {
-        if let model = item.submodel {
-            tmvc.model = model
+    private func pushSubmenu(with item: Item, in tmvc: ViewController) {
+        if let table = item.table {
+            tmvc.model = table
             navigationController?.pushViewController(tmvc, animated: true)
         }
     }

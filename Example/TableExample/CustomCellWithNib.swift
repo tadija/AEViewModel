@@ -1,5 +1,5 @@
 //
-//  CustomCellNib.swift
+//  CustomCellWithNib.swift
 //  TableExample
 //
 //  Created by Marko Tadić on 4/23/17.
@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-class CustomCellNib: BaseTableCell {
+class CustomCellWithNib: Cell.Basic {
     
     // MARK: - Outlets
     
@@ -19,7 +19,7 @@ class CustomCellNib: BaseTableCell {
     
     // MARK: - TableCell
     
-    override func configureUI() {
+    override func customizeUI() {
         customImageView.layer.cornerRadius = 28
         customImageView.layer.masksToBounds = true
     }

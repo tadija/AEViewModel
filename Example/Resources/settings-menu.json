@@ -20,7 +20,7 @@
           "id": "airplane",
           "image": "IconOrange",
           "title": "Airplane Mode",
-          "data": {
+          "user-info": {
             "enabled": false
           }
         },
@@ -29,7 +29,7 @@
           "image": "IconBlue",
           "title": "Wi-Fi",
           "detail": "Off",
-          "data": {
+          "user-info": {
             "current-network": "Off"
           },
           "table": {
@@ -224,7 +224,7 @@
           "id": "vpn",
           "image": "IconBlue",
           "title": "VPN",
-          "data": {
+          "user-info": {
             "enabled": false
           }
         },

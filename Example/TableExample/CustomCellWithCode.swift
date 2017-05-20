@@ -1,5 +1,5 @@
 //
-//  CustomCellClass.swift
+//  CustomCellWithCode.swift
 //  TableExample
 //
 //  Created by Marko Tadić on 4/23/17.
@@ -9,11 +9,11 @@
 import UIKit
 import Table
 
-class CustomCellClass: TableCellSubtitle {
+class CustomCellWithCode: Cell.Subtitle {
     
     // MARK: - TableCell
     
-    override func configureUI() {
+    override func customizeUI() {
         textLabel?.font = UIFont.preferredFont(forTextStyle: .title2)
         detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
     }

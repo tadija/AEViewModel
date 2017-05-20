@@ -9,28 +9,26 @@
 import UIKit
 import Table
 
-class RootSettingsTVC: TableViewController {
- 
-    // MARK: - Types
-    
-    enum CellType: String {
-        case profile
-        case airplane
-        case wifi
-        case bluetooth
-        case cellular
-        case hotspot
-        case vpn
-        case carrier
-    }
+extension ViewController.id {
+    static let profile = "profile"
+    static let airplane = "airplane"
+    static let wifi = "wifi"
+    static let bluetooth = "bluetooth"
+    static let cellular = "cellular"
+    static let hotspot = "hotspot"
+    static let vpn = "vpn"
+    static let carrier = "carrier"
+}
+
+class RootSettingsTVC: ViewController {
     
     // MARK: - Lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        loadModelFromJSON()
-        loadModelFromCode()
+        loadModelFromJSON()
+//        loadModelFromCode()
     }
     
     override func viewDidLoad() {
@@ -42,57 +40,43 @@ class RootSettingsTVC: TableViewController {
     
     // MARK: - Override
     
-    override func cellStyle(forIdentifier identifier: String) -> TableCellStyle {
-        if let cellType = CellType(rawValue: identifier) {
-            switch cellType {
-            case .profile:
-//                return .customClass(type: CustomCellClass.self)
-                let nib = UINib(nibName: "CustomCellNib", bundle: nil)
-                return .customNib(nib: nib)
-            case .airplane:
-                return .toggle
-            case .wifi:
-                return .rightDetail
-            case .bluetooth:
-                return .rightDetail
-            case .cellular:
-                return .basic
-            case .hotspot:
-                return .rightDetail
-            case .vpn:
-                return .toggle
-            case .carrier:
-                return .rightDetail
-            }
-        } else {
+    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+        switch identifier {
+        case id.profile:
+//            return .customClass(type: CustomCellWithCode.self)
+            let nib = UINib(nibName: "CustomCellWithNib", bundle: nil)
+            return .customNib(nib: nib)
+        case id.airplane, id.vpn:
+            return .toggle
+        case id.wifi, id.bluetooth, id.hotspot, id.carrier:
+            return .rightDetail
+        default:
             return .basic
         }
     }
     
-    override func configureCell(_ cell: TableCell, with item: Item) {
-        super.configureCell(cell, with: item)
+    override func updateCell(_ cell: TableCell, with item: Item) {
+        super.updateCell(cell, with: item)
         
-        if let toggleCell = cell as? ToggleTableCell {
+        if let toggleCell = cell as? Cell.Toggle {
             toggleCell.toggle.onTintColor = UIColor.orange
         }
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
-        if let cellType = CellType(rawValue: item.identifier) {
-            switch cellType {
-            case .airplane, .vpn:
-                if event == .valueChanged {
-                    print("handleEvent with id: \(item.identifier)")
-                }
-            case .wifi:
-                let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
-                pushSubmenu(with: item, in: wifiSubmenu)
-            case .bluetooth, .cellular, .hotspot, .carrier:
-                let defaultSubmenu = TableViewController(style: .grouped)
-                pushSubmenu(with: item, in: defaultSubmenu)
-            default:
-                break
+        switch item.identifier {
+        case id.airplane, id.vpn:
+            if event == .valueChanged {
+                print("handleEvent with id: \(item.identifier)")
             }
+        case id.wifi:
+            let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
+            pushSubmenu(with: item, in: wifiSubmenu)
+        case id.bluetooth, id.cellular, id.hotspot, id.carrier:
+            let defaultSubmenu = ViewController(style: .grouped)
+            pushSubmenu(with: item, in: defaultSubmenu)
+        default:
+            break
         }
     }
     
@@ -110,12 +94,12 @@ class RootSettingsTVC: TableViewController {
     }
     
     private func loadModelFromCode() {
-        self.model = Table.settings
+        self.model = Table.Settings
     }
     
-    private func pushSubmenu(with item: Item, in tmvc: TableViewController) {
-        if let model = item.submodel {
-            tmvc.model = model
+    private func pushSubmenu(with item: Item, in tmvc: ViewController) {
+        if let table = item.table {
+            tmvc.model = table
             navigationController?.pushViewController(tmvc, animated: true)
         }
     }

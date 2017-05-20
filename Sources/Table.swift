@@ -3,14 +3,14 @@ import Mappable
 
 public protocol Model: Mappable {
     var identifier: String { get }
-    var data: [String : Any]? { get set }
+    var userInfo: [String : Any]? { get set }
     init(_ identifier: String)
 }
 
 public struct Table: Model {
     public let identifier: String
     public var sections: [Section]?
-    public var data: [String : Any]?
+    public var userInfo: [String : Any]?
     
     public var title: String?
     
@@ -21,7 +21,7 @@ public struct Table: Model {
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
         sections = try map.mappableArray(forKey: "sections")
-        data = try? map.value(forKey: "data")
+        userInfo = try? map.value(forKey: "user-info")
         title = try? map.value(forKey: "title")
     }
     
@@ -34,7 +34,7 @@ public struct Table: Model {
 public struct Section: Model {
     public let identifier: String
     public var items: [Item]?
-    public var data: [String : Any]?
+    public var userInfo: [String : Any]?
     
     public var header: String?
     public var footer: String?
@@ -46,7 +46,7 @@ public struct Section: Model {
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
         items = try map.mappableArray(forKey: "items")
-        data = try? map.value(forKey: "data")
+        userInfo = try? map.value(forKey: "user-info")
         header = try? map.value(forKey: "header")
         footer = try? map.value(forKey: "footer")
     }
@@ -54,8 +54,8 @@ public struct Section: Model {
 
 public struct Item: Model {
     public let identifier: String
-    public var submodel: Table?
-    public var data: [String : Any]?
+    public var table: Table?
+    public var userInfo: [String : Any]?
     
     public var imageName: String?
     public var title: String?
@@ -74,8 +74,8 @@ public struct Item: Model {
     
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
-        submodel = try? map.mappable(forKey: "table")
-        data = try? map.value(forKey: "data")
+        table = try? map.mappable(forKey: "table")
+        userInfo = try? map.value(forKey: "user-info")
         
         imageName = try? map.value(forKey: "image")
         title = try? map.value(forKey: "title")
