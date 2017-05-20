@@ -40,7 +40,7 @@ class RootSettingsTVC: ViewController {
     
     // MARK: - Override
     
-    override func cellType(forIdentifier identifier: String) -> Cell.`Type` {
+    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
         switch identifier {
         case id.profile:
 //            return .customClass(type: CustomCellWithCode.self)

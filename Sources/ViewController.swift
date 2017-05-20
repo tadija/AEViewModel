@@ -43,7 +43,7 @@ open class ViewController: UITableViewController {
     
     // MARK: - Abstract
     
-    open func cellType(forIdentifier identifier: String) -> Cell.`Type` {
+    open func cellUI(forIdentifier identifier: String) -> Cell.UI {
         return .basic
     }
     
@@ -81,7 +81,7 @@ open class ViewController: UITableViewController {
     }
     
     private func registerCell(with identifier: String) {
-        switch cellType(forIdentifier: identifier) {
+        switch cellUI(forIdentifier: identifier) {
         case .basic:
             tableView.register(Cell.Basic.self, forCellReuseIdentifier: identifier)
         case .subtitle:

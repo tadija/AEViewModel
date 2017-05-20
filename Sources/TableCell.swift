@@ -11,7 +11,7 @@ public struct Cell {
 
 extension Cell {
     
-    public enum `Type` {
+    public enum UI {
         case basic
         case subtitle
         case leftDetail
