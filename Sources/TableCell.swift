@@ -1,11 +1,11 @@
 import UIKit
 
 public protocol TableCell: class {
-    func configureUI()
+    func customizeUI()
     func updateUI(with item: Item)
 }
 
-open class Cell {
+public struct Cell {
     private init() {}
 }
 
@@ -31,19 +31,19 @@ extension Cell {
         
         public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            configureUI()
+            customizeUI()
         }
         
         // MARK: - Lifecycle
         
         open override func awakeFromNib() {
             super.awakeFromNib()
-            configureUI()
+            customizeUI()
         }
         
         // MARK: - TableCell
         
-        open func configureUI() {}
+        open func customizeUI() {}
         
         open func updateUI(with item: Item) {
             imageView?.image = item.image
@@ -96,7 +96,7 @@ extension Cell {
         
         // MARK: - TableCell
         
-        open override func configureUI() {
+        open override func customizeUI() {
             selectionStyle = .none
             accessoryView = toggle
             

@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-class WiFiSettingsTVC: TableViewController {
+class WiFiSettingsTVC: ViewController {
     
     // MARK: - Types
     
@@ -21,7 +21,7 @@ class WiFiSettingsTVC: TableViewController {
     
     // MARK: - Override
     
-    override func cellStyle(forIdentifier identifier: String) -> TableCellStyle {
+    override func cellStyle(forIdentifier identifier: String) -> Cell.Style {
         if let cellType = CellType(rawValue: identifier) {
             switch cellType {
             case .wifiSwitch:
@@ -44,7 +44,7 @@ class WiFiSettingsTVC: TableViewController {
                     print("handleEvent with id: \(item.identifier)")
                 }
             case .wifiNetwork:
-                let tmvc = TableViewController(style: .grouped)
+                let tmvc = ViewController(style: .grouped)
                 pushSubmenu(with: item, in: tmvc)
             }
         }
@@ -52,9 +52,9 @@ class WiFiSettingsTVC: TableViewController {
     
     // MARK: - Helpers
     
-    private func pushSubmenu(with item: Item, in tmvc: TableViewController) {
-        if let model = item.submodel {
-            tmvc.model = model
+    private func pushSubmenu(with item: Item, in tmvc: ViewController) {
+        if let table = item.table {
+            tmvc.model = table
             navigationController?.pushViewController(tmvc, animated: true)
         }
     }

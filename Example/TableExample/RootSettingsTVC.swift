@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-class RootSettingsTVC: TableViewController {
+class RootSettingsTVC: ViewController {
  
     // MARK: - Types
     
@@ -42,12 +42,12 @@ class RootSettingsTVC: TableViewController {
     
     // MARK: - Override
     
-    override func cellStyle(forIdentifier identifier: String) -> TableCellStyle {
+    override func cellStyle(forIdentifier identifier: String) -> Cell.Style {
         if let cellType = CellType(rawValue: identifier) {
             switch cellType {
             case .profile:
-//                return .customClass(type: CustomCellClass.self)
-                let nib = UINib(nibName: "CustomCellNib", bundle: nil)
+//                return .customClass(type: CustomCellWithCode.self)
+                let nib = UINib(nibName: "CustomCellWithNib", bundle: nil)
                 return .customNib(nib: nib)
             case .airplane:
                 return .toggle
@@ -69,10 +69,10 @@ class RootSettingsTVC: TableViewController {
         }
     }
     
-    override func configureCell(_ cell: TableCell, with item: Item) {
-        super.configureCell(cell, with: item)
+    override func updateCell(_ cell: TableCell, with item: Item) {
+        super.updateCell(cell, with: item)
         
-        if let toggleCell = cell as? TableCellToggle {
+        if let toggleCell = cell as? Cell.Toggle {
             toggleCell.toggle.onTintColor = UIColor.orange
         }
     }
@@ -88,7 +88,7 @@ class RootSettingsTVC: TableViewController {
                 let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
                 pushSubmenu(with: item, in: wifiSubmenu)
             case .bluetooth, .cellular, .hotspot, .carrier:
-                let defaultSubmenu = TableViewController(style: .grouped)
+                let defaultSubmenu = ViewController(style: .grouped)
                 pushSubmenu(with: item, in: defaultSubmenu)
             default:
                 break
@@ -113,9 +113,9 @@ class RootSettingsTVC: TableViewController {
         self.model = Table.settings
     }
     
-    private func pushSubmenu(with item: Item, in tmvc: TableViewController) {
-        if let model = item.submodel {
-            tmvc.model = model
+    private func pushSubmenu(with item: Item, in tmvc: ViewController) {
+        if let table = item.table {
+            tmvc.model = table
             navigationController?.pushViewController(tmvc, animated: true)
         }
     }
