@@ -45,8 +45,8 @@ class WiFiSettingsTVC: TableViewController {
     // MARK: - Helpers
     
     private func pushSubmenu(with item: Item, in tvc: TableViewController) {
-        if let table = item.table {
-            tvc.model = table
+        if let model = item.model {
+            tvc.model = model
             navigationController?.pushViewController(tvc, animated: true)
         }
     }

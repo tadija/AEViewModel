@@ -52,7 +52,7 @@ extension Cell {
             configureAutomaticDisclosureIndicator(with: item)
         }
         open func configureAutomaticDisclosureIndicator(with item: Item) {
-            if (item.table?.sections?.count ?? 0) > 0 {
+            if (item.model?.sections?.count ?? 0) > 0 {
                 accessoryType = .disclosureIndicator
             }
         }

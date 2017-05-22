@@ -6,7 +6,7 @@ open class TableViewController: UITableViewController {
     
     // MARK: Properties
     
-    public var model: Table?
+    public var model: Model?
     
     // MARK: Init
     
@@ -20,7 +20,7 @@ open class TableViewController: UITableViewController {
         commonInit()
     }
     
-    public convenience init(style: UITableViewStyle, model: Table) {
+    public convenience init(style: UITableViewStyle, model: Model) {
         self.init(style: style)
         self.model = model
         commonInit()

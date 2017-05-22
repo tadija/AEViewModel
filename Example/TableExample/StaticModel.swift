@@ -9,12 +9,12 @@
 import Foundation
 import Table
 
-extension Table {
+extension Model {
     
-    static var Settings: Table {
-        var table = Table("settings")
-        table.sections = [.User, .Device]
-        return table
+    static var Settings: Model {
+        var model = Model("settings")
+        model.sections = [.User, .Device]
+        return model
     }
     
 }

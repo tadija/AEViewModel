@@ -86,7 +86,7 @@ class RootSettingsTVC: TableViewController {
         guard
             let url = Bundle.main.url(forResource: "JsonModel", withExtension: "json"),
             let data = try? Data(contentsOf: url),
-            let model = try? Table(jsonData: data)
+            let model = try? Model(jsonData: data)
         else {
             fatalError("Unable to load settings from settings-menu.json")
         }
@@ -94,12 +94,12 @@ class RootSettingsTVC: TableViewController {
     }
     
     private func loadModelFromCode() {
-        self.model = Table.Settings
+        model = Model.Settings
     }
     
     private func pushSubmenu(with item: Item, in tvc: TableViewController) {
-        if let table = item.table {
-            tvc.model = table
+        if let model = item.model {
+            tvc.model = model
             navigationController?.pushViewController(tvc, animated: true)
         }
     }
