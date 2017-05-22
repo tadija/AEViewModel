@@ -46,7 +46,7 @@ extension Cell {
         
         open func customizeUI() {}
         open func updateUI(with item: Item) {
-            imageView?.image = item.image
+            imageView?.image = item.localImage
             textLabel?.text = item.title
             detailTextLabel?.text = item.detail
             configureAutomaticDisclosureIndicator(with: item)

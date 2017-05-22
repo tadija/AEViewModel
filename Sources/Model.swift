@@ -47,16 +47,16 @@ public struct Section: Mappable {
 public struct Item: Mappable {
     public let identifier: String
     public var userInfo: [String : Any]?
-    public var imageName: String?
+    public var image: String?
     public var title: String?
     public var detail: String?
     public var model: Model?
     
-    public var image: UIImage? {
-        guard let imageName = imageName else {
+    public var localImage: UIImage? {
+        guard let image = image else {
             return nil
         }
-        return UIImage(named: imageName)
+        return UIImage(named: image)
     }
     
     public init(_ identifier: String) {
@@ -66,7 +66,7 @@ public struct Item: Mappable {
     public init(map: [String : Any]) throws {
         identifier = try map.value(forKey: "id")
         userInfo = try? map.value(forKey: "user-info")
-        imageName = try? map.value(forKey: "image")
+        image = try? map.value(forKey: "image")
         title = try? map.value(forKey: "title")
         detail = try? map.value(forKey: "detail")
         model = try? map.mappable(forKey: "model")
