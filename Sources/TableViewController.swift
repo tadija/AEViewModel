@@ -1,16 +1,14 @@
 import UIKit
 
-open class ViewController: UITableViewController {
+open class TableViewController: UITableViewController {
     
-    // MARK: - Types
+    public typealias id = Cell.ID
     
-    public struct id {}
+    // MARK: Properties
     
-    // MARK: - Properties
+    public var model: Model?
     
-    public var model: Table?
-    
-    // MARK: - Init
+    // MARK: Init
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,7 +20,7 @@ open class ViewController: UITableViewController {
         commonInit()
     }
     
-    public convenience init(style: UITableViewStyle, model: Table) {
+    public convenience init(style: UITableViewStyle, model: Model) {
         self.init(style: style)
         self.model = model
         commonInit()
@@ -32,7 +30,7 @@ open class ViewController: UITableViewController {
         /// - Note: nothing for now...
     }
     
-    // MARK: - Lifecycle
+    // MARK: Lifecycle
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +39,7 @@ open class ViewController: UITableViewController {
         registerCells()
     }
     
-    // MARK: - Abstract
+    // MARK: Abstract
     
     open func cellUI(forIdentifier identifier: String) -> Cell.UI {
         return .basic
@@ -55,7 +53,7 @@ open class ViewController: UITableViewController {
         print("This method is abstract and must be implemented by subclass")
     }
     
-    // MARK: - API
+    // MARK: API
     
     public func item(from cell: TableCell) -> Item? {
         guard
@@ -66,7 +64,7 @@ open class ViewController: UITableViewController {
         return item
     }
     
-    // MARK: - Helpers
+    // MARK: Helpers
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
@@ -101,9 +99,9 @@ open class ViewController: UITableViewController {
     
 }
 
-extension ViewController {
-    
-    // MARK: - UITableViewControllerDataSource
+// MARK: - UITableViewControllerDataSource
+
+extension TableViewController {
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
         return model?.sections?.count ?? 0
@@ -139,9 +137,9 @@ extension ViewController {
     
 }
 
-extension ViewController {
-    
-    // MARK: - UITableViewControllerDelegate
+// MARK: - UITableViewControllerDelegate
+
+extension TableViewController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
@@ -154,9 +152,9 @@ extension ViewController {
     
 }
 
-extension ViewController: ToggleCellDelegate {
-    
-    // MARK: - ToggleCellDelegate
+// MARK: - ToggleCellDelegate
+
+extension TableViewController: ToggleCellDelegate {
     
     public func didChangeValue(sender: Cell.Toggle) {
         if let item = item(from: sender) {

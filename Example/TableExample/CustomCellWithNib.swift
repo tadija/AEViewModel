@@ -25,7 +25,7 @@ class CustomCellWithNib: Cell.Basic {
     }
     
     override func updateUI(with item: Item) {
-        customImageView.image = item.image
+        customImageView.image = item.localImage
         title.text = item.title
         subtitle.text = item.detail
         

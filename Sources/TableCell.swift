@@ -5,6 +5,8 @@ public protocol TableCell: class {
     func updateUI(with item: Item)
 }
 
+public extension TableCell where Self: UITableViewCell {}
+
 public struct Cell {
     private init() {}
 }
@@ -21,40 +23,39 @@ extension Cell {
         case customNib(nib: UINib?)
     }
     
+    public struct ID {}
+    
+}
+
+// MARK: - System Cells
+
+extension Cell {
+    
     open class Basic: UITableViewCell, TableCell {
-        
-        // MARK: - Init
-        
         required public init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
         }
-        
         public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             customizeUI()
         }
-        
-        // MARK: - Lifecycle
-        
         open override func awakeFromNib() {
             super.awakeFromNib()
             customizeUI()
         }
         
-        // MARK: - TableCell
-        
         open func customizeUI() {}
-        
         open func updateUI(with item: Item) {
-            imageView?.image = item.image
+            imageView?.image = item.localImage
             textLabel?.text = item.title
             detailTextLabel?.text = item.detail
-            
-            if (item.table?.sections?.count ?? 0) > 0 {
+            configureAutomaticDisclosureIndicator(with: item)
+        }
+        open func configureAutomaticDisclosureIndicator(with item: Item) {
+            if (item.model?.sections?.count ?? 0) > 0 {
                 accessoryType = .disclosureIndicator
             }
         }
-        
     }
     
     open class Subtitle: Basic {
@@ -84,31 +85,24 @@ extension Cell {
         }
     }
     
+}
+
+// MARK: - Custom Cells
+
+extension Cell {
+    
     open class Toggle: Basic {
-        
-        // MARK: - Outlets
-        
         public let toggle = UISwitch()
-        
-        // MARK: - Properties
-        
         public weak var delegate: ToggleCellDelegate?
-        
-        // MARK: - TableCell
-        
+
         open override func customizeUI() {
             selectionStyle = .none
             accessoryView = toggle
-            
             toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
         }
-        
-        // MARK: - Helpers
-        
         @objc private func callDelegate() {
             delegate?.didChangeValue(sender: self)
         }
-        
     }
     
 }

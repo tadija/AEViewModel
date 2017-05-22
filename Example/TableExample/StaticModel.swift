@@ -1,5 +1,5 @@
 //
-//  SettingsMenuModel.swift
+//  StaticModel.swift
 //  TableExample
 //
 //  Created by Marko Tadić on 5/8/17.
@@ -9,12 +9,12 @@
 import Foundation
 import Table
 
-extension Table {
+extension Model {
     
-    static var Settings: Table {
-        var table = Table("settings")
-        table.sections = [.User, .Device]
-        return table
+    static var Settings: Model {
+        var model = Model("settings")
+        model.sections = [.User, .Device]
+        return model
     }
     
 }
@@ -39,7 +39,7 @@ extension Item {
     
     static var Profile: Item {
         var item = Item("profile")
-        item.imageName = "IconGray"
+        item.image = "IconGray"
         item.title = "Marko Tadic"
         item.detail = "Apple ID, iCloud, iTunes & App Store"
         return item
@@ -47,14 +47,14 @@ extension Item {
     
     static var Airplane: Item {
         var item = Item("airplane")
-        item.imageName = "IconOrange"
+        item.image = "IconOrange"
         item.title = "Airplane Mode"
         return item
     }
     
     static var Wifi: Item {
         var item = Item("wifi")
-        item.imageName = "IconBlue"
+        item.image = "IconBlue"
         item.title = "Wi-Fi"
         item.detail = "Off"
         return item

@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-extension ViewController.id {
+extension Cell.ID {
     static let profile = "profile"
     static let airplane = "airplane"
     static let wifi = "wifi"
@@ -20,7 +20,7 @@ extension ViewController.id {
     static let carrier = "carrier"
 }
 
-class RootSettingsTVC: ViewController {
+class RootSettingsTVC: TableViewController {
     
     // MARK: - Lifecycle
     
@@ -73,7 +73,7 @@ class RootSettingsTVC: ViewController {
             let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
             pushSubmenu(with: item, in: wifiSubmenu)
         case id.bluetooth, id.cellular, id.hotspot, id.carrier:
-            let defaultSubmenu = ViewController(style: .grouped)
+            let defaultSubmenu = TableViewController(style: .grouped)
             pushSubmenu(with: item, in: defaultSubmenu)
         default:
             break
@@ -84,9 +84,9 @@ class RootSettingsTVC: ViewController {
     
     private func loadModelFromJSON() {
         guard
-            let url = Bundle.main.url(forResource: "settings-menu", withExtension: "json"),
+            let url = Bundle.main.url(forResource: "JsonModel", withExtension: "json"),
             let data = try? Data(contentsOf: url),
-            let model = try? Table(jsonData: data)
+            let model = try? Model(jsonData: data)
         else {
             fatalError("Unable to load settings from settings-menu.json")
         }
@@ -94,13 +94,13 @@ class RootSettingsTVC: ViewController {
     }
     
     private func loadModelFromCode() {
-        self.model = Table.Settings
+        model = Model.Settings
     }
     
-    private func pushSubmenu(with item: Item, in tmvc: ViewController) {
-        if let table = item.table {
-            tmvc.model = table
-            navigationController?.pushViewController(tmvc, animated: true)
+    private func pushSubmenu(with item: Item, in tvc: TableViewController) {
+        if let model = item.model {
+            tvc.model = model
+            navigationController?.pushViewController(tvc, animated: true)
         }
     }
     
