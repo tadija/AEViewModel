@@ -21,6 +21,12 @@ extension Cell {
         case customNib(nib: UINib?)
     }
     
+    public struct ID {}
+    
+}
+
+extension Cell {
+    
     open class Basic: UITableViewCell, TableCell {
         
         // MARK: - Init

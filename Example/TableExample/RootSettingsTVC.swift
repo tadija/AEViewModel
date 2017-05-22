@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-extension ViewController.id {
+extension Cell.ID {
     static let profile = "profile"
     static let airplane = "airplane"
     static let wifi = "wifi"
@@ -20,7 +20,7 @@ extension ViewController.id {
     static let carrier = "carrier"
 }
 
-class RootSettingsTVC: ViewController {
+class RootSettingsTVC: TableViewController {
     
     // MARK: - Lifecycle
     
@@ -73,7 +73,7 @@ class RootSettingsTVC: ViewController {
             let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
             pushSubmenu(with: item, in: wifiSubmenu)
         case id.bluetooth, id.cellular, id.hotspot, id.carrier:
-            let defaultSubmenu = ViewController(style: .grouped)
+            let defaultSubmenu = TableViewController(style: .grouped)
             pushSubmenu(with: item, in: defaultSubmenu)
         default:
             break
@@ -84,7 +84,7 @@ class RootSettingsTVC: ViewController {
     
     private func loadModelFromJSON() {
         guard
-            let url = Bundle.main.url(forResource: "JSONModel", withExtension: "json"),
+            let url = Bundle.main.url(forResource: "JsonModel", withExtension: "json"),
             let data = try? Data(contentsOf: url),
             let model = try? Table(jsonData: data)
         else {
@@ -97,10 +97,10 @@ class RootSettingsTVC: ViewController {
         self.model = Table.Settings
     }
     
-    private func pushSubmenu(with item: Item, in tmvc: ViewController) {
+    private func pushSubmenu(with item: Item, in tvc: TableViewController) {
         if let table = item.table {
-            tmvc.model = table
-            navigationController?.pushViewController(tmvc, animated: true)
+            tvc.model = table
+            navigationController?.pushViewController(tvc, animated: true)
         }
     }
     

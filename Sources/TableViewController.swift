@@ -1,10 +1,8 @@
 import UIKit
 
-open class ViewController: UITableViewController {
+open class TableViewController: UITableViewController {
     
-    // MARK: - Types
-    
-    public struct id {}
+    public typealias id = Cell.ID
     
     // MARK: - Properties
     
@@ -101,7 +99,7 @@ open class ViewController: UITableViewController {
     
 }
 
-extension ViewController {
+extension TableViewController {
     
     // MARK: - UITableViewControllerDataSource
     
@@ -139,7 +137,7 @@ extension ViewController {
     
 }
 
-extension ViewController {
+extension TableViewController {
     
     // MARK: - UITableViewControllerDelegate
     
@@ -154,7 +152,7 @@ extension ViewController {
     
 }
 
-extension ViewController: ToggleCellDelegate {
+extension TableViewController: ToggleCellDelegate {
     
     // MARK: - ToggleCellDelegate
     

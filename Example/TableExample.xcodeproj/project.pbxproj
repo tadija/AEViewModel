@@ -16,7 +16,7 @@
 		8B893A811E98606700B3101B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A7F1E98606700B3101B /* Main.storyboard */; };
 		8B893A831E98606700B3101B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A821E98606700B3101B /* Assets.xcassets */; };
 		8B893A861E98606700B3101B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A841E98606700B3101B /* LaunchScreen.storyboard */; };
-		8B893A8E1E9860C300B3101B /* JSONModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A8D1E9860C300B3101B /* JSONModel.json */; };
+		8B893A8E1E9860C300B3101B /* JsonModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A8D1E9860C300B3101B /* JsonModel.json */; };
 		8B893A901E9860E900B3101B /* RootSettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */; };
 		8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */; };
 		8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */; };
@@ -75,7 +75,7 @@
 		8B893A821E98606700B3101B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B893A851E98606700B3101B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B893A871E98606700B3101B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B893A8D1E9860C300B3101B /* JSONModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = JSONModel.json; path = ../Resources/JSONModel.json; sourceTree = "<group>"; };
+		8B893A8D1E9860C300B3101B /* JsonModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = JsonModel.json; path = ../Resources/JsonModel.json; sourceTree = "<group>"; };
 		8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootSettingsTVC.swift; sourceTree = "<group>"; };
 		8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithCode.swift; sourceTree = "<group>"; };
 		8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithNib.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		8B0E708D1EBFC3B0000153CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8B893A8D1E9860C300B3101B /* JSONModel.json */,
+				8B893A8D1E9860C300B3101B /* JsonModel.json */,
 				8B0E70921EBFE0A0000153CD /* StaticModel.swift */,
 				8B6E7ABC1ECFDD7500DF672B /* DynamicModel.swift */,
 			);
@@ -277,7 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B893A861E98606700B3101B /* LaunchScreen.storyboard in Resources */,
-				8B893A8E1E9860C300B3101B /* JSONModel.json in Resources */,
+				8B893A8E1E9860C300B3101B /* JsonModel.json in Resources */,
 				8B893A831E98606700B3101B /* Assets.xcassets in Resources */,
 				8B893A811E98606700B3101B /* Main.storyboard in Resources */,
 				8B0E708B1EBFA0EA000153CD /* CustomCellWithNib.xib in Resources */,

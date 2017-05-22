@@ -9,13 +9,13 @@
 import UIKit
 import Table
 
-extension ViewController.id {
+extension Cell.ID {
     static let wifiSwitch = "wifiSwitch"
     static let wifiNetwork = "wifiNetwork"
     static let joinNetworksSwitch = "joinNetworksSwitch"
 }
 
-class WiFiSettingsTVC: ViewController {
+class WiFiSettingsTVC: TableViewController {
     
     // MARK: - Override
     
@@ -35,8 +35,8 @@ class WiFiSettingsTVC: ViewController {
                 print("handleEvent with id: \(item.identifier)")
             }
         case id.wifiNetwork:
-            let tmvc = ViewController(style: .grouped)
-            pushSubmenu(with: item, in: tmvc)
+            let tvc = TableViewController(style: .grouped)
+            pushSubmenu(with: item, in: tvc)
         default:
             break
         }
@@ -44,10 +44,10 @@ class WiFiSettingsTVC: ViewController {
     
     // MARK: - Helpers
     
-    private func pushSubmenu(with item: Item, in tmvc: ViewController) {
+    private func pushSubmenu(with item: Item, in tvc: TableViewController) {
         if let table = item.table {
-            tmvc.model = table
-            navigationController?.pushViewController(tmvc, animated: true)
+            tvc.model = table
+            navigationController?.pushViewController(tvc, animated: true)
         }
     }
     
