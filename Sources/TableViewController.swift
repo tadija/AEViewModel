@@ -4,11 +4,11 @@ open class TableViewController: UITableViewController {
     
     public typealias id = Cell.ID
     
-    // MARK: - Properties
+    // MARK: Properties
     
     public var model: Table?
     
-    // MARK: - Init
+    // MARK: Init
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,7 +30,7 @@ open class TableViewController: UITableViewController {
         /// - Note: nothing for now...
     }
     
-    // MARK: - Lifecycle
+    // MARK: Lifecycle
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ open class TableViewController: UITableViewController {
         registerCells()
     }
     
-    // MARK: - Abstract
+    // MARK: Abstract
     
     open func cellUI(forIdentifier identifier: String) -> Cell.UI {
         return .basic
@@ -53,7 +53,7 @@ open class TableViewController: UITableViewController {
         print("This method is abstract and must be implemented by subclass")
     }
     
-    // MARK: - API
+    // MARK: API
     
     public func item(from cell: TableCell) -> Item? {
         guard
@@ -64,7 +64,7 @@ open class TableViewController: UITableViewController {
         return item
     }
     
-    // MARK: - Helpers
+    // MARK: Helpers
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
@@ -99,9 +99,9 @@ open class TableViewController: UITableViewController {
     
 }
 
+// MARK: - UITableViewControllerDataSource
+
 extension TableViewController {
-    
-    // MARK: - UITableViewControllerDataSource
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
         return model?.sections?.count ?? 0
@@ -137,9 +137,9 @@ extension TableViewController {
     
 }
 
+// MARK: - UITableViewControllerDelegate
+
 extension TableViewController {
-    
-    // MARK: - UITableViewControllerDelegate
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
@@ -152,9 +152,9 @@ extension TableViewController {
     
 }
 
+// MARK: - ToggleCellDelegate
+
 extension TableViewController: ToggleCellDelegate {
-    
-    // MARK: - ToggleCellDelegate
     
     public func didChangeValue(sender: Cell.Toggle) {
         if let item = item(from: sender) {
