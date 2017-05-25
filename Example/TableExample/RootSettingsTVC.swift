@@ -27,8 +27,8 @@ class RootSettingsTVC: TableViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        loadModelFromJSON()
-//        loadModelFromCode()
+//        loadModelFromJSON()
+        loadModelFromCode()
     }
     
     override func viewDidLoad() {

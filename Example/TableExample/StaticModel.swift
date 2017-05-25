@@ -11,53 +11,41 @@ import Table
 
 extension Model {
     
-    static var Settings: Model {
-        var model = Model("settings")
-        model.sections = [.User, .Device]
-        return model
+    static let Settings = Model("settings") { m in
+        m.sections = [.User, .Device]
     }
     
 }
 
 extension Section {
     
-    static var User: Section {
-        var section = Section("user")
-        section.items = [.Profile]
-        return section
+    static var User = Section("user") { s in
+        s.items = [.Profile]
     }
     
-    static var Device: Section {
-        var section = Section("device")
-        section.items = [.Airplane, .Wifi]
-        return section
+    static var Device = Section("device") { s in
+        s.items = [.Airplane, .Wifi]
     }
     
 }
 
 extension Item {
     
-    static var Profile: Item {
-        var item = Item("profile")
-        item.image = "IconGray"
-        item.title = "Marko Tadic"
-        item.detail = "Apple ID, iCloud, iTunes & App Store"
-        return item
+    static var Profile = Item("profile") { i in
+        i.image = "IconGray"
+        i.title = "Marko Tadic"
+        i.detail = "Apple ID, iCloud, iTunes & App Store"
     }
     
-    static var Airplane: Item {
-        var item = Item("airplane")
-        item.image = "IconOrange"
-        item.title = "Airplane Mode"
-        return item
+    static var Airplane = Item("airplane") { i in
+        i.image = "IconOrange"
+        i.title = "Airplane Mode"
     }
     
-    static var Wifi: Item {
-        var item = Item("wifi")
-        item.image = "IconBlue"
-        item.title = "Wi-Fi"
-        item.detail = "Off"
-        return item
+    static var Wifi = Item("wifi") { i in
+        i.image = "IconBlue"
+        i.title = "Wi-Fi"
+        i.detail = "Off"
     }
     
 }

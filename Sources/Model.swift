@@ -7,8 +7,11 @@ public struct Model: Mappable {
     public var title: String?
     public var sections: [Section]?
     
-    public init(_ identifier: String) {
+    public init(_ identifier: String, _ block: ((inout Model) -> Void)? = nil) {
         self.identifier = identifier
+        if let block = block {
+            block(&self)   
+        }
     }
     
     public init(map: [String : Any]) throws {
@@ -31,8 +34,11 @@ public struct Section: Mappable {
     public var footer: String?
     public var items: [Item]?
     
-    public init(_ identifier: String) {
+    public init(_ identifier: String, _ block: ((inout Section) -> Void)? = nil) {
         self.identifier = identifier
+        if let block = block {
+            block(&self)
+        }
     }
     
     public init(map: [String : Any]) throws {
@@ -59,8 +65,11 @@ public struct Item: Mappable {
         return UIImage(named: image)
     }
     
-    public init(_ identifier: String) {
+    public init(_ identifier: String, _ block: ((inout Item) -> Void)? = nil) {
         self.identifier = identifier
+        if let block = block {
+            block(&self)
+        }
     }
     
     public init(map: [String : Any]) throws {
