@@ -11,41 +11,34 @@ import Table
 
 extension Model {
     
-    static let Settings = Model("settings") { m in
-        m.sections = [.User, .Device]
+    static let Example = Model("Example") { m in
+        m.title = "Example"
+        m.sections = [.General]
     }
     
 }
 
 extension Section {
     
-    static var User = Section("user") { s in
-        s.items = [.Profile]
-    }
-    
-    static var Device = Section("device") { s in
-        s.items = [.Airplane, .Wifi]
+    static var General = Section("General") { s in
+        s.items = [.Static, .Dynamic, .Json]
     }
     
 }
 
 extension Item {
     
-    static var Profile = Item("profile") { i in
-        i.image = "IconGray"
-        i.title = "Marko Tadic"
-        i.detail = "Apple ID, iCloud, iTunes & App Store"
+    static var Static = Item("static") { i in
+        i.title = "Static (?)"
     }
     
-    static var Airplane = Item("airplane") { i in
-        i.image = "IconOrange"
-        i.title = "Airplane Mode"
+    static var Dynamic = Item("dynamic") { i in
+        i.title = "Dynamic (?)"
     }
     
-    static var Wifi = Item("wifi") { i in
-        i.image = "IconBlue"
-        i.title = "Wi-Fi"
-        i.detail = "Off"
+    static var Json = Item("json") { i in
+        i.model = SettingsTVC.MyModel
+        i.title = "JSON (Settings)"
     }
     
 }

@@ -26,6 +26,11 @@ open class TableViewController: UITableViewController {
         commonInit()
     }
     
+    public convenience init() {
+        self.init(style: .grouped)
+        commonInit()
+    }
+    
     private func commonInit() {
         /// - Note: nothing for now...
     }
@@ -62,6 +67,13 @@ open class TableViewController: UITableViewController {
             let item = model?.item(at: indexPath)
         else { return nil }
         return item
+    }
+    
+    public func pushSubmenu(with model: Model?, in tvc: TableViewController) {
+        if let model = model {
+            tvc.model = model
+            navigationController?.pushViewController(tvc, animated: true)
+        }
     }
     
     // MARK: Helpers
