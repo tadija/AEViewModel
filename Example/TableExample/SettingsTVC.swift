@@ -27,8 +27,7 @@ class SettingsTVC: TableViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        loadModelFromJSON()
-        self.model = SettingsTVC.MyModel
+        self.table = SettingsTVC.fromJson
     }
     
     override func viewDidLoad() {
@@ -71,10 +70,10 @@ class SettingsTVC: TableViewController {
             }
         case id.wifi:
             let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
-            pushSubmenu(with: item.model, in: wifiSubmenu)
+            pushSubmenu(with: item.table, in: wifiSubmenu)
         case id.bluetooth, id.cellular, id.hotspot, id.carrier:
             let defaultSubmenu = TableViewController(style: .grouped)
-            pushSubmenu(with: item.model, in: defaultSubmenu)
+            pushSubmenu(with: item.table, in: defaultSubmenu)
         default:
             break
         }
@@ -82,11 +81,11 @@ class SettingsTVC: TableViewController {
     
     // MARK: Helpers
     
-    static var MyModel: Model {
+    static var fromJson: Table {
         guard
             let url = Bundle.main.url(forResource: "JsonModel", withExtension: "json"),
             let data = try? Data(contentsOf: url),
-            let model = try? Model(jsonData: data)
+            let model = try? Table(jsonData: data)
         else {
             fatalError("Unable to load settings from settings-menu.json")
         }
@@ -124,7 +123,7 @@ class WiFiSettingsTVC: TableViewController {
             }
         case id.wifiNetwork:
             let tvc = TableViewController(style: .grouped)
-            pushSubmenu(with: item.model, in: tvc)
+            pushSubmenu(with: item.table, in: tvc)
         default:
             break
         }

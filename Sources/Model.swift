@@ -1,13 +1,13 @@
 import Foundation
 import Mappable
 
-public struct Model: Mappable {
+public struct Table: Mappable {
     public let identifier: String
     public var userInfo: [String : Any]?
     public var title: String?
     public var sections: [Section]?
     
-    public init(_ identifier: String, _ block: ((inout Model) -> Void)? = nil) {
+    public init(_ identifier: String, _ block: ((inout Table) -> Void)? = nil) {
         self.identifier = identifier
         if let block = block {
             block(&self)   
@@ -56,7 +56,7 @@ public struct Item: Mappable {
     public var image: String?
     public var title: String?
     public var detail: String?
-    public var model: Model?
+    public var table: Table?
     
     public var localImage: UIImage? {
         guard let image = image else {
@@ -78,6 +78,6 @@ public struct Item: Mappable {
         image = try? map.value(forKey: "image")
         title = try? map.value(forKey: "title")
         detail = try? map.value(forKey: "detail")
-        model = try? map.mappable(forKey: "model")
+        table = try? map.mappable(forKey: "table")
     }
 }

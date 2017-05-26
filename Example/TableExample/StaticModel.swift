@@ -9,9 +9,9 @@
 import Foundation
 import Table
 
-extension Model {
+extension Table {
     
-    static let Example = Model("Example") { m in
+    static let Example = Table("Example") { m in
         m.title = "Example"
         m.sections = [.General]
     }
@@ -29,15 +29,15 @@ extension Section {
 extension Item {
     
     static var Static = Item("static") { i in
-        i.title = "Static (?)"
+        i.title = "Static (Login)"
     }
     
     static var Dynamic = Item("dynamic") { i in
-        i.title = "Dynamic (?)"
+        i.title = "Dynamic (API?)"
     }
     
     static var Json = Item("json") { i in
-        i.model = SettingsTVC.MyModel
+        i.table = SettingsTVC.fromJson
         i.title = "JSON (Settings)"
     }
     
