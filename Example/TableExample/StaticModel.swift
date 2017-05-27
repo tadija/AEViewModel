@@ -9,11 +9,19 @@
 import Foundation
 import Table
 
-extension Table {
+extension Item {
     
-    static let Example = Table("Example") { m in
-        m.title = "Example"
-        m.sections = [.General]
+    static var Static = Item("static") { `static` in
+        `static`.title = "Static (Login)"
+    }
+    
+    static var Dynamic = Item("dynamic") { i in
+        i.title = "Dynamic (API?)"
+    }
+    
+    static var Json = Item("json") { i in
+        i.table = SettingsTVC.fromJson
+        i.title = "JSON (Settings)"
     }
     
 }
@@ -26,19 +34,11 @@ extension Section {
     
 }
 
-extension Item {
+extension Table {
     
-    static var Static = Item("static") { i in
-        i.title = "Static (Login)"
-    }
-    
-    static var Dynamic = Item("dynamic") { i in
-        i.title = "Dynamic (API?)"
-    }
-    
-    static var Json = Item("json") { i in
-        i.table = SettingsTVC.fromJson
-        i.title = "JSON (Settings)"
+    static let Example = Table { example in
+        example.title = "Example"
+        example.sections = [.General]
     }
     
 }

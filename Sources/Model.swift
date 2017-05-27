@@ -2,12 +2,12 @@ import Foundation
 import Mappable
 
 public struct Table: Mappable {
-    public let identifier: String
+    public let identifier: String?
     public var userInfo: [String : Any]?
     public var title: String?
     public var sections: [Section]?
     
-    public init(_ identifier: String, _ block: ((inout Table) -> Void)? = nil) {
+    public init(_ identifier: String? = nil, _ block: ((inout Table) -> Void)? = nil) {
         self.identifier = identifier
         if let block = block {
             block(&self)   
@@ -15,7 +15,7 @@ public struct Table: Mappable {
     }
     
     public init(map: [String : Any]) throws {
-        identifier = try map.value(forKey: "id")
+        identifier = try? map.value(forKey: "id")
         userInfo = try? map.value(forKey: "user-info")
         title = try? map.value(forKey: "title")
         sections = try map.mappableArray(forKey: "sections")
