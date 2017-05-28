@@ -32,7 +32,7 @@
           "user-info": {
             "current-network": "Off"
           },
-          "model": {
+          "table": {
             "id": "wifiSubmenu",
             "title": "Wi-Fi",
             "sections": [
@@ -81,7 +81,7 @@
           "image": "IconBlue",
           "title": "Bluetooth",
           "detail": "On",
-          "model": {
+          "table": {
             "id": "bluetoothSubmenu",
             "title": "Bluetooth",
             "sections": [
@@ -124,7 +124,7 @@
           "id": "cellular",
           "image": "IconGreen",
           "title": "Cellular",
-          "model": {
+          "table": {
             "id": "cellularSubmenu",
             "title": "Cellular",
             "sections": [
@@ -192,7 +192,7 @@
           "image": "IconGreen",
           "title": "Personal Hotspot",
           "detail": "Off",
-          "model": {
+          "table": {
             "id": "hotspotSubmenu",
             "title": "Personal Hotspot",
             "sections": [
@@ -233,7 +233,7 @@
           "image": "IconGreen",
           "title": "Carrier",
           "detail": "Telenor SRB",
-          "model": {
+          "table": {
             "id": "carrierSubmenu",
             "title": "Network Selection",
             "sections": [

@@ -17,12 +17,12 @@
 		8B893A831E98606700B3101B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A821E98606700B3101B /* Assets.xcassets */; };
 		8B893A861E98606700B3101B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A841E98606700B3101B /* LaunchScreen.storyboard */; };
 		8B893A8E1E9860C300B3101B /* JsonModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A8D1E9860C300B3101B /* JsonModel.json */; };
-		8B893A901E9860E900B3101B /* RootSettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */; };
+		8B893A901E9860E900B3101B /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A8F1E9860E900B3101B /* SettingsTVC.swift */; };
+		8BA010691ED7A6E5004C0021 /* RootTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA010681ED7A6E5004C0021 /* RootTVC.swift */; };
 		8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */; };
 		8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */; };
 		8BD8F6851E9A5D6000C9BBA3 /* Table.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD8F6821E9A5D5200C9BBA3 /* Table.framework */; };
 		8BD8F6861E9A5D6000C9BBA3 /* Table.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD8F6821E9A5D5200C9BBA3 /* Table.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8BF8AACC1EA9533900A14F02 /* WiFiSettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF8AACB1EA9533900A14F02 /* WiFiSettingsTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,11 +76,11 @@
 		8B893A851E98606700B3101B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B893A871E98606700B3101B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B893A8D1E9860C300B3101B /* JsonModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = JsonModel.json; path = ../Resources/JsonModel.json; sourceTree = "<group>"; };
-		8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootSettingsTVC.swift; sourceTree = "<group>"; };
+		8B893A8F1E9860E900B3101B /* SettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
+		8BA010681ED7A6E5004C0021 /* RootTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTVC.swift; sourceTree = "<group>"; };
 		8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithCode.swift; sourceTree = "<group>"; };
 		8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithNib.swift; sourceTree = "<group>"; };
 		8BD8F67C1E9A5D5200C9BBA3 /* Table.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Table.xcodeproj; path = ../Table.xcodeproj; sourceTree = "<group>"; };
-		8BF8AACB1EA9533900A14F02 /* WiFiSettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WiFiSettingsTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +99,8 @@
 		8B0E708D1EBFC3B0000153CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8B893A8D1E9860C300B3101B /* JsonModel.json */,
 				8B0E70921EBFE0A0000153CD /* StaticModel.swift */,
+				8B893A8D1E9860C300B3101B /* JsonModel.json */,
 				8B6E7ABC1ECFDD7500DF672B /* DynamicModel.swift */,
 			);
 			name = Model;
@@ -118,8 +118,8 @@
 		8B0E708F1EBFC3FE000153CD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8B893A8F1E9860E900B3101B /* RootSettingsTVC.swift */,
-				8BF8AACB1EA9533900A14F02 /* WiFiSettingsTVC.swift */,
+				8BA010681ED7A6E5004C0021 /* RootTVC.swift */,
+				8B893A8F1E9860E900B3101B /* SettingsTVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -291,9 +291,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B893A901E9860E900B3101B /* RootSettingsTVC.swift in Sources */,
+				8B893A901E9860E900B3101B /* SettingsTVC.swift in Sources */,
+				8BA010691ED7A6E5004C0021 /* RootTVC.swift in Sources */,
 				8B0E70931EBFE0A0000153CD /* StaticModel.swift in Sources */,
-				8BF8AACC1EA9533900A14F02 /* WiFiSettingsTVC.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
 				8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */,
 				8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */,

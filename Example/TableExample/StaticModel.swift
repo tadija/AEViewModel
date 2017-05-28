@@ -9,55 +9,47 @@
 import Foundation
 import Table
 
-extension Model {
+extension Item {
     
-    static var Settings: Model {
-        var model = Model("settings")
-        model.sections = [.User, .Device]
-        return model
+    static var Static = Item("static") { `static` in
+        `static`.title = "Static (Login)"
+    }
+    
+    static var Dynamic = Item("dynamic") { dynamic in
+        dynamic.title = "Dynamic (API?)"
+    }
+    
+    static var Json = Item("json") { json in
+        json.table = Table.Settings
+        json.title = "JSON (Settings)"
     }
     
 }
 
 extension Section {
     
-    static var User: Section {
-        var section = Section("user")
-        section.items = [.Profile]
-        return section
-    }
-    
-    static var Device: Section {
-        var section = Section("device")
-        section.items = [.Airplane, .Wifi]
-        return section
+    static var General = Section("General") { general in
+        general.items = [.Static, .Dynamic, .Json]
     }
     
 }
 
-extension Item {
+extension Table {
     
-    static var Profile: Item {
-        var item = Item("profile")
-        item.image = "IconGray"
-        item.title = "Marko Tadic"
-        item.detail = "Apple ID, iCloud, iTunes & App Store"
-        return item
+    static let Example = Table { example in
+        example.title = "Example"
+        example.sections = [.General]
     }
     
-    static var Airplane: Item {
-        var item = Item("airplane")
-        item.image = "IconOrange"
-        item.title = "Airplane Mode"
-        return item
-    }
-    
-    static var Wifi: Item {
-        var item = Item("wifi")
-        item.image = "IconBlue"
-        item.title = "Wi-Fi"
-        item.detail = "Off"
-        return item
-    }
+    static let Settings: Table? = {
+        guard
+            let url = Bundle.main.url(forResource: "JsonModel", withExtension: "json"),
+            let data = try? Data(contentsOf: url),
+            let table = try? Table(jsonData: data)
+        else {
+            return nil
+        }
+        return table
+    }()
     
 }

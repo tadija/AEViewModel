@@ -6,7 +6,7 @@ open class TableViewController: UITableViewController {
     
     // MARK: Properties
     
-    public var model: Model?
+    public var table: Table?
     
     // MARK: Init
     
@@ -20,9 +20,14 @@ open class TableViewController: UITableViewController {
         commonInit()
     }
     
-    public convenience init(style: UITableViewStyle, model: Model) {
+    public convenience init(style: UITableViewStyle, table: Table) {
         self.init(style: style)
-        self.model = model
+        self.table = table
+        commonInit()
+    }
+    
+    public convenience init() {
+        self.init(style: .grouped)
         commonInit()
     }
     
@@ -35,7 +40,7 @@ open class TableViewController: UITableViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = model?.title
+        title = table?.title
         registerCells()
     }
     
@@ -59,16 +64,23 @@ open class TableViewController: UITableViewController {
         guard
             let tableViewCell = cell as? UITableViewCell,
             let indexPath = tableView.indexPath(for: tableViewCell),
-            let item = model?.item(at: indexPath)
+            let item = table?.item(at: indexPath)
         else { return nil }
         return item
+    }
+    
+    public func pushTable(from item: Item, in tvc: TableViewController) {
+        if let table = item.table {
+            tvc.table = table
+            navigationController?.pushViewController(tvc, animated: true)
+        }
     }
     
     // MARK: Helpers
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
-        model?.sections?.forEach { section in
+        table?.sections?.forEach { section in
             if let identifiers = section.items?.flatMap({ $0.identifier }) {
                 uniqueIdentifiers.formUnion(identifiers)
             }
@@ -104,15 +116,15 @@ open class TableViewController: UITableViewController {
 extension TableViewController {
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return model?.sections?.count ?? 0
+        return table?.sections?.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.sections?[section].items?.count ?? 0
+        return table?.sections?[section].items?.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = model?.item(at: indexPath) else {
+        guard let item = table?.item(at: indexPath) else {
             return UITableViewCell()
         }
         
@@ -128,11 +140,11 @@ extension TableViewController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model?.sections?[section].header
+        return table?.sections?[section].header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return model?.sections?[section].footer
+        return table?.sections?[section].footer
     }
     
 }
@@ -143,7 +155,7 @@ extension TableViewController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
-            let item = model?.item(at: indexPath),
+            let item = table?.item(at: indexPath),
             let cell = tableView.cellForRow(at: indexPath) as? TableCell
         else { return }
         
