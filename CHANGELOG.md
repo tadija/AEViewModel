@@ -1,5 +1,17 @@
 # Changelog
 
+## Vesion 0.1.6
+
+- Improvements and refactoring
+
+## Vesion 0.1.5
+
+- Improvements and refactoring
+
+## Vesion 0.1.4
+
+- Improvements and refactoring
+
 ## Version 0.1.3
 
 - Renamed framework: `TableModel` -> `Table`
