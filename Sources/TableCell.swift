@@ -105,6 +105,30 @@ extension Cell {
         }
     }
     
+    open class TextInput: Basic {
+        public let textField = UITextField()
+        public weak var delegate: UITextFieldDelegate? {
+            didSet {
+                textField.delegate = delegate
+            }
+        }
+        
+        open override func customizeUI() {
+            selectionStyle = .none
+            configureTextField()
+        }
+        
+        private func configureTextField() {
+            contentView.addSubview(textField)
+            
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+            textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        }
+    }
+    
 }
 
 public protocol ToggleCellDelegate: class {

@@ -2,7 +2,7 @@ import Foundation
 import Mappable
 
 public struct Table: Mappable {
-    public let identifier: String?
+    public var identifier: String?
     public var userInfo: [String : Any]?
     public var title: String?
     public var sections: [Section]?
