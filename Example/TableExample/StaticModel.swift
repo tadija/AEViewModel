@@ -15,21 +15,21 @@ extension Item {
         `static`.title = "Static (Login)"
     }
     
-    static var Dynamic = Item("dynamic") { i in
-        i.title = "Dynamic (API?)"
+    static var Dynamic = Item("dynamic") { dynamic in
+        dynamic.title = "Dynamic (API?)"
     }
     
-    static var Json = Item("json") { i in
-        i.table = SettingsTVC.fromJson
-        i.title = "JSON (Settings)"
+    static var Json = Item("json") { json in
+        json.table = Table.Settings
+        json.title = "JSON (Settings)"
     }
     
 }
 
 extension Section {
     
-    static var General = Section("General") { s in
-        s.items = [.Static, .Dynamic, .Json]
+    static var General = Section("General") { general in
+        general.items = [.Static, .Dynamic, .Json]
     }
     
 }
@@ -40,5 +40,16 @@ extension Table {
         example.title = "Example"
         example.sections = [.General]
     }
+    
+    static let Settings: Table? = {
+        guard
+            let url = Bundle.main.url(forResource: "JsonModel", withExtension: "json"),
+            let data = try? Data(contentsOf: url),
+            let table = try? Table(jsonData: data)
+        else {
+            return nil
+        }
+        return table
+    }()
     
 }

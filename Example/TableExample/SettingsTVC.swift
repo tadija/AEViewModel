@@ -24,12 +24,6 @@ class SettingsTVC: TableViewController {
     
     // MARK: - Lifecycle
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        self.table = SettingsTVC.fromJson
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,19 +71,6 @@ class SettingsTVC: TableViewController {
         default:
             break
         }
-    }
-    
-    // MARK: Helpers
-    
-    static var fromJson: Table {
-        guard
-            let url = Bundle.main.url(forResource: "JsonModel", withExtension: "json"),
-            let data = try? Data(contentsOf: url),
-            let model = try? Table(jsonData: data)
-        else {
-            fatalError("Unable to load settings from settings-menu.json")
-        }
-        return model
     }
     
 }

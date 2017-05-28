@@ -30,7 +30,7 @@ class RootTVC: TableViewController {
         case id.dynamic:
             pushTable(from: item, in: TableViewController())
         case id.json:
-            pushTable(from: item, in: SettingsTVC(style: .grouped, table: SettingsTVC.fromJson))
+            pushTable(from: item, in: SettingsTVC())
         default:
             break
         }
