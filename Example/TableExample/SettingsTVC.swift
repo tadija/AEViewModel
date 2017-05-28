@@ -70,10 +70,10 @@ class SettingsTVC: TableViewController {
             }
         case id.wifi:
             let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
-            pushSubmenu(with: item.table, in: wifiSubmenu)
+            pushTable(from: item, in: wifiSubmenu)
         case id.bluetooth, id.cellular, id.hotspot, id.carrier:
             let defaultSubmenu = TableViewController(style: .grouped)
-            pushSubmenu(with: item.table, in: defaultSubmenu)
+            pushTable(from: item, in: defaultSubmenu)
         default:
             break
         }
@@ -123,7 +123,7 @@ class WiFiSettingsTVC: TableViewController {
             }
         case id.wifiNetwork:
             let tvc = TableViewController(style: .grouped)
-            pushSubmenu(with: item.table, in: tvc)
+            pushTable(from: item, in: tvc)
         default:
             break
         }

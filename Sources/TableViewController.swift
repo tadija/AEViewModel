@@ -69,8 +69,8 @@ open class TableViewController: UITableViewController {
         return item
     }
     
-    public func pushSubmenu(with table: Table?, in tvc: TableViewController) {
-        if let table = table {
+    public func pushTable(from item: Item, in tvc: TableViewController) {
+        if let table = item.table {
             tvc.table = table
             navigationController?.pushViewController(tvc, animated: true)
         }

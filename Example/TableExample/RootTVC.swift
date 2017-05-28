@@ -19,17 +19,18 @@ class RootTVC: TableViewController {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         table = Table.Example
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
         switch item.identifier {
         case id.static:
-            pushSubmenu(with: item.table, in: TableViewController())
+            pushTable(from: item, in: TableViewController())
         case id.dynamic:
-            pushSubmenu(with: item.table, in: TableViewController())
+            pushTable(from: item, in: TableViewController())
         case id.json:
-            pushSubmenu(with: item.table, in: SettingsTVC(style: .grouped, table: SettingsTVC.fromJson))
+            pushTable(from: item, in: SettingsTVC(style: .grouped, table: SettingsTVC.fromJson))
         default:
             break
         }
