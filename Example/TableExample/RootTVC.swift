@@ -26,7 +26,7 @@ class RootTVC: TableViewController {
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
         switch item.identifier {
         case id.static:
-            pushTable(from: item, in: TableViewController())
+            pushTable(from: item, in: RegisterTVC())
         case id.dynamic:
             pushTable(from: item, in: TableViewController())
         case id.json:

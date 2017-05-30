@@ -14,4 +14,10 @@ class RegisterTVC: TableViewController {
         return .textInput
     }
     
+    override func updateCell(_ cell: TableCell, with item: Item) {        
+        if let textInputCell = cell as? Cell.TextInput {
+            textInputCell.textField.placeholder = item.title
+        }
+    }
+    
 }
