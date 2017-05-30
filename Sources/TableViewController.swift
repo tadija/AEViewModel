@@ -102,6 +102,8 @@ open class TableViewController: UITableViewController {
             tableView.register(Cell.RightDetail.self, forCellReuseIdentifier: identifier)
         case .toggle:
             tableView.register(Cell.Toggle.self, forCellReuseIdentifier: identifier)
+        case .textInput:
+            tableView.register(Cell.TextInput.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellNib):

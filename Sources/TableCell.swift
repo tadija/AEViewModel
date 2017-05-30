@@ -19,6 +19,7 @@ extension Cell {
         case leftDetail
         case rightDetail
         case toggle
+        case textInput
         case customClass(type: TableCell.Type)
         case customNib(nib: UINib?)
     }
