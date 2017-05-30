@@ -12,7 +12,8 @@ import Table
 extension Item {
     
     static var Static = Item("static") { `static` in
-        `static`.title = "Static (Login)"
+        `static`.title = "Static (Form)"
+        `static`.table = Table.Register
     }
     
     static var Dynamic = Item("dynamic") { dynamic in
@@ -20,8 +21,8 @@ extension Item {
     }
     
     static var Json = Item("json") { json in
-        json.table = Table.Settings
         json.title = "JSON (Settings)"
+        json.table = Table.Settings
     }
     
 }
