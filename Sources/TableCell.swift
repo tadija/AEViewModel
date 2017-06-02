@@ -19,6 +19,7 @@ extension Cell {
         case leftDetail
         case rightDetail
         case toggle
+        case textInput
         case customClass(type: TableCell.Type)
         case customNib(nib: UINib?)
     }
@@ -102,6 +103,31 @@ extension Cell {
         }
         @objc private func callDelegate() {
             delegate?.didChangeValue(sender: self)
+        }
+    }
+    
+    open class TextInput: Basic {
+        public let textField = UITextField()
+        public weak var delegate: UITextFieldDelegate? {
+            didSet {
+                textField.delegate = delegate
+            }
+        }
+        
+        open override func customizeUI() {
+            selectionStyle = .none
+            configureTextField()
+        }
+        
+        private func configureTextField() {
+            contentView.addSubview(textField)
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            
+            let margins = contentView.layoutMarginsGuide
+            textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+            textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+            textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+            textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
         }
     }
     

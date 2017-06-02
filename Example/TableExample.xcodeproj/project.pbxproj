@@ -11,6 +11,8 @@
 		8B0E70931EBFE0A0000153CD /* StaticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E70921EBFE0A0000153CD /* StaticModel.swift */; };
 		8B3276481E9AF35700FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; };
 		8B3276491E9AF35700FD9502 /* Mappable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B32FCA71EDADD04003ED4A1 /* RegisterTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B32FCA61EDADD04003ED4A1 /* RegisterTVC.swift */; };
+		8B32FCAA1EDADE57003ED4A1 /* FormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B32FCA91EDADE57003ED4A1 /* FormModel.swift */; };
 		8B6E7ABD1ECFDD7500DF672B /* DynamicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E7ABC1ECFDD7500DF672B /* DynamicModel.swift */; };
 		8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A7B1E98606700B3101B /* AppDelegate.swift */; };
 		8B893A811E98606700B3101B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A7F1E98606700B3101B /* Main.storyboard */; };
@@ -68,6 +70,8 @@
 		8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellWithNib.xib; sourceTree = "<group>"; };
 		8B0E70921EBFE0A0000153CD /* StaticModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticModel.swift; sourceTree = "<group>"; };
 		8B3276421E9AF2BF00FD9502 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = ../Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
+		8B32FCA61EDADD04003ED4A1 /* RegisterTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterTVC.swift; sourceTree = "<group>"; };
+		8B32FCA91EDADE57003ED4A1 /* FormModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormModel.swift; sourceTree = "<group>"; };
 		8B6E7ABC1ECFDD7500DF672B /* DynamicModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicModel.swift; sourceTree = "<group>"; };
 		8B893A781E98606700B3101B /* TableExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893A7B1E98606700B3101B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				8B0E70921EBFE0A0000153CD /* StaticModel.swift */,
+				8B32FCA91EDADE57003ED4A1 /* FormModel.swift */,
 				8B893A8D1E9860C300B3101B /* JsonModel.json */,
 				8B6E7ABC1ECFDD7500DF672B /* DynamicModel.swift */,
 			);
@@ -119,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				8BA010681ED7A6E5004C0021 /* RootTVC.swift */,
+				8B32FCA61EDADD04003ED4A1 /* RegisterTVC.swift */,
 				8B893A8F1E9860E900B3101B /* SettingsTVC.swift */,
 			);
 			name = Controller;
@@ -294,10 +300,12 @@
 				8B893A901E9860E900B3101B /* SettingsTVC.swift in Sources */,
 				8BA010691ED7A6E5004C0021 /* RootTVC.swift in Sources */,
 				8B0E70931EBFE0A0000153CD /* StaticModel.swift in Sources */,
+				8B32FCAA1EDADE57003ED4A1 /* FormModel.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
 				8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */,
 				8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */,
 				8B6E7ABD1ECFDD7500DF672B /* DynamicModel.swift in Sources */,
+				8B32FCA71EDADD04003ED4A1 /* RegisterTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
