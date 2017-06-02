@@ -121,12 +121,13 @@ extension Cell {
         
         private func configureTextField() {
             contentView.addSubview(textField)
-            
             textField.translatesAutoresizingMaskIntoConstraints = false
-            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-            textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+            
+            let margins = contentView.layoutMarginsGuide
+            textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+            textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+            textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+            textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
         }
     }
     
