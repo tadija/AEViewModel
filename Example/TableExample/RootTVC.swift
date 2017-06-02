@@ -17,10 +17,8 @@ extension Cell.ID {
 
 class RootTVC: TableViewController {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        table = Table.Example
+    override func customInit() {
+        table = .Example
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {

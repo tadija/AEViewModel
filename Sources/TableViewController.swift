@@ -6,33 +6,29 @@ open class TableViewController: UITableViewController {
     
     // MARK: Properties
     
-    public var table: Table?
+    open var table: Table?
     
     // MARK: Init
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
+        customInit()
     }
     
     public override init(style: UITableViewStyle) {
         super.init(style: style)
-        commonInit()
+        customInit()
     }
     
     public convenience init(style: UITableViewStyle, table: Table) {
         self.init(style: style)
         self.table = table
-        commonInit()
+        customInit()
     }
     
     public convenience init() {
         self.init(style: .grouped)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        /// - Note: nothing for now...
+        customInit()
     }
     
     // MARK: Lifecycle
@@ -45,6 +41,8 @@ open class TableViewController: UITableViewController {
     }
     
     // MARK: Abstract
+    
+    open func customInit() {}
     
     open func cellUI(forIdentifier identifier: String) -> Cell.UI {
         return .basic
