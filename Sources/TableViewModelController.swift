@@ -81,7 +81,7 @@ open class TableViewModelController: UITableViewController {
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
         table?.sections.forEach { section in
-            let sectionIdentifiers = section.items.flatMap({ $0.identifier })
+            let sectionIdentifiers = section.items.flatMap({ type(of: $0).identifier })
             uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
         uniqueIdentifiers.forEach { identifier in
@@ -129,7 +129,8 @@ extension TableViewModelController {
             return UITableViewCell()
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
+        let id = type(of: item).identifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
         if let cell = cell as? TableViewModelCell {
             updateCell(cell, with: item)
         }

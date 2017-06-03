@@ -23,13 +23,13 @@ struct UserInfoSection: SectionViewModel {
     ]
     
     struct FirstNameItem: ItemViewModel {
-        let identifier = "firstname"
+        static let identifier = "firstname"
         var model: ItemModel = BasicItemModel(title: "First Name")
         var table: TableViewModel?
     }
     
     struct LastNameItem: ItemViewModel {
-        let identifier = "lastname"
+        static let identifier = "lastname"
         var model: ItemModel = BasicItemModel(title: "Last Name")
         var table: TableViewModel?
     }
@@ -42,13 +42,13 @@ struct UserCredentialsSection: SectionViewModel {
     ]
     
     struct UsernameItem: ItemViewModel {
-        let identifier = "username"
+        static let identifier = "username"
         var model: ItemModel = BasicItemModel(title: "Username")
         var table: TableViewModel?
     }
     
     struct PasswordItem: ItemViewModel {
-        let identifier = "password"
+        static let identifier = "password"
         var model: ItemModel = BasicItemModel(title: "Password")
         var table: TableViewModel?
     }

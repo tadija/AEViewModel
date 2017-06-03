@@ -22,7 +22,7 @@ struct ExampleSection: SectionViewModel {
 }
 
 struct FormItem: ItemViewModel {
-    let identifier = "form"
+    static let identifier = "form"
     var model: ItemModel = BasicItemModel(title: "Form", detail: "Static Table View Model")
     var table: TableViewModel? = FormTable()
 }

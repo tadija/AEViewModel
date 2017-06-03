@@ -37,7 +37,7 @@ extension SectionViewModel {
 // MARK: - ItemViewModel
 
 public protocol ItemViewModel {
-    var identifier: String { get }
+    static var identifier: String { get }
     var model: ItemModel { get set }
     var table: TableViewModel? { get set }
 }
