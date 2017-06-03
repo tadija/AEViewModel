@@ -21,6 +21,7 @@ extension Cell {
         case subtitle
         case leftDetail
         case rightDetail
+        case button
         case toggle
         case textInput
         case customClass(type: TableViewModelCell.Type)
@@ -118,9 +119,6 @@ extension Cell {
             selectionStyle = .none
             configureTextField()
         }
-        open override func updateUI(with item: ItemViewModel) {
-            textField.placeholder = item.model.title
-        }
         private func configureTextField() {
             contentView.addSubview(textField)
             textField.translatesAutoresizingMaskIntoConstraints = false
@@ -130,6 +128,30 @@ extension Cell {
             textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
             textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
             textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+        }
+        open override func updateUI(with item: ItemViewModel) {
+            textField.placeholder = item.model.title
+        }
+    }
+    
+    open class Button: Basic {
+        public let button = UIButton(type: .system)
+        
+        open override func customizeUI() {
+            selectionStyle = .none
+            configureButton()
+        }
+        private func configureButton() {
+            contentView.addSubview(button)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            
+            button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+            button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+            button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        }
+        open override func updateUI(with item: ItemViewModel) {
+            button.setTitle(item.model.title, for: .normal)
         }
     }
     

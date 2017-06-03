@@ -18,7 +18,7 @@ final class FormTVMC: TableViewModelController {
         case RegisterSection.AcceptItem.identifier:
             return .toggle
         case RegisterSection.RegisterItem.identifier:
-            return .basic
+            return .button
         default:
             return .textInput
         }

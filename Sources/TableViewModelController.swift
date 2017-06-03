@@ -99,6 +99,8 @@ open class TableViewModelController: UITableViewController {
             tableView.register(Cell.LeftDetail.self, forCellReuseIdentifier: identifier)
         case .rightDetail:
             tableView.register(Cell.RightDetail.self, forCellReuseIdentifier: identifier)
+        case .button:
+            tableView.register(Cell.Button.self, forCellReuseIdentifier: identifier)
         case .toggle:
             tableView.register(Cell.Toggle.self, forCellReuseIdentifier: identifier)
         case .textInput:
