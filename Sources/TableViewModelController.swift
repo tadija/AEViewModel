@@ -1,12 +1,12 @@
 import UIKit
 
-open class TableViewController: UITableViewController {
+open class TableViewModelController: UITableViewController {
     
     public typealias id = Cell.ID
     
     // MARK: Properties
     
-    open var table: Table?
+    open var table: TableViewModel?
     
     // MARK: Init
     
@@ -20,9 +20,9 @@ open class TableViewController: UITableViewController {
         customInit()
     }
     
-    public convenience init(style: UITableViewStyle, table: Table) {
+    public convenience init(style: UITableViewStyle, viewModel: TableViewModel) {
         self.init(style: style)
-        self.table = table
+        self.table = viewModel
         customInit()
     }
     
@@ -35,7 +35,7 @@ open class TableViewController: UITableViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = table?.title
         registerCells()
     }
@@ -48,17 +48,17 @@ open class TableViewController: UITableViewController {
         return .basic
     }
     
-    open func updateCell(_ cell: TableCell, with item: Item) {
+    open func updateCell(_ cell: TableCell, with item: ItemViewModel) {
         cell.updateUI(with: item)
     }
     
-    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: TableCell) {
+    open func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: TableCell) {
         print("This method is abstract and must be implemented by subclass")
     }
     
     // MARK: API
     
-    public func item(from cell: TableCell) -> Item? {
+    public func item(from cell: TableCell) -> ItemViewModel? {
         guard
             let tableViewCell = cell as? UITableViewCell,
             let indexPath = tableView.indexPath(for: tableViewCell),
@@ -67,10 +67,10 @@ open class TableViewController: UITableViewController {
         return item
     }
     
-    public func pushTable(from item: Item, in tvc: TableViewController) {
+    public func pushTable(from item: ItemViewModel, in tvmc: TableViewModelController) {
         if let table = item.table {
-            tvc.table = table
-            navigationController?.pushViewController(tvc, animated: true)
+            tvmc.table = table
+            navigationController?.pushViewController(tvmc, animated: true)
         }
     }
     
@@ -78,10 +78,9 @@ open class TableViewController: UITableViewController {
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
-        table?.sections?.forEach { section in
-            if let identifiers = section.items?.flatMap({ $0.identifier }) {
-                uniqueIdentifiers.formUnion(identifiers)
-            }
+        table?.sections.forEach { section in
+            let sectionIdentifiers = section.items.flatMap({ $0.identifier })
+            uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
         uniqueIdentifiers.forEach { identifier in
             registerCell(with: identifier)
@@ -113,14 +112,14 @@ open class TableViewController: UITableViewController {
 
 // MARK: - UITableViewControllerDataSource
 
-extension TableViewController {
+extension TableViewModelController {
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return table?.sections?.count ?? 0
+        return table?.sections.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return table?.sections?[section].items?.count ?? 0
+        return table?.sections[section].items.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,7 +128,7 @@ extension TableViewController {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
-
+        
         (cell as? Cell.Toggle)?.delegate = self
         
         if let cell = cell as? TableCell {
@@ -140,18 +139,18 @@ extension TableViewController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return table?.sections?[section].header
+        return table?.sections[section].header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return table?.sections?[section].footer
+        return table?.sections[section].footer
     }
     
 }
 
 // MARK: - UITableViewControllerDelegate
 
-extension TableViewController {
+extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
@@ -166,7 +165,7 @@ extension TableViewController {
 
 // MARK: - ToggleCellDelegate
 
-extension TableViewController: ToggleCellDelegate {
+extension TableViewModelController: ToggleCellDelegate {
     
     public func didChangeValue(sender: Cell.Toggle) {
         if let item = item(from: sender) {

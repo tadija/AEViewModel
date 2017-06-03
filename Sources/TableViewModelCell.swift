@@ -2,7 +2,7 @@ import UIKit
 
 public protocol TableCell: class {
     func customizeUI()
-    func updateUI(with item: Item)
+    func updateUI(with item: ItemViewModel)
 }
 
 public extension TableCell where Self: UITableViewCell {}
@@ -46,14 +46,14 @@ extension Cell {
         }
         
         open func customizeUI() {}
-        open func updateUI(with item: Item) {
-            imageView?.image = item.localImage
-            textLabel?.text = item.title
-            detailTextLabel?.text = item.detail
+        open func updateUI(with item: ItemViewModel) {
+//            imageView?.image = item.localImage
+            textLabel?.text = item.model.title
+            detailTextLabel?.text = item.model.detail
             configureAutomaticDisclosureIndicator(with: item)
         }
-        open func configureAutomaticDisclosureIndicator(with item: Item) {
-            if (item.table?.sections?.count ?? 0) > 0 {
+        open func configureAutomaticDisclosureIndicator(with item: ItemViewModel) {
+            if (item.table?.sections.count ?? 0) > 0 {
                 accessoryType = .disclosureIndicator
             }
         }

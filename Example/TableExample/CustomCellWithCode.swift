@@ -18,7 +18,7 @@ class CustomCellWithCode: Cell.Subtitle {
         detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
     }
     
-    override func updateUI(with item: Item) {
+    override func updateUI(with item: ItemViewModel) {
         super.updateUI(with: item)
         
         let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
