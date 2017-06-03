@@ -35,9 +35,7 @@ open class TableViewModelController: UITableViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = table?.title
-        registerCells()
+        configureTableView()
     }
     
     // MARK: Abstract
@@ -48,17 +46,17 @@ open class TableViewModelController: UITableViewController {
         return .basic
     }
     
-    open func updateCell(_ cell: TableCell, with item: ItemViewModel) {
+    open func updateCell(_ cell: TableViewModelCell, with item: ItemViewModel) {
         cell.updateUI(with: item)
     }
     
-    open func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: TableCell) {
+    open func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: TableViewModelCell) {
         print("This method is abstract and must be implemented by subclass")
     }
     
     // MARK: API
     
-    public func item(from cell: TableCell) -> ItemViewModel? {
+    public func item(from cell: TableViewModelCell) -> ItemViewModel? {
         guard
             let tableViewCell = cell as? UITableViewCell,
             let indexPath = tableView.indexPath(for: tableViewCell),
@@ -75,6 +73,12 @@ open class TableViewModelController: UITableViewController {
     }
     
     // MARK: Helpers
+    
+    private func configureTableView() {
+        title = table?.title
+        registerCells()
+        tableView.reloadData()
+    }
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
@@ -128,12 +132,11 @@ extension TableViewModelController {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
-        
-        (cell as? Cell.Toggle)?.delegate = self
-        
-        if let cell = cell as? TableCell {
+        if let cell = cell as? TableViewModelCell {
             updateCell(cell, with: item)
         }
+        
+        (cell as? Cell.Toggle)?.delegate = self
         
         return cell
     }
@@ -155,7 +158,7 @@ extension TableViewModelController {
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
             let item = table?.item(at: indexPath),
-            let cell = tableView.cellForRow(at: indexPath) as? TableCell
+            let cell = tableView.cellForRow(at: indexPath) as? TableViewModelCell
         else { return }
         
         handleEvent(.primaryActionTriggered, with: item, sender: cell)

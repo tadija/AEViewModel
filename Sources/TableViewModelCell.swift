@@ -1,11 +1,15 @@
 import UIKit
 
-public protocol TableCell: class {
+// MARK: - TableViewModelCell
+
+public protocol TableViewModelCell: class {
     func customizeUI()
     func updateUI(with item: ItemViewModel)
 }
 
-public extension TableCell where Self: UITableViewCell {}
+public extension TableViewModelCell where Self: UITableViewCell {}
+
+// MARK: - Cell
 
 public struct Cell {
     private init() {}
@@ -20,7 +24,7 @@ extension Cell {
         case rightDetail
         case toggle
         case textInput
-        case customClass(type: TableCell.Type)
+        case customClass(type: TableViewModelCell.Type)
         case customNib(nib: UINib?)
     }
     
@@ -32,7 +36,7 @@ extension Cell {
 
 extension Cell {
     
-    open class Basic: UITableViewCell, TableCell {
+    open class Basic: UITableViewCell, TableViewModelCell {
         required public init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
         }
@@ -47,7 +51,7 @@ extension Cell {
         
         open func customizeUI() {}
         open func updateUI(with item: ItemViewModel) {
-//            imageView?.image = item.localImage
+            imageView?.image = UIImage(named: item.model.image)
             textLabel?.text = item.model.title
             detailTextLabel?.text = item.model.detail
             configureAutomaticDisclosureIndicator(with: item)

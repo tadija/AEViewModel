@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - TableViewModel
+
 public protocol TableViewModel {
     var title: String { get }
     var sections: [SectionViewModel] { get set }
@@ -14,6 +16,8 @@ public extension TableViewModel {
         return item
     }
 }
+
+// MARK: - SectionViewModel
 
 public protocol SectionViewModel {
     var header: String { get }
@@ -30,11 +34,15 @@ extension SectionViewModel {
     }
 }
 
+// MARK: - ItemViewModel
+
 public protocol ItemViewModel {
     var identifier: String { get }
     var model: ItemModel { get set }
     var table: TableViewModel? { get set }
 }
+
+// MARK: - ItemModel
 
 public protocol ItemModel {
     var image: String { get }
