@@ -166,10 +166,12 @@ extension TableViewModelController {
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
             let item = table?.item(at: indexPath),
-            let cell = tableView.cellForRow(at: indexPath) as? TableViewModelCell
+            let cell = tableView.cellForRow(at: indexPath)
         else { return }
         
-        handleEvent(.primaryActionTriggered, with: item, sender: cell)
+        if cell.selectionStyle != .none {
+            handleEvent(.primaryActionTriggered, with: item, sender: cell)
+        }
     }
     
 }

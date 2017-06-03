@@ -34,6 +34,8 @@ extension Cell {
 extension Cell {
     
     open class Basic: UITableViewCell, TableViewModelCell {
+        public var action: () -> Void = {}
+        
         required public init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
         }
@@ -57,6 +59,10 @@ extension Cell {
             if (item.table?.sections.count ?? 0) > 0 {
                 accessoryType = .disclosureIndicator
             }
+        }
+        
+        @objc fileprivate func callAction() {
+            action()
         }
     }
     
@@ -95,15 +101,11 @@ extension Cell {
     
     open class Toggle: Basic {
         public let toggle = UISwitch()
-        public var action: () -> Void = {}
 
         open override func customizeUI() {
             selectionStyle = .none
             accessoryView = toggle
             toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
-        }
-        @objc private func callAction() {
-            action()
         }
     }
     
@@ -131,7 +133,6 @@ extension Cell {
     
     open class Button: Basic {
         public let button = UIButton(type: .system)
-        public var action: () -> Void = {}
         
         open override func customizeUI() {
             selectionStyle = .none
@@ -146,9 +147,6 @@ extension Cell {
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
             button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        }
-        @objc private func callAction() {
-            action()
         }
         open override func updateUI(with item: ItemViewModel) {
             button.setTitle(item.model.title, for: .normal)
