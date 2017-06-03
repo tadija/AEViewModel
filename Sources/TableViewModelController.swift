@@ -46,6 +46,10 @@ open class TableViewModelController: UITableViewController {
     
     open func updateCell(_ cell: TableViewModelCell, with item: ItemViewModel) {
         cell.updateUI(with: item)
+        (cell as? Cell.Button)?.action = {
+            self.handleEvent(.touchUpInside, with: item, sender: cell)
+        }
+        (cell as? Cell.Toggle)?.delegate = self
     }
     
     open func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: TableViewModelCell) {
@@ -81,7 +85,7 @@ open class TableViewModelController: UITableViewController {
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
         table?.sections.forEach { section in
-            let sectionIdentifiers = section.items.flatMap({ type(of: $0).identifier })
+            let sectionIdentifiers = section.items.flatMap({ $0.identifier })
             uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
         uniqueIdentifiers.forEach { identifier in
@@ -130,15 +134,10 @@ extension TableViewModelController {
         guard let item = table?.item(at: indexPath) else {
             return UITableViewCell()
         }
-        
-        let id = type(of: item).identifier
-        let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         if let cell = cell as? TableViewModelCell {
             updateCell(cell, with: item)
         }
-        
-        (cell as? Cell.Toggle)?.delegate = self
-        
         return cell
     }
     

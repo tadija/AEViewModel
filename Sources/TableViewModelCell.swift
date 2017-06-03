@@ -136,10 +136,12 @@ extension Cell {
     
     open class Button: Basic {
         public let button = UIButton(type: .system)
+        public var action: () -> Void = {}
         
         open override func customizeUI() {
             selectionStyle = .none
             configureButton()
+            button.addTarget(self, action: #selector(callButtonAction), for: .touchUpInside)
         }
         private func configureButton() {
             contentView.addSubview(button)
@@ -149,6 +151,9 @@ extension Cell {
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
             button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        }
+        @objc private func callButtonAction() {
+            action()
         }
         open override func updateUI(with item: ItemViewModel) {
             button.setTitle(item.model.title, for: .normal)

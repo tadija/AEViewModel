@@ -42,6 +42,12 @@ public protocol ItemViewModel {
     var table: TableViewModel? { get set }
 }
 
+extension ItemViewModel {
+    public var identifier: String {
+        return type(of: self).identifier
+    }
+}
+
 // MARK: - ItemModel
 
 public protocol ItemModel {
