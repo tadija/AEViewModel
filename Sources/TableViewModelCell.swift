@@ -47,9 +47,9 @@ extension Cell {
         
         open func customizeUI() {}
         open func updateUI(with item: ItemViewModel) {
-            imageView?.image = UIImage(named: item.model.image)
             textLabel?.text = item.model.title
             detailTextLabel?.text = item.model.detail
+            imageView?.image = UIImage(named: item.model.image)
             configureAutomaticDisclosureIndicator(with: item)
         }
         open func configureAutomaticDisclosureIndicator(with item: ItemViewModel) {
@@ -118,7 +118,9 @@ extension Cell {
             selectionStyle = .none
             configureTextField()
         }
-        
+        open override func updateUI(with item: ItemViewModel) {
+            textField.placeholder = item.model.title
+        }
         private func configureTextField() {
             contentView.addSubview(textField)
             textField.translatesAutoresizingMaskIntoConstraints = false

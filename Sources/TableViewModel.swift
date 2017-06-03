@@ -45,19 +45,19 @@ public protocol ItemViewModel {
 // MARK: - ItemModel
 
 public protocol ItemModel {
-    var image: String { get }
     var title: String { get }
     var detail: String { get }
+    var image: String { get }
 }
 
 public extension ItemModel {
-    public var image: String {
-        return String()
-    }
     public var title: String {
         return String()
     }
     public var detail: String {
+        return String()
+    }
+    public var image: String {
         return String()
     }
 }
