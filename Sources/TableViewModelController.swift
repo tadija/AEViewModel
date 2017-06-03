@@ -2,8 +2,6 @@ import UIKit
 
 open class TableViewModelController: UITableViewController {
     
-    public typealias id = Cell.ID
-    
     // MARK: Properties
     
     open var table: TableViewModel?

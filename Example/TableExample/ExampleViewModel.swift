@@ -24,7 +24,7 @@ struct ExampleSection: SectionViewModel {
 struct FormItem: ItemViewModel {
     let identifier = "form"
     var model: ItemModel = Model()
-    var table: TableViewModel?
+    var table: TableViewModel? = FormTable()
     
     struct Model: ItemModel {
         let title = "Form"

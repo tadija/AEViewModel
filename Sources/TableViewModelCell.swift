@@ -16,7 +16,6 @@ public struct Cell {
 }
 
 extension Cell {
-    
     public enum UI {
         case basic
         case subtitle
@@ -27,9 +26,6 @@ extension Cell {
         case customClass(type: TableViewModelCell.Type)
         case customNib(nib: UINib?)
     }
-    
-    public struct ID {}
-    
 }
 
 // MARK: - System Cells

@@ -10,7 +10,19 @@ import UIKit
 import Table
 
 final class ExampleTMVC: TableViewModelController {
+    
+    // MARK: Override
+    
     override func customInit() {
         table = ExampleTable()
     }
+    
+    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+        return .subtitle
+    }
+    
+    override func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: TableViewModelCell) {
+        pushTable(from: item, in: FormTVMC())
+    }
+    
 }
