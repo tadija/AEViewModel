@@ -95,25 +95,20 @@ extension Cell {
     
     open class Toggle: Basic {
         public let toggle = UISwitch()
-        public weak var delegate: ToggleCellDelegate?
+        public var action: () -> Void = {}
 
         open override func customizeUI() {
             selectionStyle = .none
             accessoryView = toggle
-            toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
+            toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
         }
-        @objc private func callDelegate() {
-            delegate?.didChangeValue(sender: self)
+        @objc private func callAction() {
+            action()
         }
     }
     
     open class TextInput: Basic {
         public let textField = UITextField()
-        public weak var delegate: UITextFieldDelegate? {
-            didSet {
-                textField.delegate = delegate
-            }
-        }
         
         open override func customizeUI() {
             selectionStyle = .none
@@ -141,7 +136,7 @@ extension Cell {
         open override func customizeUI() {
             selectionStyle = .none
             configureButton()
-            button.addTarget(self, action: #selector(callButtonAction), for: .touchUpInside)
+            button.addTarget(self, action: #selector(callAction), for: .touchUpInside)
         }
         private func configureButton() {
             contentView.addSubview(button)
@@ -152,7 +147,7 @@ extension Cell {
             button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         }
-        @objc private func callButtonAction() {
+        @objc private func callAction() {
             action()
         }
         open override func updateUI(with item: ItemViewModel) {
@@ -160,8 +155,4 @@ extension Cell {
         }
     }
     
-}
-
-public protocol ToggleCellDelegate: class {
-    func didChangeValue(sender: Cell.Toggle)
 }

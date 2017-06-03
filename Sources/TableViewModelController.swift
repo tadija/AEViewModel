@@ -46,13 +46,21 @@ open class TableViewModelController: UITableViewController {
     
     open func updateCell(_ cell: TableViewModelCell, with item: ItemViewModel) {
         cell.updateUI(with: item)
-        (cell as? Cell.Button)?.action = {
-            self.handleEvent(.touchUpInside, with: item, sender: cell)
+
+        if let cell = cell as? Cell.Button {
+            cell.action = {
+                self.handleEvent(.touchUpInside, with: item, sender: cell.button)
+            }
         }
-        (cell as? Cell.Toggle)?.delegate = self
+
+        if let cell = cell as? Cell.Toggle {
+            cell.action = {
+                self.handleEvent(.valueChanged, with: item, sender: cell.toggle)
+            }
+        }
     }
     
-    open func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: TableViewModelCell) {
+    open func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: Any) {
         print("This method is abstract and must be implemented by subclass")
     }
     
@@ -162,18 +170,6 @@ extension TableViewModelController {
         else { return }
         
         handleEvent(.primaryActionTriggered, with: item, sender: cell)
-    }
-    
-}
-
-// MARK: - ToggleCellDelegate
-
-extension TableViewModelController: ToggleCellDelegate {
-    
-    public func didChangeValue(sender: Cell.Toggle) {
-        if let item = item(from: sender) {
-            handleEvent(.valueChanged, with: item, sender: sender)
-        }
     }
     
 }

@@ -24,8 +24,10 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: TableViewModelCell) {
+    override func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: Any) {
         switch item.identifier {
+        case RegisterSection.AcceptItem.identifier:
+            print("Accept terms toggled")
         case RegisterSection.RegisterItem.identifier:
             print("Register button tapped")
         default:

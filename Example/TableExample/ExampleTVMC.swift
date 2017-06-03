@@ -21,7 +21,7 @@ final class ExampleTMVC: TableViewModelController {
         return .subtitle
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: TableViewModelCell) {
+    override func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: Any) {
         pushTable(from: item, in: FormTVMC())
     }
     
