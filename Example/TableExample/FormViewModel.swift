@@ -12,7 +12,8 @@ struct FormTable: TableViewModel {
     let title = "Registration"
     var sections: [SectionViewModel] = [
         UserInfoSection(),
-        UserCredentialsSection()
+        UserCredentialsSection(),
+        RegisterSection()
     ]
 }
 
@@ -50,6 +51,25 @@ struct UserCredentialsSection: SectionViewModel {
     struct PasswordItem: ItemViewModel {
         static let identifier = "password"
         var model: ItemModel = BasicItemModel(title: "Password")
+        var table: TableViewModel?
+    }
+}
+
+struct RegisterSection: SectionViewModel {
+    var items: [ItemViewModel] = [
+        AcceptItem(),
+        RegisterItem()
+    ]
+    
+    struct AcceptItem: ItemViewModel {
+        static let identifier = "accept"
+        var model: ItemModel = BasicItemModel(title: "Accept Terms")
+        var table: TableViewModel?
+    }
+    
+    struct RegisterItem: ItemViewModel {
+        static let identifier = "register"
+        var model: ItemModel = BasicItemModel(title: "Register")
         var table: TableViewModel?
     }
 }

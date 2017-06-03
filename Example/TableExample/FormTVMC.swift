@@ -14,7 +14,14 @@ final class FormTVMC: TableViewModelController {
     // MARK: Override
     
     override func cellUI(forIdentifier identifier: String) -> Cell.UI {
-        return .textInput
+        switch identifier {
+        case RegisterSection.AcceptItem.identifier:
+            return .toggle
+        case RegisterSection.RegisterItem.identifier:
+            return .basic
+        default:
+            return .textInput
+        }
     }
     
 }
