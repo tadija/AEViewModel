@@ -61,3 +61,15 @@ public extension ItemModel {
         return String()
     }
 }
+
+public struct BasicItemModel: ItemModel {
+    public let title: String
+    public let detail: String
+    public let image: String
+    
+    public init(title: String = String(), detail: String = String(), image: String = String()) {
+        self.title = title
+        self.detail = detail
+        self.image = image
+    }
+}
