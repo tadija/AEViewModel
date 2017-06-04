@@ -11,8 +11,6 @@ import Table
 
 final class FormTVMC: TableViewModelController {
     
-    // MARK: Types
-    
     typealias ActionItem = FormTable.Action
     
     // MARK: Override

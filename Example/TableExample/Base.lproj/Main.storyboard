@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ExampleTMVC-->
+        <!--ExampleTVMC-->
         <scene sceneID="pHa-f8-Lx4">
             <objects>
-                <tableViewController id="5i3-s5-rn7" customClass="ExampleTMVC" customModule="TableExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="5i3-s5-rn7" customClass="ExampleTVMC" customModule="TableExample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="3cq-WE-4yR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

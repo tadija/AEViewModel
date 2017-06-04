@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-final class ExampleTMVC: TableViewModelController {
+final class ExampleTVMC: TableViewModelController {
     
     // MARK: Override
     
