@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 0.2.0
+
+- Moving to MVVM approach
+- Added button cell
+- Improvements and refactoring
+
+## Version 0.1.7
+
+- Improvements and refactoring
+- Added text input cell
+
 ## Vesion 0.1.6
 
 - Improvements and refactoring
