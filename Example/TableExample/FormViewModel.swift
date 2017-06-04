@@ -9,6 +9,14 @@
 import Table
 
 struct FormTable: TableViewModel {
+    enum ItemType: String {
+        case firstname
+        case lastname
+        case username
+        case password
+        case accept
+        case register
+    }
     let title = "Registration"
     var sections: [SectionViewModel] = [
         UserInfo(),
@@ -21,12 +29,12 @@ struct FormTable: TableViewModel {
             LastName()
         ]
         struct FirstName: ItemViewModel {
-            static let identifier = "firstname"
+            static let identifier = ItemType.firstname.rawValue
             var model: ItemModel = BasicItemModel(title: "First Name")
             var table: TableViewModel?
         }
         struct LastName: ItemViewModel {
-            static let identifier = "lastname"
+            static let identifier = ItemType.lastname.rawValue
             var model: ItemModel = BasicItemModel(title: "Last Name")
             var table: TableViewModel?
         }
@@ -37,12 +45,12 @@ struct FormTable: TableViewModel {
             Password()
         ]
         struct Username: ItemViewModel {
-            static let identifier = "username"
+            static let identifier = ItemType.username.rawValue
             var model: ItemModel = BasicItemModel(title: "Username")
             var table: TableViewModel?
         }
         struct Password: ItemViewModel {
-            static let identifier = "password"
+            static let identifier = ItemType.password.rawValue
             var model: ItemModel = BasicItemModel(title: "Password")
             var table: TableViewModel?
         }
@@ -53,13 +61,13 @@ struct FormTable: TableViewModel {
             Register()
         ]
         struct Accept: ItemViewModel {
-            static let identifier = "accept"
+            static let identifier = ItemType.accept.rawValue
             var model: ItemModel = BasicItemModel(title: "Accept Terms")
             var table: TableViewModel?
         }
         
         struct Register: ItemViewModel {
-            static let identifier = "register"
+            static let identifier = ItemType.register.rawValue
             var model: ItemModel = BasicItemModel(title: "Register")
             var table: TableViewModel?
         }

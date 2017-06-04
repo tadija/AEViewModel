@@ -9,6 +9,9 @@
 import Table
 
 struct ExampleTable: TableViewModel {
+    enum ItemType: String {
+        case form
+    }
     let title = "Example"
     var sections: [SectionViewModel] = [
         General()
@@ -18,7 +21,7 @@ struct ExampleTable: TableViewModel {
             Form()
         ]
         struct Form: ItemViewModel {
-            static let identifier = "form"
+            static let identifier = ItemType.form.rawValue
             var model: ItemModel = BasicItemModel(title: "Form", detail: "Static Table View Model")
             var table: TableViewModel? = FormTable()
         }
