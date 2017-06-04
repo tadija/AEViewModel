@@ -8,68 +8,68 @@
 
 import Table
 
-struct FormTable: TableViewModel {
+struct FormTable: Table {
+    enum ItemType: String {
+        case firstname
+        case lastname
+        case username
+        case password
+        case accept
+        case register
+    }
     let title = "Registration"
-    var sections: [SectionViewModel] = [
-        UserInfoSection(),
-        UserCredentialsSection(),
-        RegisterSection()
+    var sections: [Section] = [
+        UserInfo(),
+        UserCredentials(),
+        Action()
     ]
-}
-
-struct UserInfoSection: SectionViewModel {
-    var items: [ItemViewModel] = [
-        FirstNameItem(),
-        LastNameItem()
-    ]
-    
-    struct FirstNameItem: ItemViewModel {
-        static let identifier = "firstname"
-        var model: ItemModel = BasicItemModel(title: "First Name")
-        var table: TableViewModel?
+    struct UserInfo: Section {
+        var items: [Item] = [
+            FirstName(),
+            LastName()
+        ]
+        struct FirstName: Item {
+            static let identifier = ItemType.firstname.rawValue
+            var model: Model = BasicModel(title: "First Name")
+            var table: Table?
+        }
+        struct LastName: Item {
+            static let identifier = ItemType.lastname.rawValue
+            var model: Model = BasicModel(title: "Last Name")
+            var table: Table?
+        }
     }
-    
-    struct LastNameItem: ItemViewModel {
-        static let identifier = "lastname"
-        var model: ItemModel = BasicItemModel(title: "Last Name")
-        var table: TableViewModel?
+    struct UserCredentials: Section {
+        var items: [Item] = [
+            Username(),
+            Password()
+        ]
+        struct Username: Item {
+            static let identifier = ItemType.username.rawValue
+            var model: Model = BasicModel(title: "Username")
+            var table: Table?
+        }
+        struct Password: Item {
+            static let identifier = ItemType.password.rawValue
+            var model: Model = BasicModel(title: "Password")
+            var table: Table?
+        }
     }
-}
-
-struct UserCredentialsSection: SectionViewModel {
-    var items: [ItemViewModel] = [
-        UsernameItem(),
-        PasswordItem()
-    ]
-    
-    struct UsernameItem: ItemViewModel {
-        static let identifier = "username"
-        var model: ItemModel = BasicItemModel(title: "Username")
-        var table: TableViewModel?
-    }
-    
-    struct PasswordItem: ItemViewModel {
-        static let identifier = "password"
-        var model: ItemModel = BasicItemModel(title: "Password")
-        var table: TableViewModel?
-    }
-}
-
-struct RegisterSection: SectionViewModel {
-    var items: [ItemViewModel] = [
-        AcceptItem(),
-        RegisterItem()
-    ]
-    
-    struct AcceptItem: ItemViewModel {
-        static let identifier = "accept"
-        var model: ItemModel = BasicItemModel(title: "Accept Terms")
-        var table: TableViewModel?
-    }
-    
-    struct RegisterItem: ItemViewModel {
-        static let identifier = "register"
-        var model: ItemModel = BasicItemModel(title: "Register")
-        var table: TableViewModel?
+    struct Action: Section {
+        var items: [Item] = [
+            Accept(),
+            Register()
+        ]
+        struct Accept: Item {
+            static let identifier = ItemType.accept.rawValue
+            var model: Model = BasicModel(title: "Accept Terms")
+            var table: Table?
+        }
+        
+        struct Register: Item {
+            static let identifier = ItemType.register.rawValue
+            var model: Model = BasicModel(title: "Register")
+            var table: Table?
+        }
     }
 }

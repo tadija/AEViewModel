@@ -24,7 +24,7 @@ class CustomCellWithNib: Cell.Basic {
         customImageView.layer.masksToBounds = true
     }
     
-    override func updateUI(with item: ItemViewModel) {
+    override func updateUI(with item: Item) {
         customImageView.image = UIImage(named: item.model.image)
         title.text = item.model.title
         subtitle.text = item.model.detail

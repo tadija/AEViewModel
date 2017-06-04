@@ -9,7 +9,7 @@
 import UIKit
 import Table
 
-final class ExampleTMVC: TableViewModelController {
+final class ExampleTVMC: TableViewModelController {
     
     // MARK: Override
     
@@ -21,7 +21,7 @@ final class ExampleTMVC: TableViewModelController {
         return .subtitle
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: Any) {
+    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         pushTable(from: item, in: FormTVMC())
     }
     
