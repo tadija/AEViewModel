@@ -14,7 +14,7 @@ final class ExampleTMVC: TableViewModelController {
     // MARK: Override
     
     override func customInit() {
-        table = ExampleTable()
+        table = Example.Table()
     }
     
     override func cellUI(forIdentifier identifier: String) -> Cell.UI {

@@ -8,68 +8,72 @@
 
 import Table
 
-struct FormTable: TableViewModel {
-    let title = "Registration"
-    var sections: [SectionViewModel] = [
-        UserInfoSection(),
-        UserCredentialsSection(),
-        RegisterSection()
-    ]
-}
-
-struct UserInfoSection: SectionViewModel {
-    var items: [ItemViewModel] = [
-        FirstNameItem(),
-        LastNameItem()
-    ]
-    
-    struct FirstNameItem: ItemViewModel {
-        static let identifier = "firstname"
-        var model: ItemModel = BasicItemModel(title: "First Name")
-        var table: TableViewModel?
+struct Form {
+    struct Table: TableViewModel {
+        let title = "Registration"
+        var sections: [SectionViewModel] = [
+            Section.UserInfo(),
+            Section.UserCredentials(),
+            Section.Register()
+        ]
     }
-    
-    struct LastNameItem: ItemViewModel {
-        static let identifier = "lastname"
-        var model: ItemModel = BasicItemModel(title: "Last Name")
-        var table: TableViewModel?
-    }
-}
-
-struct UserCredentialsSection: SectionViewModel {
-    var items: [ItemViewModel] = [
-        UsernameItem(),
-        PasswordItem()
-    ]
-    
-    struct UsernameItem: ItemViewModel {
-        static let identifier = "username"
-        var model: ItemModel = BasicItemModel(title: "Username")
-        var table: TableViewModel?
-    }
-    
-    struct PasswordItem: ItemViewModel {
-        static let identifier = "password"
-        var model: ItemModel = BasicItemModel(title: "Password")
-        var table: TableViewModel?
-    }
-}
-
-struct RegisterSection: SectionViewModel {
-    var items: [ItemViewModel] = [
-        AcceptItem(),
-        RegisterItem()
-    ]
-    
-    struct AcceptItem: ItemViewModel {
-        static let identifier = "accept"
-        var model: ItemModel = BasicItemModel(title: "Accept Terms")
-        var table: TableViewModel?
-    }
-    
-    struct RegisterItem: ItemViewModel {
-        static let identifier = "register"
-        var model: ItemModel = BasicItemModel(title: "Register")
-        var table: TableViewModel?
+    struct Section {
+        struct UserInfo: SectionViewModel {
+            var items: [ItemViewModel] = [
+                Item.FirstName(),
+                Item.LastName()
+            ]
+            struct Item {
+                struct FirstName: ItemViewModel {
+                    static let identifier = "firstname"
+                    var model: ItemModel = BasicItemModel(title: "First Name")
+                    var table: TableViewModel?
+                }
+                
+                struct LastName: ItemViewModel {
+                    static let identifier = "lastname"
+                    var model: ItemModel = BasicItemModel(title: "Last Name")
+                    var table: TableViewModel?
+                }
+            }
+        }
+        struct UserCredentials: SectionViewModel {
+            var items: [ItemViewModel] = [
+                Item.Username(),
+                Item.Password()
+            ]
+            struct Item {
+                struct Username: ItemViewModel {
+                    static let identifier = "username"
+                    var model: ItemModel = BasicItemModel(title: "Username")
+                    var table: TableViewModel?
+                }
+                
+                struct Password: ItemViewModel {
+                    static let identifier = "password"
+                    var model: ItemModel = BasicItemModel(title: "Password")
+                    var table: TableViewModel?
+                }
+            }
+        }
+        struct Register: SectionViewModel {
+            var items: [ItemViewModel] = [
+                Item.Accept(),
+                Item.Register()
+            ]
+            struct Item {
+                struct Accept: ItemViewModel {
+                    static let identifier = "accept"
+                    var model: ItemModel = BasicItemModel(title: "Accept Terms")
+                    var table: TableViewModel?
+                }
+                
+                struct Register: ItemViewModel {
+                    static let identifier = "register"
+                    var model: ItemModel = BasicItemModel(title: "Register")
+                    var table: TableViewModel?
+                }
+            }
+        }
     }
 }

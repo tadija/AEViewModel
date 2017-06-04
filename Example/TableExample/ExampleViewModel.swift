@@ -8,21 +8,25 @@
 
 import Table
 
-struct ExampleTable: TableViewModel {
-    let title = "Example"
-    var sections: [SectionViewModel] = [
-        ExampleSection()
-    ]
-}
-
-struct ExampleSection: SectionViewModel {
-    var items: [ItemViewModel] = [
-        FormItem()
-    ]
-}
-
-struct FormItem: ItemViewModel {
-    static let identifier = "form"
-    var model: ItemModel = BasicItemModel(title: "Form", detail: "Static Table View Model")
-    var table: TableViewModel? = FormTable()
+struct Example {
+    struct Table: TableViewModel {
+        let title = "Example"
+        var sections: [SectionViewModel] = [
+            Section.General()
+        ]
+    }
+    struct Section {
+        struct General: SectionViewModel {
+            var items: [ItemViewModel] = [
+                Item.Registration()
+            ]
+            struct Item {
+                struct Registration: ItemViewModel {
+                    static let identifier = "form"
+                    var model: ItemModel = BasicItemModel(title: "Form", detail: "Static Table View Model")
+                    var table: TableViewModel? = Form.Table()
+                }
+            }
+        }
+    }
 }
