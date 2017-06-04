@@ -4,7 +4,7 @@ import UIKit
 
 public protocol TableViewModelCell: class {
     func customizeUI()
-    func updateUI(with item: ItemViewModel)
+    func updateUI(with item: Item)
 }
 
 public extension TableViewModelCell where Self: UITableViewCell {}
@@ -49,13 +49,13 @@ extension Cell {
         }
         
         open func customizeUI() {}
-        open func updateUI(with item: ItemViewModel) {
+        open func updateUI(with item: Item) {
             textLabel?.text = item.model.title
             detailTextLabel?.text = item.model.detail
             imageView?.image = UIImage(named: item.model.image)
             configureAutomaticDisclosureIndicator(with: item)
         }
-        open func configureAutomaticDisclosureIndicator(with item: ItemViewModel) {
+        open func configureAutomaticDisclosureIndicator(with item: Item) {
             if (item.table?.sections.count ?? 0) > 0 {
                 accessoryType = .disclosureIndicator
             }
@@ -126,7 +126,7 @@ extension Cell {
             textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
             textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
         }
-        open override func updateUI(with item: ItemViewModel) {
+        open override func updateUI(with item: Item) {
             textField.placeholder = item.model.title
         }
     }
@@ -148,7 +148,7 @@ extension Cell {
             button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         }
-        open override func updateUI(with item: ItemViewModel) {
+        open override func updateUI(with item: Item) {
             button.setTitle(item.model.title, for: .normal)
         }
     }

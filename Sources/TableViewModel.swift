@@ -1,31 +1,35 @@
 import Foundation
 
-// MARK: - TableViewModel
+// MARK: - ViewModel
 
-public protocol TableViewModel {
+public protocol ViewModel {}
+
+// MARK: - Table
+
+public protocol Table: ViewModel {
     var title: String { get }
-    var sections: [SectionViewModel] { get set }
+    var sections: [Section] { get set }
 }
 
-public extension TableViewModel {
+public extension Table {
     public var title: String {
         return String()
     }
-    public func item(at indexPath: IndexPath) -> ItemViewModel? {
+    public func item(at indexPath: IndexPath) -> Item? {
         let item = sections[indexPath.section].items[indexPath.item]
         return item
     }
 }
 
-// MARK: - SectionViewModel
+// MARK: - Section
 
-public protocol SectionViewModel {
+public protocol Section: ViewModel {
     var header: String { get }
     var footer: String { get }
-    var items: [ItemViewModel] { get set }
+    var items: [Item] { get set }
 }
 
-extension SectionViewModel {
+extension Section {
     public var header: String {
         return String()
     }
@@ -34,29 +38,29 @@ extension SectionViewModel {
     }
 }
 
-// MARK: - ItemViewModel
+// MARK: - Item
 
-public protocol ItemViewModel {
+public protocol Item: ViewModel {
     static var identifier: String { get }
-    var model: ItemModel { get set }
-    var table: TableViewModel? { get set }
+    var model: Model { get set }
+    var table: Table? { get set }
 }
 
-extension ItemViewModel {
+extension Item {
     public var identifier: String {
         return type(of: self).identifier
     }
 }
 
-// MARK: - ItemModel
+// MARK: - Model
 
-public protocol ItemModel {
+public protocol Model {
     var title: String { get }
     var detail: String { get }
     var image: String { get }
 }
 
-public extension ItemModel {
+public extension Model {
     public var title: String {
         return String()
     }
@@ -68,7 +72,7 @@ public extension ItemModel {
     }
 }
 
-public struct BasicItemModel: ItemModel {
+public struct BasicModel: Model {
     public let title: String
     public let detail: String
     public let image: String

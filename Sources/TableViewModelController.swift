@@ -4,7 +4,7 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
     
-    open var table: TableViewModel?
+    open var table: Table?
     
     // MARK: Init
     
@@ -18,9 +18,9 @@ open class TableViewModelController: UITableViewController {
         customInit()
     }
     
-    public convenience init(style: UITableViewStyle, viewModel: TableViewModel) {
+    public convenience init(style: UITableViewStyle, table: Table) {
         self.init(style: style)
-        self.table = viewModel
+        self.table = table
         customInit()
     }
     
@@ -44,7 +44,7 @@ open class TableViewModelController: UITableViewController {
         return .basic
     }
     
-    open func updateCell(_ cell: TableViewModelCell, with item: ItemViewModel) {
+    open func updateCell(_ cell: TableViewModelCell, with item: Item) {
         cell.updateUI(with: item)
 
         if let cell = cell as? Cell.Button {
@@ -60,13 +60,13 @@ open class TableViewModelController: UITableViewController {
         }
     }
     
-    open func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: Any) {
+    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         print("This method is abstract and must be implemented by subclass")
     }
     
     // MARK: API
     
-    public func item(from cell: TableViewModelCell) -> ItemViewModel? {
+    public func item(from cell: TableViewModelCell) -> Item? {
         guard
             let tableViewCell = cell as? UITableViewCell,
             let indexPath = tableView.indexPath(for: tableViewCell),
@@ -75,7 +75,7 @@ open class TableViewModelController: UITableViewController {
         return item
     }
     
-    public func pushTable(from item: ItemViewModel, in tvmc: TableViewModelController) {
+    public func pushTable(from item: Item, in tvmc: TableViewModelController) {
         if let table = item.table {
             tvmc.table = table
             navigationController?.pushViewController(tvmc, animated: true)

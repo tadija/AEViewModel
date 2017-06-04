@@ -26,7 +26,7 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: ItemViewModel, sender: Any) {
+    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         switch item.identifier {
         case ActionItem.Accept.identifier:
             print("Accept terms toggled")

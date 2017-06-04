@@ -8,22 +8,22 @@
 
 import Table
 
-struct ExampleTable: TableViewModel {
+struct ExampleTable: Table {
     enum ItemType: String {
         case form
     }
     let title = "Example"
-    var sections: [SectionViewModel] = [
+    var sections: [Section] = [
         General()
     ]
-    struct General: SectionViewModel {
-        var items: [ItemViewModel] = [
+    struct General: Section {
+        var items: [Item] = [
             Form()
         ]
-        struct Form: ItemViewModel {
+        struct Form: Item {
             static let identifier = ItemType.form.rawValue
-            var model: ItemModel = BasicItemModel(title: "Form", detail: "Static Table View Model")
-            var table: TableViewModel? = FormTable()
+            var model: Model = BasicModel(title: "Form", detail: "Static Table View Model")
+            var table: Table? = FormTable()
         }
     }
 }
