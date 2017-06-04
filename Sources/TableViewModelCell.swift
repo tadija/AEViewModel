@@ -1,38 +1,41 @@
 import UIKit
 
-public protocol TableCell: class {
+// MARK: - TableViewModelCell
+
+public protocol TableViewModelCell: class {
     func customizeUI()
-    func updateUI(with item: Item)
+    func updateUI(with item: ItemViewModel)
 }
 
-public extension TableCell where Self: UITableViewCell {}
+public extension TableViewModelCell where Self: UITableViewCell {}
+
+// MARK: - Cell
 
 public struct Cell {
     private init() {}
 }
 
 extension Cell {
-    
     public enum UI {
         case basic
         case subtitle
         case leftDetail
         case rightDetail
+        case button
         case toggle
         case textInput
-        case customClass(type: TableCell.Type)
+        case customClass(type: TableViewModelCell.Type)
         case customNib(nib: UINib?)
     }
-    
-    public struct ID {}
-    
 }
 
 // MARK: - System Cells
 
 extension Cell {
     
-    open class Basic: UITableViewCell, TableCell {
+    open class Basic: UITableViewCell, TableViewModelCell {
+        public var action: () -> Void = {}
+        
         required public init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
         }
@@ -46,16 +49,20 @@ extension Cell {
         }
         
         open func customizeUI() {}
-        open func updateUI(with item: Item) {
-            imageView?.image = item.localImage
-            textLabel?.text = item.title
-            detailTextLabel?.text = item.detail
+        open func updateUI(with item: ItemViewModel) {
+            textLabel?.text = item.model.title
+            detailTextLabel?.text = item.model.detail
+            imageView?.image = UIImage(named: item.model.image)
             configureAutomaticDisclosureIndicator(with: item)
         }
-        open func configureAutomaticDisclosureIndicator(with item: Item) {
-            if (item.table?.sections?.count ?? 0) > 0 {
+        open func configureAutomaticDisclosureIndicator(with item: ItemViewModel) {
+            if (item.table?.sections.count ?? 0) > 0 {
                 accessoryType = .disclosureIndicator
             }
+        }
+        
+        @objc fileprivate func callAction() {
+            action()
         }
     }
     
@@ -94,31 +101,21 @@ extension Cell {
     
     open class Toggle: Basic {
         public let toggle = UISwitch()
-        public weak var delegate: ToggleCellDelegate?
 
         open override func customizeUI() {
             selectionStyle = .none
             accessoryView = toggle
-            toggle.addTarget(self, action: #selector(callDelegate), for: .valueChanged)
-        }
-        @objc private func callDelegate() {
-            delegate?.didChangeValue(sender: self)
+            toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
         }
     }
     
     open class TextInput: Basic {
         public let textField = UITextField()
-        public weak var delegate: UITextFieldDelegate? {
-            didSet {
-                textField.delegate = delegate
-            }
-        }
         
         open override func customizeUI() {
             selectionStyle = .none
             configureTextField()
         }
-        
         private func configureTextField() {
             contentView.addSubview(textField)
             textField.translatesAutoresizingMaskIntoConstraints = false
@@ -129,10 +126,31 @@ extension Cell {
             textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
             textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
         }
+        open override func updateUI(with item: ItemViewModel) {
+            textField.placeholder = item.model.title
+        }
     }
     
-}
-
-public protocol ToggleCellDelegate: class {
-    func didChangeValue(sender: Cell.Toggle)
+    open class Button: Basic {
+        public let button = UIButton(type: .system)
+        
+        open override func customizeUI() {
+            selectionStyle = .none
+            configureButton()
+            button.addTarget(self, action: #selector(callAction), for: .touchUpInside)
+        }
+        private func configureButton() {
+            contentView.addSubview(button)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            
+            button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+            button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+            button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        }
+        open override func updateUI(with item: ItemViewModel) {
+            button.setTitle(item.model.title, for: .normal)
+        }
+    }
+    
 }

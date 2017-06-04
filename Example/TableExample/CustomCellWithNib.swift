@@ -24,10 +24,10 @@ class CustomCellWithNib: Cell.Basic {
         customImageView.layer.masksToBounds = true
     }
     
-    override func updateUI(with item: Item) {
-        customImageView.image = item.localImage
-        title.text = item.title
-        subtitle.text = item.detail
+    override func updateUI(with item: ItemViewModel) {
+        customImageView.image = UIImage(named: item.model.image)
+        title.text = item.model.title
+        subtitle.text = item.model.detail
         
         let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
         customImageView?.setImage(from: url)
