@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.2.2
+
+- Added `MappableViewModel` in Example
+- Added table from `settings.json` in Example
+- Improvements and refactoring 
+
 ## Version 0.2.1
 
 - Improvements and refactoring
