@@ -91,15 +91,15 @@ struct MappableModel: Model, Mappable {
     
     // MARK: Model
     
-    let title: String
-    let detail: String
-    let image: String
+    let title: String?
+    let detail: String?
+    let image: String?
     
     // MARK: Mappable
     
     init(map: [String : Any]) throws {
-        title = try map.value(forKey: Key.title.rawValue)
-        detail = try map.value(forKey: Key.detail.rawValue)
-        image = try map.value(forKey: Key.image.rawValue)
+        title = try? map.value(forKey: Key.title.rawValue)
+        detail = try? map.value(forKey: Key.detail.rawValue)
+        image = try? map.value(forKey: Key.image.rawValue)
     }
 }

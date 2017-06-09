@@ -46,29 +46,17 @@ extension Item {
 // MARK: - Model
 
 public protocol Model {
-    var title: String { get }
-    var detail: String { get }
-    var image: String { get }
-}
-
-public extension Model {
-    public var title: String {
-        return String()
-    }
-    public var detail: String {
-        return String()
-    }
-    public var image: String {
-        return String()
-    }
+    var title: String? { get }
+    var detail: String? { get }
+    var image: String? { get }
 }
 
 public struct BasicModel: Model {
-    public let title: String
-    public let detail: String
-    public let image: String
-    
-    public init(title: String = String(), detail: String = String(), image: String = String()) {
+    public let title: String?
+    public let detail: String?
+    public let image: String?
+
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil) {
         self.title = title
         self.detail = detail
         self.image = image

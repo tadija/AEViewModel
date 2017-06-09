@@ -53,7 +53,9 @@ extension Cell {
             if let model = item.model {
                 textLabel?.text = model.title
                 detailTextLabel?.text = model.detail
-                imageView?.image = UIImage(named: model.image)
+                if let imageName = model.image {
+                    imageView?.image = UIImage(named: imageName)
+                }
             }
             configureAutomaticDisclosureIndicator(with: item)
         }
