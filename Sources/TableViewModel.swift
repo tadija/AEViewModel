@@ -32,15 +32,9 @@ public protocol Section: ViewModel {
 // MARK: - Item
 
 public protocol Item: ViewModel {
-    static var identifier: String { get }
+    var identifier: String { get }
     var model: Model? { get set }
     var table: Table? { get set }
-}
-
-extension Item {
-    public var identifier: String {
-        return type(of: self).identifier
-    }
 }
 
 // MARK: - Model

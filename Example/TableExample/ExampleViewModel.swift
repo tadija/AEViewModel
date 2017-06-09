@@ -40,13 +40,13 @@ struct ExampleTable: Table {
         // MARK: Items
         
         struct Form: Item {
-            static let identifier = ItemType.form.rawValue
+            let identifier = ItemType.form.rawValue
             var model: Model? = BasicModel(title: "Form", detail: "Static Table View Model")
             var table: Table? = FormTable()
         }
         
         struct Settings: Item {
-            static let identifier = ItemType.settings.rawValue
+            let identifier = ItemType.settings.rawValue
             var model: Model? = BasicModel(title: "Settings", detail: "JSON Table View Model")
             var table: Table? = MappableTable.Settings
         }

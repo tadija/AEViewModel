@@ -11,15 +11,13 @@ import Table
 
 final class FormTVMC: TableViewModelController {
     
-    typealias Action = FormTable.Action
-    
     // MARK: Override
     
     override func cellUI(forIdentifier identifier: String) -> Cell.UI {
         switch identifier {
-        case Action.Accept.identifier:
+        case FormTable.ItemType.accept.rawValue:
             return .toggle
-        case Action.Register.identifier:
+        case FormTable.ItemType.register.rawValue:
             return .button
         default:
             return .textInput
@@ -28,9 +26,9 @@ final class FormTVMC: TableViewModelController {
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         switch item.identifier {
-        case Action.Accept.identifier:
+        case FormTable.ItemType.accept.rawValue:
             print("Accept terms toggled")
-        case Action.Register.identifier:
+        case FormTable.ItemType.register.rawValue:
             print("Register button tapped")
         default:
             print("Handle custom action here")
