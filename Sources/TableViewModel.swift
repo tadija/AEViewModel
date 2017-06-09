@@ -24,60 +24,33 @@ public extension Table {
 // MARK: - Section
 
 public protocol Section: ViewModel {
-    var header: String { get }
-    var footer: String { get }
+    var header: String? { get set }
+    var footer: String? { get set }
     var items: [Item] { get set }
-}
-
-extension Section {
-    public var header: String {
-        return String()
-    }
-    public var footer: String {
-        return String()
-    }
 }
 
 // MARK: - Item
 
 public protocol Item: ViewModel {
-    static var identifier: String { get }
-    var model: Model { get set }
+    var identifier: String { get }
+    var model: Model? { get set }
     var table: Table? { get set }
-}
-
-extension Item {
-    public var identifier: String {
-        return type(of: self).identifier
-    }
 }
 
 // MARK: - Model
 
 public protocol Model {
-    var title: String { get }
-    var detail: String { get }
-    var image: String { get }
-}
-
-public extension Model {
-    public var title: String {
-        return String()
-    }
-    public var detail: String {
-        return String()
-    }
-    public var image: String {
-        return String()
-    }
+    var title: String? { get }
+    var detail: String? { get }
+    var image: String? { get }
 }
 
 public struct BasicModel: Model {
-    public let title: String
-    public let detail: String
-    public let image: String
-    
-    public init(title: String = String(), detail: String = String(), image: String = String()) {
+    public let title: String?
+    public let detail: String?
+    public let image: String?
+
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil) {
         self.title = title
         self.detail = detail
         self.image = image

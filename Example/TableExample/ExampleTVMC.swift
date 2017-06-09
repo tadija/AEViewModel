@@ -22,7 +22,14 @@ final class ExampleTVMC: TableViewModelController {
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
-        pushTable(from: item, in: FormTVMC())
+        switch item.identifier {
+        case ExampleTable.ItemType.form.rawValue:
+            pushTable(from: item, in: FormTVMC())
+        case ExampleTable.ItemType.settings.rawValue:
+            pushTable(from: item, in: SettingsTVMC())
+        default:
+            break
+        }
     }
     
 }
