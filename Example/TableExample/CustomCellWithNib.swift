@@ -25,10 +25,11 @@ class CustomCellWithNib: Cell.Basic {
     }
     
     override func updateUI(with item: Item) {
-        customImageView.image = UIImage(named: item.model.image)
-        title.text = item.model.title
-        subtitle.text = item.model.detail
-        
+        if let model = item.model {
+            customImageView.image = UIImage(named: model.image)
+            title.text = model.title
+            subtitle.text = model.detail
+        }
         let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
         customImageView?.setImage(from: url)
     }

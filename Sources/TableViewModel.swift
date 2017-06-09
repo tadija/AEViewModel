@@ -42,7 +42,7 @@ extension Section {
 
 public protocol Item: ViewModel {
     static var identifier: String { get }
-    var model: Model { get set }
+    var model: Model? { get set }
     var table: Table? { get set }
 }
 
