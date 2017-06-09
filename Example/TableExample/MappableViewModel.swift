@@ -29,6 +29,7 @@ struct MappableTable: Table, Mappable {
         title = try map.value(forKey: Key.title.rawValue)
         sections = try map.mappableArray(forKey: Key.sections.rawValue) as [MappableSection]
     }
+    
 }
 
 struct MappableSection: Section, Mappable {
@@ -54,6 +55,7 @@ struct MappableSection: Section, Mappable {
         footer = try? map.value(forKey: Key.footer.rawValue)
         items = try map.mappableArray(forKey: Key.items.rawValue) as [MappableItem]
     }
+    
 }
 
 struct MappableItem: Item, Mappable {
@@ -79,6 +81,7 @@ struct MappableItem: Item, Mappable {
         model = try? map.mappable(forKey: Key.model.rawValue) as MappableModel
         table = try? map.mappable(forKey: Key.table.rawValue) as MappableTable
     }
+    
 }
 
 struct MappableModel: Model, Mappable {
@@ -89,6 +92,7 @@ struct MappableModel: Model, Mappable {
         case title
         case detail
         case image
+        case custom
     }
     
     // MARK: Model
@@ -96,6 +100,7 @@ struct MappableModel: Model, Mappable {
     let title: String?
     let detail: String?
     let image: String?
+    let custom: [String : Any]?
     
     // MARK: Mappable
     
@@ -103,5 +108,7 @@ struct MappableModel: Model, Mappable {
         title = try? map.value(forKey: Key.title.rawValue)
         detail = try? map.value(forKey: Key.detail.rawValue)
         image = try? map.value(forKey: Key.image.rawValue)
+        custom = try? map.value(forKey: Key.custom.rawValue)
     }
+    
 }
