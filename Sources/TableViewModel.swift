@@ -24,18 +24,9 @@ public extension Table {
 // MARK: - Section
 
 public protocol Section: ViewModel {
-    var header: String { get }
-    var footer: String { get }
+    var header: String? { get set }
+    var footer: String? { get set }
     var items: [Item] { get set }
-}
-
-extension Section {
-    public var header: String {
-        return String()
-    }
-    public var footer: String {
-        return String()
-    }
 }
 
 // MARK: - Item

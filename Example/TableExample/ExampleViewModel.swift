@@ -30,6 +30,8 @@ struct ExampleTable: Table {
         
         // MARK: Section
         
+        var header: String?
+        var footer: String?
         var items: [Item] = [
             Form(),
             Settings()

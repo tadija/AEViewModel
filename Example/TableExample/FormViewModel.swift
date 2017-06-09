@@ -24,6 +24,8 @@ struct FormTable: Table {
         Action()
     ]
     struct UserInfo: Section {
+        var header: String?
+        var footer: String?
         var items: [Item] = [
             FirstName(),
             LastName()
@@ -40,6 +42,8 @@ struct FormTable: Table {
         }
     }
     struct UserCredentials: Section {
+        var header: String?
+        var footer: String?
         var items: [Item] = [
             Username(),
             Password()
@@ -56,6 +60,8 @@ struct FormTable: Table {
         }
     }
     struct Action: Section {
+        var header: String?
+        var footer: String?
         var items: [Item] = [
             Accept(),
             Register()

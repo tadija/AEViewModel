@@ -20,11 +20,13 @@ struct MappableTable: Table, Mappable {
 }
 
 struct MappableSection: Section, Mappable {
+    var header: String?
+    var footer: String?
     var items: [Item]
     
     init(map: [String : Any]) throws {
-//        header = try? map.value(forKey: "header")
-//        footer = try? map.value(forKey: "footer")
+        header = try? map.value(forKey: "header")
+        footer = try? map.value(forKey: "footer")
         items = try map.mappableArray(forKey: "items") as [MappableItem]
     }
 }
