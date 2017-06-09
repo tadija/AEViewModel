@@ -1,9 +1,8 @@
 {
-  "id": "settings",
   "title": "Settings",
   "sections": [
     {
-      "id": "user",
+      "header": "User",
       "items": [
         {
           "id": "profile",
@@ -16,62 +15,72 @@
       ]
     },
     {
-      "id": "device",
+      "header": "Device",
       "items": [
         {
           "id": "airplane",
-          "image": "IconOrange",
-          "title": "Airplane Mode",
-          "user-info": {
-            "enabled": false
+          "model": {
+            "title": "Airplane Mode",
+            "image": "IconOrange",
+            "user-info": {
+              "enabled": false
+            }
           }
         },
         {
           "id": "wifi",
-          "image": "IconBlue",
-          "title": "Wi-Fi",
-          "detail": "Off",
-          "user-info": {
-            "current-network": "Off"
+          "model": {
+            "title": "Wi-Fi",
+            "detail": "Off",
+            "image": "IconBlue",
+            "user-info": {
+              "current-network": "Off"
+            }
           },
           "table": {
-            "id": "wifiSubmenu",
             "title": "Wi-Fi",
             "sections": [
               {
-                "id": "activeNetworks",
                 "items": [
                   {
                     "id": "wifiSwitch",
-                    "title": "Wi-Fi"
+                    "model": {
+                      "title": "Wi-Fi"
+                    }
                   },
                   {
                     "id": "currentNetwork",
-                    "title": "ae 5GHz"
+                    "model": {
+                      "title": "ae 5GHz"
+                    }
                   }
                 ]
               },
               {
-                "id": "chooseNetwork",
                 "header": "Choose a network...",
                 "items": [
                   {
                     "id": "appleNetwork",
-                    "title": "Apple"
+                    "model": {
+                      "title": "Apple"
+                    }
                   },
                   {
                     "id": "twitterNetwork",
-                    "title": "Twitter"
+                    "model": {
+                      "title": "Twitter"
+                    }
                   }
                 ]
               },
               {
-                "id": "joinNetworksSwitchSection",
                 "footer": "Known networks will be joined automatically. If no known networks are available, you will be asked before joining a new network.",
                 "items": [
                   {
                     "id": "joinNetworksSwitch",
-                    "title": "Ask to Join Networks"
+                    "model": {
+                      "title": "Ask to Join Networks"
+                    }
                   }
                 ]
               }
@@ -80,41 +89,45 @@
         },
         {
           "id": "bluetooth",
-          "image": "IconBlue",
-          "title": "Bluetooth",
-          "detail": "On",
+          "model": {
+            "title": "Bluetooth",
+            "detail": "On",
+            "image": "IconBlue"
+          },
           "table": {
-            "id": "bluetoothSubmenu",
             "title": "Bluetooth",
             "sections": [
               {
-                "id": "bluetoothSwitchSection",
                 "footer": "Now discoverable as \"aePhone6S\".",
                 "items": [
                   {
                     "id": "bluetoothSwitch",
-                    "title": "Bluetooth"
+                    "model": {
+                      "title": "Bluetooth"
+                    }
                   }
                 ]
               },
               {
-                "id": "myDevices",
                 "header": "My Devices",
                 "items": [
                   {
                     "id": "aePods",
-                    "title": "aePods",
-                    "detail": "Not Connected"
+                    "model": {
+                      "title": "aePods",
+                      "detail": "Not Connected"
+                    }
                   },
                   {
                     "id": "aeWatch",
-                    "title": "aeWatch",
-                    "detail": "Connected"
+                    "model": {
+                      "title": "aeWatch",
+                      "detail": "Connected"
+                    }
                   }
                 ]
               },
               {
-                "id": "otherDevices",
                 "header": "Other Devices",
                 "items": [
                 ]
@@ -124,65 +137,76 @@
         },
         {
           "id": "cellular",
-          "image": "IconGreen",
-          "title": "Cellular",
+          "model": {
+            "title": "Cellular",
+            "image": "IconGreen"
+          },
           "table": {
-            "id": "cellularSubmenu",
             "title": "Cellular",
             "sections": [
               {
-                "id": "cellularDataSection",
                 "items": [
                   {
                     "id": "cellularData",
-                    "title": "Cellular Data"
+                    "model": {
+                      "title": "Cellular Data"
+                    }
                   },
                   {
                     "id": "cellularDataOptions",
-                    "title": "Cellular Data Options",
-                    "detail": "Roaming Off"
+                    "model": {
+                      "title": "Cellular Data Options",
+                      "detail": "Roaming Off"
+                    }
                   }
                 ]
               },
               {
-                "id": "personalHotspotSection",
                 "items": [
                   {
                     "id": "personalHotspot",
-                    "title": "Personal Hotspot",
-                    "detail": "Off"
+                    "model": {
+                      "title": "Personal Hotspot",
+                      "detail": "Off"
+                    }
                   }
                 ]
               },
               {
-                "id": "callTime",
                 "header": "Call Time",
                 "items": [
                   {
                     "id": "currentPeriodCallTime",
-                    "title": "Current Period",
-                    "detail": "17 Hours, 31 Minutes"
+                    "model": {
+                      "title": "Current Period",
+                      "detail": "17 Hours, 31 Minutes"
+                    }
                   },
                   {
                     "id": "lifetimeCallTime",
-                    "title": "Lifetime",
-                    "detail": "17 Hours, 31 Minutes"
+                    "model": {
+                      "title": "Lifetime",
+                      "detail": "17 Hours, 31 Minutes"
+                    }
                   }
                 ]
               },
               {
-                "id": "cellularDataUsage",
                 "header": "Cellular Data Usage",
                 "items": [
                   {
                     "id": "currentPeriodDataUsage",
-                    "title": "Current Period",
-                    "detail": "15.1 GB"
+                    "model": {
+                      "title": "Current Period",
+                      "detail": "15.1 GB"
+                    }
                   },
                   {
                     "id": "currentPeriodRoaming",
-                    "title": "Current Period Roaming",
-                    "detail": "425 MB"
+                    "model": {
+                      "title": "Current Period Roaming",
+                      "detail": "425 MB"
+                    }
                   }
                 ]
               }
@@ -191,31 +215,34 @@
         },
         {
           "id": "hotspot",
-          "image": "IconGreen",
-          "title": "Personal Hotspot",
-          "detail": "Off",
+          "model": {
+            "title": "Personal Hotspot",
+            "detail": "Off",
+            "image": "IconGreen"
+          },
           "table": {
-            "id": "hotspotSubmenu",
             "title": "Personal Hotspot",
             "sections": [
               {
-                "id": "hotspotSwitchSection",
                 "footer": "Turn on Personal Hotspot to share your iPhone's internet connection. Additional usage charges may apply. Other devices signed into your iCloud account will be able to use Personal Hotspot without having to turn it on manually.",
                 "items": [
                   {
                     "id": "hotspotSwitch",
-                    "title": "Personal Hotspot"
+                    "model": {
+                      "title": "Personal Hotspot"
+                    }
                   }
                 ]
               },
               {
-                "id": "wifiPasswordSection",
                 "footer-image": "HotspotFooter",
                 "items": [
                   {
                     "id": "hotspotWifiPassword",
-                    "title": "Wi-Fi Password",
-                    "detail": "MyPassword"
+                    "model": {
+                      "title": "Wi-Fi Password",
+                      "detail": "MyPassword"
+                    }
                   }
                 ]
               }
@@ -224,28 +251,32 @@
         },
         {
           "id": "vpn",
-          "image": "IconBlue",
-          "title": "VPN",
-          "user-info": {
-            "enabled": false
+          "model": {
+            "title": "VPN",
+            "image": "IconBlue",
+            "user-info": {
+              "enabled": false
+            }
           }
         },
         {
           "id": "carrier",
-          "image": "IconGreen",
-          "title": "Carrier",
-          "detail": "Telenor SRB",
+          "model": {
+            "title": "Carrier",
+            "detail": "Telenor SRB",
+            "image": "IconGreen"
+          },
           "table": {
-            "id": "carrierSubmenu",
             "title": "Network Selection",
             "sections": [
               {
-                "id": "carrierSwitchSection",
                 "header": "Carriers",
                 "items": [
                   {
                     "id": "carrierSwitch",
-                    "title": "Automatic"
+                    "model": {
+                      "title": "Automatic"
+                    }
                   }
                 ]
               }
