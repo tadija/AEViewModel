@@ -27,6 +27,12 @@ extension MappableTable {
         case vpn
         case carrier
     }
+    
+    enum WifiItemType: String {
+        case wifiSwitch
+        case wifiNetwork
+        case joinNetworksSwitch
+    }
 }
 
 final class SettingsTVMC: TableViewModelController {
@@ -73,12 +79,45 @@ final class SettingsTVMC: TableViewModelController {
                 print("handleEvent with id: \(item.identifier)")
             }
         case Settings.wifi.rawValue:
-//            let wifiSubmenu = WiFiSettingsTVC(style: .grouped)
-//            pushTable(from: item, in: wifiSubmenu)
+            let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
+            pushTable(from: item, in: wifiSubmenu)
             break
         case Settings.bluetooth.rawValue, Settings.cellular.rawValue, Settings.hotspot.rawValue, Settings.carrier.rawValue:
             let defaultSubmenu = TableViewModelController(style: .grouped)
             pushTable(from: item, in: defaultSubmenu)
+        default:
+            break
+        }
+    }
+    
+}
+
+// MARK: - WiFiSettingsTVC
+
+class WiFiSettingsTVMC: TableViewModelController {
+    
+    typealias Wifi = MappableTable.WifiItemType
+    
+    // MARK: Override
+    
+    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+        switch identifier {
+        case Wifi.wifiSwitch.rawValue, Wifi.joinNetworksSwitch.rawValue:
+            return .toggle
+        default:
+            return .basic
+        }
+    }
+    
+    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
+        switch item.identifier {
+        case Wifi.wifiSwitch.rawValue, Wifi.joinNetworksSwitch.rawValue:
+            if event == .valueChanged {
+                print("handleEvent with id: \(item.identifier)")
+            }
+        case Wifi.wifiNetwork.rawValue:
+            let tvc = TableViewModelController(style: .grouped)
+            pushTable(from: item, in: tvc)
         default:
             break
         }
