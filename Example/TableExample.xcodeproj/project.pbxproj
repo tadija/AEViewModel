@@ -10,8 +10,7 @@
 		8B0E708B1EBFA0EA000153CD /* CustomCellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */; };
 		8B2EAE1B1EEB3BD4001FE287 /* MappableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1A1EEB3BD4001FE287 /* MappableViewModel.swift */; };
 		8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */; };
-		8B3276481E9AF35700FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; };
-		8B3276491E9AF35700FD9502 /* Mappable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276421E9AF2BF00FD9502 /* Mappable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE321EEF3332001FE287 /* Mappable.framework */; };
 		8B7281AE1EE2E607007245E7 /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleViewModel.swift */; };
 		8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */; };
 		8B7281C51EE340E5007245E7 /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C41EE340E5007245E7 /* FormViewModel.swift */; };
@@ -58,7 +57,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8B3276491E9AF35700FD9502 /* Mappable.framework in Embed Frameworks */,
 				8BD8F6861E9A5D6000C9BBA3 /* Table.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -70,7 +68,9 @@
 		8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellWithNib.xib; sourceTree = "<group>"; };
 		8B2EAE1A1EEB3BD4001FE287 /* MappableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableViewModel.swift; sourceTree = "<group>"; };
 		8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVMC.swift; sourceTree = "<group>"; };
-		8B3276421E9AF2BF00FD9502 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = ../Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
+		8B2EAE2C1EEF31A1001FE287 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		8B2EAE2D1EEF31A1001FE287 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
+		8B2EAE321EEF3332001FE287 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
 		8B7281AD1EE2E607007245E7 /* ExampleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewModel.swift; sourceTree = "<group>"; };
 		8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTVMC.swift; sourceTree = "<group>"; };
 		8B7281C41EE340E5007245E7 /* FormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
@@ -92,8 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B3276481E9AF35700FD9502 /* Mappable.framework in Frameworks */,
 				8BD8F6851E9A5D6000C9BBA3 /* Table.framework in Frameworks */,
+				8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +143,9 @@
 		8B3276411E9AF2BF00FD9502 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8B3276421E9AF2BF00FD9502 /* Mappable.framework */,
+				8B2EAE2C1EEF31A1001FE287 /* Cartfile */,
+				8B2EAE2D1EEF31A1001FE287 /* Cartfile.resolved */,
+				8B2EAE321EEF3332001FE287 /* Mappable.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -208,6 +210,7 @@
 				8B893A751E98606700B3101B /* Frameworks */,
 				8B893A761E98606700B3101B /* Resources */,
 				8BD8F6891E9A5D6000C9BBA3 /* Embed Frameworks */,
+				8B2EAE2F1EEF31FB001FE287 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -291,6 +294,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8B2EAE2F1EEF31FB001FE287 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Mappable.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8B893A741E98606700B3101B /* Sources */ = {
@@ -442,7 +463,7 @@
 				DEVELOPMENT_TEAM = VL46Q749LJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = TableExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -460,7 +481,7 @@
 				DEVELOPMENT_TEAM = VL46Q749LJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = TableExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
