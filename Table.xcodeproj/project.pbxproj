@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B3276011E9AD82A00FD9502 /* TableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3275FF1E9AD82A00FD9502 /* TableTests.swift */; };
-		8B32760A1E9ADD4A00FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276091E9ADD4A00FD9502 /* Mappable.framework */; };
 		8B3276251E9AED1400FD9502 /* Table.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3276241E9AED1400FD9502 /* Table.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B3276271E9AEEF000FD9502 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3276091E9ADD4A00FD9502 /* Mappable.framework */; };
 		8B32764E1E9C284B00FD9502 /* TableViewModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B32764D1E9C284B00FD9502 /* TableViewModelCell.swift */; };
 		8B7281B11EE2E96D007245E7 /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B01EE2E96D007245E7 /* TableViewModel.swift */; };
 		8B7281B31EE2EFA2007245E7 /* TableViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B21EE2EFA2007245E7 /* TableViewModelController.swift */; };
@@ -29,13 +27,10 @@
 
 /* Begin PBXFileReference section */
 		8B3275FF1E9AD82A00FD9502 /* TableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableTests.swift; path = TableTests/TableTests.swift; sourceTree = "<group>"; };
-		8B3276061E9ADB2C00FD9502 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B3276071E9ADB3800FD9502 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		8B3276091E9ADD4A00FD9502 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
 		8B32760E1E9AE13200FD9502 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		8B32760F1E9AE13200FD9502 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B3276101E9AE13200FD9502 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8B3276121E9AE14D00FD9502 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		8B3276131E9AE1BA00FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = SOURCE_ROOT; };
 		8B3276241E9AED1400FD9502 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Table.h; path = Sources/Table.h; sourceTree = SOURCE_ROOT; };
 		8B3276261E9AED4100FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -51,7 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B32760A1E9ADD4A00FD9502 /* Mappable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +53,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B3276271E9AEEF000FD9502 /* Mappable.framework in Frameworks */,
 				8B893AB81E98665F00B3101B /* Table.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,16 +78,6 @@
 			path = TableTests;
 			sourceTree = "<group>";
 		};
-		8B3276081E9ADD4A00FD9502 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8B3276061E9ADB2C00FD9502 /* Cartfile */,
-				8B3276121E9AE14D00FD9502 /* Cartfile.resolved */,
-				8B3276091E9ADD4A00FD9502 /* Mappable.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		8B3276111E9AE13B00FD9502 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				8B3276071E9ADB3800FD9502 /* Package.swift */,
-				8B3276081E9ADD4A00FD9502 /* Frameworks */,
 				8B8AFF291E9866ED0090B362 /* Sources */,
 				8B3275FC1E9AD82A00FD9502 /* Tests */,
 				8B893AAF1E98665F00B3101B /* Products */,
@@ -169,7 +151,6 @@
 				8B893AAA1E98665F00B3101B /* Frameworks */,
 				8B893AAB1E98665F00B3101B /* Headers */,
 				8B893AAC1E98665F00B3101B /* Resources */,
-				8B32760B1E9ADD5600FD9502 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -253,24 +234,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		8B32760B1E9ADD5600FD9502 /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Mappable.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8B893AA91E98665F00B3101B /* Sources */ = {
@@ -413,10 +376,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -438,10 +398,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -458,10 +415,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = VL46Q749LJ;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableTests;
@@ -475,10 +429,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = VL46Q749LJ;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableTests;
