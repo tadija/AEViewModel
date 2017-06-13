@@ -1,14 +1,14 @@
 # AEViewModel
 
-**Swift package for convenient making of static tables**
+**Swift minion for convenient creation of tables and collection views**
 
 > I made this for personal use, feel free to use it or contribute if you like.
 
 ## Usage
 
-> Work in progress...
+> Work in progress... Use at your own risk!
 
-> For more examples check out [Sources](Sources) and [Tests](Tests).
+> For more information check out [Sources](Sources) and [Tests](Tests).
 
 ## Installation
 
