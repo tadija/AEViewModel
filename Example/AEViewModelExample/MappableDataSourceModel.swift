@@ -1,15 +1,17 @@
 //
-//  SettingsViewModel.swift
-//  AETableExample
+//  MappableDataSourceModel.swift
+//  AEViewModelExample
 //
 //  Created by Marko Tadić on 6/9/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
-import AETable
+import AEViewModel
 import Mappable
 
-struct MappableTable: Table, Mappable {
+typealias MappableTable = MappableDataSourceModel
+
+struct MappableDataSourceModel: DataSourceModel, Mappable {
     
     // MARK: Types
     
@@ -64,27 +66,27 @@ struct MappableItem: Item, Mappable {
     
     enum Key: String {
         case id
-        case model
+        case data
         case table
     }
     
     // MARK: Item
     
     let identifier: String
-    var model: Model?
-    var table: Table?
+    var data: ItemData?
+    var child: ViewModel?
     
     // MARK: Mappable
     
     init(map: [String : Any]) throws {
         identifier = try map.value(forKey: Key.id.rawValue)
-        model = try? map.mappable(forKey: Key.model.rawValue) as MappableModel
-        table = try? map.mappable(forKey: Key.table.rawValue) as MappableTable
+        data = try? map.mappable(forKey: Key.data.rawValue) as MappableItemData
+        child = try? map.mappable(forKey: Key.table.rawValue) as MappableDataSourceModel
     }
     
 }
 
-struct MappableModel: Model, Mappable {
+struct MappableItemData: ItemData, Mappable {
     
     // MARK: Types
     

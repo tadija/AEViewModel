@@ -1,13 +1,13 @@
 //
 //  CustomCellWithNib.swift
-//  AETableExample
+//  AEViewModelExample
 //
 //  Created by Marko Tadić on 4/23/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import AETable
+import AEViewModel
 
 class CustomCellWithNib: Cell.Basic {
     
@@ -25,10 +25,10 @@ class CustomCellWithNib: Cell.Basic {
     }
     
     override func updateUI(with item: Item) {
-        if let model = item.model {
-            title.text = model.title
-            subtitle.text = model.detail
-            if let imageName = model.image {
+        if let data = item.data {
+            title.text = data.title
+            subtitle.text = data.detail
+            if let imageName = data.image {
                 customImageView.image = UIImage(named: imageName)
             }
         }

@@ -50,17 +50,17 @@ extension Cell {
         
         open func customizeUI() {}
         open func updateUI(with item: Item) {
-            if let model = item.model {
-                textLabel?.text = model.title
-                detailTextLabel?.text = model.detail
-                if let imageName = model.image {
+            if let data = item.data {
+                textLabel?.text = data.title
+                detailTextLabel?.text = data.detail
+                if let imageName = data.image {
                     imageView?.image = UIImage(named: imageName)
                 }
             }
             configureAutomaticDisclosureIndicator(with: item)
         }
         open func configureAutomaticDisclosureIndicator(with item: Item) {
-            if (item.table?.sections.count ?? 0) > 0 {
+            if let table = item.child as? Table, table.sections.count > 0 {
                 accessoryType = .disclosureIndicator
             }
         }
@@ -131,7 +131,7 @@ extension Cell {
             textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
         }
         open override func updateUI(with item: Item) {
-            textField.placeholder = item.model?.title
+            textField.placeholder = item.data?.title
         }
     }
     
@@ -153,7 +153,7 @@ extension Cell {
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         }
         open override func updateUI(with item: Item) {
-            button.setTitle(item.model?.title, for: .normal)
+            button.setTitle(item.data?.title, for: .normal)
         }
     }
     

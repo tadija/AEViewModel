@@ -4,7 +4,7 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
     
-    open var table: Table?
+    open var model: Table?
     
     // MARK: Init
     
@@ -18,9 +18,9 @@ open class TableViewModelController: UITableViewController {
         customInit()
     }
     
-    public convenience init(style: UITableViewStyle, table: Table) {
+    public convenience init(style: UITableViewStyle, model: Table) {
         self.init(style: style)
-        self.table = table
+        self.model = model
         customInit()
     }
     
@@ -70,14 +70,14 @@ open class TableViewModelController: UITableViewController {
         guard
             let tableViewCell = cell as? UITableViewCell,
             let indexPath = tableView.indexPath(for: tableViewCell),
-            let item = table?.item(at: indexPath)
+            let item = model?.item(at: indexPath)
         else { return nil }
         return item
     }
     
     public func pushTable(from item: Item, in tvmc: TableViewModelController) {
-        if let table = item.table {
-            tvmc.table = table
+        if let model = item.child as? Table {
+            tvmc.model = model
             navigationController?.pushViewController(tvmc, animated: true)
         }
     }
@@ -85,14 +85,13 @@ open class TableViewModelController: UITableViewController {
     // MARK: Helpers
     
     private func configureTableView() {
-        title = table?.title
+        title = model?.title
         registerCells()
-        tableView.reloadData()
     }
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
-        table?.sections.forEach { section in
+        model?.sections.forEach { section in
             let sectionIdentifiers = section.items.flatMap({ $0.identifier })
             uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
@@ -131,15 +130,15 @@ open class TableViewModelController: UITableViewController {
 extension TableViewModelController {
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return table?.sections.count ?? 0
+        return model?.sections.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return table?.sections[section].items.count ?? 0
+        return model?.sections[section].items.count ?? 0
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = table?.item(at: indexPath) else {
+        guard let item = model?.item(at: indexPath) else {
             return UITableViewCell()
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
@@ -150,11 +149,11 @@ extension TableViewModelController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return table?.sections[section].header
+        return model?.sections[section].header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return table?.sections[section].footer
+        return model?.sections[section].footer
     }
     
 }
@@ -165,7 +164,7 @@ extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
-            let item = table?.item(at: indexPath),
+            let item = model?.item(at: indexPath),
             let cell = tableView.cellForRow(at: indexPath)
         else { return }
         

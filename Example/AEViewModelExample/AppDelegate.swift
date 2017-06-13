@@ -1,13 +1,13 @@
 //
 //  AppDelegate.swift
-//  AETableExample
+//  AEViewModelExample
 //
 //  Created by Marko Tadić on 4/8/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import AETable
+import AEViewModel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

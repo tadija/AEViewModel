@@ -1,12 +1,12 @@
 //
-//  FormViewModel.swift
-//  AETableExample
+//  FormTable.swift
+//  AEViewModelExample
 //
 //  Created by Marko Tadić on 6/3/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
-import AETable
+import AEViewModel
 
 struct FormTable: Table {
     
@@ -47,14 +47,14 @@ struct FormTable: Table {
         
         struct FirstName: Item {
             let identifier = ItemType.firstname.rawValue
-            var model: Model? = BasicModel(title: "First Name")
-            var table: Table?
+            var data: ItemData? = BasicItemData(title: "First Name")
+            var child: ViewModel?
         }
         
         struct LastName: Item {
             let identifier = ItemType.lastname.rawValue
-            var model: Model? = BasicModel(title: "Last Name")
-            var table: Table?
+            var data: ItemData? = BasicItemData(title: "Last Name")
+            var child: ViewModel?
         }
         
     }
@@ -74,13 +74,13 @@ struct FormTable: Table {
         
         struct Username: Item {
             let identifier = ItemType.username.rawValue
-            var model: Model? = BasicModel(title: "Username")
-            var table: Table?
+            var data: ItemData? = BasicItemData(title: "Username")
+            var child: ViewModel?
         }
         struct Password: Item {
             let identifier = ItemType.password.rawValue
-            var model: Model? = BasicModel(title: "Password")
-            var table: Table?
+            var data: ItemData? = BasicItemData(title: "Password")
+            var child: ViewModel?
         }
         
     }
@@ -100,14 +100,14 @@ struct FormTable: Table {
         
         struct Accept: Item {
             let identifier = ItemType.accept.rawValue
-            var model: Model? = BasicModel(title: "Accept Terms")
-            var table: Table?
+            var data: ItemData? = BasicItemData(title: "Accept Terms")
+            var child: ViewModel?
         }
         
         struct Register: Item {
             let identifier = ItemType.register.rawValue
-            var model: Model? = BasicModel(title: "Register")
-            var table: Table?
+            var data: ItemData? = BasicItemData(title: "Register")
+            var child: ViewModel?
         }
         
     }

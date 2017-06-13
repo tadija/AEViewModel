@@ -4,14 +4,14 @@ import Foundation
 
 public protocol ViewModel {}
 
-// MARK: - Table
+// MARK: - DataSourceViewModel
 
-public protocol Table: ViewModel {
+public protocol DataSourceModel: ViewModel {
     var title: String { get }
     var sections: [Section] { get set }
 }
 
-public extension Table {
+public extension DataSourceModel {
     public var title: String {
         return String()
     }
@@ -33,19 +33,19 @@ public protocol Section: ViewModel {
 
 public protocol Item: ViewModel {
     var identifier: String { get }
-    var model: Model? { get set }
-    var table: Table? { get set }
+    var data: ItemData? { get set }
+    var child: ViewModel? { get set }
 }
 
-// MARK: - Model
+// MARK: - ItemData
 
-public protocol Model {
+public protocol ItemData {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
 }
 
-public struct BasicModel: Model {
+public struct BasicItemData: ItemData {
     public let title: String?
     public let detail: String?
     public let image: String?
@@ -56,3 +56,11 @@ public struct BasicModel: Model {
         self.image = image
     }
 }
+
+// MARK: - Table
+
+public typealias Table = DataSourceModel
+
+// MARK: - Collection
+
+public typealias Collection = DataSourceModel

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B893A771E98606700B3101B"
-               BuildableName = "AETableExample.app"
-               BlueprintName = "AETableExample"
-               ReferencedContainer = "container:AETableExample.xcodeproj">
+               BuildableName = "AEViewModelExample.app"
+               BlueprintName = "AEViewModelExample"
+               ReferencedContainer = "container:AEViewModelExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B893A771E98606700B3101B"
-            BuildableName = "AETableExample.app"
-            BlueprintName = "AETableExample"
-            ReferencedContainer = "container:AETableExample.xcodeproj">
+            BuildableName = "AEViewModelExample.app"
+            BlueprintName = "AEViewModelExample"
+            ReferencedContainer = "container:AEViewModelExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B893A771E98606700B3101B"
-            BuildableName = "AETableExample.app"
-            BlueprintName = "AETableExample"
-            ReferencedContainer = "container:AETableExample.xcodeproj">
+            BuildableName = "AEViewModelExample.app"
+            BlueprintName = "AEViewModelExample"
+            ReferencedContainer = "container:AEViewModelExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B893A771E98606700B3101B"
-            BuildableName = "AETableExample.app"
-            BlueprintName = "AETableExample"
-            ReferencedContainer = "container:AETableExample.xcodeproj">
+            BuildableName = "AEViewModelExample.app"
+            BlueprintName = "AEViewModelExample"
+            ReferencedContainer = "container:AEViewModelExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

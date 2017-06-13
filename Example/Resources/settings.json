@@ -5,7 +5,7 @@
       "items": [
         {
           "id": "profile",
-          "model": {
+          "data": {
             "title": "Marko Tadic",
             "detail": "Apple ID, iCloud, iTunes & App Store",
             "image": "IconGray"
@@ -17,7 +17,7 @@
       "items": [
         {
           "id": "airplane",
-          "model": {
+          "data": {
             "title": "Airplane Mode",
             "image": "IconOrange",
             "custom": {
@@ -27,7 +27,7 @@
         },
         {
           "id": "wifi",
-          "model": {
+          "data": {
             "title": "Wi-Fi",
             "detail": "Off",
             "image": "IconBlue",
@@ -42,13 +42,13 @@
                 "items": [
                   {
                     "id": "wifiSwitch",
-                    "model": {
+                    "data": {
                       "title": "Wi-Fi"
                     }
                   },
                   {
                     "id": "currentNetwork",
-                    "model": {
+                    "data": {
                       "title": "ae 5GHz"
                     }
                   }
@@ -59,13 +59,13 @@
                 "items": [
                   {
                     "id": "appleNetwork",
-                    "model": {
+                    "data": {
                       "title": "Apple"
                     }
                   },
                   {
                     "id": "twitterNetwork",
-                    "model": {
+                    "data": {
                       "title": "Twitter"
                     }
                   }
@@ -76,7 +76,7 @@
                 "items": [
                   {
                     "id": "joinNetworksSwitch",
-                    "model": {
+                    "data": {
                       "title": "Ask to Join Networks"
                     }
                   }
@@ -87,7 +87,7 @@
         },
         {
           "id": "bluetooth",
-          "model": {
+          "data": {
             "title": "Bluetooth",
             "detail": "On",
             "image": "IconBlue"
@@ -100,7 +100,7 @@
                 "items": [
                   {
                     "id": "bluetoothSwitch",
-                    "model": {
+                    "data": {
                       "title": "Bluetooth"
                     }
                   }
@@ -111,14 +111,14 @@
                 "items": [
                   {
                     "id": "aePods",
-                    "model": {
+                    "data": {
                       "title": "aePods",
                       "detail": "Not Connected"
                     }
                   },
                   {
                     "id": "aeWatch",
-                    "model": {
+                    "data": {
                       "title": "aeWatch",
                       "detail": "Connected"
                     }
@@ -135,7 +135,7 @@
         },
         {
           "id": "cellular",
-          "model": {
+          "data": {
             "title": "Cellular",
             "image": "IconGreen"
           },
@@ -146,13 +146,13 @@
                 "items": [
                   {
                     "id": "cellularData",
-                    "model": {
+                    "data": {
                       "title": "Cellular Data"
                     }
                   },
                   {
                     "id": "cellularDataOptions",
-                    "model": {
+                    "data": {
                       "title": "Cellular Data Options",
                       "detail": "Roaming Off"
                     }
@@ -163,7 +163,7 @@
                 "items": [
                   {
                     "id": "personalHotspot",
-                    "model": {
+                    "data": {
                       "title": "Personal Hotspot",
                       "detail": "Off"
                     }
@@ -175,14 +175,14 @@
                 "items": [
                   {
                     "id": "currentPeriodCallTime",
-                    "model": {
+                    "data": {
                       "title": "Current Period",
                       "detail": "17 Hours, 31 Minutes"
                     }
                   },
                   {
                     "id": "lifetimeCallTime",
-                    "model": {
+                    "data": {
                       "title": "Lifetime",
                       "detail": "17 Hours, 31 Minutes"
                     }
@@ -194,14 +194,14 @@
                 "items": [
                   {
                     "id": "currentPeriodDataUsage",
-                    "model": {
+                    "data": {
                       "title": "Current Period",
                       "detail": "15.1 GB"
                     }
                   },
                   {
                     "id": "currentPeriodRoaming",
-                    "model": {
+                    "data": {
                       "title": "Current Period Roaming",
                       "detail": "425 MB"
                     }
@@ -213,7 +213,7 @@
         },
         {
           "id": "hotspot",
-          "model": {
+          "data": {
             "title": "Personal Hotspot",
             "detail": "Off",
             "image": "IconGreen"
@@ -226,7 +226,7 @@
                 "items": [
                   {
                     "id": "hotspotSwitch",
-                    "model": {
+                    "data": {
                       "title": "Personal Hotspot"
                     }
                   }
@@ -237,7 +237,7 @@
                 "items": [
                   {
                     "id": "hotspotWifiPassword",
-                    "model": {
+                    "data": {
                       "title": "Wi-Fi Password",
                       "detail": "MyPassword"
                     }
@@ -249,7 +249,7 @@
         },
         {
           "id": "vpn",
-          "model": {
+          "data": {
             "title": "VPN",
             "image": "IconBlue",
             "custom": {
@@ -259,7 +259,7 @@
         },
         {
           "id": "carrier",
-          "model": {
+          "data": {
             "title": "Carrier",
             "detail": "Telenor SRB",
             "image": "IconGreen"
@@ -272,7 +272,7 @@
                 "items": [
                   {
                     "id": "carrierSwitch",
-                    "model": {
+                    "data": {
                       "title": "Automatic"
                     }
                   }
