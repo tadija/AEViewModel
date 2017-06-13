@@ -1,4 +1,4 @@
-# Table
+# AETable
 
 **Swift package for convenient making of static tables**
 
@@ -15,7 +15,7 @@
 - [Swift Package Manager](https://swift.org/package-manager/):
 
 ```swift
-.Package(url: "https://github.com/tadija/table.git", majorVersion: 0)
+.Package(url: "https://github.com/tadija/AETable.git", majorVersion: 0)
 ```
 
 ## License

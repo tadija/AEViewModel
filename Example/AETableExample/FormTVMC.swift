@@ -1,13 +1,13 @@
 //
 //  FormTVMC.swift
-//  TableExample
+//  AETableExample
 //
 //  Created by Marko Tadić on 6/3/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import Table
+import AETable
 
 final class FormTVMC: TableViewModelController {
     

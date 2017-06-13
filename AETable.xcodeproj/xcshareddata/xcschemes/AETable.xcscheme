@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8B893A771E98606700B3101B"
-               BuildableName = "TableExample.app"
-               BlueprintName = "TableExample"
-               ReferencedContainer = "container:TableExample.xcodeproj">
+               BlueprintIdentifier = "8B893AAD1E98665F00B3101B"
+               BuildableName = "AETable.framework"
+               BlueprintName = "AETable"
+               ReferencedContainer = "container:AETable.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,14 +28,24 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8B893AB61E98665F00B3101B"
+               BuildableName = "AETableTests.xctest"
+               BlueprintName = "AETableTests"
+               ReferencedContainer = "container:AETable.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8B893A771E98606700B3101B"
-            BuildableName = "TableExample.app"
-            BlueprintName = "TableExample"
-            ReferencedContainer = "container:TableExample.xcodeproj">
+            BlueprintIdentifier = "8B893AAD1E98665F00B3101B"
+            BuildableName = "AETable.framework"
+            BlueprintName = "AETable"
+            ReferencedContainer = "container:AETable.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -51,16 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8B893A771E98606700B3101B"
-            BuildableName = "TableExample.app"
-            BlueprintName = "TableExample"
-            ReferencedContainer = "container:TableExample.xcodeproj">
+            BlueprintIdentifier = "8B893AAD1E98665F00B3101B"
+            BuildableName = "AETable.framework"
+            BlueprintName = "AETable"
+            ReferencedContainer = "container:AETable.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8B893A771E98606700B3101B"
-            BuildableName = "TableExample.app"
-            BlueprintName = "TableExample"
-            ReferencedContainer = "container:TableExample.xcodeproj">
+            BlueprintIdentifier = "8B893AAD1E98665F00B3101B"
+            BuildableName = "AETable.framework"
+            BlueprintName = "AETable"
+            ReferencedContainer = "container:AETable.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

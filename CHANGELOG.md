@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.2.4
+
+- Renamed framework: `Table` -> `AETable`
+
 ## Version 0.2.3
 
 - Removed [Mappable](https://github.com/tadija/mappable) dependency and Carthage from Framework project
