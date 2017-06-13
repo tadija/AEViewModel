@@ -72,14 +72,14 @@ struct MappableItem: Item, Mappable {
     
     let identifier: String
     var data: ItemData?
-    var table: Table?
+    var child: ViewModel?
     
     // MARK: Mappable
     
     init(map: [String : Any]) throws {
         identifier = try map.value(forKey: Key.id.rawValue)
         data = try? map.mappable(forKey: Key.data.rawValue) as MappableItemData
-        table = try? map.mappable(forKey: Key.table.rawValue) as MappableTable
+        child = try? map.mappable(forKey: Key.table.rawValue) as MappableTable
     }
     
 }
