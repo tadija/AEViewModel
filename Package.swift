@@ -1,6 +1,6 @@
 import PackageDescription
 
 let package = Package(
-    name: "AETable",
+    name: "AEViewModel",
     exclude: ["Example"]
 )

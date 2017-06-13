@@ -11,8 +11,8 @@
 		8B2EAE1B1EEB3BD4001FE287 /* MappableDataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */; };
 		8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */; };
 		8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE321EEF3332001FE287 /* Mappable.framework */; };
-		8B2EAE4A1EF0889F001FE287 /* AETable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AETable.framework */; };
-		8B2EAE4B1EF0889F001FE287 /* AETable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AETable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B2EAE4A1EF0889F001FE287 /* AEViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; };
+		8B2EAE4B1EF0889F001FE287 /* AEViewModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8B7281AE1EE2E607007245E7 /* ExampleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleTable.swift */; };
 		8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */; };
 		8B7281C51EE340E5007245E7 /* FormTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C41EE340E5007245E7 /* FormTable.swift */; };
@@ -29,24 +29,24 @@
 /* Begin PBXContainerItemProxy section */
 		8B2EAE461EF0888E001FE287 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8B2EAE411EF0888E001FE287 /* AETable.xcodeproj */;
+			containerPortal = 8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8B893AAE1E98665F00B3101B;
-			remoteInfo = AETable;
+			remoteInfo = AEViewModel;
 		};
 		8B2EAE481EF0888E001FE287 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8B2EAE411EF0888E001FE287 /* AETable.xcodeproj */;
+			containerPortal = 8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8B893AB71E98665F00B3101B;
-			remoteInfo = AETableTests;
+			remoteInfo = AEViewModelTests;
 		};
 		8B2EAE4C1EF0889F001FE287 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8B2EAE411EF0888E001FE287 /* AETable.xcodeproj */;
+			containerPortal = 8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B893AAD1E98665F00B3101B;
-			remoteInfo = AETable;
+			remoteInfo = AEViewModel;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -57,7 +57,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8B2EAE4B1EF0889F001FE287 /* AETable.framework in Embed Frameworks */,
+				8B2EAE4B1EF0889F001FE287 /* AEViewModel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,12 +71,12 @@
 		8B2EAE2C1EEF31A1001FE287 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B2EAE2D1EEF31A1001FE287 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		8B2EAE321EEF3332001FE287 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
-		8B2EAE411EF0888E001FE287 /* AETable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AETable.xcodeproj; path = ../AETable.xcodeproj; sourceTree = "<group>"; };
+		8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AEViewModel.xcodeproj; path = ../AEViewModel.xcodeproj; sourceTree = "<group>"; };
 		8B7281AD1EE2E607007245E7 /* ExampleTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTable.swift; sourceTree = "<group>"; };
 		8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTVMC.swift; sourceTree = "<group>"; };
 		8B7281C41EE340E5007245E7 /* FormTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTable.swift; sourceTree = "<group>"; };
 		8B7281C71EE346A9007245E7 /* FormTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTVMC.swift; sourceTree = "<group>"; };
-		8B893A781E98606700B3101B /* AETableExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AETableExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B893A781E98606700B3101B /* AEViewModelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AEViewModelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893A7B1E98606700B3101B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B893A801E98606700B3101B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B893A821E98606700B3101B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */,
-				8B2EAE4A1EF0889F001FE287 /* AETable.framework in Frameworks */,
+				8B2EAE4A1EF0889F001FE287 /* AEViewModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,8 +143,8 @@
 		8B2EAE421EF0888E001FE287 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B2EAE471EF0888E001FE287 /* AETable.framework */,
-				8B2EAE491EF0888E001FE287 /* AETableTests.xctest */,
+				8B2EAE471EF0888E001FE287 /* AEViewModel.framework */,
+				8B2EAE491EF0888E001FE287 /* AEViewModelTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,9 +172,9 @@
 		8B893A6F1E98606700B3101B = {
 			isa = PBXGroup;
 			children = (
-				8B2EAE411EF0888E001FE287 /* AETable.xcodeproj */,
+				8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */,
 				8B3276411E9AF2BF00FD9502 /* Frameworks */,
-				8B893A7A1E98606700B3101B /* AETableExample */,
+				8B893A7A1E98606700B3101B /* AEViewModelExample */,
 				8B893A791E98606700B3101B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -182,12 +182,12 @@
 		8B893A791E98606700B3101B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B893A781E98606700B3101B /* AETableExample.app */,
+				8B893A781E98606700B3101B /* AEViewModelExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8B893A7A1E98606700B3101B /* AETableExample */ = {
+		8B893A7A1E98606700B3101B /* AEViewModelExample */ = {
 			isa = PBXGroup;
 			children = (
 				8B893A7B1E98606700B3101B /* AppDelegate.swift */,
@@ -196,15 +196,15 @@
 				8B0E708F1EBFC3FE000153CD /* Controller */,
 				8B32764A1E9AF40F00FD9502 /* Supporting Files */,
 			);
-			path = AETableExample;
+			path = AEViewModelExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8B893A771E98606700B3101B /* AETableExample */ = {
+		8B893A771E98606700B3101B /* AEViewModelExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B893A8A1E98606700B3101B /* Build configuration list for PBXNativeTarget "AETableExample" */;
+			buildConfigurationList = 8B893A8A1E98606700B3101B /* Build configuration list for PBXNativeTarget "AEViewModelExample" */;
 			buildPhases = (
 				8B893A741E98606700B3101B /* Sources */,
 				8B893A751E98606700B3101B /* Frameworks */,
@@ -217,9 +217,9 @@
 			dependencies = (
 				8B2EAE4D1EF0889F001FE287 /* PBXTargetDependency */,
 			);
-			name = AETableExample;
+			name = AEViewModelExample;
 			productName = TableExample;
-			productReference = 8B893A781E98606700B3101B /* AETableExample.app */;
+			productReference = 8B893A781E98606700B3101B /* AEViewModelExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -239,7 +239,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8B893A731E98606700B3101B /* Build configuration list for PBXProject "AETableExample" */;
+			buildConfigurationList = 8B893A731E98606700B3101B /* Build configuration list for PBXProject "AEViewModelExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -253,28 +253,28 @@
 			projectReferences = (
 				{
 					ProductGroup = 8B2EAE421EF0888E001FE287 /* Products */;
-					ProjectRef = 8B2EAE411EF0888E001FE287 /* AETable.xcodeproj */;
+					ProjectRef = 8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				8B893A771E98606700B3101B /* AETableExample */,
+				8B893A771E98606700B3101B /* AEViewModelExample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8B2EAE471EF0888E001FE287 /* AETable.framework */ = {
+		8B2EAE471EF0888E001FE287 /* AEViewModel.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = AETable.framework;
+			path = AEViewModel.framework;
 			remoteRef = 8B2EAE461EF0888E001FE287 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8B2EAE491EF0888E001FE287 /* AETableTests.xctest */ = {
+		8B2EAE491EF0888E001FE287 /* AEViewModelTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = AETableTests.xctest;
+			path = AEViewModelTests.xctest;
 			remoteRef = 8B2EAE481EF0888E001FE287 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -335,7 +335,7 @@
 /* Begin PBXTargetDependency section */
 		8B2EAE4D1EF0889F001FE287 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = AETable;
+			name = AEViewModel;
 			targetProxy = 8B2EAE4C1EF0889F001FE287 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -465,9 +465,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/AETableExample/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/AEViewModelExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AETableExample;
+				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AEViewModelExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -483,9 +483,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/AETableExample/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/AEViewModelExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AETableExample;
+				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AEViewModelExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -494,7 +494,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B893A731E98606700B3101B /* Build configuration list for PBXProject "AETableExample" */ = {
+		8B893A731E98606700B3101B /* Build configuration list for PBXProject "AEViewModelExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B893A881E98606700B3101B /* Debug */,
@@ -503,7 +503,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B893A8A1E98606700B3101B /* Build configuration list for PBXNativeTarget "AETableExample" */ = {
+		8B893A8A1E98606700B3101B /* Build configuration list for PBXNativeTarget "AEViewModelExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B893A8B1E98606700B3101B /* Debug */,

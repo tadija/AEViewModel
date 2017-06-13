@@ -1,12 +1,12 @@
 //
 //  MappableDataSourceModel.swift
-//  AETableExample
+//  AEViewModelExample
 //
 //  Created by Marko Tadić on 6/9/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
-import AETable
+import AEViewModel
 import Mappable
 
 typealias MappableTable = MappableDataSourceModel

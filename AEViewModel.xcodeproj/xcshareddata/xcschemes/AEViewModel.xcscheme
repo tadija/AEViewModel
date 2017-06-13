@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B893AAD1E98665F00B3101B"
-               BuildableName = "AETable.framework"
-               BlueprintName = "AETable"
-               ReferencedContainer = "container:AETable.xcodeproj">
+               BuildableName = "AEViewModel.framework"
+               BlueprintName = "AEViewModel"
+               ReferencedContainer = "container:AEViewModel.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B893AB61E98665F00B3101B"
-               BuildableName = "AETableTests.xctest"
-               BlueprintName = "AETableTests"
-               ReferencedContainer = "container:AETable.xcodeproj">
+               BuildableName = "AEViewModelTests.xctest"
+               BlueprintName = "AEViewModelTests"
+               ReferencedContainer = "container:AEViewModel.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B893AAD1E98665F00B3101B"
-            BuildableName = "AETable.framework"
-            BlueprintName = "AETable"
-            ReferencedContainer = "container:AETable.xcodeproj">
+            BuildableName = "AEViewModel.framework"
+            BlueprintName = "AEViewModel"
+            ReferencedContainer = "container:AEViewModel.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B893AAD1E98665F00B3101B"
-            BuildableName = "AETable.framework"
-            BlueprintName = "AETable"
-            ReferencedContainer = "container:AETable.xcodeproj">
+            BuildableName = "AEViewModel.framework"
+            BlueprintName = "AEViewModel"
+            ReferencedContainer = "container:AEViewModel.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B893AAD1E98665F00B3101B"
-            BuildableName = "AETable.framework"
-            BlueprintName = "AETable"
-            ReferencedContainer = "container:AETable.xcodeproj">
+            BuildableName = "AEViewModel.framework"
+            BlueprintName = "AEViewModel"
+            ReferencedContainer = "container:AEViewModel.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
