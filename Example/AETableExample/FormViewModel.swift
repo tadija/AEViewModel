@@ -47,13 +47,13 @@ struct FormTable: Table {
         
         struct FirstName: Item {
             let identifier = ItemType.firstname.rawValue
-            var model: Model? = BasicModel(title: "First Name")
+            var data: ItemData? = BasicItemData(title: "First Name")
             var table: Table?
         }
         
         struct LastName: Item {
             let identifier = ItemType.lastname.rawValue
-            var model: Model? = BasicModel(title: "Last Name")
+            var data: ItemData? = BasicItemData(title: "Last Name")
             var table: Table?
         }
         
@@ -74,12 +74,12 @@ struct FormTable: Table {
         
         struct Username: Item {
             let identifier = ItemType.username.rawValue
-            var model: Model? = BasicModel(title: "Username")
+            var data: ItemData? = BasicItemData(title: "Username")
             var table: Table?
         }
         struct Password: Item {
             let identifier = ItemType.password.rawValue
-            var model: Model? = BasicModel(title: "Password")
+            var data: ItemData? = BasicItemData(title: "Password")
             var table: Table?
         }
         
@@ -100,13 +100,13 @@ struct FormTable: Table {
         
         struct Accept: Item {
             let identifier = ItemType.accept.rawValue
-            var model: Model? = BasicModel(title: "Accept Terms")
+            var data: ItemData? = BasicItemData(title: "Accept Terms")
             var table: Table?
         }
         
         struct Register: Item {
             let identifier = ItemType.register.rawValue
-            var model: Model? = BasicModel(title: "Register")
+            var data: ItemData? = BasicItemData(title: "Register")
             var table: Table?
         }
         

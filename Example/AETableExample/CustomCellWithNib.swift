@@ -25,10 +25,10 @@ class CustomCellWithNib: Cell.Basic {
     }
     
     override func updateUI(with item: Item) {
-        if let model = item.model {
-            title.text = model.title
-            subtitle.text = model.detail
-            if let imageName = model.image {
+        if let data = item.data {
+            title.text = data.title
+            subtitle.text = data.detail
+            if let imageName = data.image {
                 customImageView.image = UIImage(named: imageName)
             }
         }

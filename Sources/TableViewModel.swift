@@ -33,19 +33,19 @@ public protocol Section: ViewModel {
 
 public protocol Item: ViewModel {
     var identifier: String { get }
-    var model: Model? { get set }
+    var data: ItemData? { get set }
     var table: Table? { get set }
 }
 
 // MARK: - Model
 
-public protocol Model {
+public protocol ItemData {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
 }
 
-public struct BasicModel: Model {
+public struct BasicItemData: ItemData {
     public let title: String?
     public let detail: String?
     public let image: String?

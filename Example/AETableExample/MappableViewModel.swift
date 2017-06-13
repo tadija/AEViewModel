@@ -64,27 +64,27 @@ struct MappableItem: Item, Mappable {
     
     enum Key: String {
         case id
-        case model
+        case data
         case table
     }
     
     // MARK: Item
     
     let identifier: String
-    var model: Model?
+    var data: ItemData?
     var table: Table?
     
     // MARK: Mappable
     
     init(map: [String : Any]) throws {
         identifier = try map.value(forKey: Key.id.rawValue)
-        model = try? map.mappable(forKey: Key.model.rawValue) as MappableModel
+        data = try? map.mappable(forKey: Key.data.rawValue) as MappableItemData
         table = try? map.mappable(forKey: Key.table.rawValue) as MappableTable
     }
     
 }
 
-struct MappableModel: Model, Mappable {
+struct MappableItemData: ItemData, Mappable {
     
     // MARK: Types
     

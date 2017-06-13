@@ -87,7 +87,6 @@ open class TableViewModelController: UITableViewController {
     private func configureTableView() {
         title = table?.title
         registerCells()
-        tableView.reloadData()
     }
     
     private func registerCells() {
