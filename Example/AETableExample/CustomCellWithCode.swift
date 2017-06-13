@@ -1,13 +1,13 @@
 //
 //  CustomCellWithCode.swift
-//  TableExample
+//  AETableExample
 //
 //  Created by Marko Tadić on 4/23/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import Table
+import AETable
 
 class CustomCellWithCode: Cell.Subtitle {
     

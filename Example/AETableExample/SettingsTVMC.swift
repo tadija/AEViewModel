@@ -1,13 +1,13 @@
 //
 //  SettingsTVMC.swift
-//  TableExample
+//  AETableExample
 //
 //  Created by Marko Tadić on 6/9/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import UIKit
-import Table
+import AETable
 
 extension MappableTable {
     static var Settings: MappableTable {

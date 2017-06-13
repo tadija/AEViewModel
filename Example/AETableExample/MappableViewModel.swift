@@ -1,12 +1,12 @@
 //
 //  SettingsViewModel.swift
-//  TableExample
+//  AETableExample
 //
 //  Created by Marko Tadić on 6/9/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
-import Table
+import AETable
 import Mappable
 
 struct MappableTable: Table, Mappable {
