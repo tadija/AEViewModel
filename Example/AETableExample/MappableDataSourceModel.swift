@@ -1,5 +1,5 @@
 //
-//  SettingsViewModel.swift
+//  MappableDataSourceModel.swift
 //  AETableExample
 //
 //  Created by Marko Tadić on 6/9/17.
@@ -9,7 +9,9 @@
 import AETable
 import Mappable
 
-struct MappableTable: Table, Mappable {
+typealias MappableTable = MappableDataSourceModel
+
+struct MappableDataSourceModel: DataSourceModel, Mappable {
     
     // MARK: Types
     
@@ -79,7 +81,7 @@ struct MappableItem: Item, Mappable {
     init(map: [String : Any]) throws {
         identifier = try map.value(forKey: Key.id.rawValue)
         data = try? map.mappable(forKey: Key.data.rawValue) as MappableItemData
-        child = try? map.mappable(forKey: Key.table.rawValue) as MappableTable
+        child = try? map.mappable(forKey: Key.table.rawValue) as MappableDataSourceModel
     }
     
 }

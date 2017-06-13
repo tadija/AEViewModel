@@ -10,7 +10,7 @@
 		8B3276011E9AD82A00FD9502 /* AETableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3275FF1E9AD82A00FD9502 /* AETableTests.swift */; };
 		8B3276251E9AED1400FD9502 /* AETable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3276241E9AED1400FD9502 /* AETable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B32764E1E9C284B00FD9502 /* TableViewModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B32764D1E9C284B00FD9502 /* TableViewModelCell.swift */; };
-		8B7281B11EE2E96D007245E7 /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B01EE2E96D007245E7 /* TableViewModel.swift */; };
+		8B7281B11EE2E96D007245E7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B01EE2E96D007245E7 /* ViewModel.swift */; };
 		8B7281B31EE2EFA2007245E7 /* TableViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B21EE2EFA2007245E7 /* TableViewModelController.swift */; };
 		8B893AB81E98665F00B3101B /* AETable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B893AAE1E98665F00B3101B /* AETable.framework */; };
 /* End PBXBuildFile section */
@@ -35,7 +35,7 @@
 		8B3276241E9AED1400FD9502 /* AETable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AETable.h; path = Sources/AETable.h; sourceTree = SOURCE_ROOT; };
 		8B3276261E9AED4100FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
 		8B32764D1E9C284B00FD9502 /* TableViewModelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelCell.swift; sourceTree = "<group>"; };
-		8B7281B01EE2E96D007245E7 /* TableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
+		8B7281B01EE2E96D007245E7 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		8B7281B21EE2EFA2007245E7 /* TableViewModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelController.swift; sourceTree = "<group>"; };
 		8B893AAE1E98665F00B3101B /* AETable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AETable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893AB71E98665F00B3101B /* AETableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AETableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,7 +121,7 @@
 		8B8AFF291E9866ED0090B362 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8B7281B01EE2E96D007245E7 /* TableViewModel.swift */,
+				8B7281B01EE2E96D007245E7 /* ViewModel.swift */,
 				8B32764D1E9C284B00FD9502 /* TableViewModelCell.swift */,
 				8B7281B21EE2EFA2007245E7 /* TableViewModelController.swift */,
 				8B893AB01E98665F00B3101B /* Supporting Files */,
@@ -242,7 +242,7 @@
 			files = (
 				8B32764E1E9C284B00FD9502 /* TableViewModelCell.swift in Sources */,
 				8B7281B31EE2EFA2007245E7 /* TableViewModelController.swift in Sources */,
-				8B7281B11EE2E96D007245E7 /* TableViewModel.swift in Sources */,
+				8B7281B11EE2E96D007245E7 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

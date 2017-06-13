@@ -6,12 +6,12 @@ public protocol ViewModel {}
 
 // MARK: - DataSourceViewModel
 
-public protocol DataSourceViewModel: ViewModel {
+public protocol DataSourceModel: ViewModel {
     var title: String { get }
     var sections: [Section] { get set }
 }
 
-public extension DataSourceViewModel {
+public extension DataSourceModel {
     public var title: String {
         return String()
     }
@@ -59,4 +59,8 @@ public struct BasicItemData: ItemData {
 
 // MARK: - Table
 
-public protocol Table: DataSourceViewModel {}
+public typealias Table = DataSourceModel
+
+// MARK: - Collection
+
+public typealias Collection = DataSourceModel

@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8B0E708B1EBFA0EA000153CD /* CustomCellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */; };
-		8B2EAE1B1EEB3BD4001FE287 /* MappableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1A1EEB3BD4001FE287 /* MappableViewModel.swift */; };
+		8B2EAE1B1EEB3BD4001FE287 /* MappableDataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */; };
 		8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */; };
 		8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE321EEF3332001FE287 /* Mappable.framework */; };
 		8B2EAE4A1EF0889F001FE287 /* AETable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AETable.framework */; };
 		8B2EAE4B1EF0889F001FE287 /* AETable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AETable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8B7281AE1EE2E607007245E7 /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleViewModel.swift */; };
+		8B7281AE1EE2E607007245E7 /* ExampleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleTable.swift */; };
 		8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */; };
-		8B7281C51EE340E5007245E7 /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C41EE340E5007245E7 /* FormViewModel.swift */; };
+		8B7281C51EE340E5007245E7 /* FormTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C41EE340E5007245E7 /* FormTable.swift */; };
 		8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C71EE346A9007245E7 /* FormTVMC.swift */; };
 		8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A7B1E98606700B3101B /* AppDelegate.swift */; };
 		8B893A811E98606700B3101B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A7F1E98606700B3101B /* Main.storyboard */; };
@@ -66,15 +66,15 @@
 
 /* Begin PBXFileReference section */
 		8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellWithNib.xib; sourceTree = "<group>"; };
-		8B2EAE1A1EEB3BD4001FE287 /* MappableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableViewModel.swift; sourceTree = "<group>"; };
+		8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableDataSourceModel.swift; sourceTree = "<group>"; };
 		8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVMC.swift; sourceTree = "<group>"; };
 		8B2EAE2C1EEF31A1001FE287 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B2EAE2D1EEF31A1001FE287 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		8B2EAE321EEF3332001FE287 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
 		8B2EAE411EF0888E001FE287 /* AETable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AETable.xcodeproj; path = ../AETable.xcodeproj; sourceTree = "<group>"; };
-		8B7281AD1EE2E607007245E7 /* ExampleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewModel.swift; sourceTree = "<group>"; };
+		8B7281AD1EE2E607007245E7 /* ExampleTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTable.swift; sourceTree = "<group>"; };
 		8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTVMC.swift; sourceTree = "<group>"; };
-		8B7281C41EE340E5007245E7 /* FormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
+		8B7281C41EE340E5007245E7 /* FormTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTable.swift; sourceTree = "<group>"; };
 		8B7281C71EE346A9007245E7 /* FormTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTVMC.swift; sourceTree = "<group>"; };
 		8B893A781E98606700B3101B /* AETableExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AETableExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893A7B1E98606700B3101B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,9 +103,9 @@
 		8B0E708D1EBFC3B0000153CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8B7281AD1EE2E607007245E7 /* ExampleViewModel.swift */,
-				8B7281C41EE340E5007245E7 /* FormViewModel.swift */,
-				8B2EAE1A1EEB3BD4001FE287 /* MappableViewModel.swift */,
+				8B7281AD1EE2E607007245E7 /* ExampleTable.swift */,
+				8B7281C41EE340E5007245E7 /* FormTable.swift */,
+				8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */,
 				8B893A8D1E9860C300B3101B /* settings.json */,
 			);
 			name = Model;
@@ -319,14 +319,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */,
-				8B7281C51EE340E5007245E7 /* FormViewModel.swift in Sources */,
+				8B7281C51EE340E5007245E7 /* FormTable.swift in Sources */,
 				8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */,
-				8B7281AE1EE2E607007245E7 /* ExampleViewModel.swift in Sources */,
+				8B7281AE1EE2E607007245E7 /* ExampleTable.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
 				8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */,
 				8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */,
 				8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */,
-				8B2EAE1B1EEB3BD4001FE287 /* MappableViewModel.swift in Sources */,
+				8B2EAE1B1EEB3BD4001FE287 /* MappableDataSourceModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  ExampleViewModel.swift
+//  ExampleTable.swift
 //  AETableExample
 //
 //  Created by Marko Tadić on 6/3/17.
