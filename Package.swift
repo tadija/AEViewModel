@@ -1,6 +1,6 @@
 import PackageDescription
 
 let package = Package(
-    name: "Table",
+    name: "AETable",
     exclude: ["Example"]
 )

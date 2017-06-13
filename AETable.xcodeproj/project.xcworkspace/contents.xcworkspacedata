@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Table.xcodeproj">
+      location = "self:AETable.xcodeproj">
    </FileRef>
 </Workspace>

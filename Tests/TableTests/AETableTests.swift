@@ -1,15 +1,15 @@
 //
-//  TableTests.swift
-//  TableTests
+//  AETableTests.swift
+//  AETableTests
 //
 //  Created by Marko Tadić on 4/8/17.
 //  Copyright © 2017 AE. All rights reserved.
 //
 
 import XCTest
-@testable import Table
+@testable import AETable
 
-class TableTests: XCTestCase {
+class AETableTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
