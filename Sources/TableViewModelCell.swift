@@ -108,7 +108,7 @@ extension TableCell {
         }
     }
     
-    open class TextInput: Basic {
+    open class TextInput: Basic, UITextFieldDelegate {
         public let textField = UITextField()
         
         open override func customize() {
@@ -124,9 +124,16 @@ extension TableCell {
             textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
             textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
             textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+            
+            textField.delegate = self
         }
         open override func update(with item: Item) {
             textField.placeholder = item.data?.title
+        }
+        open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            callAction()
+            return false
         }
     }
     

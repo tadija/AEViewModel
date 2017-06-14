@@ -29,8 +29,8 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
-    override func updateCell(_ cell: TableViewModelCell, with item: Item) {
-        super.updateCell(cell, with: item)
+    override func configureCell(_ cell: TableViewModelCell, with item: Item) {
+        super.configureCell(cell, with: item)
         
         switch item.identifier {
         case FormItem.username.rawValue:
