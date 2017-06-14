@@ -11,13 +11,15 @@ import AEViewModel
 
 final class FormTVMC: TableViewModelController {
     
+    typealias FormItem = FormTable.ItemType
+    
     // MARK: Override
     
     override func cell(forIdentifier identifier: String) -> TableCell {
         switch identifier {
-        case FormTable.ItemType.accept.rawValue:
+        case FormItem.accept.rawValue:
             return .toggle
-        case FormTable.ItemType.register.rawValue:
+        case FormItem.register.rawValue:
             return .button
         default:
             return .textInput
@@ -26,9 +28,9 @@ final class FormTVMC: TableViewModelController {
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         switch item.identifier {
-        case FormTable.ItemType.accept.rawValue:
+        case FormItem.accept.rawValue:
             print("Accept terms toggled")
-        case FormTable.ItemType.register.rawValue:
+        case FormItem.register.rawValue:
             print("Register button tapped")
         default:
             print("Handle custom action here")

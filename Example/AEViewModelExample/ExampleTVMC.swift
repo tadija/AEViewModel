@@ -11,6 +11,8 @@ import AEViewModel
 
 final class ExampleTVMC: TableViewModelController {
     
+    typealias ExampleItem = ExampleTable.ItemType
+    
     // MARK: Override
     
     override func customInit() {
@@ -23,9 +25,9 @@ final class ExampleTVMC: TableViewModelController {
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         switch item.identifier {
-        case ExampleTable.ItemType.form.rawValue:
+        case ExampleItem.form.rawValue:
             pushTable(from: item, in: FormTVMC())
-        case ExampleTable.ItemType.settings.rawValue:
+        case ExampleItem.settings.rawValue:
             pushTable(from: item, in: SettingsTVMC())
         default:
             break
