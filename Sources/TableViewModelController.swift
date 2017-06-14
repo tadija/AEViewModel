@@ -46,22 +46,6 @@ open class TableViewModelController: UITableViewController {
     
     open func updateCell(_ cell: TableViewModelCell, with item: Item) {
         cell.update(with: item)
-
-        if let cell = cell as? TableCell.Toggle {
-            cell.action = {
-                self.handleEvent(.valueChanged, with: item, sender: cell.toggle)
-            }
-        }
-        
-        if let cell = cell as? TableCell.Button {
-            cell.action = {
-                self.handleEvent(.touchUpInside, with: item, sender: cell.button)
-            }
-        }
-    }
-    
-    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
-        print("This method is abstract and must be implemented by subclass")
     }
     
     // MARK: API
@@ -164,12 +148,12 @@ extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
-            let item = model?.item(at: indexPath),
-            let cell = tableView.cellForRow(at: indexPath)
+            let cell = tableView.cellForRow(at: indexPath),
+            let tableViewModelCell = cell as? TableViewModelCell
         else { return }
         
         if cell.selectionStyle != .none {
-            handleEvent(.primaryActionTriggered, with: item, sender: cell)
+            tableViewModelCell.action()
         }
     }
     

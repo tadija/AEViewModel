@@ -3,6 +3,7 @@ import UIKit
 // MARK: - TableViewModelCell
 
 public protocol TableViewModelCell: class {
+    var action: () -> Void { get set }
     func customize()
     func update(with item: Item)
 }

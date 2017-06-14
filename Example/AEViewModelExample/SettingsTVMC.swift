@@ -68,23 +68,28 @@ final class SettingsTVMC: TableViewModelController {
         }
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
+    override func updateCell(_ cell: TableViewModelCell, with item: Item) {
+        super.updateCell(cell, with: item)
+        
         switch item.identifier {
         case SettingsItem.airplane.rawValue,
              SettingsItem.vpn.rawValue:
-            if event == .valueChanged {
+            cell.action = {
                 print("handleEvent with id: \(item.identifier)")
             }
         case SettingsItem.wifi.rawValue:
-            let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
-            pushTable(from: item, in: wifiSubmenu)
-            break
+            cell.action = {
+                let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
+                self.pushTable(from: item, in: wifiSubmenu)
+            }
         case SettingsItem.bluetooth.rawValue,
              SettingsItem.cellular.rawValue,
              SettingsItem.hotspot.rawValue,
              SettingsItem.carrier.rawValue:
-            let defaultSubmenu = TableViewModelController(style: .grouped)
-            pushTable(from: item, in: defaultSubmenu)
+            cell.action = {
+                let defaultSubmenu = TableViewModelController(style: .grouped)
+                self.pushTable(from: item, in: defaultSubmenu)
+            }
         default:
             break
         }
@@ -110,16 +115,20 @@ class WiFiSettingsTVMC: TableViewModelController {
         }
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
+    override func updateCell(_ cell: TableViewModelCell, with item: Item) {
+        super.updateCell(cell, with: item)
+        
         switch item.identifier {
         case WifiItem.wifiSwitch.rawValue,
              WifiItem.joinNetworksSwitch.rawValue:
-            if event == .valueChanged {
+            cell.action = {
                 print("handleEvent with id: \(item.identifier)")
             }
         case WifiItem.wifiNetwork.rawValue:
-            let tvc = TableViewModelController(style: .grouped)
-            pushTable(from: item, in: tvc)
+            cell.action = {
+                let tvc = TableViewModelController(style: .grouped)
+                self.pushTable(from: item, in: tvc)
+            }
         default:
             break
         }

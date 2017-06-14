@@ -32,21 +32,25 @@ final class FormTVMC: TableViewModelController {
     override func updateCell(_ cell: TableViewModelCell, with item: Item) {
         super.updateCell(cell, with: item)
         
-        if item.identifier == FormItem.password.rawValue, let cell = cell as? TableCell.TextInput {
-            cell.textField.isSecureTextEntry = true
-        }
-    }
-    
-    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         switch item.identifier {
-        case FormItem.username.rawValue,
-             FormItem.password.rawValue:
-            print("Handle custom action here")
+        case FormItem.username.rawValue:
+            cell.action = {
+                print("Handle custom action here")
+            }
+        case FormItem.password.rawValue:
+            (cell as? TableCell.TextInput)?.textField.isSecureTextEntry = true
+            cell.action = {
+                print("Handle custom action here")
+            }
         case FormItem.accept.rawValue:
-            print("Accept terms toggled")
+            cell.action = {
+                print("Accept terms toggled")
+            }
         case FormItem.register.rawValue:
-            print("Register button tapped")
-            presentAlert()
+            cell.action = {
+                print("Register button tapped")
+                self.presentAlert()
+            }
         default:
             break
         }
