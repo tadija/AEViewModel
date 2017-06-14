@@ -29,18 +29,20 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
-    override func configureCell(_ cell: TableViewModelCell, with item: Item) {
-        super.configureCell(cell, with: item)
+    override func configureCell(_ cell: TableViewModelCell, with item: Item, at indexPath: IndexPath) {
+        super.configureCell(cell, with: item, at: indexPath)
         
         switch item.identifier {
         case FormItem.username.rawValue:
             cell.action = {
-                print("Handle custom action here")
+                let nextIndexPath = self.nextIndexPath(from: indexPath)
+                self.becomeFirstResponder(at: nextIndexPath)
             }
         case FormItem.password.rawValue:
             (cell as? TableCell.TextInput)?.textField.isSecureTextEntry = true
             cell.action = {
-                print("Handle custom action here")
+                let previousIndexPath = self.previousIndexPath(from: indexPath)
+                self.becomeFirstResponder(at: previousIndexPath)
             }
         case FormItem.accept.rawValue:
             cell.action = {
@@ -48,7 +50,6 @@ final class FormTVMC: TableViewModelController {
             }
         case FormItem.register.rawValue:
             cell.action = {
-                print("Register button tapped")
                 self.presentAlert()
             }
         default:
@@ -57,6 +58,15 @@ final class FormTVMC: TableViewModelController {
     }
     
     // MARK: Helpers
+    
+    private func becomeFirstResponder(at indexPath: IndexPath?) {
+        guard let indexPath = indexPath else {
+            return
+        }
+        if let cell = tableView.cellForRow(at: indexPath) as? TableCell.TextInput {
+            cell.textField.becomeFirstResponder()
+        }
+    }
     
     private func presentAlert() {
         let alert = UIAlertController(title: "Thank you",

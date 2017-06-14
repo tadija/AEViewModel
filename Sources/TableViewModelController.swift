@@ -44,7 +44,7 @@ open class TableViewModelController: UITableViewController {
         return .basic
     }
     
-    open func configureCell(_ cell: TableViewModelCell, with item: Item) {
+    open func configureCell(_ cell: TableViewModelCell, with item: Item, at indexPath: IndexPath) {
         cell.update(with: item)
     }
     
@@ -64,6 +64,31 @@ open class TableViewModelController: UITableViewController {
             tvmc.model = model
             navigationController?.pushViewController(tvmc, animated: true)
         }
+    }
+    
+    public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {
+        var newIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+        if newIndexPath.row >= tableView(tableView, numberOfRowsInSection: indexPath.section) {
+            let newSection = indexPath.section + 1
+            newIndexPath = IndexPath(row: 0, section: newSection)
+            if newSection >= numberOfSections(in: tableView) {
+                return nil
+            }
+        }
+        return newIndexPath
+    }
+    
+    public func previousIndexPath(from indexPath: IndexPath) -> IndexPath? {
+        var newIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+        if newIndexPath.row < 0 {
+            let newSection = indexPath.section - 1
+            if newSection < 0 {
+                return nil
+            }
+            let maxRow = tableView(tableView, numberOfRowsInSection: newSection) - 1
+            newIndexPath = IndexPath(row: maxRow, section: newSection)
+        }
+        return newIndexPath
     }
     
     // MARK: Helpers
@@ -127,7 +152,7 @@ extension TableViewModelController {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         if let cell = cell as? TableViewModelCell {
-            configureCell(cell, with: item)
+            configureCell(cell, with: item, at: indexPath)
         }
         return cell
     }

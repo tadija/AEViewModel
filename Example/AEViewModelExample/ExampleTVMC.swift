@@ -23,8 +23,8 @@ final class ExampleTVMC: TableViewModelController {
         return .subtitle
     }
     
-    override func configureCell(_ cell: TableViewModelCell, with item: Item) {
-        super.configureCell(cell, with: item)
+    override func configureCell(_ cell: TableViewModelCell, with item: Item, at indexPath: IndexPath) {
+        super.configureCell(cell, with: item, at: indexPath)
         
         switch item.identifier {
         case ExampleItem.form.rawValue:
