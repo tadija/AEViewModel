@@ -29,12 +29,36 @@ public protocol Section: ViewModel {
     var items: [Item] { get set }
 }
 
+public struct BasicSection: Section {
+    public var header: String?
+    public var footer: String?
+    public var items: [Item]
+    
+    public init(header: String? = nil, footer: String? = nil, items: [Item] = [Item]()) {
+        self.header = header
+        self.footer = footer
+        self.items = items
+    }
+}
+
 // MARK: - Item
 
 public protocol Item: ViewModel {
     var identifier: String { get }
     var data: ItemData? { get set }
     var child: ViewModel? { get set }
+}
+
+public struct BasicItem: Item {
+    public let identifier: String
+    public var data: ItemData?
+    public var child: ViewModel?
+    
+    public init(identifier: String, data: ItemData? = nil, child: ViewModel? = nil) {
+        self.identifier = identifier
+        self.data = data
+        self.child = child
+    }
 }
 
 // MARK: - ItemData
