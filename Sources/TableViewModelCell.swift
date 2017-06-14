@@ -3,35 +3,29 @@ import UIKit
 // MARK: - TableViewModelCell
 
 public protocol TableViewModelCell: class {
-    func customizeUI()
-    func updateUI(with item: Item)
+    func customize()
+    func update(with item: Item)
 }
 
 public extension TableViewModelCell where Self: UITableViewCell {}
 
-// MARK: - Cell
+// MARK: - TableCell
 
-public struct Cell {
-    private init() {}
-}
-
-extension Cell {
-    public enum UI {
-        case basic
-        case subtitle
-        case leftDetail
-        case rightDetail
-        case button
-        case toggle
-        case textInput
-        case customClass(type: TableViewModelCell.Type)
-        case customNib(nib: UINib?)
-    }
+public enum TableCell {
+    case basic
+    case subtitle
+    case leftDetail
+    case rightDetail
+    case button
+    case toggle
+    case textInput
+    case customClass(type: TableViewModelCell.Type)
+    case customNib(nib: UINib?)
 }
 
 // MARK: - System Cells
 
-extension Cell {
+extension TableCell {
     
     open class Basic: UITableViewCell, TableViewModelCell {
         public var action: () -> Void = {}
@@ -41,15 +35,15 @@ extension Cell {
         }
         public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            customizeUI()
+            customize()
         }
         open override func awakeFromNib() {
             super.awakeFromNib()
-            customizeUI()
+            customize()
         }
         
-        open func customizeUI() {}
-        open func updateUI(with item: Item) {
+        open func customize() {}
+        open func update(with item: Item) {
             if let data = item.data {
                 textLabel?.text = data.title
                 detailTextLabel?.text = data.detail
@@ -101,12 +95,12 @@ extension Cell {
 
 // MARK: - Custom Cells
 
-extension Cell {
+extension TableCell {
     
     open class Toggle: Basic {
         public let toggle = UISwitch()
 
-        open override func customizeUI() {
+        open override func customize() {
             selectionStyle = .none
             accessoryView = toggle
             toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
@@ -116,7 +110,7 @@ extension Cell {
     open class TextInput: Basic {
         public let textField = UITextField()
         
-        open override func customizeUI() {
+        open override func customize() {
             selectionStyle = .none
             configureTextField()
         }
@@ -130,7 +124,7 @@ extension Cell {
             textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
             textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
         }
-        open override func updateUI(with item: Item) {
+        open override func update(with item: Item) {
             textField.placeholder = item.data?.title
         }
     }
@@ -138,7 +132,7 @@ extension Cell {
     open class Button: Basic {
         public let button = UIButton(type: .system)
         
-        open override func customizeUI() {
+        open override func customize() {
             selectionStyle = .none
             configureButton()
             button.addTarget(self, action: #selector(callAction), for: .touchUpInside)
@@ -152,7 +146,7 @@ extension Cell {
             button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         }
-        open override func updateUI(with item: Item) {
+        open override func update(with item: Item) {
             button.setTitle(item.data?.title, for: .normal)
         }
     }

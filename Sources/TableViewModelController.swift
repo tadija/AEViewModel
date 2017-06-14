@@ -40,22 +40,22 @@ open class TableViewModelController: UITableViewController {
     
     open func customInit() {}
     
-    open func cellUI(forIdentifier identifier: String) -> Cell.UI {
+    open func cell(forIdentifier identifier: String) -> TableCell {
         return .basic
     }
     
     open func updateCell(_ cell: TableViewModelCell, with item: Item) {
-        cell.updateUI(with: item)
+        cell.update(with: item)
 
-        if let cell = cell as? Cell.Button {
-            cell.action = {
-                self.handleEvent(.touchUpInside, with: item, sender: cell.button)
-            }
-        }
-
-        if let cell = cell as? Cell.Toggle {
+        if let cell = cell as? TableCell.Toggle {
             cell.action = {
                 self.handleEvent(.valueChanged, with: item, sender: cell.toggle)
+            }
+        }
+        
+        if let cell = cell as? TableCell.Button {
+            cell.action = {
+                self.handleEvent(.touchUpInside, with: item, sender: cell.button)
             }
         }
     }
@@ -101,21 +101,21 @@ open class TableViewModelController: UITableViewController {
     }
     
     private func registerCell(with identifier: String) {
-        switch cellUI(forIdentifier: identifier) {
+        switch cell(forIdentifier: identifier) {
         case .basic:
-            tableView.register(Cell.Basic.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCell.Basic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
-            tableView.register(Cell.Subtitle.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCell.Subtitle.self, forCellReuseIdentifier: identifier)
         case .leftDetail:
-            tableView.register(Cell.LeftDetail.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCell.LeftDetail.self, forCellReuseIdentifier: identifier)
         case .rightDetail:
-            tableView.register(Cell.RightDetail.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCell.RightDetail.self, forCellReuseIdentifier: identifier)
         case .button:
-            tableView.register(Cell.Button.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCell.Button.self, forCellReuseIdentifier: identifier)
         case .toggle:
-            tableView.register(Cell.Toggle.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCell.Toggle.self, forCellReuseIdentifier: identifier)
         case .textInput:
-            tableView.register(Cell.TextInput.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCell.TextInput.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellNib):

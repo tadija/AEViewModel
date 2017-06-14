@@ -11,21 +11,23 @@ import AEViewModel
 
 final class ExampleTVMC: TableViewModelController {
     
+    typealias ExampleItem = ExampleTable.ItemType
+    
     // MARK: Override
     
     override func customInit() {
         model = ExampleTable()
     }
     
-    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         return .subtitle
     }
     
     override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         switch item.identifier {
-        case ExampleTable.ItemType.form.rawValue:
+        case ExampleItem.form.rawValue:
             pushTable(from: item, in: FormTVMC())
-        case ExampleTable.ItemType.settings.rawValue:
+        case ExampleItem.settings.rawValue:
             pushTable(from: item, in: SettingsTVMC())
         default:
             break

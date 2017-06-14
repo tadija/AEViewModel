@@ -9,7 +9,7 @@
 import UIKit
 import AEViewModel
 
-class CustomCellWithNib: Cell.Basic {
+class CustomCellWithNib: TableCell.Basic {
     
     // MARK: - Outlets
     
@@ -19,12 +19,12 @@ class CustomCellWithNib: Cell.Basic {
     
     // MARK: - TableCell
     
-    override func customizeUI() {
+    override func customize() {
         customImageView.layer.cornerRadius = 28
         customImageView.layer.masksToBounds = true
     }
     
-    override func updateUI(with item: Item) {
+    override func update(with item: Item) {
         if let data = item.data {
             title.text = data.title
             subtitle.text = data.detail
