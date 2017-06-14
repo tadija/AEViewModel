@@ -13,7 +13,7 @@ final class FormTVMC: TableViewModelController {
     
     // MARK: Override
     
-    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         switch identifier {
         case FormTable.ItemType.accept.rawValue:
             return .toggle

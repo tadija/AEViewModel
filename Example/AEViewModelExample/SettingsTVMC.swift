@@ -50,7 +50,7 @@ final class SettingsTVMC: TableViewModelController {
     
     // MARK: Override
 
-    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         switch identifier {
         case id.profile.rawValue:
             let nib = UINib(nibName: "CustomCellWithNib", bundle: nil)
@@ -92,7 +92,7 @@ class WiFiSettingsTVMC: TableViewModelController {
     
     // MARK: Override
     
-    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         switch identifier {
         case id.wifiSwitch.rawValue, id.joinNetworksSwitch.rawValue:
             return .toggle

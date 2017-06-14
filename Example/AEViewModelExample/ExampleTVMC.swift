@@ -17,7 +17,7 @@ final class ExampleTVMC: TableViewModelController {
         model = ExampleTable()
     }
     
-    override func cellUI(forIdentifier identifier: String) -> Cell.UI {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         return .subtitle
     }
     
