@@ -47,15 +47,15 @@ open class TableViewModelController: UITableViewController {
     open func updateCell(_ cell: TableViewModelCell, with item: Item) {
         cell.update(with: item)
 
-        if let cell = cell as? TableCell.Button {
-            cell.action = {
-                self.handleEvent(.touchUpInside, with: item, sender: cell.button)
-            }
-        }
-
         if let cell = cell as? TableCell.Toggle {
             cell.action = {
                 self.handleEvent(.valueChanged, with: item, sender: cell.toggle)
+            }
+        }
+        
+        if let cell = cell as? TableCell.Button {
+            cell.action = {
+                self.handleEvent(.touchUpInside, with: item, sender: cell.button)
             }
         }
     }
