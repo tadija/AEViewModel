@@ -68,8 +68,8 @@ final class SettingsTVMC: TableViewModelController {
         }
     }
     
-    override func configureCell(_ cell: TableViewModelCell, with item: Item, at indexPath: IndexPath) {
-        super.configureCell(cell, with: item, at: indexPath)
+    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
+        super.configureCell(cell, at: indexPath, with: item)
         
         switch item.identifier {
         case SettingsItem.airplane.rawValue,
@@ -115,8 +115,8 @@ class WiFiSettingsTVMC: TableViewModelController {
         }
     }
     
-    override func configureCell(_ cell: TableViewModelCell, with item: Item, at indexPath: IndexPath) {
-        super.configureCell(cell, with: item, at: indexPath)
+    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
+        super.configureCell(cell, at: indexPath, with: item)
         
         switch item.identifier {
         case WifiItem.wifiSwitch.rawValue,
