@@ -27,16 +27,16 @@ struct FormTable: Table {
     var sections: [Section]
     
     init() {
-        let firstName = BasicItem(identifier: ItemType.firstname.rawValue, data: BasicItemData(title: "First Name"))
-        let lastName = BasicItem(identifier: ItemType.lastname.rawValue, data: BasicItemData(title: "Last Name"))
+        let firstName = BasicItem(identifier: ItemType.firstname.rawValue, title: "First Name")
+        let lastName = BasicItem(identifier: ItemType.lastname.rawValue, title: "Last Name")
         let userInfo = BasicSection(items: [firstName, lastName])
         
-        let username = BasicItem(identifier: ItemType.username.rawValue, data: BasicItemData(title: "Username"))
-        let password = BasicItem(identifier: ItemType.password.rawValue, data: BasicItemData(title: "Password"))
+        let username = BasicItem(identifier: ItemType.username.rawValue, title: "Username")
+        let password = BasicItem(identifier: ItemType.password.rawValue, title: "Password")
         let userCredentials = BasicSection(items: [username, password])
         
-        let accept = BasicItem(identifier: ItemType.accept.rawValue, data: BasicItemData(title: "Accept"))
-        let register = BasicItem(identifier: ItemType.register.rawValue, data: BasicItemData(title: "Register"))
+        let accept = BasicItem(identifier: ItemType.accept.rawValue, title: "Accept")
+        let register = BasicItem(identifier: ItemType.register.rawValue, title: "Register")
         let action = BasicSection(items: [accept, register])
         
         sections = [userInfo, userCredentials, action]

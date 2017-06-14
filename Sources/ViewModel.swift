@@ -59,6 +59,14 @@ public struct BasicItem: Item {
         self.data = data
         self.child = child
     }
+    
+    public init(identifier: String,
+                title: String? = nil, detail: String? = nil, image: String? = nil,
+                child: ViewModel? = nil) {
+        self.identifier = identifier
+        self.data = BasicItemData(title: title, detail: detail, image: image)
+        self.child = child
+    }
 }
 
 // MARK: - ItemData
