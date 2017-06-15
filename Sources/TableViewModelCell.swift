@@ -3,6 +3,7 @@ import UIKit
 // MARK: - TableViewModelCell
 
 public protocol TableViewModelCell: class {
+    var action: (_ sender: Any) -> Void { get set }
     func customize()
     func update(with item: Item)
 }
@@ -28,7 +29,7 @@ public enum TableCell {
 extension TableCell {
     
     open class Basic: UITableViewCell, TableViewModelCell {
-        public var action: () -> Void = {}
+        public var action: (Any) -> Void = { sender in }
         
         required public init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
@@ -59,8 +60,8 @@ extension TableCell {
             }
         }
         
-        @objc fileprivate func callAction() {
-            action()
+        @objc public func callAction(sender: Any) {
+            action(sender)
         }
     }
     
@@ -107,7 +108,7 @@ extension TableCell {
         }
     }
     
-    open class TextInput: Basic {
+    open class TextInput: Basic, UITextFieldDelegate {
         public let textField = UITextField()
         
         open override func customize() {
@@ -123,9 +124,16 @@ extension TableCell {
             textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
             textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
             textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+            
+            textField.delegate = self
         }
         open override func update(with item: Item) {
             textField.placeholder = item.data?.title
+        }
+        open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            callAction(sender: textField)
+            return false
         }
     }
     

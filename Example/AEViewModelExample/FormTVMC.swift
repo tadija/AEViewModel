@@ -29,30 +29,56 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
-    override func updateCell(_ cell: TableViewModelCell, with item: Item) {
-        super.updateCell(cell, with: item)
+    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
+        super.configureCell(cell, at: indexPath, with: item)
         
-        if item.identifier == FormItem.password.rawValue, let cell = cell as? TableCell.TextInput {
-            cell.textField.isSecureTextEntry = true
-        }
-    }
-    
-    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
         switch item.identifier {
-        case FormItem.username.rawValue,
-             FormItem.password.rawValue:
-            print("Handle custom action here")
+        case FormItem.username.rawValue:
+            cell.action = { _ in
+                let nextIndexPath = self.nextIndexPath(from: indexPath)
+                self.becomeFirstResponder(at: nextIndexPath)
+            }
+        case FormItem.password.rawValue:
+            (cell as? TableCell.TextInput)?.textField.isSecureTextEntry = true
+            cell.action = { _ in
+                let previousIndexPath = self.previousIndexPath(from: indexPath)
+                self.becomeFirstResponder(at: previousIndexPath)
+            }
         case FormItem.accept.rawValue:
-            print("Accept terms toggled")
+            cell.action = { sender in
+                let enabled = (sender as? UISwitch)?.isOn ?? false
+                let nextIndexPath = self.nextIndexPath(from: indexPath)
+                self.updateButton(at: nextIndexPath, enabled: enabled)
+            }
         case FormItem.register.rawValue:
-            print("Register button tapped")
-            presentAlert()
+            (cell as? TableCell.Button)?.button.isEnabled = false
+            cell.action = { _ in
+                self.presentAlert()
+            }
         default:
             break
         }
     }
     
     // MARK: Helpers
+    
+    private func becomeFirstResponder(at indexPath: IndexPath?) {
+        guard let indexPath = indexPath else {
+            return
+        }
+        if let cell = tableView.cellForRow(at: indexPath) as? TableCell.TextInput {
+            cell.textField.becomeFirstResponder()
+        }
+    }
+    
+    private func updateButton(at indexPath: IndexPath?, enabled: Bool) {
+        guard let indexPath = indexPath else {
+            return
+        }
+        if let cell = tableView.cellForRow(at: indexPath) as? TableCell.Button {
+            cell.button.isEnabled = enabled
+        }
+    }
     
     private func presentAlert() {
         let alert = UIAlertController(title: "Thank you",

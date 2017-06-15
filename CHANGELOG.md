@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 0.2.7
+
+- Improvements and refactoring
+
+## Version 0.2.6
+
+- Improvements and refactoring
+
 ## Version 0.2.5
 
 - Renamed framework: `AETable` -> `AEViewModel`

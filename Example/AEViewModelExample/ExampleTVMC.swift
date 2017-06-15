@@ -23,12 +23,18 @@ final class ExampleTVMC: TableViewModelController {
         return .subtitle
     }
     
-    override func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
+    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
+        super.configureCell(cell, at: indexPath, with: item)
+        
         switch item.identifier {
         case ExampleItem.form.rawValue:
-            pushTable(from: item, in: FormTVMC())
+            cell.action = { _ in
+                self.pushTable(from: item, in: FormTVMC())
+            }
         case ExampleItem.settings.rawValue:
-            pushTable(from: item, in: SettingsTVMC())
+            cell.action = { _ in
+                self.pushTable(from: item, in: SettingsTVMC())
+            }
         default:
             break
         }

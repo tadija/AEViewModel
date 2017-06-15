@@ -44,24 +44,8 @@ open class TableViewModelController: UITableViewController {
         return .basic
     }
     
-    open func updateCell(_ cell: TableViewModelCell, with item: Item) {
+    open func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
         cell.update(with: item)
-
-        if let cell = cell as? TableCell.Toggle {
-            cell.action = {
-                self.handleEvent(.valueChanged, with: item, sender: cell.toggle)
-            }
-        }
-        
-        if let cell = cell as? TableCell.Button {
-            cell.action = {
-                self.handleEvent(.touchUpInside, with: item, sender: cell.button)
-            }
-        }
-    }
-    
-    open func handleEvent(_ event: UIControlEvents, with item: Item, sender: Any) {
-        print("This method is abstract and must be implemented by subclass")
     }
     
     // MARK: API
@@ -80,6 +64,31 @@ open class TableViewModelController: UITableViewController {
             tvmc.model = model
             navigationController?.pushViewController(tvmc, animated: true)
         }
+    }
+    
+    public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {
+        var newIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+        if newIndexPath.row >= tableView(tableView, numberOfRowsInSection: indexPath.section) {
+            let newSection = indexPath.section + 1
+            newIndexPath = IndexPath(row: 0, section: newSection)
+            if newSection >= numberOfSections(in: tableView) {
+                return nil
+            }
+        }
+        return newIndexPath
+    }
+    
+    public func previousIndexPath(from indexPath: IndexPath) -> IndexPath? {
+        var newIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+        if newIndexPath.row < 0 {
+            let newSection = indexPath.section - 1
+            if newSection < 0 {
+                return nil
+            }
+            let maxRow = tableView(tableView, numberOfRowsInSection: newSection) - 1
+            newIndexPath = IndexPath(row: maxRow, section: newSection)
+        }
+        return newIndexPath
     }
     
     // MARK: Helpers
@@ -143,7 +152,7 @@ extension TableViewModelController {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         if let cell = cell as? TableViewModelCell {
-            updateCell(cell, with: item)
+            configureCell(cell, at: indexPath, with: item)
         }
         return cell
     }
@@ -164,12 +173,12 @@ extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
-            let item = model?.item(at: indexPath),
-            let cell = tableView.cellForRow(at: indexPath)
+            let cell = tableView.cellForRow(at: indexPath),
+            let tableViewModelCell = cell as? TableViewModelCell
         else { return }
         
         if cell.selectionStyle != .none {
-            handleEvent(.primaryActionTriggered, with: item, sender: cell)
+            tableViewModelCell.action(cell)
         }
     }
     
