@@ -29,17 +29,18 @@ final class ExampleTVMC: TableViewModelController {
     override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
         super.configureCell(cell, at: indexPath, with: item)
         
-        switch item.identifier {
-        case ExampleItem.form.rawValue:
+        guard let type = ExampleItem(rawValue: item.identifier) else {
+            return
+        }
+        switch type {
+        case .form:
             cell.action = { _ in
                 self.pushTable(from: item, in: FormTVMC())
             }
-        case ExampleItem.settings.rawValue:
+        case .settings:
             cell.action = { _ in
                 self.pushTable(from: item, in: SettingsTVMC())
             }
-        default:
-            break
         }
     }
     
