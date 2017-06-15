@@ -34,22 +34,25 @@ final class FormTVMC: TableViewModelController {
         
         switch item.identifier {
         case FormItem.username.rawValue:
-            cell.action = {
+            cell.action = { _ in
                 let nextIndexPath = self.nextIndexPath(from: indexPath)
                 self.becomeFirstResponder(at: nextIndexPath)
             }
         case FormItem.password.rawValue:
             (cell as? TableCell.TextInput)?.textField.isSecureTextEntry = true
-            cell.action = {
+            cell.action = { _ in
                 let previousIndexPath = self.previousIndexPath(from: indexPath)
                 self.becomeFirstResponder(at: previousIndexPath)
             }
         case FormItem.accept.rawValue:
-            cell.action = {
-                print("Accept terms toggled")
+            cell.action = { sender in
+                let enabled = (sender as? UISwitch)?.isOn ?? false
+                let nextIndexPath = self.nextIndexPath(from: indexPath)
+                self.updateButton(at: nextIndexPath, enabled: enabled)
             }
         case FormItem.register.rawValue:
-            cell.action = {
+            (cell as? TableCell.Button)?.button.isEnabled = false
+            cell.action = { _ in
                 self.presentAlert()
             }
         default:
@@ -65,6 +68,15 @@ final class FormTVMC: TableViewModelController {
         }
         if let cell = tableView.cellForRow(at: indexPath) as? TableCell.TextInput {
             cell.textField.becomeFirstResponder()
+        }
+    }
+    
+    private func updateButton(at indexPath: IndexPath?, enabled: Bool) {
+        guard let indexPath = indexPath else {
+            return
+        }
+        if let cell = tableView.cellForRow(at: indexPath) as? TableCell.Button {
+            cell.button.isEnabled = enabled
         }
     }
     

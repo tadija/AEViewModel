@@ -3,7 +3,7 @@ import UIKit
 // MARK: - TableViewModelCell
 
 public protocol TableViewModelCell: class {
-    var action: () -> Void { get set }
+    var action: (_ sender: Any) -> Void { get set }
     func customize()
     func update(with item: Item)
 }
@@ -29,7 +29,7 @@ public enum TableCell {
 extension TableCell {
     
     open class Basic: UITableViewCell, TableViewModelCell {
-        public var action: () -> Void = {}
+        public var action: (Any) -> Void = { sender in }
         
         required public init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
@@ -60,8 +60,8 @@ extension TableCell {
             }
         }
         
-        @objc fileprivate func callAction() {
-            action()
+        @objc public func callAction(sender: Any) {
+            action(sender)
         }
     }
     
@@ -132,7 +132,7 @@ extension TableCell {
         }
         open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder()
-            callAction()
+            callAction(sender: textField)
             return false
         }
     }

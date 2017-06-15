@@ -74,11 +74,11 @@ final class SettingsTVMC: TableViewModelController {
         switch item.identifier {
         case SettingsItem.airplane.rawValue,
              SettingsItem.vpn.rawValue:
-            cell.action = {
+            cell.action = { _ in
                 print("handleEvent with id: \(item.identifier)")
             }
         case SettingsItem.wifi.rawValue:
-            cell.action = {
+            cell.action = { _ in
                 let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
                 self.pushTable(from: item, in: wifiSubmenu)
             }
@@ -86,7 +86,7 @@ final class SettingsTVMC: TableViewModelController {
              SettingsItem.cellular.rawValue,
              SettingsItem.hotspot.rawValue,
              SettingsItem.carrier.rawValue:
-            cell.action = {
+            cell.action = { _ in
                 let defaultSubmenu = TableViewModelController(style: .grouped)
                 self.pushTable(from: item, in: defaultSubmenu)
             }
@@ -121,11 +121,11 @@ class WiFiSettingsTVMC: TableViewModelController {
         switch item.identifier {
         case WifiItem.wifiSwitch.rawValue,
              WifiItem.joinNetworksSwitch.rawValue:
-            cell.action = {
+            cell.action = { _ in
                 print("handleEvent with id: \(item.identifier)")
             }
         case WifiItem.wifiNetwork.rawValue:
-            cell.action = {
+            cell.action = { _ in
                 let tvc = TableViewModelController(style: .grouped)
                 self.pushTable(from: item, in: tvc)
             }

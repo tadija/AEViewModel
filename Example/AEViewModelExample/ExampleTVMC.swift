@@ -28,11 +28,11 @@ final class ExampleTVMC: TableViewModelController {
         
         switch item.identifier {
         case ExampleItem.form.rawValue:
-            cell.action = {
+            cell.action = { _ in
                 self.pushTable(from: item, in: FormTVMC())
             }
         case ExampleItem.settings.rawValue:
-            cell.action = {
+            cell.action = { _ in
                 self.pushTable(from: item, in: SettingsTVMC())
             }
         default:

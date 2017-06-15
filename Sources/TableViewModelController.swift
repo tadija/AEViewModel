@@ -178,7 +178,7 @@ extension TableViewModelController {
         else { return }
         
         if cell.selectionStyle != .none {
-            tableViewModelCell.action()
+            tableViewModelCell.action(cell)
         }
     }
     
