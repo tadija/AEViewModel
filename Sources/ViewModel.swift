@@ -74,6 +74,12 @@ public protocol ItemData {
     var image: String? { get }
 }
 
+extension ItemData {
+    var title: String? { return nil }
+    var detail: String? { return nil }
+    var image: String? { return nil }
+}
+
 public struct BasicItemData: ItemData {
     public let title: String?
     public let detail: String?
