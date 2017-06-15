@@ -9,35 +9,9 @@
 import UIKit
 import AEViewModel
 
-extension MappableTable {
-    static var Settings: MappableTable {
-        let url = Bundle.main.url(forResource: "settings", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let table = try! MappableTable(jsonData: data)
-        return table
-    }
-    
-    enum SettingsItemType: String {
-        case profile
-        case airplane
-        case wifi
-        case bluetooth
-        case cellular
-        case hotspot
-        case vpn
-        case carrier
-    }
-    
-    enum WifiItemType: String {
-        case wifiSwitch
-        case wifiNetwork
-        case joinNetworksSwitch
-    }
-}
-
 final class SettingsTVMC: TableViewModelController {
     
-    typealias SettingsItem = MappableTable.SettingsItemType
+    typealias SettingsItem = SettingsTable.ItemType
     
     // MARK: Lifecycle
     
@@ -101,7 +75,7 @@ final class SettingsTVMC: TableViewModelController {
 
 class WiFiSettingsTVMC: TableViewModelController {
     
-    typealias WifiItem = MappableTable.WifiItemType
+    typealias WifiItem = SettingsTable.Wifi.ItemType
     
     // MARK: Override
     
