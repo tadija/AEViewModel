@@ -29,7 +29,7 @@ public enum TableCell {
 extension TableCell {
     
     open class Basic: UITableViewCell, TableViewModelCell {
-        public var action: (Any) -> Void = { sender in }
+        public var useAutomaticDisclosureIndicator = true
         
         required public init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
@@ -43,6 +43,7 @@ extension TableCell {
             customize()
         }
         
+        public var action: (Any) -> Void = { _ in }
         open func customize() {}
         open func update(with item: Item) {
             if let data = item.data {
@@ -54,12 +55,12 @@ extension TableCell {
             }
             configureAutomaticDisclosureIndicator(with: item)
         }
+        
         open func configureAutomaticDisclosureIndicator(with item: Item) {
-            if let table = item.child as? Table, table.sections.count > 0 {
+            if useAutomaticDisclosureIndicator, let table = item.child as? Table, table.sections.count > 0 {
                 accessoryType = .disclosureIndicator
             }
         }
-        
         @objc public func callAction(sender: Any) {
             action(sender)
         }
@@ -103,6 +104,9 @@ extension TableCell {
 
         open override func customize() {
             selectionStyle = .none
+            configureToggle()
+        }
+        private func configureToggle() {
             accessoryView = toggle
             toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
         }
@@ -143,7 +147,6 @@ extension TableCell {
         open override func customize() {
             selectionStyle = .none
             configureButton()
-            button.addTarget(self, action: #selector(callAction), for: .touchUpInside)
         }
         private func configureButton() {
             contentView.addSubview(button)
@@ -153,6 +156,8 @@ extension TableCell {
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
             button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+            
+            button.addTarget(self, action: #selector(callAction), for: .touchUpInside)
         }
         open override func update(with item: Item) {
             button.setTitle(item.data?.title, for: .normal)

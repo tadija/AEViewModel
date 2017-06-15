@@ -48,7 +48,7 @@ struct ExampleTable: Table {
         struct Settings: Item {
             let identifier = ItemType.settings.rawValue
             var data: ItemData? = BasicItemData(title: "Settings", detail: "JSON Table View Model")
-            var child: ViewModel? = MappableTable.Settings
+            var child: ViewModel? = SettingsTable.fromJson
         }
         
     }

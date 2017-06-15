@@ -12,9 +12,6 @@ public protocol DataSourceModel: ViewModel {
 }
 
 public extension DataSourceModel {
-    public var title: String {
-        return String()
-    }
     public func item(at indexPath: IndexPath) -> Item? {
         let item = sections[indexPath.section].items[indexPath.item]
         return item
@@ -75,6 +72,12 @@ public protocol ItemData {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
+}
+
+extension ItemData {
+    var title: String? { return nil }
+    var detail: String? { return nil }
+    var image: String? { return nil }
 }
 
 public struct BasicItemData: ItemData {
