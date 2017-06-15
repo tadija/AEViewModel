@@ -12,9 +12,6 @@ public protocol DataSourceModel: ViewModel {
 }
 
 public extension DataSourceModel {
-    public var title: String {
-        return String()
-    }
     public func item(at indexPath: IndexPath) -> Item? {
         let item = sections[indexPath.section].items[indexPath.item]
         return item

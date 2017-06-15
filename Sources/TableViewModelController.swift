@@ -8,25 +8,13 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Init
     
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        customInit()
-    }
-    
-    public override init(style: UITableViewStyle) {
-        super.init(style: style)
-        customInit()
-    }
-    
     public convenience init(style: UITableViewStyle, model: Table) {
         self.init(style: style)
         self.model = model
-        customInit()
     }
     
     public convenience init() {
         self.init(style: .grouped)
-        customInit()
     }
     
     // MARK: Lifecycle
@@ -37,8 +25,6 @@ open class TableViewModelController: UITableViewController {
     }
     
     // MARK: Abstract
-    
-    open func customInit() {}
     
     open func cell(forIdentifier identifier: String) -> TableCell {
         return .basic

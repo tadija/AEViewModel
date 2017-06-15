@@ -13,11 +13,14 @@ final class ExampleTVMC: TableViewModelController {
     
     typealias ExampleItem = ExampleTable.ItemType
     
-    // MARK: Override
+    // MARK: Lifecycle
     
-    override func customInit() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
         model = ExampleTable()
     }
+    
+    // MARK: Override
     
     override func cell(forIdentifier identifier: String) -> TableCell {
         return .subtitle
