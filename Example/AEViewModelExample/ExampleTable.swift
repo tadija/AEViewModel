@@ -15,6 +15,7 @@ struct ExampleTable: Table {
     enum ItemType: String {
         case form
         case settings
+        case github
     }
     
     // MARK: Table
@@ -49,6 +50,12 @@ struct ExampleTable: Table {
             let identifier = ItemType.settings.rawValue
             var data: ItemData? = BasicItemData(title: "Settings", detail: "JSON Table View Model")
             var child: ViewModel? = SettingsTable.fromJson
+        }
+        
+        struct Github: Item {
+            let identifier = ItemType.github.rawValue
+            var data: ItemData? = BasicItemData(title: "Github", detail: "Trending Swift Repos")
+            var child: ViewModel? = GithubTable()
         }
         
     }
