@@ -29,8 +29,7 @@ final class GithubTVMC: TableViewModelController {
         didSet {
             let items = repos.map { BasicItem(identifier: GithubItem.repo.rawValue, data: $0) }
             let section = BasicSection(items: items)
-            var table = GithubTable()
-            table.sections = [section]
+            let table = BasicTable(title: "Github", sections: [section])
             model = table
         }
     }

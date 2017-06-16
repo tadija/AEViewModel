@@ -7,7 +7,7 @@ public protocol ViewModel {}
 // MARK: - DataSourceViewModel
 
 public protocol DataSourceModel: ViewModel {
-    var title: String { get }
+    var title: String { get set }
     var sections: [Section] { get set }
 }
 
@@ -15,6 +15,16 @@ public extension DataSourceModel {
     public func item(at indexPath: IndexPath) -> Item? {
         let item = sections[indexPath.section].items[indexPath.item]
         return item
+    }
+}
+
+public struct BasicDataSourceModel: DataSourceModel {
+    public var title: String
+    public var sections: [Section]
+    
+    public init(title: String = String(), sections: [Section] = [Section]()) {
+        self.title = title
+        self.sections = sections
     }
 }
 
@@ -95,7 +105,9 @@ public struct BasicItemData: ItemData {
 // MARK: - Table
 
 public typealias Table = DataSourceModel
+public typealias BasicTable = BasicDataSourceModel
 
 // MARK: - Collection
 
 public typealias Collection = DataSourceModel
+public typealias BasicCollection = BasicDataSourceModel

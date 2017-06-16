@@ -21,7 +21,7 @@ struct FormTable: Table {
     
     // MARK: Table
     
-    let title = "Registration"
+    var title = "Registration"
     var sections: [Section]
     
     init() {

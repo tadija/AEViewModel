@@ -18,7 +18,7 @@ struct GithubTable: Table {
     
     // MARK: Table
     
-    let title = "Github"
+    var title = "Github"
     var sections = [Section]()
     
     init() {

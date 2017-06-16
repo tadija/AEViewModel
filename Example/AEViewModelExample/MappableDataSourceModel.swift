@@ -22,7 +22,7 @@ struct MappableDataSourceModel: DataSourceModel, Mappable {
     
     // MARK: Table
     
-    let title: String
+    var title: String
     var sections: [Section]
     
     // MARK: Mappable
