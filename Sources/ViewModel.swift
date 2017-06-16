@@ -27,14 +27,14 @@ public protocol Section: ViewModel {
 }
 
 public struct BasicSection: Section {
+    public var items: [Item]
     public var header: String?
     public var footer: String?
-    public var items: [Item]
     
-    public init(header: String? = nil, footer: String? = nil, items: [Item] = [Item]()) {
+    public init(items: [Item] = [Item](), header: String? = nil, footer: String? = nil) {
+        self.items = items
         self.header = header
         self.footer = footer
-        self.items = items
     }
 }
 

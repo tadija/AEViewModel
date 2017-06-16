@@ -45,19 +45,29 @@ final class GithubTVMC: TableViewModelController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        configureRefreshControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let refreshControl = refreshControl {
-            tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
-            refreshControl.beginRefreshing()
-            refresh(refreshControl)
-        }
+        performManualRefresh()
+    }
+    
+    // MARK: Override
+    
+    override func cell(forIdentifier identifier: String) -> TableCell {
+        return .subtitle
+    }
+    
+    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
+        super.configureCell(cell, at: indexPath, with: item)
+    }
+    
+    // MARK: Helpers
+    
+    private func configureRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
     }
     
     @objc
@@ -70,14 +80,12 @@ final class GithubTVMC: TableViewModelController {
         }
     }
     
-    // MARK: Override
-    
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        return .subtitle
-    }
-    
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
-        super.configureCell(cell, at: indexPath, with: item)
+    private func performManualRefresh() {
+        if let refreshControl = refreshControl {
+            tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+            refreshControl.beginRefreshing()
+            refresh(refreshControl)
+        }
     }
     
 }

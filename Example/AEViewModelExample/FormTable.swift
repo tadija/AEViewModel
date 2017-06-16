@@ -27,11 +27,11 @@ struct FormTable: Table {
     init() {
         let username = BasicItem(identifier: ItemType.username.rawValue, title: "Username")
         let password = BasicItem(identifier: ItemType.password.rawValue, title: "Password")
-        let credentials = BasicSection(header: "Input", items: [username, password])
+        let credentials = BasicSection(items: [username, password], header: "Input")
         
         let accept = BasicItem(identifier: ItemType.accept.rawValue, title: "Accept Terms")
         let register = BasicItem(identifier: ItemType.register.rawValue, title: "Register")
-        let action = BasicSection(header: "Actions", items: [accept, register])
+        let action = BasicSection(items: [accept, register], header: "Actions")
         
         sections = [credentials, action]
     }
