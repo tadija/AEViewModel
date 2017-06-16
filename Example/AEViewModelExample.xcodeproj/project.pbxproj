@@ -26,6 +26,9 @@
 		8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */; };
 		8BE0C4EF1EF32F4200E6F95F /* SettingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */; };
 		8BE0C5051EF4808F00E6F95F /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE0C5041EF4808F00E6F95F /* Network.framework */; };
+		8BE0C50F1EF482D300E6F95F /* Github.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C50E1EF482D300E6F95F /* Github.swift */; };
+		8BE0C5111EF492BA00E6F95F /* GithubModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C5101EF492BA00E6F95F /* GithubModels.swift */; };
+		8BE0C5131EF492F400E6F95F /* GithubDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C5121EF492F400E6F95F /* GithubDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +92,9 @@
 		8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithNib.swift; sourceTree = "<group>"; };
 		8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTable.swift; sourceTree = "<group>"; };
 		8BE0C5041EF4808F00E6F95F /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Carthage/Build/iOS/Network.framework; sourceTree = "<group>"; };
+		8BE0C50E1EF482D300E6F95F /* Github.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Github.swift; sourceTree = "<group>"; };
+		8BE0C5101EF492BA00E6F95F /* GithubModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubModels.swift; sourceTree = "<group>"; };
+		8BE0C5121EF492F400E6F95F /* GithubDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +134,7 @@
 		8B32764A1E9AF40F00FD9502 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8B893A841E98606700B3101B /* LaunchScreen.storyboard */,
 				8B893A821E98606700B3101B /* Assets.xcassets */,
 				8B893A871E98606700B3101B /* Info.plist */,
 			);
@@ -156,11 +163,11 @@
 			isa = PBXGroup;
 			children = (
 				8B893A7B1E98606700B3101B /* AppDelegate.swift */,
-				8B893A841E98606700B3101B /* LaunchScreen.storyboard */,
 				8B893A7F1E98606700B3101B /* Main.storyboard */,
 				8BE0C5071EF480F000E6F95F /* Example */,
 				8BE0C5081EF480FB00E6F95F /* Form */,
 				8BE0C5091EF480FF00E6F95F /* Settings */,
+				8BE0C50D1EF482A500E6F95F /* Github */,
 				8B32764A1E9AF40F00FD9502 /* Resources */,
 			);
 			path = AEViewModelExample;
@@ -220,6 +227,16 @@
 				8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		8BE0C50D1EF482A500E6F95F /* Github */ = {
+			isa = PBXGroup;
+			children = (
+				8BE0C50E1EF482D300E6F95F /* Github.swift */,
+				8BE0C5101EF492BA00E6F95F /* GithubModels.swift */,
+				8BE0C5121EF492F400E6F95F /* GithubDataSource.swift */,
+			);
+			name = Github;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,10 +361,13 @@
 				8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */,
 				8B7281C51EE340E5007245E7 /* FormTable.swift in Sources */,
 				8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */,
+				8BE0C5111EF492BA00E6F95F /* GithubModels.swift in Sources */,
 				8BE0C4EF1EF32F4200E6F95F /* SettingsTable.swift in Sources */,
 				8B7281AE1EE2E607007245E7 /* ExampleTable.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
+				8BE0C50F1EF482D300E6F95F /* Github.swift in Sources */,
 				8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */,
+				8BE0C5131EF492F400E6F95F /* GithubDataSource.swift in Sources */,
 				8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */,
 				8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */,
 				8B2EAE1B1EEB3BD4001FE287 /* MappableDataSourceModel.swift in Sources */,
