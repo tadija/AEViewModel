@@ -357,6 +357,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Mappable.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Network.framework",
 			);
 			name = Carthage;
 			outputPaths = (

@@ -35,7 +35,8 @@ struct ExampleTable: Table {
         var footer: String?
         var items: [Item] = [
             Form(),
-            Settings()
+            Settings(),
+            Github()
         ]
         
         // MARK: Items
