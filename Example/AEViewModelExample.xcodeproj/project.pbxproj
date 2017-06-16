@@ -25,6 +25,7 @@
 		8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */; };
 		8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */; };
 		8BE0C4EF1EF32F4200E6F95F /* SettingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */; };
+		8BE0C5051EF4808F00E6F95F /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE0C5041EF4808F00E6F95F /* Network.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithCode.swift; sourceTree = "<group>"; };
 		8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithNib.swift; sourceTree = "<group>"; };
 		8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTable.swift; sourceTree = "<group>"; };
+		8BE0C5041EF4808F00E6F95F /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Carthage/Build/iOS/Network.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +96,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */,
 				8B2EAE4A1EF0889F001FE287 /* AEViewModel.framework in Frameworks */,
+				8BE0C5051EF4808F00E6F95F /* Network.framework in Frameworks */,
+				8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +158,7 @@
 			children = (
 				8B2EAE2C1EEF31A1001FE287 /* Cartfile */,
 				8B2EAE2D1EEF31A1001FE287 /* Cartfile.resolved */,
+				8BE0C5041EF4808F00E6F95F /* Network.framework */,
 				8B2EAE321EEF3332001FE287 /* Mappable.framework */,
 			);
 			name = Frameworks;
