@@ -35,12 +35,6 @@ final class GithubTVMC: TableViewModelController {
         }
     }
     
-    override var model: Table? {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
     // MARK: Init
     
     public convenience init() {

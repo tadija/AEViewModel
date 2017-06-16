@@ -4,7 +4,11 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
     
-    open var model: Table?
+    open var model: Table? {
+        didSet {
+            didUpdateModel()
+        }
+    }
     
     // MARK: Init
     
@@ -25,6 +29,12 @@ open class TableViewModelController: UITableViewController {
     }
     
     // MARK: Abstract
+    
+    open func didUpdateModel() {
+        if model != nil {
+            tableView.reloadData()
+        }
+    }
     
     open func cell(forIdentifier identifier: String) -> TableCell {
         return .basic
