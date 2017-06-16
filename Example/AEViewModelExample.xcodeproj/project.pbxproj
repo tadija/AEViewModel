@@ -105,45 +105,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8B0E708D1EBFC3B0000153CD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8B7281AD1EE2E607007245E7 /* ExampleTable.swift */,
-				8B7281C41EE340E5007245E7 /* FormTable.swift */,
-				8BE0C4F11EF32F5A00E6F95F /* Settings */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		8B0E708E1EBFC3BD000153CD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8B893A7F1E98606700B3101B /* Main.storyboard */,
-				8B0E70901EBFC405000153CD /* Cells */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		8B0E708F1EBFC3FE000153CD /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */,
-				8B7281C71EE346A9007245E7 /* FormTVMC.swift */,
-				8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		8B0E70901EBFC405000153CD /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */,
-				8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */,
-				8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
 		8B2EAE421EF0888E001FE287 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,14 +125,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8B32764A1E9AF40F00FD9502 /* Supporting Files */ = {
+		8B32764A1E9AF40F00FD9502 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8B893A841E98606700B3101B /* LaunchScreen.storyboard */,
 				8B893A821E98606700B3101B /* Assets.xcassets */,
 				8B893A871E98606700B3101B /* Info.plist */,
 			);
-			name = "Supporting Files";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		8B893A6F1E98606700B3101B = {
@@ -196,22 +156,70 @@
 			isa = PBXGroup;
 			children = (
 				8B893A7B1E98606700B3101B /* AppDelegate.swift */,
-				8B0E708D1EBFC3B0000153CD /* Model */,
-				8B0E708E1EBFC3BD000153CD /* View */,
-				8B0E708F1EBFC3FE000153CD /* Controller */,
-				8B32764A1E9AF40F00FD9502 /* Supporting Files */,
+				8B893A841E98606700B3101B /* LaunchScreen.storyboard */,
+				8B893A7F1E98606700B3101B /* Main.storyboard */,
+				8BE0C5071EF480F000E6F95F /* Example */,
+				8BE0C5081EF480FB00E6F95F /* Form */,
+				8BE0C5091EF480FF00E6F95F /* Settings */,
+				8B32764A1E9AF40F00FD9502 /* Resources */,
 			);
 			path = AEViewModelExample;
 			sourceTree = "<group>";
 		};
-		8BE0C4F11EF32F5A00E6F95F /* Settings */ = {
+		8BE0C5071EF480F000E6F95F /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				8B7281AD1EE2E607007245E7 /* ExampleTable.swift */,
+				8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */,
+			);
+			name = Example;
+			sourceTree = "<group>";
+		};
+		8BE0C5081EF480FB00E6F95F /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				8B7281C41EE340E5007245E7 /* FormTable.swift */,
+				8B7281C71EE346A9007245E7 /* FormTVMC.swift */,
+			);
+			name = Form;
+			sourceTree = "<group>";
+		};
+		8BE0C5091EF480FF00E6F95F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */,
-				8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */,
-				8B893A8D1E9860C300B3101B /* settings.json */,
+				8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */,
+				8BE0C50C1EF4818E00E6F95F /* Cells */,
+				8BE0C50A1EF4813A00E6F95F /* Helpers */,
+				8BE0C50B1EF4813F00E6F95F /* Resources */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		8BE0C50A1EF4813A00E6F95F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		8BE0C50B1EF4813F00E6F95F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8B893A8D1E9860C300B3101B /* settings.json */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		8BE0C50C1EF4818E00E6F95F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */,
+				8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */,
+				8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
