@@ -21,4 +21,10 @@ struct GithubTable: Table {
     let title = "Github"
     var sections = [Section]()
     
+    init() {
+        let item = BasicItem(identifier: ItemType.repo.rawValue, data: nil, child: nil)
+        let sections = BasicSection(items: [item])
+        self.sections = [sections]
+    }
+    
 }

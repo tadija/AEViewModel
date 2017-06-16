@@ -74,7 +74,7 @@ public protocol ItemData {
     var image: String? { get }
 }
 
-extension ItemData {
+public extension ItemData {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }

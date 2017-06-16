@@ -8,6 +8,15 @@
 
 import AEViewModel
 
+extension Repo: ItemData {
+    var title: String? {
+        return name
+    }
+    var detail: String? {
+        return description
+    }
+}
+
 final class GithubTVMC: TableViewModelController {
     
     typealias GithubItem = GithubTable.ItemType
@@ -16,7 +25,27 @@ final class GithubTVMC: TableViewModelController {
     
     private let dataSource = GithubDataSource()
     
-    private var repos = [Repo]()
+    private var repos = [Repo]() {
+        didSet {
+            let items = repos.map { BasicItem(identifier: GithubItem.repo.rawValue, data: $0) }
+            let section = BasicSection(items: items)
+            var table = GithubTable()
+            table.sections = [section]
+            model = table
+        }
+    }
+    
+    override var model: Table? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK: Init
+    
+    public convenience init() {
+        self.init(style: .plain)
+    }
     
     // MARK: Lifecycle
     
