@@ -8,23 +8,8 @@
 
 import AEViewModel
 
-struct GithubTable: Table {
-    
-    // MARK: Types
-    
-    enum ItemType: String {
+extension BasicTable {
+    enum GithubItemType: String {
         case repo
     }
-    
-    // MARK: Table
-    
-    var title = "Github"
-    var sections = [Section]()
-    
-    init() {
-        let item = BasicItem(identifier: ItemType.repo.rawValue, data: nil, child: nil)
-        let sections = BasicSection(items: [item])
-        self.sections = [sections]
-    }
-    
 }

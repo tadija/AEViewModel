@@ -6,6 +6,7 @@ open class TableViewModelController: UITableViewController {
     
     open var model: Table? {
         didSet {
+            configureTableView()
             didUpdateModel()
         }
     }

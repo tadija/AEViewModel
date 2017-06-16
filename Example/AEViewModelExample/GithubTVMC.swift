@@ -19,7 +19,7 @@ extension Repo: ItemData {
 
 final class GithubTVMC: TableViewModelController {
     
-    typealias GithubItem = GithubTable.ItemType
+    typealias GithubItem = BasicTable.GithubItemType
     
     // MARK: Properties
     

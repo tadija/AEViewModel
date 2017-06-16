@@ -56,7 +56,7 @@ struct ExampleTable: Table {
         struct Github: Item {
             let identifier = ItemType.github.rawValue
             var data: ItemData? = BasicItemData(title: "Github", detail: "Trending Swift Repos")
-            var child: ViewModel? = GithubTable()
+            var child: ViewModel? = BasicTable()
         }
         
     }
