@@ -12,6 +12,7 @@ import Mappable
 struct Repo: Mappable {
     let name: String
     let description: String?
+    let url: String
     let updated: Date
     let forksCount: Int
     let starsCount: Int
@@ -20,6 +21,7 @@ struct Repo: Mappable {
     init(map: [String : Any]) throws {
         name = try map.value(forKey: "name")
         description = try? map.value(forKey: "description")
+        url = try map.value(forKey: "html_url")
         updated = Repo.parseDate(from: map["updated_at"])
         forksCount = try map.value(forKey: "forks_count")
         starsCount = try map.value(forKey: "stargazers_count")

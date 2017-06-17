@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension UIImageView {
     func setImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
                 let image = UIImage(data: data)
                 DispatchQueue.main.async {
