@@ -7,6 +7,7 @@
 //
 
 import AEViewModel
+import SafariServices
 
 extension Repo: ItemData {
     var title: String? {
@@ -48,9 +49,15 @@ final class GithubTVMC: TableViewModelController {
         configureRefreshControl()
     }
     
+    private var initialAppear = true
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        performManualRefresh()
+        
+        if initialAppear {
+            initialAppear = false
+            performManualRefresh()
+        }
     }
     
     // MARK: Override
@@ -72,7 +79,23 @@ final class GithubTVMC: TableViewModelController {
                     }
                 })
             }
+            
+            cell.action = { _ in
+                if let url = URL(string: repo.url) {
+                    self.pushBrowser(with: url, title: repo.name)
+                }
+            }
         }
+        
+        if let cell = cell as? UITableViewCell {
+            cell.accessoryType = .disclosureIndicator
+        }
+    }
+    
+    private func pushBrowser(with url: URL, title: String? = nil) {
+        let browser = SFSafariViewController(url: url)
+        browser.title = title
+        navigationController?.pushViewController(browser, animated: true)
     }
     
     // MARK: Helpers
