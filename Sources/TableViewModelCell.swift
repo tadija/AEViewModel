@@ -9,7 +9,11 @@ public protocol TableViewModelCell: class {
     func reset()
 }
 
-public extension TableViewModelCell where Self: UITableViewCell {}
+public extension TableViewModelCell {
+    var base: UITableViewCell? {
+        return self as? UITableViewCell
+    }
+}
 
 // MARK: - TableCell
 

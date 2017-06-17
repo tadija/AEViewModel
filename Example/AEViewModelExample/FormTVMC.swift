@@ -29,10 +29,13 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
-        super.configureCell(cell, at: indexPath, with: item)
+    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+        super.configureCell(cell, at: indexPath)
         
-        guard let type = FormItem(rawValue: item.identifier) else {
+        guard
+            let item = model?.item(at: indexPath),
+            let type = FormItem(rawValue: item.identifier)
+        else {
             return
         }
         switch type {

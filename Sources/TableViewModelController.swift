@@ -41,8 +41,10 @@ open class TableViewModelController: UITableViewController {
         return .basic
     }
     
-    open func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
-        cell.update(with: item)
+    open func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+        if let item = model?.item(at: indexPath) {
+            cell.update(with: item)
+        }
     }
     
     // MARK: API
@@ -149,7 +151,7 @@ extension TableViewModelController {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         if let cell = cell as? TableViewModelCell {
-            configureCell(cell, at: indexPath, with: item)
+            configureCell(cell, at: indexPath)
         }
         return cell
     }
