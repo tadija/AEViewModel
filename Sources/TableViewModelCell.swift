@@ -6,6 +6,7 @@ public protocol TableViewModelCell: class {
     var action: (_ sender: Any) -> Void { get set }
     func customize()
     func update(with item: Item)
+    func reset()
 }
 
 public extension TableViewModelCell where Self: UITableViewCell {}
@@ -42,6 +43,10 @@ extension TableCell {
             super.awakeFromNib()
             customize()
         }
+        open override func prepareForReuse() {
+            super.prepareForReuse()
+            reset()
+        }
         
         public var action: (Any) -> Void = { _ in }
         open func customize() {}
@@ -49,11 +54,16 @@ extension TableCell {
             if let data = item.data {
                 textLabel?.text = data.title
                 detailTextLabel?.text = data.detail
-                if let imageName = data.image {
-                    imageView?.image = UIImage(named: imageName)
+                if let imageName = data.image, let image = UIImage(named: imageName) {
+                    imageView?.image = image
                 }
             }
             configureAutomaticDisclosureIndicator(with: item)
+        }
+        open func reset() {
+            textLabel?.text = nil
+            detailTextLabel?.text = nil
+            imageView?.image = nil
         }
         
         open func configureAutomaticDisclosureIndicator(with item: Item) {
