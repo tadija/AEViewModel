@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.3.0
+
+- Added Github sample to Example project
+- Added [Network](https://github.com/tadija/mappable) dependecy to Example project
+- Improvements and refactoring
+
 ## Version 0.2.8
 
 - Improvements and refactoring
