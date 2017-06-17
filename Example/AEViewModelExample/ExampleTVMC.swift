@@ -41,6 +41,10 @@ final class ExampleTVMC: TableViewModelController {
             cell.action = { _ in
                 self.pushTable(from: item, in: SettingsTVMC())
             }
+        case .github:
+            cell.action = { _ in
+                self.pushTable(from: item, in: GithubTVMC())
+            }
         }
     }
     
