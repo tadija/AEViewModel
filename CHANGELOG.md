@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.3.1
+
+- Improvements and refactoring
+- Improving Github sample in Example
+
 ## Version 0.3.0
 
 - Added Github sample to Example project
