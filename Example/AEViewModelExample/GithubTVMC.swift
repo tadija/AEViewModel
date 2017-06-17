@@ -24,6 +24,7 @@ final class GithubTVMC: TableViewModelController {
     // MARK: Properties
     
     private let dataSource = GithubDataSource()
+    private let imageLoader = ImageLoader()
     
     private var repos = [Repo]() {
         didSet {
@@ -60,6 +61,18 @@ final class GithubTVMC: TableViewModelController {
     
     override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath, with item: Item) {
         super.configureCell(cell, at: indexPath, with: item)
+        
+        if let repo = item.data as? Repo {
+            let avatarURL = repo.owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
+            if let url = URL(string: avatarURL) {
+                imageLoader.loadImage(with: url, completion: { (image) in
+                    if let cell = self.tableView.cellForRow(at: indexPath) {
+                        cell.imageView?.image = image
+                        cell.setNeedsLayout()
+                    }
+                })
+            }
+        }
     }
     
     // MARK: Helpers
