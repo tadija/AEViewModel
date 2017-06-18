@@ -52,7 +52,7 @@ final class GithubTVMC: TableViewModelController {
         configureRefreshControl()
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 150
     }
     
     private var initialAppear = true
