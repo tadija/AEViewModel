@@ -58,8 +58,6 @@ final class GithubRepoCell: TableCell.Basic {
             forks.text = "⋔ \(repo.forksCount)"
             stars.text = "★ \(repo.starsCount)"
         }
-        
-        setNeedsLayout()
     }
     
 }
