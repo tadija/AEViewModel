@@ -51,9 +51,10 @@ extension UIImage {
 }
 
 extension UIImageView {
-    func loadImage(from url: URL) {
+    func loadImage(from url: URL, completion: (() -> Void)? = nil) {
         ImageLoader.shared.loadImage(with: url) { [weak self] (image) in
             self?.image = image
+            completion?()
         }
     }
 }
