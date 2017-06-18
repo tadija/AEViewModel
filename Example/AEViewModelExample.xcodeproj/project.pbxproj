@@ -32,6 +32,8 @@
 		8BE0C5151EF4945300E6F95F /* GithubTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C5141EF4945300E6F95F /* GithubTVMC.swift */; };
 		8BE0C5181EF4949600E6F95F /* GithubTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C5171EF4949600E6F95F /* GithubTable.swift */; };
 		8BF92E3D1EF5CC3300278777 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF92E3C1EF5CC3300278777 /* ImageLoader.swift */; };
+		8BF92E411EF5F1F700278777 /* GithubRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF92E401EF5F1F700278777 /* GithubRepoCell.swift */; };
+		8BF92E441EF5F2AD00278777 /* GithubRepoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BF92E431EF5F2AD00278777 /* GithubRepoCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		8BE0C5141EF4945300E6F95F /* GithubTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubTVMC.swift; sourceTree = "<group>"; };
 		8BE0C5171EF4949600E6F95F /* GithubTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubTable.swift; sourceTree = "<group>"; };
 		8BF92E3C1EF5CC3300278777 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		8BF92E401EF5F1F700278777 /* GithubRepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubRepoCell.swift; sourceTree = "<group>"; };
+		8BF92E431EF5F2AD00278777 /* GithubRepoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GithubRepoCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +244,8 @@
 			children = (
 				8BE0C5171EF4949600E6F95F /* GithubTable.swift */,
 				8BE0C5141EF4945300E6F95F /* GithubTVMC.swift */,
+				8BF92E401EF5F1F700278777 /* GithubRepoCell.swift */,
+				8BF92E431EF5F2AD00278777 /* GithubRepoCell.xib */,
 				8BE0C5161EF4948C00E6F95F /* Helpers */,
 			);
 			name = Github;
@@ -344,6 +350,7 @@
 			files = (
 				8B893A861E98606700B3101B /* LaunchScreen.storyboard in Resources */,
 				8B893A8E1E9860C300B3101B /* settings.json in Resources */,
+				8BF92E441EF5F2AD00278777 /* GithubRepoCell.xib in Resources */,
 				8B893A831E98606700B3101B /* Assets.xcassets in Resources */,
 				8B893A811E98606700B3101B /* Main.storyboard in Resources */,
 				8B0E708B1EBFA0EA000153CD /* CustomCellWithNib.xib in Resources */,
@@ -388,6 +395,7 @@
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
 				8BE0C50F1EF482D300E6F95F /* Github.swift in Sources */,
 				8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */,
+				8BF92E411EF5F1F700278777 /* GithubRepoCell.swift in Sources */,
 				8BE0C5131EF492F400E6F95F /* GithubDataSource.swift in Sources */,
 				8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */,
 				8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */,

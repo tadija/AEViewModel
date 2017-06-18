@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pef-aR-aXW" customClass="GithubRepoCell" customModule="AEViewModelExample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pef-aR-aXW" id="ms4-It-ENm">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bpu-Df-Rch">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ldW-4G-6AS">
+                                <rect key="frame" x="8" y="18" width="64" height="64"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="OSb-ah-dzV"/>
+                                    <constraint firstAttribute="width" constant="64" id="Owc-xp-bbJ"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FEr-9E-iGo">
+                                <rect key="frame" x="80" y="8" width="287" height="83.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="yWp-ZT-D8E">
+                                        <rect key="frame" x="0.0" y="0.0" width="287" height="21"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ownerName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLa-pL-FcY">
+                                                <rect key="frame" x="0.0" y="0.0" width="143.5" height="13"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="repoUpdateDate" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwM-qZ-IeO">
+                                                <rect key="frame" x="143.5" y="0.0" width="143.5" height="13"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="8" right="0.0"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xxq-Zm-6VQ">
+                                        <rect key="frame" x="0.0" y="25" width="287" height="36"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="repoName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48N-aH-wji">
+                                                <rect key="frame" x="0.0" y="0.0" width="287" height="14"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="repoDescription" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0r2-Pm-pn6">
+                                                <rect key="frame" x="0.0" y="22" width="287" height="14"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2hc-DI-vBg">
+                                        <rect key="frame" x="0.0" y="65" width="287" height="18.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="forks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A03-wZ-8hK">
+                                                <rect key="frame" x="0.0" y="8" width="143.5" height="10.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAt-cf-OkW">
+                                                <rect key="frame" x="143.5" y="8" width="143.5" height="10.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="0.0" right="0.0"/>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="bpu-Df-Rch" secondAttribute="trailing" id="49g-Zi-qiM"/>
+                    <constraint firstItem="bpu-Df-Rch" firstAttribute="leading" secondItem="ms4-It-ENm" secondAttribute="leading" id="DsZ-9O-94F"/>
+                    <constraint firstItem="bpu-Df-Rch" firstAttribute="top" secondItem="ms4-It-ENm" secondAttribute="top" id="R8G-cI-uCe"/>
+                    <constraint firstAttribute="bottom" secondItem="bpu-Df-Rch" secondAttribute="bottom" id="lwK-nu-kC9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="forks" destination="A03-wZ-8hK" id="ck8-tY-EZr"/>
+                <outlet property="repoDescription" destination="0r2-Pm-pn6" id="J0o-Sg-fuo"/>
+                <outlet property="repoName" destination="48N-aH-wji" id="v9A-ay-CLR"/>
+                <outlet property="repoOwnerAvatar" destination="ldW-4G-6AS" id="TiG-Ne-UHb"/>
+                <outlet property="repoOwnerName" destination="dLa-pL-FcY" id="4hL-0l-fs0"/>
+                <outlet property="repoUpdateDate" destination="PwM-qZ-IeO" id="jJ1-GN-o3D"/>
+                <outlet property="stars" destination="ZAt-cf-OkW" id="El4-YH-k5J"/>
+            </connections>
+            <point key="canvasLocation" x="-159.5" y="-38"/>
+        </tableViewCell>
+    </objects>
+</document>

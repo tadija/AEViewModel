@@ -10,12 +10,6 @@ import AEViewModel
 import SafariServices
 
 extension Repo: ItemData {
-    var title: String? {
-        return name
-    }
-    var detail: String? {
-        return description
-    }
     var ownerImageURL: URL? {
         let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
         return URL(string: avatarURL)
@@ -40,6 +34,11 @@ final class GithubTVMC: TableViewModelController {
         }
     }
     
+    func repo(at indexPath: IndexPath) -> Repo? {
+        let repo = model?.item(at: indexPath)?.data as? Repo
+        return repo
+    }
+    
     // MARK: Init
     
     public convenience init() {
@@ -51,6 +50,9 @@ final class GithubTVMC: TableViewModelController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureRefreshControl()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
     }
     
     private var initialAppear = true
@@ -67,7 +69,7 @@ final class GithubTVMC: TableViewModelController {
     // MARK: Override
     
     override func cell(forIdentifier identifier: String) -> TableCell {
-        return .subtitle
+        return .customNib(nib: GithubRepoCell.nib)
     }
     
     override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
@@ -75,38 +77,29 @@ final class GithubTVMC: TableViewModelController {
         
         cell.base?.accessoryType = .disclosureIndicator
         configureCellImage(at: indexPath)
-        configureCellAction(at: indexPath)
+
+        cell.action = { _ in
+            if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
+                self.pushBrowser(with: url, title: repo.name)
+            }
+        }
     }
     
     // MARK: Helpers - Cells
     
     private func configureCellImage(at indexPath: IndexPath) {
         guard
-            let repo = model?.item(at: indexPath) as? Repo,
+            let repo = repo(at: indexPath),
             let url = repo.ownerImageURL
         else {
             return
         }
         imageLoader.loadImage(with: url, completion: { (image) in
-            if let cell = self.tableView.cellForRow(at: indexPath) {
-                cell.imageView?.image = image
+            if let cell = self.tableView.cellForRow(at: indexPath) as? GithubRepoCell {
+                cell.repoOwnerAvatar.image = image
                 cell.setNeedsLayout()
             }
         })
-    }
-    
-    private func configureCellAction(at indexPath: IndexPath) {
-        guard
-            let repo = model?.item(at: indexPath) as? Repo,
-            let cell = tableView.cellForRow(at: indexPath) as? TableViewModelCell
-        else {
-            return
-        }
-        cell.action = { _ in
-            if let url = URL(string: repo.url) {
-                self.pushBrowser(with: url, title: repo.name)
-            }
-        }
     }
     
     private func pushBrowser(with url: URL, title: String? = nil) {
