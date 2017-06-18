@@ -74,9 +74,6 @@ final class GithubTVMC: TableViewModelController {
     override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
         
-        cell.base?.accessoryType = .disclosureIndicator
-        configureCellImage(at: indexPath)
-
         cell.action = { _ in
             if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
                 self.pushBrowser(with: url, title: repo.name)
@@ -84,30 +81,13 @@ final class GithubTVMC: TableViewModelController {
         }
     }
     
-    // MARK: Helpers - Cells
-    
-    private func configureCellImage(at indexPath: IndexPath) {
-        guard
-            let repo = repo(at: indexPath),
-            let url = repo.ownerImageURL
-        else {
-            return
-        }
-        UIImage.load(from: url, completion: { (image) in
-            if let cell = self.tableView.cellForRow(at: indexPath) as? GithubRepoCell {
-                cell.repoOwnerAvatar.image = image
-                cell.setNeedsLayout()
-            }
-        })
-    }
+    // MARK: Helpers
     
     private func pushBrowser(with url: URL, title: String? = nil) {
         let browser = SFSafariViewController(url: url)
         browser.title = title
         navigationController?.pushViewController(browser, animated: true)
     }
-    
-    // MARK: Helpers - Refresh Control
     
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()

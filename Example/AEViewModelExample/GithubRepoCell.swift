@@ -31,7 +31,12 @@ final class GithubRepoCell: TableCell.Basic {
     }
     
     override func update(with item: Item) {
+        base?.accessoryType = .disclosureIndicator
+        
         if let repo = item.data as? Repo {
+            if let url = repo.ownerImageURL {
+                repoOwnerAvatar.loadImage(from: url)
+            }
             repoOwnerName.text = "@\(repo.owner.username)"
             repoUpdateDate.text = "\(repo.updated)"
             repoName.text = repo.name
@@ -39,6 +44,7 @@ final class GithubRepoCell: TableCell.Basic {
             forks.text = "forks: \(repo.forksCount)"
             stars.text = "stars: \(repo.starsCount)"
         }
+        
         setNeedsLayout()
     }
     
