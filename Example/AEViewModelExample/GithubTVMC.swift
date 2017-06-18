@@ -9,13 +9,6 @@
 import AEViewModel
 import SafariServices
 
-extension Repo: ItemData {
-    var ownerImageURL: URL? {
-        let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
-        return URL(string: avatarURL)
-    }
-}
-
 final class GithubTVMC: TableViewModelController {
     
     typealias GithubItem = BasicTable.GithubItemType
