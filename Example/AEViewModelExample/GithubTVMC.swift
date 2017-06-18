@@ -23,7 +23,6 @@ final class GithubTVMC: TableViewModelController {
     // MARK: Properties
     
     private let dataSource = GithubDataSource()
-    private let imageLoader = ImageLoader()
     
     private var repos = [Repo]() {
         didSet {
@@ -94,7 +93,7 @@ final class GithubTVMC: TableViewModelController {
         else {
             return
         }
-        imageLoader.loadImage(with: url, completion: { (image) in
+        UIImage.load(from: url, completion: { (image) in
             if let cell = self.tableView.cellForRow(at: indexPath) as? GithubRepoCell {
                 cell.repoOwnerAvatar.image = image
                 cell.setNeedsLayout()

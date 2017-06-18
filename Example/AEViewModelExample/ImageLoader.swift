@@ -44,6 +44,12 @@ class ImageLoader {
     
 }
 
+extension UIImage {
+    static func load(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        ImageLoader.shared.loadImage(with: url, completion: completion)
+    }
+}
+
 extension UIImageView {
     func setImage(with url: URL) {
         ImageLoader.shared.loadImage(with: url) { (image) in
