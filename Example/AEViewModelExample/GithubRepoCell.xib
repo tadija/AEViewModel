@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="pef-aR-aXW" customClass="GithubRepoCell" customModule="AEViewModelExample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pef-aR-aXW" id="ms4-It-ENm">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="yWp-ZT-D8E">
+                        <rect key="frame" x="8" y="8" width="359" height="19.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ownerName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLa-pL-FcY">
+                                <rect key="frame" x="0.0" y="0.0" width="164" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="repoUpdateDate" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwM-qZ-IeO">
+                                <rect key="frame" x="164" y="0.0" width="195" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ldW-4G-6AS">
+                        <rect key="frame" x="8" y="35.5" width="64" height="64"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="64" id="OSb-ah-dzV"/>
+                            <constraint firstAttribute="width" constant="64" id="Owc-xp-bbJ"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FEr-9E-iGo">
+                        <rect key="frame" x="80" y="35.5" width="287" height="106"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xxq-Zm-6VQ">
+                                <rect key="frame" x="0.0" y="0.0" width="287" height="68"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="repoName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48N-aH-wji">
+                                        <rect key="frame" x="0.0" y="0.0" width="287" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0r2-Pm-pn6">
+                                        <rect key="frame" x="0.0" y="29.5" width="287" height="38.5"/>
+                                        <string key="text">repoDescription
+secondLine</string>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="2hc-DI-vBg">
+                                <rect key="frame" x="0.0" y="89" width="287" height="17"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="forks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A03-wZ-8hK">
+                                        <rect key="frame" x="0.0" y="0.0" width="143.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAt-cf-OkW">
+                                        <rect key="frame" x="143.5" y="0.0" width="143.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="yWp-ZT-D8E" firstAttribute="top" secondItem="ms4-It-ENm" secondAttribute="topMargin" id="C6i-yO-k6F"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="FEr-9E-iGo" secondAttribute="bottom" id="VOM-1k-lk4"/>
+                    <constraint firstItem="FEr-9E-iGo" firstAttribute="top" secondItem="ldW-4G-6AS" secondAttribute="top" id="Vep-jE-tmQ"/>
+                    <constraint firstItem="ldW-4G-6AS" firstAttribute="top" secondItem="yWp-ZT-D8E" secondAttribute="bottom" constant="8" id="auD-fc-35Y"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="ldW-4G-6AS" secondAttribute="leading" id="eMp-xj-PTN"/>
+                    <constraint firstItem="yWp-ZT-D8E" firstAttribute="leading" secondItem="ms4-It-ENm" secondAttribute="leadingMargin" id="g7A-kT-OU5"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="ldW-4G-6AS" secondAttribute="bottom" constant="8" id="iOF-VS-QkH"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FEr-9E-iGo" secondAttribute="trailing" id="pIQ-5f-XH7"/>
+                    <constraint firstItem="FEr-9E-iGo" firstAttribute="leading" secondItem="ldW-4G-6AS" secondAttribute="trailing" constant="8" id="x3h-ie-rDm"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="yWp-ZT-D8E" secondAttribute="trailing" id="zZr-L7-TDy"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="forks" destination="A03-wZ-8hK" id="ck8-tY-EZr"/>
+                <outlet property="repoDescription" destination="0r2-Pm-pn6" id="J0o-Sg-fuo"/>
+                <outlet property="repoName" destination="48N-aH-wji" id="v9A-ay-CLR"/>
+                <outlet property="repoOwnerAvatar" destination="ldW-4G-6AS" id="TiG-Ne-UHb"/>
+                <outlet property="repoOwnerName" destination="dLa-pL-FcY" id="4hL-0l-fs0"/>
+                <outlet property="repoUpdateDate" destination="PwM-qZ-IeO" id="jJ1-GN-o3D"/>
+                <outlet property="stars" destination="ZAt-cf-OkW" id="El4-YH-k5J"/>
+            </connections>
+            <point key="canvasLocation" x="-159.5" y="-38"/>
+        </tableViewCell>
+    </objects>
+</document>

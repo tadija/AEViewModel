@@ -3,13 +3,27 @@ import UIKit
 // MARK: - TableViewModelCell
 
 public protocol TableViewModelCell: class {
+    static var nib: UINib? { get }
+    
     var action: (_ sender: Any) -> Void { get set }
+    
     func customize()
     func update(with item: Item)
     func reset()
 }
 
-public extension TableViewModelCell where Self: UITableViewCell {}
+public extension TableViewModelCell {
+    static var nib: UINib? {
+        let className = String(describing: type(of: self))
+        guard let nibName = className.components(separatedBy: ".").first else {
+            return nil
+        }
+        return UINib(nibName: nibName, bundle: nil)
+    }
+    var base: UITableViewCell? {
+        return self as? UITableViewCell
+    }
+}
 
 // MARK: - TableCell
 
