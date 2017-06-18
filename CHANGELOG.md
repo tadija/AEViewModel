@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.3.2
+
+- Created custom cell from nib in Github sample
+- Improvements and refactoring
+
 ## Version 0.3.1
 
 - Improvements and refactoring
