@@ -96,9 +96,9 @@ final class GithubTVMC: TableViewModelController {
     
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        dataSource.reload { (repos) in
+        dataSource.reload { [weak self] (repos) in
             if let repos = repos {
-                self.repos = repos
+                self?.repos = repos
             }
             sender.endRefreshing()
         }

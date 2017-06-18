@@ -27,9 +27,9 @@ class ImageLoader {
                 completion(image)
             }
         } else {
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            URLSession.shared.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
                 if let data = data, let image = UIImage(data: data) {
-                    self.cache.setObject(image, forKey: cacheKey)
+                    self?.cache.setObject(image, forKey: cacheKey)
                     DispatchQueue.main.async {
                         completion(image)
                     }
@@ -52,8 +52,8 @@ extension UIImage {
 
 extension UIImageView {
     func loadImage(from url: URL) {
-        ImageLoader.shared.loadImage(with: url) { (image) in
-            self.image = image
+        ImageLoader.shared.loadImage(with: url) { [weak self] (image) in
+            self?.image = image
         }
     }
 }
