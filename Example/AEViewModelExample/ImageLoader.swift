@@ -10,6 +10,10 @@ import UIKit
 
 class ImageLoader {
     
+    // MARK: Singleton
+    
+    static let shared = ImageLoader()
+    
     // MARK: Properties
 
     private var cache = NSCache<NSString, UIImage>()
@@ -38,4 +42,12 @@ class ImageLoader {
         }
     }
     
+}
+
+extension UIImageView {
+    func setImage(with url: URL) {
+        ImageLoader.shared.loadImage(with: url) { (image) in
+            self.image = image
+        }
+    }
 }

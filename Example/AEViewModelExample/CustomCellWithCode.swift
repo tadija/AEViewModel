@@ -22,7 +22,7 @@ class CustomCellWithCode: TableCell.Subtitle {
         super.update(with: item)
         
         let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
-        imageView?.setImage(from: url)
+        imageView?.setImage(with: url)
     }
     
     // MARK: - Lifecycle

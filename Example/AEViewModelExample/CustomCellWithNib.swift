@@ -33,7 +33,7 @@ class CustomCellWithNib: TableCell.Basic {
             }
         }
         let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
-        customImageView?.setImage(from: url)
+        customImageView?.setImage(with: url)
     }
     
 }
