@@ -30,8 +30,7 @@ final class SettingsTVMC: TableViewModelController {
         }
         switch type {
         case .profile:
-            let nib = UINib(nibName: "CustomCellWithNib", bundle: nil)
-            return .customNib(nib: nib)
+            return .customClass(type: SettingsProfileCell.self)
         case .airplane, .vpn:
             return .toggle
         case .wifi, .bluetooth, .hotspot, .carrier:

@@ -9,13 +9,6 @@
 import AEViewModel
 import SafariServices
 
-extension Repo: ItemData {
-    var ownerImageURL: URL? {
-        let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
-        return URL(string: avatarURL)
-    }
-}
-
 final class GithubTVMC: TableViewModelController {
     
     typealias GithubItem = BasicTable.GithubItemType
@@ -23,7 +16,6 @@ final class GithubTVMC: TableViewModelController {
     // MARK: Properties
     
     private let dataSource = GithubDataSource()
-    private let imageLoader = ImageLoader()
     
     private var repos = [Repo]() {
         didSet {
@@ -75,9 +67,6 @@ final class GithubTVMC: TableViewModelController {
     override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
         
-        cell.base?.accessoryType = .disclosureIndicator
-        configureCellImage(at: indexPath)
-
         cell.action = { _ in
             if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
                 self.pushBrowser(with: url, title: repo.name)
@@ -85,30 +74,13 @@ final class GithubTVMC: TableViewModelController {
         }
     }
     
-    // MARK: Helpers - Cells
-    
-    private func configureCellImage(at indexPath: IndexPath) {
-        guard
-            let repo = repo(at: indexPath),
-            let url = repo.ownerImageURL
-        else {
-            return
-        }
-        imageLoader.loadImage(with: url, completion: { (image) in
-            if let cell = self.tableView.cellForRow(at: indexPath) as? GithubRepoCell {
-                cell.repoOwnerAvatar.image = image
-                cell.setNeedsLayout()
-            }
-        })
-    }
+    // MARK: Helpers
     
     private func pushBrowser(with url: URL, title: String? = nil) {
         let browser = SFSafariViewController(url: url)
         browser.title = title
         navigationController?.pushViewController(browser, animated: true)
     }
-    
-    // MARK: Helpers - Refresh Control
     
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
@@ -117,9 +89,9 @@ final class GithubTVMC: TableViewModelController {
     
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        dataSource.reload { (repos) in
+        dataSource.reload { [weak self] (repos) in
             if let repos = repos {
-                self.repos = repos
+                self?.repos = repos
             }
             sender.endRefreshing()
         }

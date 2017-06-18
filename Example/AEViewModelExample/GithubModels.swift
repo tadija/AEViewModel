@@ -28,7 +28,7 @@ struct Repo: Mappable {
         owner = try map.mappable(forKey: "owner")
     }
     
-    private static let dateFormatter = DateFormatter()
+    static let dateFormatter = DateFormatter()
     
     private static func parseDate(from value: Any?) -> Date {
         if let dateValue = value as? Date {

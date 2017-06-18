@@ -8,6 +8,20 @@
 
 import AEViewModel
 
+extension Repo: ItemData {
+    var ownerImageURL: URL? {
+        let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
+        return URL(string: avatarURL)
+    }
+    var updatedFormatted: String {
+        let df = Repo.dateFormatter
+        df.dateStyle = .medium
+        df.timeStyle = .short
+        let date = df.string(from: updated)
+        return date
+    }
+}
+
 final class GithubRepoCell: TableCell.Basic {
     
     // MARK: Outlets
@@ -31,15 +45,19 @@ final class GithubRepoCell: TableCell.Basic {
     }
     
     override func update(with item: Item) {
+        base?.accessoryType = .disclosureIndicator
+        
         if let repo = item.data as? Repo {
+            if let url = repo.ownerImageURL {
+                repoOwnerAvatar.loadImage(from: url)
+            }
             repoOwnerName.text = "@\(repo.owner.username)"
-            repoUpdateDate.text = "\(repo.updated)"
+            repoUpdateDate.text = repo.updatedFormatted
             repoName.text = repo.name
             repoDescription.text = repo.description
-            forks.text = "forks: \(repo.forksCount)"
-            stars.text = "stars: \(repo.starsCount)"
+            forks.text = "⋔ \(repo.forksCount)"
+            stars.text = "★ \(repo.starsCount)"
         }
-        setNeedsLayout()
     }
     
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B0E708B1EBFA0EA000153CD /* CustomCellWithNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */; };
 		8B2EAE1B1EEB3BD4001FE287 /* MappableDataSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */; };
 		8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */; };
 		8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE321EEF3332001FE287 /* Mappable.framework */; };
@@ -22,8 +21,7 @@
 		8B893A831E98606700B3101B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A821E98606700B3101B /* Assets.xcassets */; };
 		8B893A861E98606700B3101B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A841E98606700B3101B /* LaunchScreen.storyboard */; };
 		8B893A8E1E9860C300B3101B /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A8D1E9860C300B3101B /* settings.json */; };
-		8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */; };
-		8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */; };
+		8BB518001EAC19B700A181AE /* SettingsProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */; };
 		8BE0C4EF1EF32F4200E6F95F /* SettingsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */; };
 		8BE0C5051EF4808F00E6F95F /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE0C5041EF4808F00E6F95F /* Network.framework */; };
 		8BE0C50F1EF482D300E6F95F /* Github.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C50E1EF482D300E6F95F /* Github.swift */; };
@@ -75,7 +73,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellWithNib.xib; sourceTree = "<group>"; };
 		8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableDataSourceModel.swift; sourceTree = "<group>"; };
 		8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVMC.swift; sourceTree = "<group>"; };
 		8B2EAE2C1EEF31A1001FE287 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
@@ -93,8 +90,7 @@
 		8B893A851E98606700B3101B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B893A871E98606700B3101B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B893A8D1E9860C300B3101B /* settings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = settings.json; path = ../Resources/settings.json; sourceTree = "<group>"; };
-		8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithCode.swift; sourceTree = "<group>"; };
-		8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellWithNib.swift; sourceTree = "<group>"; };
+		8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsProfileCell.swift; sourceTree = "<group>"; };
 		8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTable.swift; sourceTree = "<group>"; };
 		8BE0C5041EF4808F00E6F95F /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Carthage/Build/iOS/Network.framework; sourceTree = "<group>"; };
 		8BE0C50E1EF482D300E6F95F /* Github.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Github.swift; sourceTree = "<group>"; };
@@ -206,9 +202,8 @@
 			children = (
 				8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */,
 				8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */,
-				8BE0C50C1EF4818E00E6F95F /* Cells */,
+				8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */,
 				8BE0C50A1EF4813A00E6F95F /* Helpers */,
-				8BE0C50B1EF4813F00E6F95F /* Resources */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -217,26 +212,9 @@
 			isa = PBXGroup;
 			children = (
 				8B2EAE1A1EEB3BD4001FE287 /* MappableDataSourceModel.swift */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
-		8BE0C50B1EF4813F00E6F95F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
 				8B893A8D1E9860C300B3101B /* settings.json */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		8BE0C50C1EF4818E00E6F95F /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				8BB517FF1EAC19B700A181AE /* CustomCellWithCode.swift */,
-				8BB518021EAC19BD00A181AE /* CustomCellWithNib.swift */,
-				8B0E708A1EBFA0EA000153CD /* CustomCellWithNib.xib */,
-			);
-			name = Cells;
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		8BE0C50D1EF482A500E6F95F /* Github */ = {
@@ -353,7 +331,6 @@
 				8BF92E441EF5F2AD00278777 /* GithubRepoCell.xib in Resources */,
 				8B893A831E98606700B3101B /* Assets.xcassets in Resources */,
 				8B893A811E98606700B3101B /* Main.storyboard in Resources */,
-				8B0E708B1EBFA0EA000153CD /* CustomCellWithNib.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,8 +374,7 @@
 				8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */,
 				8BF92E411EF5F1F700278777 /* GithubRepoCell.swift in Sources */,
 				8BE0C5131EF492F400E6F95F /* GithubDataSource.swift in Sources */,
-				8BB518031EAC19BD00A181AE /* CustomCellWithNib.swift in Sources */,
-				8BB518001EAC19B700A181AE /* CustomCellWithCode.swift in Sources */,
+				8BB518001EAC19B700A181AE /* SettingsProfileCell.swift in Sources */,
 				8B2EAE1B1EEB3BD4001FE287 /* MappableDataSourceModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
