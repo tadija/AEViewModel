@@ -9,7 +9,9 @@
 import AEViewModel
 
 extension BasicTable {
+    
     enum GithubItemType: String {
         case repo
     }
+    
 }

@@ -21,7 +21,7 @@ final class GithubTVMC: TableViewModelController {
         didSet {
             let items = repos.map { BasicItem(identifier: GithubItem.repo.rawValue, data: $0) }
             let section = BasicSection(items: items)
-            let table = BasicTable(title: "Github", sections: [section])
+            let table = BasicTable(sections: [section])
             model = table
         }
     }
@@ -41,10 +41,8 @@ final class GithubTVMC: TableViewModelController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureRefreshControl()
         
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 150
+        configureSelf()
     }
     
     private var initialAppear = true
@@ -80,6 +78,15 @@ final class GithubTVMC: TableViewModelController {
         let browser = SFSafariViewController(url: url)
         browser.title = title
         navigationController?.pushViewController(browser, animated: true)
+    }
+    
+    private func configureSelf() {
+        title = "Github"
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150
+        
+        configureRefreshControl()
     }
     
     private func configureRefreshControl() {
