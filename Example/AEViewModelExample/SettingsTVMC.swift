@@ -11,7 +11,7 @@ import AEViewModel
 
 final class SettingsTVMC: TableViewModelController {
     
-    typealias SettingsItem = SettingsTable.ItemType
+    typealias SettingsCell = SettingsTable.Cell
     
     // MARK: Lifecycle
     
@@ -25,10 +25,11 @@ final class SettingsTVMC: TableViewModelController {
     // MARK: Override
 
     override func cell(forIdentifier identifier: String) -> TableCell {        
-        guard let type = SettingsItem(rawValue: identifier) else {
+        guard let settingsCell = SettingsCell(rawValue: identifier) else {
             return .basic
         }
-        switch type {
+        
+        switch settingsCell {
         case .profile:
             return .customClass(type: SettingsProfileCell.self)
         case .airplane, .vpn:
@@ -45,11 +46,12 @@ final class SettingsTVMC: TableViewModelController {
         
         guard
             let item = model?.item(at: indexPath),
-            let type = SettingsItem(rawValue: item.identifier)
+            let settingsCell = SettingsCell(rawValue: item.identifier)
         else {
             return
         }
-        switch type {
+        
+        switch settingsCell {
         case .profile, .airplane, .vpn:
             cell.action = { _ in
                 print("handleEvent with id: \(item.identifier)")
@@ -73,15 +75,16 @@ final class SettingsTVMC: TableViewModelController {
 
 class WiFiSettingsTVMC: TableViewModelController {
     
-    typealias WifiItem = SettingsTable.Wifi.ItemType
+    typealias WifiCell = SettingsTable.Wifi.Cell
     
     // MARK: Override
     
     override func cell(forIdentifier identifier: String) -> TableCell {
-        guard let type = WifiItem(rawValue: identifier) else {
+        guard let wifiCell = WifiCell(rawValue: identifier) else {
             return .basic
         }
-        switch type {
+        
+        switch wifiCell {
         case .wifiSwitch, .joinNetworksSwitch:
             return .toggle
         case .wifiNetwork:
@@ -94,11 +97,12 @@ class WiFiSettingsTVMC: TableViewModelController {
         
         guard
             let item = model?.item(at: indexPath),
-            let type = WifiItem(rawValue: item.identifier)
+            let wifiCell = WifiCell(rawValue: item.identifier)
         else {
             return
         }
-        switch type {
+        
+        switch wifiCell {
         case .wifiSwitch,
              .joinNetworksSwitch:
             cell.action = { _ in

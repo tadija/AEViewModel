@@ -16,7 +16,7 @@ final class GithubDataSource {
     
     private lazy var trendingSwiftReposURL: URL = {
         let url = Github.API.url(.search("repositories")).addingParameters([
-            "q" : "language:swift created:\(lastWeekDate)",
+            "q" : "pushed:>=\(lastWeekDate) language:swift",
             "sort" : "stars",
             "order" : "desc"
         ])!

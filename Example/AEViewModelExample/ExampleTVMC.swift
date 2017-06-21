@@ -11,12 +11,13 @@ import AEViewModel
 
 final class ExampleTVMC: TableViewModelController {
     
-    typealias ExampleItem = ExampleTable.ItemType
+    typealias ExampleCell = ExampleTable.Cell
     
     // MARK: Lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         model = ExampleTable()
     }
     
@@ -31,10 +32,12 @@ final class ExampleTVMC: TableViewModelController {
         
         guard
             let item = model?.item(at: indexPath),
-            let type = ExampleItem(rawValue: item.identifier) else {
+            let exampleCell = ExampleCell(rawValue: item.identifier)
+        else {
             return
         }
-        switch type {
+        
+        switch exampleCell {
         case .form:
             cell.action = { _ in
                 self.pushTable(from: item, in: FormTVMC())

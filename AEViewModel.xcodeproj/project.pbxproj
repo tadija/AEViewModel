@@ -35,6 +35,7 @@
 		8B3276241E9AED1400FD9502 /* AEViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AEViewModel.h; path = Sources/AEViewModel.h; sourceTree = SOURCE_ROOT; };
 		8B3276261E9AED4100FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
 		8B32764D1E9C284B00FD9502 /* TableViewModelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelCell.swift; sourceTree = "<group>"; };
+		8B6DD41E1EFB0B13007A5F98 /* AEViewModel.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AEViewModel.podspec; sourceTree = "<group>"; };
 		8B7281B01EE2E96D007245E7 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		8B7281B21EE2EFA2007245E7 /* TableViewModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewModelController.swift; sourceTree = "<group>"; };
 		8B893AAE1E98665F00B3101B /* AEViewModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AEViewModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +85,7 @@
 				8B32760F1E9AE13200FD9502 /* LICENSE */,
 				8B3276101E9AE13200FD9502 /* README.md */,
 				8B32760E1E9AE13200FD9502 /* CHANGELOG.md */,
+				8B6DD41E1EFB0B13007A5F98 /* AEViewModel.podspec */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

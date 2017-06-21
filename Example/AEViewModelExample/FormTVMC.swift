@@ -11,15 +11,16 @@ import AEViewModel
 
 final class FormTVMC: TableViewModelController {
     
-    typealias FormItem = FormTable.ItemType
+    typealias FormCell = FormTable.Cell
     
     // MARK: Override
     
     override func cell(forIdentifier identifier: String) -> TableCell {
-        guard let type = FormItem(rawValue: identifier) else {
+        guard let formCell = FormCell(rawValue: identifier) else {
             return .basic
         }
-        switch type {
+        
+        switch formCell {
         case .username, .password:
             return .textInput
         case .accept:
@@ -34,11 +35,12 @@ final class FormTVMC: TableViewModelController {
         
         guard
             let item = model?.item(at: indexPath),
-            let type = FormItem(rawValue: item.identifier)
+            let formCell = FormCell(rawValue: item.identifier)
         else {
             return
         }
-        switch type {
+        
+        switch formCell {
         case .username:
             cell.action = { _ in
                 let nextIndexPath = self.nextIndexPath(from: indexPath)
