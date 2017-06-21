@@ -37,6 +37,77 @@
 
 ### Introduction
 
+#### ViewModel
+
+I suggest to start by getting very familiar with [ViewModel.swift](Sources/ViewModel.swift), because you're gonna use that stuff a lot. There are actually only very simple protocols and basic structs, which are gonna serve as our "view models" (VM from MVVM).
+
+In short, it all starts with empty `ViewModel` protocol, followed by `DataSourceModel` which says that you must have a `title` and `sections` in order to implement it. This one is later typealiased to `Table` or `Collection` depending on your needs.
+
+There are also protocols `Section`, `Item` and `ItemData` and your custom models should conform to the latter one, easy like this:
+
+```swift
+	struct MyCustomModel: ItemData { /* ... */ }
+```
+
+Now, for each of those protocols there is a simple basic struct conforming to it, named like `BasicSection` or `Basicitem` etc.
+Most of the time you should be able to do everything with these, but in case of need (or style) you may want to create custom types that conform to these protocols and use those. 
+
+That's why [Example](Example) project tackles each sample table in a slightly different way to show multiple approaches that can be used. See [ExampleTable](Example/AEViewModelExample/ExampleTable.swift), [FormTable](Example/AEViewModelExample/FormTable.swift), [SettingsTable](Example/AEViewModelExample/SettingsTable.swift), [GithubTable](Example/AEViewModelExample/GithubTable.swift).
+
+In the end, notice that `ViewModel.swift` doesn't import `UIKit` and it should stay like that in your implementation too. If you ask why then you didn't read enough about [MVVM](https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52). *"ViewModel is basicaly basically UIKit independent representation of your View and its state."*
+
+#### TableViewModelCell
+
+On the `UIKit` side of things there is this `TableViewModelCell` protocol which should be implemented by `UITableViewCell` for things to work. Luckily for you, that's already included out of the box for some often used cell types:
+
+```swift
+public enum TableCell {
+    case basic
+    case subtitle
+    case leftDetail
+    case rightDetail
+    case button
+    case toggle
+    case textInput
+    case customClass(type: TableViewModelCell.Type)
+    case customNib(nib: UINib?)
+}
+```
+
+These classes are defined in the extension of `TableCell` enum, so you would refer to them like `TableCell.Basic`, `TableCell.Subtitle` etc. Easiest way to use custom cells is to inherit from `TableCell.Basic` and override what you need:
+
+```swift
+	/// Called in `awakeFromNib`, you should make initial configuration of your interface here.
+	func customize()
+	
+	/// Called in `tableView(_:cellForRowAt:)`, you should update your interface here.
+	func update(with item: Item)
+	
+	/// Called in `prepareForReuse`, you should reset your interface here.
+	func reset()
+```
+
+#### TableViewModelController
+
+Final part of this story is `TableViewModelController`, which you guessed it, inherits from `UITableViewController`.  
+
+Only this one is nice enough to register, dequeue and update all cells you need, on its own.  
+All you need to do to make this happen is to set its `model` property which is of type `Table`, remember that one?
+
+Use it by inheriting from it with your `CustomTableViewModelController` and override what you need:
+
+```swift
+	/// Return appropriate cell type for given identifier.
+	func cell(forIdentifier identifier: String) -> TableCell
+	
+	/// Update cell at index path, like customize look or set `action` for cell here.
+	func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath)
+```
+
+#### CollectionViewModelCell & CollectionViewModelController
+
+Unfortunately, those are not yet implemented but should be very similar to their table counterparts.
+
 ### Example
 
 ```swift
