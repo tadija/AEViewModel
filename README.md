@@ -24,6 +24,16 @@
 ## Index
 - [Features](#features)
 - [Usage](#usage)
+	- [Introduction](#introduction)
+		- [ViewModel](#viewmodel)
+		- [TableViewModelCell](#tableviewmodelcell)
+		- [TableViewModelController](#tableviewmodelcontroller)
+		- [CollectionViewModelCell](#collectionviewmodelcell)
+		- [CollectionViewModelController](#collectionviewmodelcontroller)
+	- [Example](#example)
+		- [Static ViewModel](#static-viewmodel)
+		- [Dynamic ViewModel](#dynamic-viewmodel)
+		- [Custom Cell](#custom-cell)
 - [Installation](#installation)
 - [License](#license)
 
@@ -87,6 +97,8 @@ These classes are defined in the extension of `TableCell` enum, so you would ref
 	func reset()
 ```
 
+`TableViewModelCell` also defines `var action: (_ sender: Any) -> Void` property which you should probably want to set from the view controller in order to make the cell do what you want on `tableView(_:didSelectRowAt:)`.
+
 #### TableViewModelController
 
 Final part of this story is `TableViewModelController`, which you guessed it, inherits from `UITableViewController`.  
@@ -104,14 +116,201 @@ Use it by inheriting from it with your `CustomTableViewModelController` and over
 	func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath)
 ```
 
-#### CollectionViewModelCell & CollectionViewModelController
+#### CollectionViewModelCell 
 
-Unfortunately, those are not yet implemented but should be very similar to their table counterparts.
+> Unfortunately, collection views are not yet implemented but should be very similar to their table counterparts.
+
+#### CollectionViewModelController
+
+> Unfortunately, collection views are not yet implemented but should be very similar to their table counterparts.
 
 ### Example
 
+Here's just a few examples (with just the important parts):
+
+#### Static ViewModel
+
 ```swift
-/// - Note: some usage example
+import AEViewModel
+
+struct FormTable: Table {
+    enum Cell: String {
+        case username
+        case password
+        case accept
+        case register
+        
+        var item: BasicItem {
+            switch self {
+            case .username:
+                return BasicItem(identifier: rawValue, title: "Username")
+            case .password:
+                return BasicItem(identifier: rawValue, title: "Password")
+            case .accept:
+                return BasicItem(identifier: rawValue, title: "Accept Terms")
+            case .register:
+                return BasicItem(identifier: rawValue, title: "Register")
+            }
+        }
+    }
+    
+    var title = "Registration"
+    var sections: [Section]
+    
+    init() {
+        let credentials = BasicSection(items: [Cell.username.item, Cell.password.item])
+        let actions = BasicSection(items: [Cell.accept.item, Cell.register.item])
+        sections = [credentials, actions]
+    }
+}
+
+final class FormTVMC: TableViewModelController {
+    
+    typealias FormCell = FormTable.Cell
+    
+    // MARK: Override
+    
+    override func cell(forIdentifier identifier: String) -> TableCell {
+        guard let formCell = FormCell(rawValue: identifier) else {
+            return .basic
+        }
+        
+        switch formCell {
+        case .username, .password:
+            return .textInput
+        case .accept:
+            return .toggle
+        case .register:
+            return .button
+        }
+    }
+    
+    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+        super.configureCell(cell, at: indexPath)
+        
+        guard
+            let item = model?.item(at: indexPath),
+            let formCell = FormCell(rawValue: item.identifier)
+        else {
+            return
+        }
+        
+        switch formCell {
+        case .username:
+            cell.action = { _ in
+                let nextIndexPath = self.nextIndexPath(from: indexPath)
+                self.becomeFirstResponder(at: nextIndexPath)
+            }
+        case .password:
+            (cell as? TableCell.TextInput)?.textField.isSecureTextEntry = true
+            cell.action = { _ in
+                let previousIndexPath = self.previousIndexPath(from: indexPath)
+                self.becomeFirstResponder(at: previousIndexPath)
+            }
+        case .accept:
+            cell.action = { sender in
+                let enabled = (sender as? UISwitch)?.isOn ?? false
+                let nextIndexPath = self.nextIndexPath(from: indexPath)
+                self.updateButton(at: nextIndexPath, enabled: enabled)
+            }
+        case .register:
+            (cell as? TableCell.Button)?.button.isEnabled = false
+            cell.action = { _ in
+                self.presentAlert()
+            }
+        }
+    }
+    
+}
+```
+
+#### Dynamic ViewModel
+
+```swift
+import AEViewModel
+
+extension BasicTable {
+    enum GithubCellType: String {
+        case repo
+    }
+}
+
+final class GithubTVMC: TableViewModelController {
+    
+    typealias CellType = BasicTable.GithubCellType
+    
+    private var repos = [Repo]() {
+        didSet {
+            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, data: $0) }
+            let section = BasicSection(items: items)
+            let table = BasicTable(sections: [section])
+            model = table
+        }
+    }
+    
+    func repo(at indexPath: IndexPath) -> Repo? {
+        let repo = model?.item(at: indexPath)?.data as? Repo
+        return repo
+    }
+    
+    // MARK: Override
+    
+    override func cell(forIdentifier identifier: String) -> TableCell {
+        return .customNib(nib: GithubRepoCell.nib)
+    }
+    
+    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+        super.configureCell(cell, at: indexPath)
+        
+        cell.action = { _ in
+            if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
+                self.pushBrowser(with: url, title: repo.name)
+            }
+        }
+    }    
+    
+}
+```
+
+#### Custom Cell
+
+```swift
+final class GithubRepoCell: TableCell.Basic {
+
+    @IBOutlet weak var repoOwnerAvatar: UIImageView!
+    
+    @IBOutlet weak var repoOwnerName: UILabel!
+    @IBOutlet weak var repoUpdateDate: UILabel!
+    
+    @IBOutlet weak var repoName: UILabel!
+    @IBOutlet weak var repoDescription: UILabel!
+    
+    @IBOutlet weak var forks: UILabel!
+    @IBOutlet weak var stars: UILabel!
+    
+    // MARK: - TableCell
+    
+    override func customize() {
+        repoOwnerAvatar.layer.cornerRadius = 32
+        repoOwnerAvatar.layer.masksToBounds = true
+    }
+    
+    override func update(with item: Item) {
+        base?.accessoryType = .disclosureIndicator
+        
+        if let repo = item.data as? Repo {
+            if let url = repo.ownerImageURL {
+                repoOwnerAvatar.loadImage(from: url)
+            }
+            repoOwnerName.text = "@\(repo.owner.username)"
+            repoUpdateDate.text = repo.updatedFormatted
+            repoName.text = repo.name
+            repoDescription.text = repo.description
+            forks.text = "⋔ \(repo.forksCount)"
+            stars.text = "★ \(repo.starsCount)"
+        }
+    }
+}
 ```
 
 > For more details check out [Sources](Sources) and [Example](Example).
