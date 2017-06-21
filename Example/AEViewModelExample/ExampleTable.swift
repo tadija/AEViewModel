@@ -12,7 +12,7 @@ struct ExampleTable: Table {
     
     // MARK: Types
     
-    enum ItemType: String {
+    enum Cell: String {
         case form
         case settings
         case github
@@ -42,19 +42,19 @@ struct ExampleTable: Table {
         // MARK: Items
         
         struct Form: Item {
-            let identifier = ItemType.form.rawValue
+            let identifier = Cell.form.rawValue
             var data: ItemData? = BasicItemData(title: "Form", detail: "Static Table View Model")
             var child: ViewModel? = FormTable()
         }
         
         struct Settings: Item {
-            let identifier = ItemType.settings.rawValue
+            let identifier = Cell.settings.rawValue
             var data: ItemData? = BasicItemData(title: "Settings", detail: "JSON Table View Model")
             var child: ViewModel? = SettingsTable.fromJson
         }
         
         struct Github: Item {
-            let identifier = ItemType.github.rawValue
+            let identifier = Cell.github.rawValue
             var data: ItemData? = BasicItemData(title: "Github", detail: "Trending Swift Repos")
             var child: ViewModel? = BasicTable()
         }

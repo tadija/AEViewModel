@@ -13,7 +13,7 @@ typealias SettingsTable = MappableTable.Settings
 extension MappableTable {
     
     struct Settings {
-        enum ItemType: String {
+        enum Cell: String {
             case profile
             case airplane
             case wifi
@@ -32,7 +32,7 @@ extension MappableTable {
         }
         
         struct Wifi {
-            enum ItemType: String {
+            enum Cell: String {
                 case wifiSwitch
                 case wifiNetwork
                 case joinNetworksSwitch

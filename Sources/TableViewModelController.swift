@@ -26,6 +26,7 @@ open class TableViewModelController: UITableViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureTableView()
     }
     

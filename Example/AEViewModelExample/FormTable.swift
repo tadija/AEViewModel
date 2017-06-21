@@ -12,11 +12,24 @@ struct FormTable: Table {
     
     // MARK: Types
     
-    enum ItemType: String {
+    enum Cell: String {
         case username
         case password
         case accept
         case register
+        
+        var item: BasicItem {
+            switch self {
+            case .username:
+                return BasicItem(identifier: rawValue, title: "Username")
+            case .password:
+                return BasicItem(identifier: rawValue, title: "Password")
+            case .accept:
+                return BasicItem(identifier: rawValue, title: "Accept Terms")
+            case .register:
+                return BasicItem(identifier: rawValue, title: "Register")
+            }
+        }
     }
     
     // MARK: Table
@@ -25,15 +38,9 @@ struct FormTable: Table {
     var sections: [Section]
     
     init() {
-        let username = BasicItem(identifier: ItemType.username.rawValue, title: "Username")
-        let password = BasicItem(identifier: ItemType.password.rawValue, title: "Password")
-        let credentials = BasicSection(items: [username, password], header: "Input")
-        
-        let accept = BasicItem(identifier: ItemType.accept.rawValue, title: "Accept Terms")
-        let register = BasicItem(identifier: ItemType.register.rawValue, title: "Register")
-        let action = BasicSection(items: [accept, register], header: "Actions")
-        
-        sections = [credentials, action]
+        let credentials = BasicSection(items: [Cell.username.item, Cell.password.item], header: "Input")
+        let actions = BasicSection(items: [Cell.accept.item, Cell.register.item], header: "Actions")
+        sections = [credentials, actions]
     }
     
 }

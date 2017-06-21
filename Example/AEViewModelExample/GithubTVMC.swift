@@ -11,7 +11,7 @@ import SafariServices
 
 final class GithubTVMC: TableViewModelController {
     
-    typealias GithubItem = BasicTable.GithubItemType
+    typealias CellType = BasicTable.GithubCellType
     
     // MARK: Properties
     
@@ -19,7 +19,7 @@ final class GithubTVMC: TableViewModelController {
     
     private var repos = [Repo]() {
         didSet {
-            let items = repos.map { BasicItem(identifier: GithubItem.repo.rawValue, data: $0) }
+            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, data: $0) }
             let section = BasicSection(items: items)
             let table = BasicTable(sections: [section])
             model = table
