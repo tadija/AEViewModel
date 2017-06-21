@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.3.4
+
+- First public release
+- README.md
+- Minor improvements and refactoring
+
 ## Version 0.3.3
 
 - Improvements and refactoring 
