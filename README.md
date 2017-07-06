@@ -18,7 +18,7 @@
 
 > Idea behind this solution is somehow very broad, implementation is very loose too.  
 > That means, you may use it in many different ways or styles which are most appropriate to your case or liking.  
-> I think that by proper usage of this framework, it enforces you to write more clean and maintainable code by leveraging concepts of [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern. So you should probably be familiar with that first (in case I'm wrong).  
+> I think that by proper usage of this framework, it enforces you to write more clean and maintainable code by leveraging concepts of [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern. So you should probably understand ["manual" approach](https://medium.com/yay-its-erica/dabbling-with-mvvm-in-swift-3-3bbeba61b45b) first.  
 > Anyway, it may not be quick and easy (for everyone) to grasp at first look, but if you go deeper you may never wish to create another table or collection view without using this, just saying...
 
 ## Index
