@@ -101,7 +101,7 @@ open class TableViewModelController: UITableViewController {
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
         model?.sections.forEach { section in
-            let sectionIdentifiers = section.items.flatMap({ $0.identifier })
+            let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
             uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
         uniqueIdentifiers.forEach { identifier in
