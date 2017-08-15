@@ -32,7 +32,7 @@ final class ExampleTVMC: TableViewModelController {
         super.configureCell(cell, at: indexPath)
         
         guard
-            let item = model?.item(at: indexPath),
+            let item = item(at: indexPath),
             let exampleCell = ExampleCell(rawValue: item.identifier)
         else {
             return

@@ -11,17 +11,11 @@ import AEViewModel
 
 class MappableTVMC: TableViewModelController {    
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let mappableSection = model?.sections[section] as? MappableSection else {
-            return nil
-        }
-        return mappableSection.header
+        return (self.section(at: section) as? MappableSection)?.header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        guard let mappableSection = model?.sections[section] as? MappableSection else {
-            return nil
-        }
-        return mappableSection.footer
+        return (self.section(at: section) as? MappableSection)?.footer
     }
 }
 
@@ -63,7 +57,7 @@ final class SettingsTVMC: MappableTVMC {
         super.configureCell(cell, at: indexPath)
         
         guard
-            let item = model?.item(at: indexPath),
+            let item = item(at: indexPath),
             let settingsCell = SettingsCell(rawValue: item.identifier)
         else {
             return
@@ -116,7 +110,7 @@ class WiFiSettingsTVMC: MappableTVMC {
         super.configureCell(cell, at: indexPath)
         
         guard
-            let item = model?.item(at: indexPath),
+            let item = item(at: indexPath),
             let wifiCell = WifiCell(rawValue: item.identifier)
         else {
             return
