@@ -8,6 +8,11 @@
 
 import AEViewModel
 
+struct FormSection: Section {
+    let header: String
+    var items: [Item]
+}
+
 struct FormTable: Table {
     
     // MARK: Types
@@ -42,9 +47,4 @@ struct FormTable: Table {
         sections = [credentials, actions]
     }
     
-}
-
-struct FormSection: Section {
-    let header: String
-    var items: [Item]
 }
