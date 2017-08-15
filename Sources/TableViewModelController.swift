@@ -65,7 +65,7 @@ open class TableViewModelController: UITableViewController {
     }
     
     public func pushTable(from item: Item, in tvmc: TableViewModelController) {
-        if let model = item.child as? Table {
+        if let model = item.data?.submodel as? Table {
             tvmc.model = model
             navigationController?.pushViewController(tvmc, animated: true)
         }

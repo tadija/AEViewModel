@@ -15,19 +15,20 @@ public protocol Section: ViewModel {
 public protocol Item: ViewModel {
     var identifier: String { get }
     var data: ItemData? { get set }
-    var child: ViewModel? { get set }
 }
 
 public protocol ItemData {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
+    var submodel: ViewModel? { get }
 }
 
 public extension ItemData {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }
+    var submodel: ViewModel? { return nil }
 }
 
 // MARK: - Basic Structs
@@ -51,20 +52,16 @@ public struct BasicSection: Section {
 public struct BasicItem: Item {
     public let identifier: String
     public var data: ItemData?
-    public var child: ViewModel?
     
-    public init(identifier: String, data: ItemData? = nil, child: ViewModel? = nil) {
+    public init(identifier: String, data: ItemData? = nil) {
         self.identifier = identifier
         self.data = data
-        self.child = child
     }
     
     public init(identifier: String,
-                title: String? = nil, detail: String? = nil, image: String? = nil,
-                child: ViewModel? = nil) {
+                title: String? = nil, detail: String? = nil, image: String? = nil, submodel: ViewModel? = nil) {
         self.identifier = identifier
-        self.data = BasicItemData(title: title, detail: detail, image: image)
-        self.child = child
+        self.data = BasicItemData(title: title, detail: detail, image: image, submodel: submodel)
     }
 }
 
@@ -72,11 +69,13 @@ public struct BasicItemData: ItemData {
     public let title: String?
     public let detail: String?
     public let image: String?
+    public var submodel: ViewModel?
     
-    public init(title: String? = nil, detail: String? = nil, image: String? = nil) {
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil, submodel: ViewModel? = nil) {
         self.title = title
         self.detail = detail
         self.image = image
+        self.submodel = submodel
     }
 }
 
