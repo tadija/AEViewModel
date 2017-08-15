@@ -4,7 +4,7 @@ import Foundation
 
 public protocol ViewModel {}
 
-public protocol DataSourceModel: ViewModel {
+public protocol DataSource: ViewModel {
     var sections: [Section] { get set }
 }
 
@@ -17,7 +17,7 @@ public protocol Item: ViewModel {
     var data: ItemData? { get set }
 }
 
-public protocol ItemData {
+public protocol ItemData: ViewModel {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
@@ -33,7 +33,7 @@ public extension ItemData {
 
 // MARK: - Basic Structs
 
-public struct BasicDataSourceModel: DataSourceModel {
+public struct BasicDataSource: DataSource {
     public var sections: [Section]
     
     public init(sections: [Section] = [Section]()) {
@@ -81,11 +81,11 @@ public struct BasicItemData: ItemData {
 
 // MARK: - Table
 
-public typealias Table = DataSourceModel
-public typealias BasicTable = BasicDataSourceModel
+public typealias Table = DataSource
+public typealias BasicTable = BasicDataSource
 
 // MARK: - Collection
 
 /// - Note: UICollectionView is also planned, but not yet implemented 😇
-public typealias Collection = DataSourceModel
-public typealias BasicCollection = BasicDataSourceModel
+public typealias Collection = DataSource
+public typealias BasicCollection = BasicDataSource
