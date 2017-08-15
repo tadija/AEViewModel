@@ -51,7 +51,7 @@
 
 I suggest to start by getting very familiar with [ViewModel.swift](Sources/ViewModel.swift), because you're gonna use that stuff a lot. There are actually only very simple protocols and basic structs, which are gonna serve as our "view models" (VM from MVVM).
 
-In short, it all starts with empty `ViewModel` protocol, followed by `DataSourceModel` which says that you must have a `title` and `sections` in order to implement it. This one is later typealiased to `Table` or `Collection` depending on your needs.
+In short, it all starts with empty `ViewModel` protocol, followed by `DataSource` which says that you must have `sections` in order to implement it. This one is later typealiased to `Table` or `Collection` depending on your needs.
 
 There are also protocols `Section`, `Item` and `ItemData` and your custom models should conform to the latter one, easy like this:
 

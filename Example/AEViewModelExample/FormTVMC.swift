@@ -13,6 +13,14 @@ final class FormTVMC: TableViewModelController {
     
     typealias FormCell = FormTable.Cell
     
+    // MARK: Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "Registration"
+    }
+    
     // MARK: Override
     
     override func cell(forIdentifier identifier: String) -> TableCell {
@@ -34,7 +42,7 @@ final class FormTVMC: TableViewModelController {
         super.configureCell(cell, at: indexPath)
         
         guard
-            let item = model?.item(at: indexPath),
+            let item = item(at: indexPath),
             let formCell = FormCell(rawValue: item.identifier)
         else {
             return
@@ -64,6 +72,10 @@ final class FormTVMC: TableViewModelController {
                 self.presentAlert()
             }
         }
+    }
+    
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return (self.section(at: section) as? FormSection)?.header
     }
     
     // MARK: Helpers

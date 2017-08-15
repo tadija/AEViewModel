@@ -34,13 +34,17 @@ struct FormTable: Table {
     
     // MARK: Table
     
-    var title = "Registration"
     var sections: [Section]
     
     init() {
-        let credentials = BasicSection(items: [Cell.username.item, Cell.password.item], header: "Input")
-        let actions = BasicSection(items: [Cell.accept.item, Cell.register.item], header: "Actions")
+        let credentials = FormSection(header: "Input", items: [Cell.username.item, Cell.password.item])
+        let actions = FormSection(header: "Actions", items: [Cell.accept.item, Cell.register.item])
         sections = [credentials, actions]
     }
     
+}
+
+struct FormSection: Section {
+    let header: String
+    var items: [Item]
 }

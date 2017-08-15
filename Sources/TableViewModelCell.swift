@@ -81,7 +81,7 @@ extension TableCell {
         }
         
         open func configureAutomaticDisclosureIndicator(with item: Item) {
-            if useAutomaticDisclosureIndicator, let table = item.child as? Table, table.sections.count >= 0 {
+            if useAutomaticDisclosureIndicator, let table = item.data?.submodel as? Table, table.sections.count >= 0 {
                 accessoryType = .disclosureIndicator
             }
         }

@@ -27,7 +27,7 @@ final class GithubTVMC: TableViewModelController {
     }
     
     func repo(at indexPath: IndexPath) -> Repo? {
-        let repo = model?.item(at: indexPath)?.data as? Repo
+        let repo = item(at: indexPath)?.data as? Repo
         return repo
     }
     
@@ -97,10 +97,12 @@ final class GithubTVMC: TableViewModelController {
     @objc
     private func refresh(_ sender: UIRefreshControl) {
         dataSource.reload { [weak self] (repos) in
+            DispatchQueue.main.async {
+                sender.endRefreshing()
+            }
             if let repos = repos {
                 self?.repos = repos
             }
-            sender.endRefreshing()
         }
     }
     

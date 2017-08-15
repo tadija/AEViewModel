@@ -9,7 +9,17 @@
 import UIKit
 import AEViewModel
 
-final class SettingsTVMC: TableViewModelController {
+class MappableTVMC: TableViewModelController {    
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return (self.section(at: section) as? MappableSection)?.header
+    }
+    
+    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return (self.section(at: section) as? MappableSection)?.footer
+    }
+}
+
+final class SettingsTVMC: MappableTVMC {
     
     typealias SettingsCell = SettingsTable.Cell
     
@@ -17,6 +27,8 @@ final class SettingsTVMC: TableViewModelController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = (model as? MappableTable)?.title
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
@@ -45,7 +57,7 @@ final class SettingsTVMC: TableViewModelController {
         super.configureCell(cell, at: indexPath)
         
         guard
-            let item = model?.item(at: indexPath),
+            let item = item(at: indexPath),
             let settingsCell = SettingsCell(rawValue: item.identifier)
         else {
             return
@@ -59,11 +71,13 @@ final class SettingsTVMC: TableViewModelController {
         case .wifi:
             cell.action = { _ in
                 let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
+                wifiSubmenu.title = (item.data?.submodel as? MappableTable)?.title
                 self.pushTable(from: item, in: wifiSubmenu)
             }
         case .bluetooth, .cellular, .hotspot, .carrier:
             cell.action = { _ in
-                let defaultSubmenu = TableViewModelController(style: .grouped)
+                let defaultSubmenu = MappableTVMC(style: .grouped)
+                defaultSubmenu.title = (item.data?.submodel as? MappableTable)?.title
                 self.pushTable(from: item, in: defaultSubmenu)
             }
         }
@@ -73,7 +87,7 @@ final class SettingsTVMC: TableViewModelController {
 
 // MARK: - WiFiSettingsTVC
 
-class WiFiSettingsTVMC: TableViewModelController {
+class WiFiSettingsTVMC: MappableTVMC {
     
     typealias WifiCell = SettingsTable.Wifi.Cell
     
@@ -96,7 +110,7 @@ class WiFiSettingsTVMC: TableViewModelController {
         super.configureCell(cell, at: indexPath)
         
         guard
-            let item = model?.item(at: indexPath),
+            let item = item(at: indexPath),
             let wifiCell = WifiCell(rawValue: item.identifier)
         else {
             return
