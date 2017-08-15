@@ -20,7 +20,6 @@ struct ExampleTable: Table {
     
     // MARK: Table
     
-    var title = "Example"
     var sections: [Section] = [
         General()
     ]

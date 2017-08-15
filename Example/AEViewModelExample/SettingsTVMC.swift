@@ -18,6 +18,8 @@ final class SettingsTVMC: TableViewModelController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = (model as? MappableTable)?.title
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
@@ -59,11 +61,13 @@ final class SettingsTVMC: TableViewModelController {
         case .wifi:
             cell.action = { _ in
                 let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
+                wifiSubmenu.title = (item.child as? MappableTable)?.title
                 self.pushTable(from: item, in: wifiSubmenu)
             }
         case .bluetooth, .cellular, .hotspot, .carrier:
             cell.action = { _ in
                 let defaultSubmenu = TableViewModelController(style: .grouped)
+                defaultSubmenu.title = (item.child as? MappableTable)?.title
                 self.pushTable(from: item, in: defaultSubmenu)
             }
         }

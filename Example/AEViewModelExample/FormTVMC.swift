@@ -13,6 +13,14 @@ final class FormTVMC: TableViewModelController {
     
     typealias FormCell = FormTable.Cell
     
+    // MARK: Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = "Registration"
+    }
+    
     // MARK: Override
     
     override func cell(forIdentifier identifier: String) -> TableCell {

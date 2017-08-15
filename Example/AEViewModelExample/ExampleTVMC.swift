@@ -18,6 +18,7 @@ final class ExampleTVMC: TableViewModelController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        title = "Example"
         model = ExampleTable()
     }
     
