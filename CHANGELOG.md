@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.5
+
+- Migrated to Swift 4
+
 ## Version 0.3.4
 
 - First public release
