@@ -1,21 +1,36 @@
 import Foundation
 
-// MARK: - ViewModel
+// MARK: - Protocols
 
 public protocol ViewModel {}
-
-// MARK: - DataSourceViewModel
 
 public protocol DataSourceModel: ViewModel {
     var sections: [Section] { get set }
 }
 
-public extension DataSourceModel {
-    public func item(at indexPath: IndexPath) -> Item? {
-        let item = sections[indexPath.section].items[indexPath.item]
-        return item
-    }
+public protocol Section: ViewModel {
+    var items: [Item] { get set }
 }
+
+public protocol Item: ViewModel {
+    var identifier: String { get }
+    var data: ItemData? { get set }
+    var child: ViewModel? { get set }
+}
+
+public protocol ItemData {
+    var title: String? { get }
+    var detail: String? { get }
+    var image: String? { get }
+}
+
+public extension ItemData {
+    var title: String? { return nil }
+    var detail: String? { return nil }
+    var image: String? { return nil }
+}
+
+// MARK: - Basic Structs
 
 public struct BasicDataSourceModel: DataSourceModel {
     public var sections: [Section]
@@ -25,26 +40,12 @@ public struct BasicDataSourceModel: DataSourceModel {
     }
 }
 
-// MARK: - Section
-
-public protocol Section: ViewModel {
-    var items: [Item] { get set }
-}
-
 public struct BasicSection: Section {
     public var items: [Item]
     
     public init(items: [Item] = [Item]()) {
         self.items = items
     }
-}
-
-// MARK: - Item
-
-public protocol Item: ViewModel {
-    var identifier: String { get }
-    var data: ItemData? { get set }
-    var child: ViewModel? { get set }
 }
 
 public struct BasicItem: Item {
@@ -67,25 +68,11 @@ public struct BasicItem: Item {
     }
 }
 
-// MARK: - ItemData
-
-public protocol ItemData {
-    var title: String? { get }
-    var detail: String? { get }
-    var image: String? { get }
-}
-
-public extension ItemData {
-    var title: String? { return nil }
-    var detail: String? { return nil }
-    var image: String? { return nil }
-}
-
 public struct BasicItemData: ItemData {
     public let title: String?
     public let detail: String?
     public let image: String?
-
+    
     public init(title: String? = nil, detail: String? = nil, image: String? = nil) {
         self.title = title
         self.detail = detail

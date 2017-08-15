@@ -38,18 +38,28 @@ open class TableViewModelController: UITableViewController {
     }
     
     open func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        if let item = model?.item(at: indexPath) {
+        if let item = item(at: indexPath) {
             cell.update(with: item)
         }
     }
     
     // MARK: API
     
+    public func section(at index: Int) -> Section? {
+        let section = model?.sections[index]
+        return section
+    }
+    
+    public func item(at indexPath: IndexPath) -> Item? {
+        let item = model?.sections[indexPath.section].items[indexPath.item]
+        return item
+    }
+    
     public func item(from cell: TableViewModelCell) -> Item? {
         guard
             let tableViewCell = cell as? UITableViewCell,
             let indexPath = tableView.indexPath(for: tableViewCell),
-            let item = model?.item(at: indexPath)
+            let item = item(at: indexPath)
         else { return nil }
         return item
     }
@@ -154,7 +164,7 @@ extension TableViewModelController {
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = model?.item(at: indexPath) else {
+        guard let item = item(at: indexPath) else {
             return UITableViewCell()
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
