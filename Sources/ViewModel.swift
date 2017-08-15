@@ -7,7 +7,6 @@ public protocol ViewModel {}
 // MARK: - DataSourceViewModel
 
 public protocol DataSourceModel: ViewModel {
-    var title: String { get set }
     var sections: [Section] { get set }
 }
 
@@ -19,11 +18,9 @@ public extension DataSourceModel {
 }
 
 public struct BasicDataSourceModel: DataSourceModel {
-    public var title: String
     public var sections: [Section]
     
-    public init(title: String = String(), sections: [Section] = [Section]()) {
-        self.title = title
+    public init(sections: [Section] = [Section]()) {
         self.sections = sections
     }
 }

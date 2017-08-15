@@ -94,7 +94,6 @@ open class TableViewModelController: UITableViewController {
     // MARK: Helpers
     
     private func configureTableView() {
-        title = model?.title
         registerCells()
     }
     
