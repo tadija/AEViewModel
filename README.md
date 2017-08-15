@@ -18,7 +18,9 @@
 
 > Idea behind this solution is somehow broad and implementation is very loose too, meaning that
 > you may use this in many different ways or styles which are most appropriate to your case or liking.
+>
 > By proper usage of this framework, it will enforce you to write more clean and maintainable code by leveraging concepts of [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern. So you should probably understand ["manual" approach](https://medium.com/yay-its-erica/dabbling-with-mvvm-in-swift-3-3bbeba61b45b) first.
+>
 > Anyway, it may not be quick and easy (for everyone) to grasp at first look, but if you go deeper you may never wish to create another table or collection view without using this, just saying...
 
 ## Index
@@ -133,11 +135,6 @@ Here's just a few examples (with just the important parts):
 ```swift
 import AEViewModel
 
-struct FormSection: Section {
-    let header: String
-    var items: [Item]
-}
-
 struct FormTable: Table {
     enum Cell: String {
         case username
@@ -162,8 +159,8 @@ struct FormTable: Table {
     var sections: [Section]
     
     init() {
-        let credentials = FormSection(header: "Input", items: [Cell.username.item, Cell.password.item])
-        let actions = FormSection(header: "Actions", items: [Cell.accept.item, Cell.register.item])
+        let credentials = BasicSection(items: [Cell.username.item, Cell.password.item])
+        let actions = BasicSection(items: [Cell.accept.item, Cell.register.item])
         sections = [credentials, actions]
     }
 }
