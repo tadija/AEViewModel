@@ -28,20 +28,14 @@ public struct BasicDataSourceModel: DataSourceModel {
 // MARK: - Section
 
 public protocol Section: ViewModel {
-    var header: String? { get set }
-    var footer: String? { get set }
     var items: [Item] { get set }
 }
 
 public struct BasicSection: Section {
     public var items: [Item]
-    public var header: String?
-    public var footer: String?
     
-    public init(items: [Item] = [Item](), header: String? = nil, footer: String? = nil) {
+    public init(items: [Item] = [Item]()) {
         self.items = items
-        self.header = header
-        self.footer = footer
     }
 }
 
