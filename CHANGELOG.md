@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.4.0
+
+- Simplification
+- Improvements and refactoring
+
 ## Version 0.3.5
 
 - Migrated to Swift 4
