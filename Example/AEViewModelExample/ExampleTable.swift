@@ -40,20 +40,20 @@ struct ExampleTable: Table {
         
         struct Form: Item {
             let identifier = Cell.form.rawValue
-            var data: ItemData? = BasicItemData(title: "Form", detail: "Static Table View Model")
-            var child: ViewModel? = FormTable()
+            var data: ItemData? = BasicItemData(title: "Form", detail: "Static Table View Model",
+                                                submodel: FormTable())
         }
         
         struct Settings: Item {
             let identifier = Cell.settings.rawValue
-            var data: ItemData? = BasicItemData(title: "Settings", detail: "JSON Table View Model")
-            var child: ViewModel? = SettingsTable.fromJson
+            var data: ItemData? = BasicItemData(title: "Settings", detail: "JSON Table View Model",
+                                                submodel: SettingsTable.fromJson)
         }
         
         struct Github: Item {
             let identifier = Cell.github.rawValue
-            var data: ItemData? = BasicItemData(title: "Github", detail: "Trending Swift Repos")
-            var child: ViewModel? = BasicTable()
+            var data: ItemData? = BasicItemData(title: "Github", detail: "Trending Swift Repos",
+                                                submodel: BasicTable())
         }
         
     }

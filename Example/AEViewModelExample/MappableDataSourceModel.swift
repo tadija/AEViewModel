@@ -67,21 +67,18 @@ struct MappableItem: Item, Mappable {
     enum Key: String {
         case id
         case data
-        case table
     }
     
     // MARK: Item
     
     let identifier: String
     var data: ItemData?
-    var child: ViewModel?
     
     // MARK: Mappable
     
     init(map: [String : Any]) throws {
         identifier = try map.value(forKey: Key.id.rawValue)
         data = try? map.mappable(forKey: Key.data.rawValue) as MappableItemData
-        child = try? map.mappable(forKey: Key.table.rawValue) as MappableDataSourceModel
     }
     
 }
@@ -94,6 +91,7 @@ struct MappableItemData: ItemData, Mappable {
         case title
         case detail
         case image
+        case table
         case custom
     }
     
@@ -102,6 +100,7 @@ struct MappableItemData: ItemData, Mappable {
     let title: String?
     let detail: String?
     let image: String?
+    let submodel: ViewModel?
     let custom: [String : Any]?
     
     // MARK: Mappable
@@ -110,6 +109,7 @@ struct MappableItemData: ItemData, Mappable {
         title = try? map.value(forKey: Key.title.rawValue)
         detail = try? map.value(forKey: Key.detail.rawValue)
         image = try? map.value(forKey: Key.image.rawValue)
+        submodel = try? map.mappable(forKey: Key.table.rawValue) as MappableDataSourceModel
         custom = try? map.value(forKey: Key.custom.rawValue)
     }
     
