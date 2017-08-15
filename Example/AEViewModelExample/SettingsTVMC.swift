@@ -9,7 +9,23 @@
 import UIKit
 import AEViewModel
 
-final class SettingsTVMC: TableViewModelController {
+class MappableTVMC: TableViewModelController {    
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let mappableSection = model?.sections[section] as? MappableSection else {
+            return nil
+        }
+        return mappableSection.header
+    }
+    
+    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        guard let mappableSection = model?.sections[section] as? MappableSection else {
+            return nil
+        }
+        return mappableSection.footer
+    }
+}
+
+final class SettingsTVMC: MappableTVMC {
     
     typealias SettingsCell = SettingsTable.Cell
     
@@ -66,7 +82,7 @@ final class SettingsTVMC: TableViewModelController {
             }
         case .bluetooth, .cellular, .hotspot, .carrier:
             cell.action = { _ in
-                let defaultSubmenu = TableViewModelController(style: .grouped)
+                let defaultSubmenu = MappableTVMC(style: .grouped)
                 defaultSubmenu.title = (item.child as? MappableTable)?.title
                 self.pushTable(from: item, in: defaultSubmenu)
             }
@@ -77,7 +93,7 @@ final class SettingsTVMC: TableViewModelController {
 
 // MARK: - WiFiSettingsTVC
 
-class WiFiSettingsTVMC: TableViewModelController {
+class WiFiSettingsTVMC: MappableTVMC {
     
     typealias WifiCell = SettingsTable.Wifi.Cell
     

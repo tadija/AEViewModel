@@ -74,6 +74,13 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let formSection = model?.sections[section] as? FormSection else {
+            return nil
+        }
+        return formSection.header
+    }
+    
     // MARK: Helpers
     
     private func becomeFirstResponder(at indexPath: IndexPath?) {
