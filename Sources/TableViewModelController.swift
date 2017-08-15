@@ -6,10 +6,11 @@ open class TableViewModelController: UITableViewController {
     
     open var model: Table? {
         didSet {
-            configureTableView()
-            didUpdateModel()
+            reload()
         }
     }
+    
+    open var automaticReloadEnabled = true
     
     // MARK: Init
     
@@ -27,16 +28,10 @@ open class TableViewModelController: UITableViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTableView()
+        registerCells()
     }
     
     // MARK: Abstract
-    
-    open func didUpdateModel() {
-        if model != nil {
-            tableView.reloadData()
-        }
-    }
     
     open func cell(forIdentifier identifier: String) -> TableCell {
         return .basic
@@ -93,8 +88,15 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Helpers
     
-    private func configureTableView() {
-        registerCells()
+    private func reload() {
+        DispatchQueue.main.async { [weak self] in
+            if let strongSelf = self {
+                strongSelf.registerCells()
+                if strongSelf.automaticReloadEnabled {
+                    strongSelf.reloadData()
+                }
+            }
+        }
     }
     
     private func registerCells() {
@@ -128,6 +130,12 @@ open class TableViewModelController: UITableViewController {
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellNib):
             tableView.register(cellNib, forCellReuseIdentifier: identifier)
+        }
+    }
+    
+    private func reloadData() {
+        if model != nil {
+            tableView.reloadData()
         }
     }
     
