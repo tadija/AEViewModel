@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.4.1
+
+- Reverted build system from New to Standard
+
 ## Version 0.4.0
 
 - Simplification
