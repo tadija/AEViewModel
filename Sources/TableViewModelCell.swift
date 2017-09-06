@@ -68,7 +68,7 @@ extension TableCell {
             if let data = item.data {
                 textLabel?.text = data.title
                 detailTextLabel?.text = data.detail
-                if let imageName = data.image, let image = UIImage(named: imageName) {
+                if let image = UIImage(named: data.image) {
                     imageView?.image = image
                 }
             }
@@ -125,7 +125,7 @@ extension TableCell {
     
     open class Toggle: Basic {
         public let toggle = UISwitch()
-
+        
         open override func customize() {
             selectionStyle = .none
             configureToggle()

@@ -99,13 +99,19 @@ open class TableViewModelController: UITableViewController {
     // MARK: Helpers
     
     private func reload() {
-        DispatchQueue.main.async { [weak self] in
-            if let strongSelf = self {
-                strongSelf.registerCells()
-                if strongSelf.automaticReloadEnabled {
-                    strongSelf.reloadData()
-                }
+        if Thread.isMainThread {
+            registerCellsAndReloadDataIfNeeded()
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.registerCellsAndReloadDataIfNeeded()
             }
+        }
+    }
+    
+    private func registerCellsAndReloadDataIfNeeded() {
+        registerCells()
+        if automaticReloadEnabled {
+            reloadData()
         }
     }
     
