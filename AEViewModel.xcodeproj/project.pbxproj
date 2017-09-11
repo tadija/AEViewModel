@@ -121,7 +121,6 @@
 				8B3276261E9AED4100FD9502 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			path = ../Table;
 			sourceTree = "<group>";
 		};
 		8B8AFF291E9866ED0090B362 /* Sources */ = {
