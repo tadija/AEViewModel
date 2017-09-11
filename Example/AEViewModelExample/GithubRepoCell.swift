@@ -22,7 +22,7 @@ extension Repo: ItemData {
     }
 }
 
-final class GithubRepoCell: TableCell.Basic {
+final class GithubRepoCell: TableCellBasic {
     
     // MARK: Outlets
     

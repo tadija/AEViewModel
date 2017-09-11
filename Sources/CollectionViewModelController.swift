@@ -135,7 +135,7 @@ open class CollectionViewModelController: UICollectionViewController {
     private func registerCell(with identifier: String) {
         switch cell(forIdentifier: identifier) {
         case .empty:
-            collectionView?.register(CollectionCell.Empty.self, forCellWithReuseIdentifier: identifier)
+            collectionView?.register(CollectionCellEmpty.self, forCellWithReuseIdentifier: identifier)
         case .customClass(let cellClass):
             collectionView?.register(cellClass, forCellWithReuseIdentifier: identifier)
         case .customNib(let cellNib):
