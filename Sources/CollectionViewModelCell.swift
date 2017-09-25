@@ -20,9 +20,6 @@ public extension CollectionViewModelCell {
         }
         return UINib(nibName: nibName, bundle: nil)
     }
-    var base: UICollectionViewCell? {
-        return self as? UICollectionViewCell
-    }
 }
 
 // MARK: - CollectionCell
@@ -34,35 +31,31 @@ public enum CollectionCell {
 }
 
 // MARK: - Cells
-
-extension CollectionCell {
     
-    open class Empty: UICollectionViewCell, CollectionViewModelCell {
-        required public init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-        }
-        public override init(frame: CGRect) {
-            super.init(frame: frame)
-            customize()
-        }
-        open override func awakeFromNib() {
-            super.awakeFromNib()
-            customize()
-        }
-        open override func prepareForReuse() {
-            super.prepareForReuse()
-            reset()
-        }
-        
-        public var action: (Any) -> Void = { _ in }
-        
-        open func customize() {}
-        open func update(with item: Item) {}
-        open func reset() {}
-        
-        @objc public func callAction(sender: Any) {
-            action(sender)
-        }
+open class CollectionCellEmpty: UICollectionViewCell, CollectionViewModelCell {
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        customize()
+    }
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        customize()
+    }
+    open override func prepareForReuse() {
+        super.prepareForReuse()
+        reset()
     }
     
+    public var action: (Any) -> Void = { _ in }
+    
+    open func customize() {}
+    open func update(with item: Item) {}
+    open func reset() {}
+    
+    @objc public func callAction(sender: Any) {
+        action(sender)
+    }
 }

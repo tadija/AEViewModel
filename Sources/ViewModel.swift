@@ -18,16 +18,16 @@ public protocol Item: ViewModel {
 }
 
 public protocol ItemData: ViewModel {
-    var title: String { get }
-    var detail: String { get }
-    var image: String { get }
+    var title: String? { get }
+    var detail: String? { get }
+    var image: String? { get }
     var submodel: ViewModel? { get }
 }
 
 public extension ItemData {
-    var title: String { return String() }
-    var detail: String { return String() }
-    var image: String { return String() }
+    var title: String? { return nil }
+    var detail: String? { return nil }
+    var image: String? { return nil }
     var submodel: ViewModel? { return nil }
 }
 
@@ -86,6 +86,5 @@ public typealias BasicTable = BasicDataSource
 
 // MARK: - Collection
 
-/// - Note: UICollectionView is also planned, but not yet implemented 😇
 public typealias Collection = DataSource
 public typealias BasicCollection = BasicDataSource

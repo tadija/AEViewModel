@@ -8,7 +8,7 @@
 
 import AEViewModel
 
-class SettingsProfileCell: TableCell.Basic {
+class SettingsProfileCell: TableCellBasic {
     
     // MARK: Outlets
     
