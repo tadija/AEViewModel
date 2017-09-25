@@ -66,7 +66,7 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
         if let data = item.data {
             textLabel?.text = data.title
             detailTextLabel?.text = data.detail
-            if let image = UIImage(named: data.image) {
+            if data.image != "", let image = UIImage(named: data.image) {
                 imageView?.image = image
             }
         }

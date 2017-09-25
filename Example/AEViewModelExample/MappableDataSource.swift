@@ -97,18 +97,18 @@ struct MappableItemData: ItemData, Mappable {
     
     // MARK: Model
     
-    let title: String?
-    let detail: String?
-    let image: String?
+    let title: String
+    let detail: String
+    let image: String
     let submodel: ViewModel?
     let custom: [String : Any]?
     
     // MARK: Mappable
     
     init(map: [String : Any]) throws {
-        title = try? map.value(forKey: Key.title.rawValue)
-        detail = try? map.value(forKey: Key.detail.rawValue)
-        image = try? map.value(forKey: Key.image.rawValue)
+        title = (try? map.value(forKey: Key.title.rawValue)) ?? ""
+        detail = (try? map.value(forKey: Key.detail.rawValue)) ?? ""
+        image = (try? map.value(forKey: Key.image.rawValue)) ?? ""
         submodel = try? map.mappable(forKey: Key.table.rawValue) as MappableDataSource
         custom = try? map.value(forKey: Key.custom.rawValue)
     }

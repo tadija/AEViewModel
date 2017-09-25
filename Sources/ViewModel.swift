@@ -59,19 +59,19 @@ public struct BasicItem: Item {
     }
     
     public init(identifier: String,
-                title: String? = nil, detail: String? = nil, image: String? = nil, submodel: ViewModel? = nil) {
+                title: String = "", detail: String = "", image: String = "", submodel: ViewModel? = nil) {
         self.identifier = identifier
         self.data = BasicItemData(title: title, detail: detail, image: image, submodel: submodel)
     }
 }
 
 public struct BasicItemData: ItemData {
-    public let title: String?
-    public let detail: String?
-    public let image: String?
+    public let title: String
+    public let detail: String
+    public let image: String
     public var submodel: ViewModel?
     
-    public init(title: String? = nil, detail: String? = nil, image: String? = nil, submodel: ViewModel? = nil) {
+    public init(title: String = "", detail: String = "", image: String = "", submodel: ViewModel? = nil) {
         self.title = title
         self.detail = detail
         self.image = image
