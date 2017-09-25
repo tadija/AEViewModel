@@ -45,7 +45,7 @@ final class GithubRepoCell: TableCellBasic {
     }
     
     override func update(with item: Item) {
-        base?.accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator
         
         if let repo = item.data as? Repo {
             if let url = repo.ownerImageURL {

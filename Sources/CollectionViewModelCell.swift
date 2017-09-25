@@ -20,9 +20,6 @@ public extension CollectionViewModelCell {
         }
         return UINib(nibName: nibName, bundle: nil)
     }
-    var base: UICollectionViewCell? {
-        return self as? UICollectionViewCell
-    }
 }
 
 // MARK: - CollectionCell

@@ -86,6 +86,5 @@ public typealias BasicTable = BasicDataSource
 
 // MARK: - Collection
 
-/// - Note: UICollectionView is also planned, but not yet implemented 😇
 public typealias Collection = DataSource
 public typealias BasicCollection = BasicDataSource

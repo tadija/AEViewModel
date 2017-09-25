@@ -20,9 +20,6 @@ public extension TableViewModelCell {
         }
         return UINib(nibName: nibName, bundle: nil)
     }
-    var base: UITableViewCell? {
-        return self as? UITableViewCell
-    }
 }
 
 // MARK: - TableCell
