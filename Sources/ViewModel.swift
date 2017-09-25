@@ -18,16 +18,16 @@ public protocol Item: ViewModel {
 }
 
 public protocol ItemData: ViewModel {
-    var title: String { get }
-    var detail: String { get }
-    var image: String { get }
+    var title: String? { get }
+    var detail: String? { get }
+    var image: String? { get }
     var submodel: ViewModel? { get }
 }
 
 public extension ItemData {
-    var title: String { return String() }
-    var detail: String { return String() }
-    var image: String { return String() }
+    var title: String? { return nil }
+    var detail: String? { return nil }
+    var image: String? { return nil }
     var submodel: ViewModel? { return nil }
 }
 
@@ -59,19 +59,19 @@ public struct BasicItem: Item {
     }
     
     public init(identifier: String,
-                title: String = "", detail: String = "", image: String = "", submodel: ViewModel? = nil) {
+                title: String? = nil, detail: String? = nil, image: String? = nil, submodel: ViewModel? = nil) {
         self.identifier = identifier
         self.data = BasicItemData(title: title, detail: detail, image: image, submodel: submodel)
     }
 }
 
 public struct BasicItemData: ItemData {
-    public let title: String
-    public let detail: String
-    public let image: String
+    public let title: String?
+    public let detail: String?
+    public let image: String?
     public var submodel: ViewModel?
     
-    public init(title: String = "", detail: String = "", image: String = "", submodel: ViewModel? = nil) {
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil, submodel: ViewModel? = nil) {
         self.title = title
         self.detail = detail
         self.image = image
