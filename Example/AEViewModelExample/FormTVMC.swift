@@ -55,7 +55,7 @@ final class FormTVMC: TableViewModelController {
                 self.becomeFirstResponder(at: nextIndexPath)
             }
         case .password:
-            (cell as? TableCell.TextInput)?.textField.isSecureTextEntry = true
+            (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
             cell.action = { _ in
                 let previousIndexPath = self.previousIndexPath(from: indexPath)
                 self.becomeFirstResponder(at: previousIndexPath)
@@ -67,7 +67,7 @@ final class FormTVMC: TableViewModelController {
                 self.updateButton(at: nextIndexPath, enabled: enabled)
             }
         case .register:
-            (cell as? TableCell.Button)?.button.isEnabled = false
+            (cell as? TableCellButton)?.button.isEnabled = false
             cell.action = { _ in
                 self.presentAlert()
             }
@@ -81,13 +81,13 @@ final class FormTVMC: TableViewModelController {
     // MARK: Helpers
     
     private func becomeFirstResponder(at indexPath: IndexPath?) {
-        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCell.TextInput {
+        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCellTextInput {
             cell.textField.becomeFirstResponder()
         }
     }
     
     private func updateButton(at indexPath: IndexPath?, enabled: Bool) {
-        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCell.Button {
+        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCellButton {
             cell.button.isEnabled = enabled
         }
     }

@@ -99,13 +99,19 @@ open class TableViewModelController: UITableViewController {
     // MARK: Helpers
     
     private func reload() {
-        DispatchQueue.main.async { [weak self] in
-            if let strongSelf = self {
-                strongSelf.registerCells()
-                if strongSelf.automaticReloadEnabled {
-                    strongSelf.reloadData()
-                }
+        if Thread.isMainThread {
+            registerCellsAndReloadDataIfNeeded()
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.registerCellsAndReloadDataIfNeeded()
             }
+        }
+    }
+    
+    private func registerCellsAndReloadDataIfNeeded() {
+        registerCells()
+        if automaticReloadEnabled {
+            reloadData()
         }
     }
     
@@ -123,19 +129,19 @@ open class TableViewModelController: UITableViewController {
     private func registerCell(with identifier: String) {
         switch cell(forIdentifier: identifier) {
         case .basic:
-            tableView.register(TableCell.Basic.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellBasic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
-            tableView.register(TableCell.Subtitle.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellSubtitle.self, forCellReuseIdentifier: identifier)
         case .leftDetail:
-            tableView.register(TableCell.LeftDetail.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellLeftDetail.self, forCellReuseIdentifier: identifier)
         case .rightDetail:
-            tableView.register(TableCell.RightDetail.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellRightDetail.self, forCellReuseIdentifier: identifier)
         case .button:
-            tableView.register(TableCell.Button.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellButton.self, forCellReuseIdentifier: identifier)
         case .toggle:
-            tableView.register(TableCell.Toggle.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellToggle.self, forCellReuseIdentifier: identifier)
         case .textInput:
-            tableView.register(TableCell.TextInput.self, forCellReuseIdentifier: identifier)
+            tableView.register(TableCellTextInput.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellNib):

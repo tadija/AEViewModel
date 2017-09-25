@@ -22,7 +22,7 @@ extension Repo: ItemData {
     }
 }
 
-final class GithubRepoCell: TableCell.Basic {
+final class GithubRepoCell: TableCellBasic {
     
     // MARK: Outlets
     
@@ -45,7 +45,7 @@ final class GithubRepoCell: TableCell.Basic {
     }
     
     override func update(with item: Item) {
-        base?.accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator
         
         if let repo = item.data as? Repo {
             if let url = repo.ownerImageURL {

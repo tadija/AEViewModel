@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.5.0
+
+- Added initial support for UICollectionViewController
+- Changed class names to have better compatibility in complex projects
+- Minor improvements and bug fixes
+
 ## Version 0.4.1
 
 - Reverted build system from New to Standard

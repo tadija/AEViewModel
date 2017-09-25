@@ -70,7 +70,7 @@ In the end, notice that `ViewModel.swift` doesn't import `UIKit` and it should s
 
 #### TableViewModelCell
 
-On the `UIKit` side of things there is this `TableViewModelCell` protocol which should be implemented by `UITableViewCell` for things to work. Luckily for you, that's already included out of the box for some often used cell types:
+On the `UIKit` side of things there is this `TableViewModelCell` protocol which shoxuld be implemented by `UITableViewCell` for things to work. Luckily for you, that's already included out of the box for some often used cell types:
 
 ```swift
 public enum TableCell {
@@ -86,7 +86,7 @@ public enum TableCell {
 }
 ```
 
-These classes are defined in the extension of `TableCell` enum, so you would refer to them like `TableCell.Basic`, `TableCell.Subtitle` etc. Easiest way to use custom cells is to inherit from `TableCell.Basic` and override what you need:
+These classes are defined like `TableCellBasic`, `TableCellSubtitle` etc. Easiest way to use custom cells is to inherit from `TableCellBasic` and override what you need:
 
 ```swift
 	/// Called in `awakeFromNib`, you should make initial configuration of your interface here.
@@ -120,11 +120,13 @@ Use it by inheriting from it with your `CustomTableViewModelController` and over
 
 #### CollectionViewModelCell 
 
-> Unfortunately, collection views are not yet implemented but should be very similar to their table counterparts.
+Out of the box there is only `CollectionCellEmpty` cell. Logic is at this moment just duplicated from `TableViewModelCell`.
+> *Note:* refactoring needed in order to loose duplicated logic!
 
 #### CollectionViewModelController
 
-> Unfortunately, collection views are not yet implemented but should be very similar to their table counterparts.
+There is a `CollectionViewModelController` which you may use, but entire logic at this moment is just duplicated from `TableViewModelController`.
+> *Note:* refactoring needed in order to loose duplicated logic!
 
 ### Example
 
@@ -203,7 +205,7 @@ final class FormTVMC: TableViewModelController {
                 self.becomeFirstResponder(at: nextIndexPath)
             }
         case .password:
-            (cell as? TableCell.TextInput)?.textField.isSecureTextEntry = true
+            (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
             cell.action = { _ in
                 let previousIndexPath = self.previousIndexPath(from: indexPath)
                 self.becomeFirstResponder(at: previousIndexPath)
@@ -215,7 +217,7 @@ final class FormTVMC: TableViewModelController {
                 self.updateButton(at: nextIndexPath, enabled: enabled)
             }
         case .register:
-            (cell as? TableCell.Button)?.button.isEnabled = false
+            (cell as? TableCellButton)?.button.isEnabled = false
             cell.action = { _ in
                 self.presentAlert()
             }
@@ -276,7 +278,7 @@ final class GithubTVMC: TableViewModelController {
 #### Custom Cell
 
 ```swift
-final class GithubRepoCell: TableCell.Basic {
+final class GithubRepoCell: TableCellBasic {
 
     @IBOutlet weak var repoOwnerAvatar: UIImageView!
     
@@ -297,7 +299,7 @@ final class GithubRepoCell: TableCell.Basic {
     }
     
     override func update(with item: Item) {
-        base?.accessoryType = .disclosureIndicator
+        accessoryType = .disclosureIndicator
         
         if let repo = item.data as? Repo {
             if let url = repo.ownerImageURL {
