@@ -1,29 +1,21 @@
+[![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://swift.org)
+[![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com)
+[![CocoaPods](https://img.shields.io/cocoapods/v/AEViewModel.svg?style=flat)](https://cocoapods.org/pods/AEViewModel)
+[![Carthage](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![License MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](https://github.com/tadija/AEViewModel/blob/master/LICENSE)
+
 # AEViewModel
 
 **Swift minion for convenient creation of table and collection views**
 
-[![Language Swift 3.0](https://img.shields.io/badge/Language-Swift%203.0-orange.svg?style=flat)](https://swift.org)
-[![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com)
-[![License MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](LICENSE)
-
-[![CocoaPods Version](https://img.shields.io/cocoapods/v/AEViewModel.svg?style=flat)](https://cocoapods.org/pods/AEViewModel)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
-
-> From my experience large part of almost any app's interface is going on in table or collection views.  
-> But then again, anytime I need to make any new table / collection, I'm like AAARGH, NOT AGAIN!  
-> This is my take on making that task easier for myself, and hopefully for others too.
+> I made this for personal use, but feel free to use it or contribute.
+> For more examples check out [Sources](Sources) and [Tests](Tests).
 
 ![AEViewModel](http://tadija.net/public/AEViewModel.png)
 
-> Idea behind this solution is somehow broad and implementation is very loose too, meaning that
-> you may use this in many different ways or styles which are most appropriate to your case or liking.
->
-> By proper usage of this framework, it will enforce you to write more clean and maintainable code by leveraging concepts of [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern. So you should probably understand ["manual" approach](https://medium.com/yay-its-erica/dabbling-with-mvvm-in-swift-3-3bbeba61b45b) first.
->
-> Anyway, it may not be quick and easy (for everyone) to grasp at first look, but if you go deeper you may never wish to create another table or collection view without using this, just saying...
-
 ## Index
+- [Intro](#intro)
 - [Features](#features)
 - [Usage](#usage)
 	- [Introduction](#introduction)
@@ -38,6 +30,19 @@
 		- [Custom Cell](#custom-cell)
 - [Installation](#installation)
 - [License](#license)
+
+## Intro
+
+From my experience large part of almost any app's interface is going on in table or collection views.
+This is my take on making that task easier for myself, and hopefully for others too.
+
+Idea behind this solution is somehow broad and implementation is very loose too, meaning that
+you may use this in many different ways or styles which are most appropriate to your case or liking.
+
+By proper usage of this framework, it will enforce you to write more clean and maintainable code by leveraging concepts of [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern.
+In order to understand it better you should be familiar with the ["manual" approach](https://medium.com/yay-its-erica/dabbling-with-mvvm-in-swift-3-3bbeba61b45b) in the first place.
+
+Anyway, it may not be quick and easy (for everyone) to grasp at first look, but if you go deeper you may never wish to create another table or collection view without using this, just saying...
 
 ## Features
 - Create custom table / collection based interface faster with less boilerplate
@@ -58,7 +63,7 @@ In short, it all starts with empty `ViewModel` protocol, followed by `DataSource
 There are also protocols `Section`, `Item` and `ItemData` and your custom models should conform to the latter one, easy like this:
 
 ```swift
-	struct MyCustomModel: ItemData {}
+struct MyCustomModel: ItemData {}
 ```
 
 Now, for each of those protocols there is a simple basic struct conforming to it, named like `BasicSection` or `Basicitem` etc.
@@ -89,14 +94,14 @@ public enum TableCell {
 These classes are defined like `TableCellBasic`, `TableCellSubtitle` etc. Easiest way to use custom cells is to inherit from `TableCellBasic` and override what you need:
 
 ```swift
-	/// Called in `awakeFromNib`, you should make initial configuration of your interface here.
-	func customize()
-	
-	/// Called in `tableView(_:cellForRowAt:)`, you should update your interface here.
-	func update(with item: Item)
-	
-	/// Called in `prepareForReuse`, you should reset your interface here.
-	func reset()
+/// Called in `awakeFromNib`, you should make initial configuration of your interface here.
+func customize()
+
+/// Called in `tableView(_:cellForRowAt:)`, you should update your interface here.
+func update(with item: Item)
+
+/// Called in `prepareForReuse`, you should reset your interface here.
+func reset()
 ```
 
 `TableViewModelCell` also defines `var action: (_ sender: Any) -> Void` property which you should probably want to set from the view controller in order to make the cell do what you want on `tableView(_:didSelectRowAt:)`.
@@ -111,22 +116,22 @@ All you need to do to make this happen is to set its `model` property which is o
 Use it by inheriting from it with your `CustomTableViewModelController` and override what you need:
 
 ```swift
-	/// Return appropriate cell type for given identifier.
-	func cell(forIdentifier identifier: String) -> TableCell
-	
-	/// Update cell at index path, like customize look or set `action` for cell here.
-	func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath)
+/// Return appropriate cell type for given identifier.
+func cell(forIdentifier identifier: String) -> TableCell
+
+/// Update cell at index path, like customize look or set `action` for cell here.
+func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath)
 ```
 
 #### CollectionViewModelCell 
 
 Out of the box there is only `CollectionCellEmpty` cell. Logic is at this moment just duplicated from `TableViewModelCell`.
-> *Note:* refactoring needed in order to loose duplicated logic!
+> *Note:* some refactoring is still needed in order to keep things DRY!
 
 #### CollectionViewModelController
 
 There is a `CollectionViewModelController` which you may use, but entire logic at this moment is just duplicated from `TableViewModelController`.
-> *Note:* refactoring needed in order to loose duplicated logic!
+> *Note:* some refactoring is still needed in order to keep things DRY!
 
 ### Example
 
@@ -315,8 +320,6 @@ final class GithubRepoCell: TableCellBasic {
     }
 }
 ```
-
-> For more details check out [Sources](Sources) and [Example](Example).
 
 ## Installation
 
