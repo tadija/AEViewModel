@@ -127,7 +127,7 @@ public extension TableCellToggle where Self: TableCellBasic {
         selectionStyle = .none
         configureToggle()
     }
-    func configureToggle() {
+    private func configureToggle() {
         accessoryView = toggle
         toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
     }

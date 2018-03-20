@@ -77,7 +77,7 @@ final class GithubTVMC: TableViewModelController {
     private func pushBrowser(with url: URL, title: String? = nil) {
         let browser = SFSafariViewController(url: url)
         browser.title = title
-        navigationController?.pushViewController(browser, animated: true)
+        present(browser, animated: true, completion: nil)
     }
     
     private func configureSelf() {
