@@ -30,7 +30,8 @@ public enum TableCell {
     case leftDetail
     case rightDetail
     case button
-    case toggle
+    case toggleBasic
+    case toggleSubtitle
     case textInput
     case customClass(type: TableViewModelCell.Type)
     case customNib(nib: UINib?)
@@ -46,10 +47,12 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
     }
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        reset()
         customize()
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
+        reset()
         customize()
     }
     open override func prepareForReuse() {
@@ -58,6 +61,12 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
     }
     
     public var action: (Any) -> Void = { _ in }
+
+    open func reset() {
+        textLabel?.text = nil
+        detailTextLabel?.text = nil
+        imageView?.image = nil
+    }
     open func customize() {}
     open func update(with item: Item) {
         if let data = item.data {
@@ -68,11 +77,6 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
             }
         }
         configureAutomaticDisclosureIndicator(with: item)
-    }
-    open func reset() {
-        textLabel?.text = nil
-        detailTextLabel?.text = nil
-        imageView?.image = nil
     }
     
     open func configureAutomaticDisclosureIndicator(with item: Item) {
@@ -113,17 +117,35 @@ open class TableCellRightDetail: TableCellBasic {
 }
 
 // MARK: - Custom Cells
-    
-open class TableCellToggle: TableCellBasic {
-    public let toggle = UISwitch()
-    
-    open override func customize() {
+
+public protocol TableCellToggle {
+    var toggle: UISwitch { get }
+}
+
+public extension TableCellToggle where Self: TableCellBasic {
+    func configureCell() {
         selectionStyle = .none
         configureToggle()
     }
-    private func configureToggle() {
+    func configureToggle() {
         accessoryView = toggle
         toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
+    }
+}
+    
+open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
+    public let toggle = UISwitch()
+    
+    open override func customize() {
+        configureCell()
+    }
+}
+
+open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
+    public let toggle = UISwitch()
+    
+    open override func customize() {
+        configureCell()
     }
 }
 
