@@ -1,10 +1,8 @@
-//
-//  GithubDataSource.swift
-//  AEViewModelExample
-//
-//  Created by Marko Tadić on 6/17/17.
-//  Copyright © 2017 AE. All rights reserved.
-//
+/**
+ *  https://github.com/tadija/AEViewModel
+ *  Copyright (c) Marko Tadić 2017-2018
+ *  Licensed under the MIT license. See LICENSE file.
+ */
 
 import Foundation
 
@@ -36,13 +34,11 @@ final class GithubDataSource {
     func reload(completion: @escaping ([Repo]?) -> Void) {
         github.fetch(from: trendingSwiftReposURL) { closure in
             do {
-                let response = try closure()
-                if let items = response["items"] as? [Any] {
-                    let repos: [Repo] = try items.mappableArray()
-                    completion(repos)
-                } else {
-                    completion(nil)
-                }
+                let data = try closure()
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let root = try decoder.decode(Root.self, from: data)
+                completion(root.items)
             } catch {
                 print(error)
                 completion(nil)

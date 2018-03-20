@@ -1,3 +1,9 @@
+/**
+ *  https://github.com/tadija/AEViewModel
+ *  Copyright (c) Marko Tadić 2017-2018
+ *  Licensed under the MIT license. See LICENSE file.
+ */
+
 import UIKit
 
 open class TableViewModelController: UITableViewController {
@@ -138,8 +144,10 @@ open class TableViewModelController: UITableViewController {
             tableView.register(TableCellRightDetail.self, forCellReuseIdentifier: identifier)
         case .button:
             tableView.register(TableCellButton.self, forCellReuseIdentifier: identifier)
-        case .toggle:
-            tableView.register(TableCellToggle.self, forCellReuseIdentifier: identifier)
+        case .toggleBasic:
+            tableView.register(TableCellToggleBasic.self, forCellReuseIdentifier: identifier)
+        case .toggleSubtitle:
+            tableView.register(TableCellToggleSubtitle.self, forCellReuseIdentifier: identifier)
         case .textInput:
             tableView.register(TableCellTextInput.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):

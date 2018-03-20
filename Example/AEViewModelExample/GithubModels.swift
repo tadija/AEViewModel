@@ -1,15 +1,16 @@
-//
-//  GithubModels.swift
-//  AEViewModelExample
-//
-//  Created by Marko Tadić on 6/17/17.
-//  Copyright © 2017 AE. All rights reserved.
-//
+/**
+ *  https://github.com/tadija/AEViewModel
+ *  Copyright (c) Marko Tadić 2017-2018
+ *  Licensed under the MIT license. See LICENSE file.
+ */
 
 import Foundation
-import Mappable
 
-struct Repo: Mappable {
+struct Root: Codable {
+    let items: [Repo]
+}
+
+struct Repo: Codable {
     let name: String
     let description: String?
     let url: String
@@ -17,38 +18,18 @@ struct Repo: Mappable {
     let forksCount: Int
     let starsCount: Int
     let owner: Owner
-    
-    init(map: [String : Any]) throws {
-        name = try map.value(forKey: "name")
-        description = try? map.value(forKey: "description")
-        url = try map.value(forKey: "html_url")
-        updated = Repo.parseDate(from: map["updated_at"])
-        forksCount = try map.value(forKey: "forks_count")
-        starsCount = try map.value(forKey: "stargazers_count")
-        owner = try map.mappable(forKey: "owner")
-    }
-    
-    static let dateFormatter = DateFormatter()
-    
-    private static func parseDate(from value: Any?) -> Date {
-        if let dateValue = value as? Date {
-            return dateValue
-        }
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        guard
-            let stringValue = value as? String,
-            let date = dateFormatter.date(from: stringValue)
-            else { return Date() }
-        return date
+
+    private enum CodingKeys: String, CodingKey {
+        case name, description, url = "html_url", updated = "updated_at",
+        forksCount = "forks_count", starsCount = "stargazers_count", owner
     }
 }
 
-struct Owner: Mappable {
+struct Owner: Codable {
     let username: String
     let avatarURL: String
-    
-    init(map: [String : Any]) throws {
-        username = try map.value(forKey: "login")
-        avatarURL = try map.value(forKey: "avatar_url")
+
+    private enum CodingKeys: String, CodingKey {
+        case username = "login", avatarURL = "avatar_url"
     }
 }

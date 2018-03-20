@@ -1,10 +1,8 @@
-//
-//  Github.swift
-//  AEViewModelExample
-//
-//  Created by Marko Tadić on 6/16/17.
-//  Copyright © 2017 AE. All rights reserved.
-//
+/**
+ *  https://github.com/tadija/AEViewModel
+ *  Copyright (c) Marko Tadić 2017-2018
+ *  Licensed under the MIT license. See LICENSE file.
+ */
 
 import Foundation
 import Network
@@ -30,10 +28,10 @@ final class Github {
     }
     
     private let network = Network()
-    
-    func fetch(from url: URL, completion: @escaping Network.Completion.ThrowableDictionary) {
+
+    func fetch(from url: URL, completion: @escaping Network.Completion.ThrowableData) {
         let request = URLRequest(url: url)
-        network.fetchDictionary(with: request, completion: completion)
+        network.fetchData(with: request, completion: completion)
     }
-    
+
 }

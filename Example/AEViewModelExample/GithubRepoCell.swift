@@ -1,10 +1,8 @@
-//
-//  GithubRepoCell.swift
-//  AEViewModelExample
-//
-//  Created by Marko Tadić on 6/18/17.
-//  Copyright © 2017 AE. All rights reserved.
-//
+/**
+ *  https://github.com/tadija/AEViewModel
+ *  Copyright (c) Marko Tadić 2017-2018
+ *  Licensed under the MIT license. See LICENSE file.
+ */
 
 import AEViewModel
 
@@ -20,6 +18,7 @@ extension Repo: ItemData {
         let date = df.string(from: updated)
         return date
     }
+    private static let dateFormatter = DateFormatter()
 }
 
 final class GithubRepoCell: TableCellBasic {

@@ -1,10 +1,8 @@
-//
-//  SettingsTVMC.swift
-//  AEViewModelExample
-//
-//  Created by Marko Tadić on 6/9/17.
-//  Copyright © 2017 AE. All rights reserved.
-//
+/**
+ *  https://github.com/tadija/AEViewModel
+ *  Copyright (c) Marko Tadić 2017-2018
+ *  Licensed under the MIT license. See LICENSE file.
+ */
 
 import UIKit
 import AEViewModel
@@ -45,7 +43,7 @@ final class SettingsTVMC: MappableTVMC {
         case .profile:
             return .customClass(type: SettingsProfileCell.self)
         case .airplane, .vpn:
-            return .toggle
+            return .toggleBasic
         case .wifi, .bluetooth, .hotspot, .carrier:
             return .rightDetail
         case .cellular:
@@ -100,7 +98,7 @@ class WiFiSettingsTVMC: MappableTVMC {
         
         switch wifiCell {
         case .wifiSwitch, .joinNetworksSwitch:
-            return .toggle
+            return .toggleBasic
         case .wifiNetwork:
             return .basic
         }
