@@ -20,6 +20,7 @@ extension Repo: ItemData {
         let date = df.string(from: updated)
         return date
     }
+    private static let dateFormatter = DateFormatter()
 }
 
 final class GithubRepoCell: TableCellBasic {

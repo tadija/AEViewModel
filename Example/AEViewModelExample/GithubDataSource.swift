@@ -36,13 +36,11 @@ final class GithubDataSource {
     func reload(completion: @escaping ([Repo]?) -> Void) {
         github.fetch(from: trendingSwiftReposURL) { closure in
             do {
-                let response = try closure()
-                if let items = response["items"] as? [Any] {
-                    let repos: [Repo] = try items.mappableArray()
-                    completion(repos)
-                } else {
-                    completion(nil)
-                }
+                let data = try closure()
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let root = try decoder.decode(Root.self, from: data)
+                completion(root.items)
             } catch {
                 print(error)
                 completion(nil)

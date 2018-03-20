@@ -30,10 +30,10 @@ final class Github {
     }
     
     private let network = Network()
-    
-    func fetch(from url: URL, completion: @escaping Network.Completion.ThrowableDictionary) {
+
+    func fetch(from url: URL, completion: @escaping Network.Completion.ThrowableData) {
         let request = URLRequest(url: url)
-        network.fetchDictionary(with: request, completion: completion)
+        network.fetchData(with: request, completion: completion)
     }
-    
+
 }
