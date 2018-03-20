@@ -45,7 +45,7 @@ final class SettingsTVMC: MappableTVMC {
         case .profile:
             return .customClass(type: SettingsProfileCell.self)
         case .airplane, .vpn:
-            return .toggle
+            return .toggleBasic
         case .wifi, .bluetooth, .hotspot, .carrier:
             return .rightDetail
         case .cellular:
@@ -100,7 +100,7 @@ class WiFiSettingsTVMC: MappableTVMC {
         
         switch wifiCell {
         case .wifiSwitch, .joinNetworksSwitch:
-            return .toggle
+            return .toggleBasic
         case .wifiNetwork:
             return .basic
         }

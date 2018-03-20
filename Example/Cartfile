@@ -1,2 +1,2 @@
-github "tadija/network"
+github "tadija/network" ~> 0.1.9
 github "tadija/mappable"

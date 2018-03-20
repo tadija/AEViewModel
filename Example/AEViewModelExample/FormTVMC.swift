@@ -32,7 +32,7 @@ final class FormTVMC: TableViewModelController {
         case .username, .password:
             return .textInput
         case .accept:
-            return .toggle
+            return .toggleBasic
         case .register:
             return .button
         }
