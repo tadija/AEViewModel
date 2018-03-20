@@ -1,10 +1,8 @@
-//
-//  FormTVMC.swift
-//  AEViewModelExample
-//
-//  Created by Marko Tadić on 6/3/17.
-//  Copyright © 2017 AE. All rights reserved.
-//
+/**
+ *  https://github.com/tadija/AEViewModel
+ *  Copyright (c) Marko Tadić 2017-2018
+ *  Licensed under the MIT license. See LICENSE file.
+ */
 
 import UIKit
 import AEViewModel
