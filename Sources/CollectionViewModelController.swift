@@ -9,14 +9,16 @@ import UIKit
 open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: Properties
-    
+
+    open var isAutomaticReloadEnabled = true
+
     open var model: DataSource = BasicDataSource() {
         didSet {
-            reload()
+            if isAutomaticReloadEnabled {
+                reload()
+            }
         }
     }
-    
-    open var isAutomaticReloadEnabled = true
     
     // MARK: Init
     
@@ -103,9 +105,7 @@ open class CollectionViewModelController: UICollectionViewController {
     
     private func registerCellsAndReloadDataIfNeeded() {
         registerCells()
-        if isAutomaticReloadEnabled {
-            collectionView?.reloadData()
-        }
+        collectionView?.reloadData()
     }
     
     private func registerCells() {

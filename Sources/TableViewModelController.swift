@@ -9,14 +9,16 @@ import UIKit
 open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
-    
-    open var model: DataSource = BasicDataSource() {
-        didSet {
-            reload()
-        }
-    }
 
     open var isAutomaticReloadEnabled = true
+
+    open var model: DataSource = BasicDataSource() {
+        didSet {
+            if isAutomaticReloadEnabled {
+                reload()
+            }
+        }
+    }
     
     // MARK: Init
     
@@ -97,9 +99,7 @@ open class TableViewModelController: UITableViewController {
     
     private func registerCellsAndReloadDataIfNeeded() {
         registerCells()
-        if isAutomaticReloadEnabled {
-            tableView.reloadData()
-        }
+        tableView.reloadData()
     }
     
     private func registerCells() {
