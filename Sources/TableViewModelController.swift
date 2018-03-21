@@ -9,19 +9,10 @@ import UIKit
 public protocol TableViewModelControllerDelegate: class {
     func cell(forIdentifier identifier: String) -> TableCell
     func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath)
+    func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: Any)
 }
 
-public extension TableViewModelControllerDelegate where Self: TableViewModelController {
-    func cell(forIdentifier identifier: String) -> TableCell {
-        return .basic
-    }
-    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
-    }
-}
-
-open class TableViewModelController: UITableViewController {
+open class TableViewModelController: UITableViewController, TableViewModelControllerDelegate {
     
     // MARK: Properties
 
@@ -45,11 +36,33 @@ open class TableViewModelController: UITableViewController {
     }
     
     // MARK: Lifecycle
-    
+
+    open override func loadView() {
+        super.loadView()
+        if delegate == nil {
+            delegate = self
+        }
+    }
+
     open override func viewDidLoad() {
         super.viewDidLoad()
-
         reload()
+    }
+
+    // MARK: TableViewModelControllerDelegate
+
+    open func cell(forIdentifier identifier: String) -> TableCell {
+        return .basic
+    }
+
+    open func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
+    }
+
+    open func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+        /// - TODO: check later
+        cell.action(cell)
     }
 
     // MARK: Helpers
@@ -74,7 +87,7 @@ open class TableViewModelController: UITableViewController {
     
     private func registerCell(with identifier: String) {
         guard let delegate = delegate else {
-            return
+            fatalError("Delegate must be provided by now.")
         }
         switch delegate.cell(forIdentifier: identifier) {
         case .basic:
@@ -130,13 +143,11 @@ extension TableViewModelController {
 extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard
-            let cell = tableView.cellForRow(at: indexPath),
-            let tableViewModelCell = cell as? TableViewModelCell
-        else { return }
-        
+        guard let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell & TableViewModelCell else {
+            return
+        }
         if cell.selectionStyle != .none {
-            tableViewModelCell.action(cell)
+            delegate?.performAction(for: cell, at: indexPath, sender: self)
         }
     }
     
