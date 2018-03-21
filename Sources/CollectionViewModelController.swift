@@ -68,12 +68,7 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     private func registerCells() {
-        var uniqueIdentifiers: Set<String> = Set<String>()
-        model.sections.forEach { section in
-            let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
-            uniqueIdentifiers.formUnion(sectionIdentifiers)
-        }
-        uniqueIdentifiers.forEach { identifier in
+        model.uniqueIdentifiers.forEach { identifier in
             registerCell(with: identifier)
         }
     }

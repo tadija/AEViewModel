@@ -42,4 +42,12 @@ public extension DataSource {
     func identifier(at indexPath: IndexPath) -> String {
         return item(at: indexPath).identifier
     }
+    var uniqueIdentifiers: Set<String> {
+        var ids: Set<String> = Set<String>()
+        sections.forEach { section in
+            let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
+            ids.formUnion(sectionIdentifiers)
+        }
+        return ids
+    }
 }
