@@ -42,6 +42,12 @@ public struct BasicItem: Item, Codable {
         self.model = model
     }
 
+    public init(identifier: String,
+                title: String? = nil, detail: String? = nil, image: String? = nil, child: BasicDataSource? = nil) {
+        self.identifier = identifier
+        self.model = BasicViewModel(title: title, detail: detail, image: image, child: child)
+    }
+
     // MARK: Codable
 
     public enum CodingKeys: String, CodingKey {
