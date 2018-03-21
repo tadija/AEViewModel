@@ -27,8 +27,8 @@ class SettingsProfileCell: TableCellBasic {
     }
     
     override func update(with item: Item) {
-        name.text = item.data?.title
-        subtitle.text = item.data?.detail
+        name.text = item.model?.title
+        subtitle.text = item.model?.detail
         
         let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
         profileImageView.loadImage(from: url)
