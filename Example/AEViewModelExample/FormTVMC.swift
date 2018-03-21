@@ -36,7 +36,7 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
         
         guard

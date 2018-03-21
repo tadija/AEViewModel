@@ -60,7 +60,7 @@ final class GithubTVMC: TableViewModelController {
         return .customNib(nib: GithubRepoCell.nib)
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
         
         cell.action = { _ in

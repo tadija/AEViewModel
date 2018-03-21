@@ -43,7 +43,7 @@ open class CollectionViewModelController: UICollectionViewController {
         return .empty
     }
     
-    open func configureCell(_ cell: CollectionViewModelCell, at indexPath: IndexPath) {
+    open func configureCell(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath) {
         if let item = item(at: indexPath) {
             cell.update(with: item)
         }
@@ -176,7 +176,7 @@ extension CollectionViewModelController {
             return UICollectionViewCell()
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.identifier, for: indexPath)
-        if let cell = cell as? CollectionViewModelCell {
+        if let cell = cell as? UICollectionViewCell & CollectionViewModelCell {
             configureCell(cell, at: indexPath)
         }
         return cell

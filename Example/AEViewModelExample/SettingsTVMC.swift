@@ -51,7 +51,7 @@ final class SettingsTVMC: MappableTVMC {
         }
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
         
         guard
@@ -106,7 +106,7 @@ class WiFiSettingsTVMC: MappableTVMC {
         }
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
         
         guard

@@ -26,9 +26,11 @@ final class ExampleTVMC: TableViewModelController {
         return .subtitle
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
-        
+
+        cell.accessoryType = .disclosureIndicator
+
         guard
             let item = item(at: indexPath),
             let exampleCell = ExampleCell(rawValue: item.identifier)
