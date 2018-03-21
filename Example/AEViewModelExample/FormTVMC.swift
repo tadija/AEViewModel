@@ -47,19 +47,19 @@ final class FormTVMC: TableViewModelController {
         switch formCell {
         case .username:
             cell.action = { _ in
-                let nextIndexPath = self.nextIndexPath(from: indexPath)
+                let nextIndexPath = indexPath.next(in: self.tableView)
                 self.becomeFirstResponder(at: nextIndexPath)
             }
         case .password:
             (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
             cell.action = { _ in
-                let previousIndexPath = self.previousIndexPath(from: indexPath)
+                let previousIndexPath = indexPath.previous(in: self.tableView)
                 self.becomeFirstResponder(at: previousIndexPath)
             }
         case .accept:
             cell.action = { sender in
                 let enabled = (sender as? UISwitch)?.isOn ?? false
-                let nextIndexPath = self.nextIndexPath(from: indexPath)
+                let nextIndexPath = indexPath.next(in: self.tableView)
                 self.updateButton(at: nextIndexPath, enabled: enabled)
             }
         case .register:

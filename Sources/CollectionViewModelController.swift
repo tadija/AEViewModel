@@ -50,39 +50,6 @@ open class CollectionViewModelController: UICollectionViewController {
         cell.update(with: item)
     }
     
-    // MARK: API
-    
-    public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {
-        guard let cv = collectionView else {
-            return nil
-        }
-        var newIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-        if newIndexPath.row >= collectionView(cv, numberOfItemsInSection: indexPath.section) {
-            let newSection = indexPath.section + 1
-            newIndexPath = IndexPath(item: 0, section: newSection)
-            if newSection >= numberOfSections(in: cv) {
-                return nil
-            }
-        }
-        return newIndexPath
-    }
-    
-    public func previousIndexPath(from indexPath: IndexPath) -> IndexPath? {
-        guard let cv = collectionView else {
-            return nil
-        }
-        var newIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
-        if newIndexPath.row < 0 {
-            let newSection = indexPath.section - 1
-            if newSection < 0 {
-                return nil
-            }
-            let maxRow = collectionView(cv, numberOfItemsInSection: newSection) - 1
-            newIndexPath = IndexPath(item: maxRow, section: newSection)
-        }
-        return newIndexPath
-    }
-    
     // MARK: Helpers
     
     private func reload() {
