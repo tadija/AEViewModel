@@ -57,17 +57,8 @@ open class TableViewModelController: UITableViewController {
     }
     
     public func item(at indexPath: IndexPath) -> Item? {
-        guard let dictionary = model?.sections[indexPath.section].items[indexPath.item] else {
-            return nil
-        }
-        return Array(dictionary.values).first
-    }
-
-    public func identifier(at indexPath: IndexPath) -> String? {
-        guard let dictionary = model?.sections[indexPath.section].items[indexPath.item] else {
-            return nil
-        }
-        return Array(dictionary.keys).first
+        let item = model?.sections[indexPath.section].items[indexPath.item]
+        return item
     }
     
     public func item(from cell: TableViewModelCell) -> Item? {
@@ -80,8 +71,8 @@ open class TableViewModelController: UITableViewController {
     }
     
     public func pushTable(from item: Item, in tvmc: TableViewModelController) {
-        if let basicItem = item as? BasicItem, let model = basicItem.child {
-            tvmc.model = model
+        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {
+            tvmc.model = child
             navigationController?.pushViewController(tvmc, animated: true)
         }
     }
@@ -133,7 +124,7 @@ open class TableViewModelController: UITableViewController {
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
         model?.sections.forEach { section in
-            let sectionIdentifiers: [String] = section.items.flatMap({ Array($0.keys).first })
+            let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
             uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
         uniqueIdentifiers.forEach { identifier in
@@ -187,10 +178,10 @@ extension TableViewModelController {
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let identifier = identifier(at: indexPath) else {
+        guard let item = item(at: indexPath) else {
             return UITableViewCell()
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
         if let cell = cell as? TableViewModelCell {
             configureCell(cell, at: indexPath)
         }

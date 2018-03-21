@@ -8,15 +8,19 @@ import Foundation
 
 // MARK: - NEW
 
-public protocol Item {}
+public protocol ViewModel {}
+public protocol Item {
+    var identifier: String { get }
+    var model: ViewModel? { get set }
+}
 public protocol Section {
-    var items: [[String : Item]] { get set }
+    var items: [Item] { get set }
 }
 public protocol DataSource {
     var sections: [Section] { get set }
 }
 
-public struct BasicItem: Item, Codable {
+public struct BasicViewModel: ViewModel, Codable {
     public let title: String?
     public let detail: String?
     public let image: String?
@@ -29,10 +33,35 @@ public struct BasicItem: Item, Codable {
         self.child = child
     }
 }
-public struct BasicSection: Section, Codable {
-    public var items: [[String : Item]]
+public struct BasicItem: Item, Codable {
+    public let identifier: String
+    public var model: ViewModel?
 
-    public init(items: [[String : Item]] = [[String : Item]]()) {
+    public init(identifier: String, model: ViewModel? = nil) {
+        self.identifier = identifier
+        self.model = model
+    }
+
+    // MARK: Codable
+
+    public enum CodingKeys: String, CodingKey {
+        case identifier, model
+    }
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        identifier = try container.decode(String.self, forKey: .identifier)
+        model = try container.decode(BasicViewModel.self, forKey: .model)
+    }
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(identifier, forKey: .identifier)
+        try container.encode(model, forKey: .model)
+    }
+}
+public struct BasicSection: Section, Codable {
+    public var items: [Item]
+
+    public init(items: [Item] = [Item]()) {
         self.items = items
     }
 
@@ -43,7 +72,7 @@ public struct BasicSection: Section, Codable {
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode([[String : BasicItem]].self, forKey: .items)
+        items = try container.decode([BasicItem].self, forKey: .items)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
