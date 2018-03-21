@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-struct ExampleTable: Table {
+struct ExampleTable: DataSource {
     
     // MARK: Types
     

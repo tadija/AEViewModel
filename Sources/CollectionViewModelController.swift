@@ -10,7 +10,7 @@ open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: Properties
     
-    open var model: Collection? {
+    open var model: DataSource? {
         didSet {
             reload()
         }
@@ -24,7 +24,7 @@ open class CollectionViewModelController: UICollectionViewController {
         self.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
-    public convenience init(collectionViewLayout layout: UICollectionViewLayout, model: Collection) {
+    public convenience init(collectionViewLayout layout: UICollectionViewLayout, model: DataSource) {
         self.init(collectionViewLayout: layout)
         self.model = model
     }

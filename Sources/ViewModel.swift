@@ -26,9 +26,3 @@ public protocol Section {
 public protocol DataSource {
     var sections: [Section] { get set }
 }
-
-public typealias Table = DataSource
-public typealias Collection = DataSource
-
-public typealias BasicTable = BasicDataSource
-public typealias BasicCollection = BasicDataSource

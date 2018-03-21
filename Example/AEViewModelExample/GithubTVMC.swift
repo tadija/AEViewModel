@@ -9,7 +9,7 @@ import SafariServices
 
 final class GithubTVMC: TableViewModelController {
     
-    typealias CellType = BasicTable.GithubCellType
+    typealias CellType = BasicDataSource.GithubCellType
     
     // MARK: Properties
     
@@ -19,7 +19,7 @@ final class GithubTVMC: TableViewModelController {
         didSet {
             let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, model: $0) }
             let section = BasicSection(items: items)
-            let table = BasicTable(sections: [section])
+            let table = BasicDataSource(sections: [section])
             model = table
         }
     }

@@ -10,7 +10,7 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
     
-    open var model: Table? {
+    open var model: DataSource? {
         didSet {
             reload()
         }
@@ -20,7 +20,7 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Init
     
-    public convenience init(style: UITableViewStyle, model: Table) {
+    public convenience init(style: UITableViewStyle, model: DataSource) {
         self.init(style: style)
         self.model = model
     }
