@@ -74,23 +74,16 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
         imageView?.image = nil
     }
     open func customize() {}
-    /// - TODO: check later
     open func update(with item: Item) {
-//        if let data = item.data {
-//            textLabel?.text = data.title
-//            detailTextLabel?.text = data.detail
-//            if let imageName = data.image, let image = UIImage(named: imageName) {
-//                imageView?.image = image
-//            }
-//        }
-//        configureAutomaticDisclosureIndicator(with: item)
+        if let model = item.model {
+            textLabel?.text = model.title
+            detailTextLabel?.text = model.detail
+            if let imageName = model.image, let image = UIImage(named: imageName) {
+                imageView?.image = image
+            }
+        }
     }
-    
-//    open func configureAutomaticDisclosureIndicator(with item: Item) {
-//        if useAutomaticDisclosureIndicator, let table = item.data?.submodel as? Table, table.sections.count >= 0 {
-//            accessoryType = .disclosureIndicator
-//        }
-//    }
+
     @objc public func callAction(sender: Any) {
         action(sender)
     }
@@ -176,8 +169,7 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
         textField.delegate = self
     }
     open override func update(with item: Item) {
-        /// - TODO: check later
-//        textField.placeholder = item.data?.title
+        textField.placeholder = item.model?.title
     }
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -205,7 +197,6 @@ open class TableCellButton: TableCellBasic {
         button.addTarget(self, action: #selector(callAction), for: .touchUpInside)
     }
     open override func update(with item: Item) {
-        /// - TODO: check later
-//        button.setTitle(item.data?.title, for: .normal)
+        button.setTitle(item.model?.title, for: .normal)
     }
 }
