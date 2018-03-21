@@ -70,18 +70,18 @@ struct MappableItem: Item, Mappable {
     // MARK: Item
     
     let identifier: String
-    var data: ItemData?
+    var model: ViewModel?
     
     // MARK: Mappable
     
     init(map: [String : Any]) throws {
         identifier = try map.value(forKey: Key.id.rawValue)
-        data = try? map.mappable(forKey: Key.data.rawValue) as MappableItemData
+        model = try? map.mappable(forKey: Key.data.rawValue) as MappableItemData
     }
     
 }
 
-struct MappableItemData: ItemData, Mappable {
+struct MappableItemData: ViewModel, Mappable {
     
     // MARK: Types
     
@@ -98,7 +98,7 @@ struct MappableItemData: ItemData, Mappable {
     let title: String?
     let detail: String?
     let image: String?
-    let submodel: ViewModel?
+    let submodel: DataSource?
     let custom: [String : Any]?
     
     // MARK: Mappable
