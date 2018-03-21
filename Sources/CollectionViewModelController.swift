@@ -10,13 +10,13 @@ open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: Properties
     
-    open var model: DataSource? {
+    open var model: DataSource = BasicDataSource() {
         didSet {
             reload()
         }
     }
     
-    open var automaticReloadEnabled = true
+    open var isAutomaticReloadEnabled = true
     
     // MARK: Init
     
@@ -44,30 +44,25 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     open func configureCell(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath) {
-        if let item = item(at: indexPath) {
-            cell.update(with: item)
-        }
+        cell.update(with: item(at: indexPath))
     }
     
     // MARK: API
     
-    public func section(at index: Int) -> Section? {
-        let section = model?.sections[index]
-        return section
+    public func section(at index: Int) -> Section {
+        return model.sections[index]
     }
     
-    public func item(at indexPath: IndexPath) -> Item? {
-        let item = model?.sections[indexPath.section].items[indexPath.item]
-        return item
+    public func item(at indexPath: IndexPath) -> Item {
+        return model.sections[indexPath.section].items[indexPath.item]
     }
     
     public func item(from cell: CollectionViewModelCell) -> Item? {
         guard
             let collectionViewCell = cell as? UICollectionViewCell,
-            let indexPath = collectionView?.indexPath(for: collectionViewCell),
-            let item = item(at: indexPath)
+            let indexPath = collectionView?.indexPath(for: collectionViewCell)
         else { return nil }
-        return item
+        return item(at: indexPath)
     }
     
     public func pushCollection(from item: Item, in cvmc: CollectionViewModelController) {
@@ -123,14 +118,14 @@ open class CollectionViewModelController: UICollectionViewController {
     
     private func registerCellsAndReloadDataIfNeeded() {
         registerCells()
-        if automaticReloadEnabled {
-            reloadData()
+        if isAutomaticReloadEnabled {
+            collectionView?.reloadData()
         }
     }
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
-        model?.sections.forEach { section in
+        model.sections.forEach { section in
             let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
             uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
@@ -150,12 +145,6 @@ open class CollectionViewModelController: UICollectionViewController {
         }
     }
     
-    private func reloadData() {
-        if model != nil {
-            collectionView?.reloadData()
-        }
-    }
-    
 }
 
 // MARK: - UICollectionViewControllerDataSource
@@ -163,19 +152,17 @@ open class CollectionViewModelController: UICollectionViewController {
 extension CollectionViewModelController {
     
     open override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return model?.sections.count ?? 0
+        return model.sections.count
     }
     
     open override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model?.sections[section].items.count ?? 0
+        return model.sections[section].items.count
     }
     
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = item(at: indexPath) else {
-            return UICollectionViewCell()
-        }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.identifier, for: indexPath)
+        let identifier = item(at: indexPath).identifier
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         if let cell = cell as? UICollectionViewCell & CollectionViewModelCell {
             configureCell(cell, at: indexPath)
         }

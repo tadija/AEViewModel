@@ -25,8 +25,7 @@ final class GithubTVMC: TableViewModelController {
     }
     
     func repo(at indexPath: IndexPath) -> Repo? {
-        let repo = item(at: indexPath)?.model as? Repo
-        return repo
+        return item(at: indexPath).model as? Repo
     }
     
     // MARK: Init

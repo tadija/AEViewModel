@@ -31,25 +31,23 @@ final class ExampleTVMC: TableViewModelController {
 
         cell.accessoryType = .disclosureIndicator
 
-        guard
-            let item = item(at: indexPath),
-            let exampleCell = ExampleCell(rawValue: item.identifier)
-        else {
+        let itm = item(at: indexPath)
+        guard let exampleCell = ExampleCell(rawValue: itm.identifier) else {
             return
         }
         
         switch exampleCell {
         case .form:
             cell.action = { _ in
-                self.pushTable(from: item, in: FormTVMC())
+                self.pushTable(from: itm, in: FormTVMC())
             }
         case .settings:
             cell.action = { _ in
-                self.pushTable(from: item, in: SettingsTVMC())
+                self.pushTable(from: itm, in: SettingsTVMC())
             }
         case .github:
             cell.action = { _ in
-                self.pushTable(from: item, in: GithubTVMC())
+                self.pushTable(from: itm, in: GithubTVMC())
             }
         }
     }

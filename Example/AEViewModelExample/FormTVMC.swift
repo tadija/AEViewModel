@@ -38,11 +38,9 @@ final class FormTVMC: TableViewModelController {
     
     override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
-        
-        guard
-            let item = item(at: indexPath),
-            let formCell = FormCell(rawValue: item.identifier)
-        else {
+
+        let identifier = item(at: indexPath).identifier
+        guard let formCell = FormCell(rawValue: identifier) else {
             return
         }
         

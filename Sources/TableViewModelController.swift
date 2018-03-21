@@ -10,13 +10,13 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
     
-    open var model: DataSource? {
+    open var model: DataSource = BasicDataSource() {
         didSet {
             reload()
         }
     }
     
-    open var automaticReloadEnabled = true
+    open var isAutomaticReloadEnabled = true
     
     // MARK: Init
     
@@ -33,7 +33,7 @@ open class TableViewModelController: UITableViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         registerCells()
     }
     
@@ -44,30 +44,27 @@ open class TableViewModelController: UITableViewController {
     }
     
     open func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        if let item = item(at: indexPath) {
-            cell.update(with: item)
-        }
+        cell.update(with: item(at: indexPath))
     }
     
     // MARK: API
     
-    public func section(at index: Int) -> Section? {
-        let section = model?.sections[index]
+    public func section(at index: Int) -> Section {
+        let section = model.sections[index]
         return section
     }
     
-    public func item(at indexPath: IndexPath) -> Item? {
-        let item = model?.sections[indexPath.section].items[indexPath.item]
+    public func item(at indexPath: IndexPath) -> Item {
+        let item = model.sections[indexPath.section].items[indexPath.item]
         return item
     }
     
     public func item(from cell: TableViewModelCell) -> Item? {
         guard
             let tableViewCell = cell as? UITableViewCell,
-            let indexPath = tableView.indexPath(for: tableViewCell),
-            let item = item(at: indexPath)
+            let indexPath = tableView.indexPath(for: tableViewCell)
         else { return nil }
-        return item
+        return item(at: indexPath)
     }
     
     public func pushTable(from item: Item, in tvmc: TableViewModelController) {
@@ -117,14 +114,14 @@ open class TableViewModelController: UITableViewController {
     
     private func registerCellsAndReloadDataIfNeeded() {
         registerCells()
-        if automaticReloadEnabled {
-            reloadData()
+        if isAutomaticReloadEnabled {
+            tableView.reloadData()
         }
     }
     
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
-        model?.sections.forEach { section in
+        model.sections.forEach { section in
             let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
             uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
@@ -158,12 +155,6 @@ open class TableViewModelController: UITableViewController {
         }
     }
     
-    private func reloadData() {
-        if model != nil {
-            tableView.reloadData()
-        }
-    }
-    
 }
 
 // MARK: - UITableViewControllerDataSource
@@ -171,18 +162,16 @@ open class TableViewModelController: UITableViewController {
 extension TableViewModelController {
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return model?.sections.count ?? 0
+        return model.sections.count
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.sections[section].items.count ?? 0
+        return model.sections[section].items.count
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = item(at: indexPath) else {
-            return UITableViewCell()
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
+        let identifier = item(at: indexPath).identifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         if let cell = cell as? UITableViewCell & TableViewModelCell {
             configureCell(cell, at: indexPath)
         }
