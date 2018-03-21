@@ -6,9 +6,16 @@
 
 import UIKit
 
+public protocol TableViewModelControllerDelegate: class {
+    func cell(forIdentifier identifier: String) -> TableCell
+    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath)
+}
+
 open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
+
+    public weak var delegate: TableViewModelControllerDelegate?
 
     open var isAutomaticReloadEnabled = true
 
@@ -38,18 +45,7 @@ open class TableViewModelController: UITableViewController {
 
         registerCells()
     }
-    
-    // MARK: Abstract
-    
-    open func cell(forIdentifier identifier: String) -> TableCell {
-        return .basic
-    }
-    
-    open func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
-    }
-    
+
     // MARK: Helpers
     
     private func reload() {
@@ -74,7 +70,10 @@ open class TableViewModelController: UITableViewController {
     }
     
     private func registerCell(with identifier: String) {
-        switch cell(forIdentifier: identifier) {
+        guard let delegate = delegate else {
+            return
+        }
+        switch delegate.cell(forIdentifier: identifier) {
         case .basic:
             tableView.register(TableCellBasic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
@@ -116,7 +115,7 @@ extension TableViewModelController {
         let identifier = dataSource.identifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         if let cell = cell as? UITableViewCell & TableViewModelCell {
-            update(cell, at: indexPath)
+            delegate?.update(cell, at: indexPath)
         }
         return cell
     }

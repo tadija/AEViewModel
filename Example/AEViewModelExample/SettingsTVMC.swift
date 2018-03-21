@@ -17,7 +17,7 @@ class MappableTVMC: TableViewModelController {
     }
 }
 
-final class SettingsTVMC: MappableTVMC {
+final class SettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
     
     typealias SettingsCell = SettingsTable.Cell
     
@@ -27,14 +27,15 @@ final class SettingsTVMC: MappableTVMC {
         super.viewDidLoad()
         
         title = (dataSource as? MappableTable)?.title
+        delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
 
-    override func cell(forIdentifier identifier: String) -> TableCell {        
+    func cell(forIdentifier identifier: String) -> TableCell {
         guard let settingsCell = SettingsCell(rawValue: identifier) else {
             return .basic
         }
@@ -51,10 +52,10 @@ final class SettingsTVMC: MappableTVMC {
         }
     }
     
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.update(cell, at: indexPath)
-
+    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
+
         guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
             return
         }
@@ -85,13 +86,21 @@ final class SettingsTVMC: MappableTVMC {
 
 // MARK: - WiFiSettingsTVC
 
-class WiFiSettingsTVMC: MappableTVMC {
+class WiFiSettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
     
     typealias WifiCell = SettingsTable.Wifi.Cell
+
+    // MARK: Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        delegate = self
+    }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    func cell(forIdentifier identifier: String) -> TableCell {
         guard let wifiCell = WifiCell(rawValue: identifier) else {
             return .basic
         }
@@ -104,10 +113,10 @@ class WiFiSettingsTVMC: MappableTVMC {
         }
     }
     
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.update(cell, at: indexPath)
-
+    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
+
         guard let wifiCell = WifiCell(rawValue: item.identifier) else {
             return
         }

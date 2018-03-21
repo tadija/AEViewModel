@@ -7,7 +7,7 @@
 import AEViewModel
 import SafariServices
 
-final class GithubTVMC: TableViewModelController {
+final class GithubTVMC: TableViewModelController, TableViewModelControllerDelegate {
     
     typealias CellType = BasicDataSource.GithubCellType
     
@@ -52,14 +52,15 @@ final class GithubTVMC: TableViewModelController {
         }
     }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    func cell(forIdentifier identifier: String) -> TableCell {
         return .customNib(nib: GithubRepoCell.nib)
     }
     
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.update(cell, at: indexPath)
+    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
         
         cell.action = { _ in
             if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
@@ -78,6 +79,7 @@ final class GithubTVMC: TableViewModelController {
     
     private func configureSelf() {
         title = "Github"
+        delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150

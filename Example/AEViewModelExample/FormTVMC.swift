@@ -7,7 +7,7 @@
 import UIKit
 import AEViewModel
 
-final class FormTVMC: TableViewModelController {
+final class FormTVMC: TableViewModelController, TableViewModelControllerDelegate {
     
     typealias FormCell = FormTable.Cell
     
@@ -17,11 +17,12 @@ final class FormTVMC: TableViewModelController {
         super.viewDidLoad()
         
         title = "Registration"
+        delegate = self
     }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    func cell(forIdentifier identifier: String) -> TableCell {
         guard let formCell = FormCell(rawValue: identifier) else {
             return .basic
         }
@@ -36,8 +37,9 @@ final class FormTVMC: TableViewModelController {
         }
     }
     
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.update(cell, at: indexPath)
+    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
 
         let identifier = dataSource.identifier(at: indexPath)
         guard let formCell = FormCell(rawValue: identifier) else {

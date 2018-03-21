@@ -7,7 +7,7 @@
 import UIKit
 import AEViewModel
 
-final class ExampleTVMC: TableViewModelController {
+final class ExampleTVMC: TableViewModelController, TableViewModelControllerDelegate {
     
     typealias ExampleCell = ExampleTable.Cell
     
@@ -17,21 +17,22 @@ final class ExampleTVMC: TableViewModelController {
         super.awakeFromNib()
         
         title = "Example"
+        delegate = self
         dataSource = ExampleTable()
     }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    func cell(forIdentifier identifier: String) -> TableCell {
         return .subtitle
     }
     
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.update(cell, at: indexPath)
+    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
 
         cell.accessoryType = .disclosureIndicator
 
-        let item = dataSource.item(at: indexPath)
         guard let exampleCell = ExampleCell(rawValue: item.identifier) else {
             return
         }
