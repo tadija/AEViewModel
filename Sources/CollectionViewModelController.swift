@@ -71,10 +71,11 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     public func pushCollection(from item: Item, in cvmc: CollectionViewModelController) {
-        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {
-            cvmc.model = child
-            navigationController?.pushViewController(cvmc, animated: true)
-        }
+        /// - TODO: check later
+//        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {
+//            cvmc.model = child
+//            navigationController?.pushViewController(cvmc, animated: true)
+//        }
     }
     
     public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {

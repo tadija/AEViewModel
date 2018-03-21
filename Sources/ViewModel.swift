@@ -12,13 +12,11 @@ public protocol ViewModel {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
-    var child: DataSource? { get }
 }
 public extension ViewModel {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }
-    var child: DataSource? { return nil }
 }
 public protocol Item {
     var identifier: String { get }
@@ -35,13 +33,11 @@ public struct BasicViewModel: ViewModel, Codable {
     public let title: String?
     public let detail: String?
     public let image: String?
-    public var child: BasicDataSource?
 
-    public init(title: String? = nil, detail: String? = nil, image: String? = nil, child: BasicDataSource? = nil) {
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil) {
         self.title = title
         self.detail = detail
         self.image = image
-        self.child = child
     }
 }
 public struct BasicItem: Item, Codable {
@@ -54,9 +50,9 @@ public struct BasicItem: Item, Codable {
     }
 
     public init(identifier: String,
-                title: String? = nil, detail: String? = nil, image: String? = nil, child: BasicDataSource? = nil) {
+                title: String? = nil, detail: String? = nil, image: String? = nil) {
         self.identifier = identifier
-        self.model = BasicViewModel(title: title, detail: detail, image: image, child: child)
+        self.model = BasicViewModel(title: title, detail: detail, image: image)
     }
 
     // MARK: Codable

@@ -71,10 +71,11 @@ open class TableViewModelController: UITableViewController {
     }
     
     public func pushTable(from item: Item, in tvmc: TableViewModelController) {
-        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {
-            tvmc.model = child
-            navigationController?.pushViewController(tvmc, animated: true)
-        }
+        /// - TODO: check later
+//        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {
+//            tvmc.model = child
+//            navigationController?.pushViewController(tvmc, animated: true)
+//        }
     }
     
     public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {
