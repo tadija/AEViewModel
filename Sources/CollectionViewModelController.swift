@@ -57,8 +57,17 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     public func item(at indexPath: IndexPath) -> Item? {
-        let item = model?.sections[indexPath.section].items[indexPath.item]
-        return item
+        guard let dictionary = model?.sections[indexPath.section].items[indexPath.item] else {
+            return nil
+        }
+        return Array(dictionary.values).first
+    }
+
+    public func identifier(at indexPath: IndexPath) -> String? {
+        guard let dictionary = model?.sections[indexPath.section].items[indexPath.item] else {
+            return nil
+        }
+        return Array(dictionary.keys).first
     }
     
     public func item(from cell: CollectionViewModelCell) -> Item? {
@@ -71,7 +80,7 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     public func pushCollection(from item: Item, in cvmc: CollectionViewModelController) {
-        if let model = item.data?.submodel as? Collection {
+        if let basicItem = item as? BasicItem, let model = basicItem.child {
             cvmc.model = model
             navigationController?.pushViewController(cvmc, animated: true)
         }
@@ -130,7 +139,7 @@ open class CollectionViewModelController: UICollectionViewController {
     private func registerCells() {
         var uniqueIdentifiers: Set<String> = Set<String>()
         model?.sections.forEach { section in
-            let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
+            let sectionIdentifiers: [String] = section.items.flatMap({ Array($0.keys).first })
             uniqueIdentifiers.formUnion(sectionIdentifiers)
         }
         uniqueIdentifiers.forEach { identifier in
@@ -171,10 +180,10 @@ extension CollectionViewModelController {
     
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = item(at: indexPath) else {
+        guard let identifier = identifier(at: indexPath) else {
             return UICollectionViewCell()
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         if let cell = cell as? CollectionViewModelCell {
             configureCell(cell, at: indexPath)
         }
