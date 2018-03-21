@@ -13,19 +13,18 @@ final class GithubTVMC: TableViewModelController {
     
     // MARK: Properties
     
-    private let dataSource = GithubDataSource()
+    private let github = GithubDataSource()
     
     private var repos = [Repo]() {
         didSet {
             let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, model: $0) }
             let section = BasicSection(items: items)
-            let table = BasicDataSource(sections: [section])
-            model = table
+            dataSource = BasicDataSource(sections: [section])
         }
     }
     
     func repo(at indexPath: IndexPath) -> Repo? {
-        return model.item(at: indexPath).model as? Repo
+        return dataSource.item(at: indexPath).model as? Repo
     }
     
     // MARK: Init
@@ -93,7 +92,7 @@ final class GithubTVMC: TableViewModelController {
     
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        dataSource.reload { [weak self] (repos) in
+        github.reload { [weak self] (repos) in
             DispatchQueue.main.async {
                 sender.endRefreshing()
             }

@@ -39,7 +39,7 @@ final class FormTVMC: TableViewModelController {
     override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
 
-        let identifier = model.identifier(at: indexPath)
+        let identifier = dataSource.identifier(at: indexPath)
         guard let formCell = FormCell(rawValue: identifier) else {
             return
         }
@@ -71,7 +71,7 @@ final class FormTVMC: TableViewModelController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (model.sections[section] as? FormSection)?.header
+        return (dataSource.sections[section] as? FormSection)?.header
     }
     
     // MARK: Helpers

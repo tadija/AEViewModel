@@ -17,7 +17,7 @@ final class ExampleTVMC: TableViewModelController {
         super.awakeFromNib()
         
         title = "Example"
-        model = ExampleTable()
+        dataSource = ExampleTable()
     }
     
     // MARK: Override
@@ -31,7 +31,7 @@ final class ExampleTVMC: TableViewModelController {
 
         cell.accessoryType = .disclosureIndicator
 
-        let item = model.item(at: indexPath)
+        let item = dataSource.item(at: indexPath)
         guard let exampleCell = ExampleCell(rawValue: item.identifier) else {
             return
         }

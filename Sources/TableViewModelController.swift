@@ -12,7 +12,7 @@ open class TableViewModelController: UITableViewController {
 
     open var isAutomaticReloadEnabled = true
 
-    open var model: DataSource = BasicDataSource() {
+    open var dataSource: DataSource = BasicDataSource() {
         didSet {
             if isAutomaticReloadEnabled {
                 reload()
@@ -22,9 +22,9 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Init
     
-    public convenience init(style: UITableViewStyle, model: DataSource) {
+    public convenience init(style: UITableViewStyle, dataSource: DataSource) {
         self.init(style: style)
-        self.model = model
+        self.dataSource = dataSource
     }
     
     public convenience init() {
@@ -46,7 +46,7 @@ open class TableViewModelController: UITableViewController {
     }
     
     open func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        let item = model.item(at: indexPath)
+        let item = dataSource.item(at: indexPath)
         cell.update(with: item)
     }
     
@@ -68,7 +68,7 @@ open class TableViewModelController: UITableViewController {
     }
     
     private func registerCells() {
-        model.uniqueIdentifiers.forEach { identifier in
+        dataSource.uniqueIdentifiers.forEach { identifier in
             registerCell(with: identifier)
         }
     }
@@ -105,15 +105,15 @@ open class TableViewModelController: UITableViewController {
 extension TableViewModelController {
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return model.sections.count
+        return dataSource.sections.count
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.sections[section].items.count
+        return dataSource.sections[section].items.count
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = model.identifier(at: indexPath)
+        let identifier = dataSource.identifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         if let cell = cell as? UITableViewCell & TableViewModelCell {
             configureCell(cell, at: indexPath)

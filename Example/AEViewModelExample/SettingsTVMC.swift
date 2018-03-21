@@ -9,11 +9,11 @@ import AEViewModel
 
 class MappableTVMC: TableViewModelController {    
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (model.sections[section] as? MappableSection)?.header
+        return (dataSource.sections[section] as? MappableSection)?.header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return (model.sections[section] as? MappableSection)?.footer
+        return (dataSource.sections[section] as? MappableSection)?.footer
     }
 }
 
@@ -26,7 +26,7 @@ final class SettingsTVMC: MappableTVMC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = (model as? MappableTable)?.title
+        title = (dataSource as? MappableTable)?.title
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
@@ -54,7 +54,7 @@ final class SettingsTVMC: MappableTVMC {
     override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
 
-        let item = model.item(at: indexPath)
+        let item = dataSource.item(at: indexPath)
         guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
             return
         }
@@ -107,7 +107,7 @@ class WiFiSettingsTVMC: MappableTVMC {
     override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
 
-        let item = model.item(at: indexPath)
+        let item = dataSource.item(at: indexPath)
         guard let wifiCell = WifiCell(rawValue: item.identifier) else {
             return
         }
