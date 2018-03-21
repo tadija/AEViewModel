@@ -29,13 +29,9 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Init
     
-    public convenience init(style: UITableViewStyle, dataSource: DataSource) {
+    public convenience init(style: UITableViewStyle = .grouped, dataSource: DataSource = BasicDataSource()) {
         self.init(style: style)
         self.dataSource = dataSource
-    }
-    
-    public convenience init() {
-        self.init(style: .grouped)
     }
     
     // MARK: Lifecycle
@@ -43,24 +39,21 @@ open class TableViewModelController: UITableViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerCells()
+        reload()
     }
 
     // MARK: Helpers
     
     private func reload() {
         if Thread.isMainThread {
-            registerCellsAndReloadDataIfNeeded()
+            registerCells()
+            tableView.reloadData()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCellsAndReloadDataIfNeeded()
+                self?.registerCells()
+                self?.tableView.reloadData()
             }
         }
-    }
-    
-    private func registerCellsAndReloadDataIfNeeded() {
-        registerCells()
-        tableView.reloadData()
     }
     
     private func registerCells() {
