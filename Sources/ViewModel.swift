@@ -8,46 +8,65 @@ import Foundation
 
 // MARK: - NEW
 
-protocol NewItem {}
-protocol NewSection {
-    var items: [[String : NewItem]] { get set }
+public protocol Item {}
+public protocol Section {
+    var items: [[String : Item]] { get set }
 }
-protocol NewDataSource {
-    var sections: [NewSection] { get set }
+public protocol DataSource {
+    var sections: [Section] { get set }
 }
 
-struct NewBasicItem: NewItem, Codable {
-    let title: String?
-    let detail: String?
-    let image: String?
-    var child: NewBasicDataSource?
-}
-struct NewBasicSection: NewSection, Codable {
-    var items: [[String : NewItem]]
+public struct BasicItem: Item, Codable {
+    public let title: String?
+    public let detail: String?
+    public let image: String?
+    public var child: BasicDataSource?
 
-    enum CodingKeys: String, CodingKey {
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil, child: BasicDataSource? = nil) {
+        self.title = title
+        self.detail = detail
+        self.image = image
+        self.child = child
+    }
+}
+public struct BasicSection: Section, Codable {
+    public var items: [[String : Item]]
+
+    public init(items: [[String : Item]] = [[String : Item]]()) {
+        self.items = items
+    }
+
+    // MARK: Codable
+
+    public enum CodingKeys: String, CodingKey {
         case items
     }
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode([[String : NewBasicItem]].self, forKey: .items)
+        items = try container.decode([[String : BasicItem]].self, forKey: .items)
     }
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(items, forKey: .items)
     }
 }
-struct NewBasicDataSource: NewDataSource, Codable {
-    var sections: [NewSection]
+public struct BasicDataSource: DataSource, Codable {
+    public var sections: [Section]
 
-    enum CodingKeys: String, CodingKey {
+    public init(sections: [Section] = [Section]()) {
+        self.sections = sections
+    }
+
+    // MARK: Codable
+
+    public enum CodingKeys: String, CodingKey {
         case sections
     }
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sections = try container.decode([NewBasicSection].self, forKey: .sections)
+        sections = try container.decode([BasicSection].self, forKey: .sections)
     }
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(sections, forKey: .sections)
     }
@@ -63,6 +82,7 @@ public typealias BasicCollection = BasicDataSource
 
 // MARK: - Protocols
 
+/*
 public protocol ViewModel {}
 
 public protocol DataSource: ViewModel {
@@ -139,3 +159,4 @@ public struct BasicItemData: ItemData {
         self.submodel = submodel
     }
 }
+*/
