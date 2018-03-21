@@ -50,14 +50,6 @@ open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: API
     
-    public func item(from cell: CollectionViewModelCell) -> Item? {
-        guard
-            let collectionViewCell = cell as? UICollectionViewCell,
-            let indexPath = collectionView?.indexPath(for: collectionViewCell)
-        else { return nil }
-        return model.item(at: indexPath)
-    }
-    
     public func pushCollection(from item: Item, in cvmc: CollectionViewModelController) {
         /// - TODO: check later
 //        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {

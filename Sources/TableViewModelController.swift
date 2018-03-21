@@ -50,14 +50,6 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: API
     
-    public func item(from cell: TableViewModelCell) -> Item? {
-        guard
-            let tableViewCell = cell as? UITableViewCell,
-            let indexPath = tableView.indexPath(for: tableViewCell)
-        else { return nil }
-        return model.item(at: indexPath)
-    }
-    
     public func pushTable(from item: Item, in tvmc: TableViewModelController) {
         /// - TODO: check later
 //        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {

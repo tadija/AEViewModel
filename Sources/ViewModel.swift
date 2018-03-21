@@ -36,9 +36,6 @@ public extension ViewModel {
 }
 
 public extension DataSource {
-    func section(at index: Int) -> Section {
-        return sections[index]
-    }
     func item(at indexPath: IndexPath) -> Item {
         return sections[indexPath.section].items[indexPath.item]
     }

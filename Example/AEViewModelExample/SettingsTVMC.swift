@@ -9,11 +9,11 @@ import AEViewModel
 
 class MappableTVMC: TableViewModelController {    
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (model.section(at: section) as? MappableSection)?.header
+        return (model.sections[section] as? MappableSection)?.header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return (model.section(at: section) as? MappableSection)?.footer
+        return (model.sections[section] as? MappableSection)?.footer
     }
 }
 

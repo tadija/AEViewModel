@@ -71,7 +71,7 @@ final class FormTVMC: TableViewModelController {
     }
     
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (model.section(at: section) as? FormSection)?.header
+        return (model.sections[section] as? FormSection)?.header
     }
     
     // MARK: Helpers
