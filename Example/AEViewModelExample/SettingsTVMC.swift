@@ -51,8 +51,8 @@ final class SettingsTVMC: MappableTVMC {
         }
     }
     
-    override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
 
         let item = dataSource.item(at: indexPath)
         guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
@@ -104,8 +104,8 @@ class WiFiSettingsTVMC: MappableTVMC {
         }
     }
     
-    override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
 
         let item = dataSource.item(at: indexPath)
         guard let wifiCell = WifiCell(rawValue: item.identifier) else {
