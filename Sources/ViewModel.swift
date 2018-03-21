@@ -6,23 +6,31 @@
 
 import Foundation
 
+// MARK: - Protocols
+
 public protocol ViewModel {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
 }
-public extension ViewModel {
-    var title: String? { return nil }
-    var detail: String? { return nil }
-    var image: String? { return nil }
-}
+
 public protocol Item {
     var identifier: String { get }
     var model: ViewModel? { get set }
 }
+
 public protocol Section {
     var items: [Item] { get set }
 }
+
 public protocol DataSource {
     var sections: [Section] { get set }
+}
+
+// MARK: - Helpers
+
+public extension ViewModel {
+    var title: String? { return nil }
+    var detail: String? { return nil }
+    var image: String? { return nil }
 }

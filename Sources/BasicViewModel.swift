@@ -6,7 +6,9 @@
 
 import Foundation
 
-public struct BasicViewModel: ViewModel, Codable {
+// MARK: - Model
+
+public struct BasicViewModel: ViewModel {
     public let title: String?
     public let detail: String?
     public let image: String?
@@ -17,7 +19,8 @@ public struct BasicViewModel: ViewModel, Codable {
         self.image = image
     }
 }
-public struct BasicItem: Item, Codable {
+
+public struct BasicItem: Item {
     public let identifier: String
     public var model: ViewModel?
 
@@ -31,9 +34,45 @@ public struct BasicItem: Item, Codable {
         self.identifier = identifier
         self.model = BasicViewModel(title: title, detail: detail, image: image)
     }
+}
 
-    // MARK: Codable
+public struct BasicSection: Section {
+    public var items: [Item]
 
+    public init(items: [Item] = [Item]()) {
+        self.items = items
+    }
+}
+
+public struct BasicDataSource: DataSource {
+    public var sections: [Section]
+
+    public init(sections: [Section] = [Section]()) {
+        self.sections = sections
+    }
+}
+
+// MARK: - Codable
+
+extension BasicViewModel: Codable {
+    public enum CodingKeys: String, CodingKey {
+        case title, detail, image
+    }
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        title = try container.decode(String.self, forKey: .title)
+        detail = try container.decode(String.self, forKey: .detail)
+        image = try container.decode(String.self, forKey: .image)
+    }
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(title, forKey: .title)
+        try container.encode(detail, forKey: .detail)
+        try container.encode(image, forKey: .image)
+    }
+}
+
+extension BasicItem: Codable {
     public enum CodingKeys: String, CodingKey {
         case identifier, model
     }
@@ -48,15 +87,8 @@ public struct BasicItem: Item, Codable {
         try container.encode(model, forKey: .model)
     }
 }
-public struct BasicSection: Section, Codable {
-    public var items: [Item]
 
-    public init(items: [Item] = [Item]()) {
-        self.items = items
-    }
-
-    // MARK: Codable
-
+extension BasicSection: Codable {
     public enum CodingKeys: String, CodingKey {
         case items
     }
@@ -69,15 +101,8 @@ public struct BasicSection: Section, Codable {
         try container.encode(items, forKey: .items)
     }
 }
-public struct BasicDataSource: DataSource, Codable {
-    public var sections: [Section]
 
-    public init(sections: [Section] = [Section]()) {
-        self.sections = sections
-    }
-
-    // MARK: Codable
-
+extension BasicDataSource: Codable {
     public enum CodingKeys: String, CodingKey {
         case sections
     }
