@@ -11,6 +11,16 @@ public protocol TableViewModelControllerDelegate: class {
     func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath)
 }
 
+public extension TableViewModelControllerDelegate where Self: TableViewModelController {
+    func cell(forIdentifier identifier: String) -> TableCell {
+        return .basic
+    }
+    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
+    }
+}
+
 open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
