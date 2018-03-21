@@ -52,14 +52,6 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: API
     
-    public func pushTable(from item: Item, in tvmc: TableViewModelController) {
-        /// - TODO: check later
-//        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {
-//            tvmc.model = child
-//            navigationController?.pushViewController(tvmc, animated: true)
-//        }
-    }
-    
     public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {
         var newIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
         if newIndexPath.row >= tableView(tableView, numberOfRowsInSection: indexPath.section) {

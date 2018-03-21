@@ -39,15 +39,18 @@ final class ExampleTVMC: TableViewModelController {
         switch exampleCell {
         case .form:
             cell.action = { _ in
-                self.pushTable(from: item, in: FormTVMC())
+                /// - TODO: check later
+//                self.pushTable(from: item, in: FormTVMC())
             }
         case .settings:
             cell.action = { _ in
-                self.pushTable(from: item, in: SettingsTVMC())
+                /// - TODO: check later
+//                self.pushTable(from: item, in: SettingsTVMC())
             }
         case .github:
             cell.action = { _ in
-                self.pushTable(from: item, in: GithubTVMC())
+                /// - TODO: check later
+//                self.pushTable(from: item, in: GithubTVMC())
             }
         }
     }

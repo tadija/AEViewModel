@@ -52,14 +52,6 @@ open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: API
     
-    public func pushCollection(from item: Item, in cvmc: CollectionViewModelController) {
-        /// - TODO: check later
-//        if let basicViewModel = item.model as? BasicViewModel, let child = basicViewModel.child {
-//            cvmc.model = child
-//            navigationController?.pushViewController(cvmc, animated: true)
-//        }
-    }
-    
     public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {
         guard let cv = collectionView else {
             return nil

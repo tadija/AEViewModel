@@ -66,17 +66,17 @@ final class SettingsTVMC: MappableTVMC {
             }
         case .wifi:
             cell.action = { _ in
-                let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
+//                let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
                 /// - TODO: check later
 //                wifiSubmenu.title = (item.model?.child as? MappableTable)?.title
-                self.pushTable(from: item, in: wifiSubmenu)
+//                self.pushTable(from: item, in: wifiSubmenu)
             }
         case .bluetooth, .cellular, .hotspot, .carrier:
             cell.action = { _ in
-                let defaultSubmenu = MappableTVMC(style: .grouped)
+//                let defaultSubmenu = MappableTVMC(style: .grouped)
                 /// - TODO: check later
 //                defaultSubmenu.title = (item.model?.child as? MappableTable)?.title
-                self.pushTable(from: item, in: defaultSubmenu)
+//                self.pushTable(from: item, in: defaultSubmenu)
             }
         }
     }
@@ -120,8 +120,9 @@ class WiFiSettingsTVMC: MappableTVMC {
             }
         case .wifiNetwork:
             cell.action = { _ in
-                let tvc = TableViewModelController(style: .grouped)
-                self.pushTable(from: item, in: tvc)
+                /// - TODO: check later
+//                let tvc = TableViewModelController(style: .grouped)
+//                self.pushTable(from: item, in: tvc)
             }
         }
     }
