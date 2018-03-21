@@ -15,7 +15,7 @@ open class TableViewModelController: UITableViewController {
             reload()
         }
     }
-    
+
     open var isAutomaticReloadEnabled = true
     
     // MARK: Init
@@ -44,27 +44,18 @@ open class TableViewModelController: UITableViewController {
     }
     
     open func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        cell.update(with: item(at: indexPath))
+        let item = model.item(at: indexPath)
+        cell.update(with: item)
     }
     
     // MARK: API
-    
-    public func section(at index: Int) -> Section {
-        let section = model.sections[index]
-        return section
-    }
-    
-    public func item(at indexPath: IndexPath) -> Item {
-        let item = model.sections[indexPath.section].items[indexPath.item]
-        return item
-    }
     
     public func item(from cell: TableViewModelCell) -> Item? {
         guard
             let tableViewCell = cell as? UITableViewCell,
             let indexPath = tableView.indexPath(for: tableViewCell)
         else { return nil }
-        return item(at: indexPath)
+        return model.item(at: indexPath)
     }
     
     public func pushTable(from item: Item, in tvmc: TableViewModelController) {
@@ -170,7 +161,7 @@ extension TableViewModelController {
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = item(at: indexPath).identifier
+        let identifier = model.identifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         if let cell = cell as? UITableViewCell & TableViewModelCell {
             configureCell(cell, at: indexPath)

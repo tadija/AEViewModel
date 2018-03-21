@@ -34,3 +34,15 @@ public extension ViewModel {
     var detail: String? { return nil }
     var image: String? { return nil }
 }
+
+public extension DataSource {
+    func section(at index: Int) -> Section {
+        return sections[index]
+    }
+    func item(at indexPath: IndexPath) -> Item {
+        return sections[indexPath.section].items[indexPath.item]
+    }
+    func identifier(at indexPath: IndexPath) -> String {
+        return item(at: indexPath).identifier
+    }
+}

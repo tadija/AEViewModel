@@ -9,11 +9,11 @@ import AEViewModel
 
 class MappableTVMC: TableViewModelController {    
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (self.section(at: section) as? MappableSection)?.header
+        return (model.section(at: section) as? MappableSection)?.header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return (self.section(at: section) as? MappableSection)?.footer
+        return (model.section(at: section) as? MappableSection)?.footer
     }
 }
 
@@ -54,29 +54,29 @@ final class SettingsTVMC: MappableTVMC {
     override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
 
-        let itm = item(at: indexPath)
-        guard let settingsCell = SettingsCell(rawValue: itm.identifier) else {
+        let item = model.item(at: indexPath)
+        guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
             return
         }
         
         switch settingsCell {
         case .profile, .airplane, .vpn:
             cell.action = { _ in
-                print("handleEvent with id: \(itm.identifier)")
+                print("handleEvent with id: \(item.identifier)")
             }
         case .wifi:
             cell.action = { _ in
                 let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
                 /// - TODO: check later
 //                wifiSubmenu.title = (item.model?.child as? MappableTable)?.title
-                self.pushTable(from: itm, in: wifiSubmenu)
+                self.pushTable(from: item, in: wifiSubmenu)
             }
         case .bluetooth, .cellular, .hotspot, .carrier:
             cell.action = { _ in
                 let defaultSubmenu = MappableTVMC(style: .grouped)
                 /// - TODO: check later
 //                defaultSubmenu.title = (item.model?.child as? MappableTable)?.title
-                self.pushTable(from: itm, in: defaultSubmenu)
+                self.pushTable(from: item, in: defaultSubmenu)
             }
         }
     }
@@ -107,8 +107,8 @@ class WiFiSettingsTVMC: MappableTVMC {
     override func configureCell(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.configureCell(cell, at: indexPath)
 
-        let itm = item(at: indexPath)
-        guard let wifiCell = WifiCell(rawValue: itm.identifier) else {
+        let item = model.item(at: indexPath)
+        guard let wifiCell = WifiCell(rawValue: item.identifier) else {
             return
         }
         
@@ -116,12 +116,12 @@ class WiFiSettingsTVMC: MappableTVMC {
         case .wifiSwitch,
              .joinNetworksSwitch:
             cell.action = { _ in
-                print("handleEvent with id: \(itm.identifier)")
+                print("handleEvent with id: \(item.identifier)")
             }
         case .wifiNetwork:
             cell.action = { _ in
                 let tvc = TableViewModelController(style: .grouped)
-                self.pushTable(from: itm, in: tvc)
+                self.pushTable(from: item, in: tvc)
             }
         }
     }

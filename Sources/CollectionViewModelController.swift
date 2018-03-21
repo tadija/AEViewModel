@@ -44,25 +44,18 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     open func configureCell(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath) {
-        cell.update(with: item(at: indexPath))
+        let item = model.item(at: indexPath)
+        cell.update(with: item)
     }
     
     // MARK: API
-    
-    public func section(at index: Int) -> Section {
-        return model.sections[index]
-    }
-    
-    public func item(at indexPath: IndexPath) -> Item {
-        return model.sections[indexPath.section].items[indexPath.item]
-    }
     
     public func item(from cell: CollectionViewModelCell) -> Item? {
         guard
             let collectionViewCell = cell as? UICollectionViewCell,
             let indexPath = collectionView?.indexPath(for: collectionViewCell)
         else { return nil }
-        return item(at: indexPath)
+        return model.item(at: indexPath)
     }
     
     public func pushCollection(from item: Item, in cvmc: CollectionViewModelController) {
@@ -161,7 +154,7 @@ extension CollectionViewModelController {
     
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = item(at: indexPath).identifier
+        let identifier = model.identifier(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         if let cell = cell as? UICollectionViewCell & CollectionViewModelCell {
             configureCell(cell, at: indexPath)
