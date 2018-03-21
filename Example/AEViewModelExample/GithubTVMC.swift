@@ -17,7 +17,7 @@ final class GithubTVMC: TableViewModelController {
     
     private var repos = [Repo]() {
         didSet {
-            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, data: $0) }
+            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, model: $0) }
             let section = BasicSection(items: items)
             let table = BasicTable(sections: [section])
             model = table
@@ -25,7 +25,7 @@ final class GithubTVMC: TableViewModelController {
     }
     
     func repo(at indexPath: IndexPath) -> Repo? {
-        let repo = item(at: indexPath)?.data as? Repo
+        let repo = item(at: indexPath)?.model as? Repo
         return repo
     }
     
