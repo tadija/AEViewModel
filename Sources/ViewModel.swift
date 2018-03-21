@@ -20,7 +20,7 @@ struct NewBasicItem: NewItem, Codable {
     let title: String?
     let detail: String?
     let image: String?
-    var submodel: NewBasicDataSource?
+    var child: NewBasicDataSource?
 }
 struct NewBasicSection: NewSection, Codable {
     var items: [[String : NewItem]]
@@ -53,66 +53,11 @@ struct NewBasicDataSource: NewDataSource, Codable {
     }
 }
 
+public typealias Table = DataSource
+public typealias Collection = DataSource
 
-
-//protocol NewItem {}
-//protocol NewSection {
-//    associatedtype ItemType: NewItem
-//    var items: [[String : ItemType]] { get set }
-//}
-//protocol NewDataSource {
-//    var sections: [Any] { get set }
-//}
-//
-//extension NewDataSource {
-//    var tmp: [NewSection]? {
-//        return sections as? [NewSection]
-//    }
-//}
-//
-//struct NewBasicItem: NewItem, Codable {
-//    let title: String?
-//    let detail: String?
-//}
-//struct NewBasicSection: NewSection, Codable {
-//    var items: [[String : NewBasicItem]]
-//}
-//struct NewBasicDataSource: NewDataSource, Codable {
-//    var sections: [Any]
-//
-//    enum CodingKeys: String, CodingKey {
-//        case sections
-//    }
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        sections = try container.decode([NewBasicSection].self, forKey: .sections)
-//    }
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(sections, forKey: .sections)
-//    }
-//}
-
-
-//protocol NewItem {}
-//protocol NewSection {
-//    associatedtype ItemType: NewItem
-//    var items: [[String : ItemType]] { get set }
-//}
-//protocol NewDataSource {
-//    var sections: [NewSection] { get set }
-//}
-//
-//struct CodableSection: NewSection, Codable {
-//    var header: String?
-//    var footer: String?
-//    var items: [[String : CodableItem]]
-//}
-//
-//struct CodableItem: NewItem, Codable {
-//    let identifier: String
-//    var data: [String : String]
-//}
+public typealias BasicTable = BasicDataSource
+public typealias BasicCollection = BasicDataSource
 
 // MARK: - OLD
 
@@ -194,13 +139,3 @@ public struct BasicItemData: ItemData {
         self.submodel = submodel
     }
 }
-
-// MARK: - Table
-
-public typealias Table = DataSource
-public typealias BasicTable = BasicDataSource
-
-// MARK: - Collection
-
-public typealias Collection = DataSource
-public typealias BasicCollection = BasicDataSource
