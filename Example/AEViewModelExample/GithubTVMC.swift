@@ -9,24 +9,10 @@ import SafariServices
 
 final class GithubTVMC: TableViewModelController {
     
-    typealias CellType = BasicDataSource.GithubCellType
-    
     // MARK: Properties
     
     private let github = GithubDataSource()
-    
-    private var repos = [Repo]() {
-        didSet {
-            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, model: $0) }
-            let section = BasicSection(items: items)
-            dataSource = BasicDataSource(sections: [section])
-        }
-    }
-    
-    func repo(at indexPath: IndexPath) -> Repo? {
-        return dataSource.item(at: indexPath).model as? Repo
-    }
-    
+
     // MARK: Init
     
     public convenience init() {
@@ -38,11 +24,17 @@ final class GithubTVMC: TableViewModelController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureSelf()
+        title = "Github"
+
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150
+
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
     }
     
     private var initialAppear = true
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -59,32 +51,21 @@ final class GithubTVMC: TableViewModelController {
     }
 
     override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
-        if let repo = repo(at: indexPath), let url = URL(string: repo.url) {
-            pushBrowser(with: url, title: repo.name)
+        if let repo = dataSource.item(at: indexPath).model as? Repo, let url = URL(string: repo.url) {
+            let browser = SFSafariViewController(url: url)
+            browser.title = title
+            present(browser, animated: true, completion: nil)
         }
     }
     
     // MARK: Helpers
-    
-    private func pushBrowser(with url: URL, title: String? = nil) {
-        let browser = SFSafariViewController(url: url)
-        browser.title = title
-        present(browser, animated: true, completion: nil)
-    }
-    
-    private func configureSelf() {
-        title = "Github"
-        delegate = self
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 150
-        
-        configureRefreshControl()
-    }
-    
-    private func configureRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+
+    private func performManualRefresh() {
+        if let refreshControl = refreshControl {
+            tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+            refreshControl.beginRefreshing()
+            refresh(refreshControl)
+        }
     }
     
     @objc
@@ -94,16 +75,10 @@ final class GithubTVMC: TableViewModelController {
                 sender.endRefreshing()
             }
             if let repos = repos {
-                self?.repos = repos
+                let items = repos.map { BasicItem(identifier: "GithubRepoCell", model: $0) }
+                let section = BasicSection(items: items)
+                self?.dataSource = BasicDataSource(sections: [section])
             }
-        }
-    }
-    
-    private func performManualRefresh() {
-        if let refreshControl = refreshControl {
-            tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
-            refreshControl.beginRefreshing()
-            refresh(refreshControl)
         }
     }
     

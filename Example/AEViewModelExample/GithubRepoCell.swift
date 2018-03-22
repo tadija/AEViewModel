@@ -6,6 +6,40 @@
 
 import AEViewModel
 
+final class GithubRepoCell: TableCellBasic {
+    
+    // MARK: Outlets
+    
+    @IBOutlet weak var ownerImage: UIImageView!
+    @IBOutlet weak var ownerUsername: UILabel!
+    @IBOutlet weak var repoUpdateDate: UILabel!
+    @IBOutlet weak var repoName: UILabel!
+    @IBOutlet weak var repoDescription: UILabel!
+    @IBOutlet weak var forks: UILabel!
+    @IBOutlet weak var stars: UILabel!
+    
+    // MARK: - TableCell
+    
+    override func customize() {
+        accessoryType = .disclosureIndicator
+        ownerImage.layer.cornerRadius = 32
+        ownerImage.layer.masksToBounds = true
+    }
+    
+    override func update(with item: Item) {
+        if let repo = item.model as? Repo {
+            ownerImage.loadImage(from: repo.ownerImageURL)
+            ownerUsername.text = "@\(repo.owner.username)"
+            repoUpdateDate.text = repo.updatedFormatted
+            repoName.text = repo.name
+            repoDescription.text = repo.description
+            forks.text = "⋔ \(repo.forksCount)"
+            stars.text = "★ \(repo.starsCount)"
+        }
+    }
+    
+}
+
 extension Repo: ViewModel {
     var ownerImageURL: URL? {
         let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
@@ -19,44 +53,4 @@ extension Repo: ViewModel {
         return date
     }
     private static let dateFormatter = DateFormatter()
-}
-
-final class GithubRepoCell: TableCellBasic {
-    
-    // MARK: Outlets
-    
-    @IBOutlet weak var repoOwnerAvatar: UIImageView!
-    
-    @IBOutlet weak var repoOwnerName: UILabel!
-    @IBOutlet weak var repoUpdateDate: UILabel!
-    
-    @IBOutlet weak var repoName: UILabel!
-    @IBOutlet weak var repoDescription: UILabel!
-    
-    @IBOutlet weak var forks: UILabel!
-    @IBOutlet weak var stars: UILabel!
-    
-    // MARK: - TableCell
-    
-    override func customize() {
-        repoOwnerAvatar.layer.cornerRadius = 32
-        repoOwnerAvatar.layer.masksToBounds = true
-    }
-    
-    override func update(with item: Item) {
-        accessoryType = .disclosureIndicator
-        
-        if let repo = item.model as? Repo {
-            if let url = repo.ownerImageURL {
-                repoOwnerAvatar.loadImage(from: url)
-            }
-            repoOwnerName.text = "@\(repo.owner.username)"
-            repoUpdateDate.text = repo.updatedFormatted
-            repoName.text = repo.name
-            repoDescription.text = repo.description
-            forks.text = "⋔ \(repo.forksCount)"
-            stars.text = "★ \(repo.starsCount)"
-        }
-    }
-    
 }
