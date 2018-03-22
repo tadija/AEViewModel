@@ -28,6 +28,7 @@ final class ExampleTVMC: TableViewModelController {
     
     override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
+        
         cell.accessoryType = .disclosureIndicator
     }
 

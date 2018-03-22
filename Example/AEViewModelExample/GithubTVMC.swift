@@ -57,15 +57,10 @@ final class GithubTVMC: TableViewModelController {
     override func cell(forIdentifier identifier: String) -> TableCell {
         return .customNib(nib: GithubRepoCell.nib)
     }
-    
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
-        
-        cell.action = { _ in
-            if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
-                self.pushBrowser(with: url, title: repo.name)
-            }
+
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        if let repo = repo(at: indexPath), let url = URL(string: repo.url) {
+            pushBrowser(with: url, title: repo.name)
         }
     }
     

@@ -27,8 +27,6 @@ final class SettingsTVMC: MappableTVMC {
         super.viewDidLoad()
         
         title = (dataSource as? MappableTable)?.title
-        delegate = self
-        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
@@ -51,34 +49,23 @@ final class SettingsTVMC: MappableTVMC {
             return .basic
         }
     }
-    
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
 
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        let item = dataSource.item(at: indexPath)
         guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
             return
         }
-        
         switch settingsCell {
         case .profile, .airplane, .vpn:
-            cell.action = { _ in
-                print("handleEvent with id: \(item.identifier)")
-            }
+            print("handleEvent with id: \(item.identifier)")
         case .wifi:
-            cell.action = { _ in
-//                let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
-                /// - TODO: check later
-//                wifiSubmenu.title = (item.model?.child as? MappableTable)?.title
-//                self.pushTable(from: item, in: wifiSubmenu)
-            }
+            let dataSource = (item.model as? MappableItemData)?.submodel ?? BasicDataSource()
+            let vc = WiFiSettingsTVMC(dataSource: dataSource)
+            show(vc, sender: self)
         case .bluetooth, .cellular, .hotspot, .carrier:
-            cell.action = { _ in
-//                let defaultSubmenu = MappableTVMC(style: .grouped)
-                /// - TODO: check later
-//                defaultSubmenu.title = (item.model?.child as? MappableTable)?.title
-//                self.pushTable(from: item, in: defaultSubmenu)
-            }
+            let dataSource = (item.model as? MappableItemData)?.submodel ?? BasicDataSource()
+            let vc = MappableTVMC(dataSource: dataSource)
+            show(vc, sender: self)
         }
     }
     
@@ -89,14 +76,6 @@ final class SettingsTVMC: MappableTVMC {
 class WiFiSettingsTVMC: MappableTVMC {
     
     typealias WifiCell = SettingsTable.Wifi.Cell
-
-    // MARK: Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        delegate = self
-    }
     
     // MARK: TableViewModelControllerDelegate
     
@@ -104,7 +83,6 @@ class WiFiSettingsTVMC: MappableTVMC {
         guard let wifiCell = WifiCell(rawValue: identifier) else {
             return .basic
         }
-        
         switch wifiCell {
         case .wifiSwitch, .joinNetworksSwitch:
             return .toggleBasic
@@ -112,27 +90,19 @@ class WiFiSettingsTVMC: MappableTVMC {
             return .basic
         }
     }
-    
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
 
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        let item = dataSource.item(at: indexPath)
         guard let wifiCell = WifiCell(rawValue: item.identifier) else {
             return
         }
-        
         switch wifiCell {
         case .wifiSwitch,
              .joinNetworksSwitch:
-            cell.action = { _ in
-                print("handleEvent with id: \(item.identifier)")
-            }
+            print("handleEvent with id: \(item.identifier)")
         case .wifiNetwork:
-            cell.action = { _ in
-                /// - TODO: check later
-//                let tvc = TableViewModelController(style: .grouped)
-//                self.pushTable(from: item, in: tvc)
-            }
+            let vc = TableViewModelController()
+            show(vc, sender: self)
         }
     }
     
