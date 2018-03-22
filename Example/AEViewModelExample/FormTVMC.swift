@@ -38,7 +38,7 @@ final class FormTVMC: TableViewModelController {
     override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
 
-        let id = dataSource.identifier(at: indexPath)
+        let id = dataSource.cellIdentifier(at: indexPath)
         guard let formCell = FormCell(rawValue: id) else {
             return
         }
@@ -53,7 +53,7 @@ final class FormTVMC: TableViewModelController {
     }
 
     override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
-        let id = dataSource.identifier(at: indexPath)
+        let id = dataSource.cellIdentifier(at: indexPath)
         guard let cellType = FormCell(rawValue: id) else {
             return
         }

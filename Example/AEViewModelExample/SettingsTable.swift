@@ -66,7 +66,7 @@ struct SettingsViewModel: ViewModel, Codable {
     }
 }
 struct SettingsItem: Item, Codable {
-    let identifier: String
+    let cellIdentifier: String
     var viewModel: ViewModel
     
     // MARK: Codable
@@ -76,12 +76,12 @@ struct SettingsItem: Item, Codable {
     }
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        identifier = try container.decode(String.self, forKey: .id)
+        cellIdentifier = try container.decode(String.self, forKey: .id)
         viewModel = try container.decode(SettingsViewModel.self, forKey: .data)
     }
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(identifier, forKey: .id)
+        try container.encode(cellIdentifier, forKey: .id)
         try container.encodeIfPresent(viewModel as? SettingsViewModel, forKey: .data)
     }
 }

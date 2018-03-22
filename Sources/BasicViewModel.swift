@@ -21,16 +21,16 @@ public struct BasicViewModel: ViewModel {
 }
 
 public struct BasicItem: Item {
-    public let identifier: String
+    public let cellIdentifier: String
     public var viewModel: ViewModel
 
     public init(identifier: String, viewModel: ViewModel = BasicViewModel()) {
-        self.identifier = identifier
+        self.cellIdentifier = identifier
         self.viewModel = viewModel
     }
 
     public init(identifier: String, title: String? = nil, detail: String? = nil, image: String? = nil) {
-        self.identifier = identifier
+        self.cellIdentifier = identifier
         self.viewModel = BasicViewModel(title: title, detail: detail, image: image)
     }
 }
@@ -77,12 +77,12 @@ extension BasicItem: Codable {
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        identifier = try container.decode(String.self, forKey: .identifier)
+        cellIdentifier = try container.decode(String.self, forKey: .identifier)
         viewModel = try container.decode(BasicViewModel.self, forKey: .viewModel)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(identifier, forKey: .identifier)
+        try container.encode(cellIdentifier, forKey: .identifier)
         try container.encodeIfPresent(viewModel as? BasicViewModel, forKey: .viewModel)
     }
 }

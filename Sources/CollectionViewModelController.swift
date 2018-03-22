@@ -68,8 +68,8 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     private func registerCells() {
-        dataSource.uniqueIdentifiers.forEach { identifier in
-            registerCell(with: identifier)
+        dataSource.uniqueCellIdentifiers.forEach { id in
+            registerCell(with: id)
         }
     }
     
@@ -103,8 +103,8 @@ extension CollectionViewModelController {
     
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = dataSource.identifier(at: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        let id = dataSource.cellIdentifier(at: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
         if let cell = cell as? UICollectionViewCell & CollectionViewModelCell {
             delegate?.update(cell, at: indexPath)
         }

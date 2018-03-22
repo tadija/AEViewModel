@@ -15,7 +15,7 @@ public protocol ViewModel {
 }
 
 public protocol Item {
-    var identifier: String { get }
+    var cellIdentifier: String { get }
     var viewModel: ViewModel { get }
 }
 
@@ -39,14 +39,14 @@ public extension DataSource {
     func item(at indexPath: IndexPath) -> Item {
         return sections[indexPath.section].items[indexPath.item]
     }
-    func identifier(at indexPath: IndexPath) -> String {
-        return item(at: indexPath).identifier
+    func cellIdentifier(at indexPath: IndexPath) -> String {
+        return item(at: indexPath).cellIdentifier
     }
-    var uniqueIdentifiers: Set<String> {
+    var uniqueCellIdentifiers: Set<String> {
         var ids: Set<String> = Set<String>()
         sections.forEach { section in
-            let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
-            ids.formUnion(sectionIdentifiers)
+            let allSectionIdentifiers: [String] = section.items.flatMap({ $0.cellIdentifier })
+            ids.formUnion(allSectionIdentifiers)
         }
         return ids
     }
