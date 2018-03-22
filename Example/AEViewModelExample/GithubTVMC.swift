@@ -7,7 +7,7 @@
 import AEViewModel
 import SafariServices
 
-final class GithubTVMC: TableViewModelController, TableViewModelControllerDelegate {
+final class GithubTVMC: TableViewModelController {
     
     typealias CellType = BasicDataSource.GithubCellType
     
@@ -54,11 +54,11 @@ final class GithubTVMC: TableViewModelController, TableViewModelControllerDelega
     
     // MARK: TableViewModelControllerDelegate
     
-    func cell(forIdentifier identifier: String) -> TableCell {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         return .customNib(nib: GithubRepoCell.nib)
     }
     
-    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         

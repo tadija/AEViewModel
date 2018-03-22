@@ -7,26 +7,24 @@
 import UIKit
 import AEViewModel
 
-final class FormTVMC: TableViewModelController, TableViewModelControllerDelegate {
+final class FormTVMC: TableViewModelController {
     
     typealias FormCell = FormTable.Cell
     
     // MARK: Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = "Registration"
-        delegate = self
     }
-    
+
     // MARK: TableViewModelControllerDelegate
     
-    func cell(forIdentifier identifier: String) -> TableCell {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         guard let formCell = FormCell(rawValue: identifier) else {
             return .basic
         }
-        
         switch formCell {
         case .username, .password:
             return .textInput
@@ -37,38 +35,41 @@ final class FormTVMC: TableViewModelController, TableViewModelControllerDelegate
         }
     }
     
-    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
 
-        let identifier = dataSource.identifier(at: indexPath)
-        guard let formCell = FormCell(rawValue: identifier) else {
+        let id = dataSource.identifier(at: indexPath)
+        guard let formCell = FormCell(rawValue: id) else {
             return
         }
-        
         switch formCell {
-        case .username:
-            cell.action = { _ in
-                let nextIndexPath = indexPath.next(in: self.tableView)
-                self.becomeFirstResponder(at: nextIndexPath)
-            }
         case .password:
             (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
-            cell.action = { _ in
-                let previousIndexPath = indexPath.previous(in: self.tableView)
-                self.becomeFirstResponder(at: previousIndexPath)
-            }
-        case .accept:
-            cell.action = { sender in
-                let enabled = (sender as? UISwitch)?.isOn ?? false
-                let nextIndexPath = indexPath.next(in: self.tableView)
-                self.updateButton(at: nextIndexPath, enabled: enabled)
-            }
         case .register:
             (cell as? TableCellButton)?.button.isEnabled = false
-            cell.action = { _ in
-                self.presentAlert()
-            }
+        case .username, .accept:
+            break
+        }
+    }
+
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        let id = dataSource.identifier(at: indexPath)
+        guard let cellType = FormCell(rawValue: id) else {
+            return
+        }
+        switch cellType {
+        case .username:
+            let nextIndexPath = indexPath.next(in: tableView)
+            becomeFirstResponder(at: nextIndexPath)
+        case .password:
+            let previousIndexPath = indexPath.previous(in: tableView)
+            becomeFirstResponder(at: previousIndexPath)
+        case .accept:
+            let toggle = (cell as? TableCellToggle)?.toggle
+            didToggleAcceptCell(at: indexPath, sender: toggle)
+            break
+        case .register:
+            presentAlert()
         }
     }
     
@@ -77,7 +78,14 @@ final class FormTVMC: TableViewModelController, TableViewModelControllerDelegate
     }
     
     // MARK: Helpers
-    
+
+    @objc
+    private func didToggleAcceptCell(at indexPath: IndexPath, sender: UISwitch?) {
+        let enabled = sender?.isOn ?? false
+        let nextIndexPath = indexPath.next(in: tableView)
+        updateButton(at: nextIndexPath, enabled: enabled)
+    }
+
     private func becomeFirstResponder(at indexPath: IndexPath?) {
         if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCellTextInput {
             cell.textField.becomeFirstResponder()

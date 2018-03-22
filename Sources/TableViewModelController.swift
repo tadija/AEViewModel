@@ -9,7 +9,7 @@ import UIKit
 public protocol TableViewModelControllerDelegate: class {
     func cell(forIdentifier identifier: String) -> TableCell
     func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath)
-    func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: Any)
+    func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
 }
 
 open class TableViewModelController: UITableViewController, TableViewModelControllerDelegate {
@@ -58,9 +58,12 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     open func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
+        cell.action = { [unowned self] sender in
+            self.delegate?.performAction(for: cell, at: indexPath, sender: self)
+        }
     }
 
-    open func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+    open func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         /// - TODO: check later
         cell.action(cell)
     }

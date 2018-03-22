@@ -7,53 +7,44 @@
 import UIKit
 import AEViewModel
 
-final class ExampleTVMC: TableViewModelController, TableViewModelControllerDelegate {
+final class ExampleTVMC: TableViewModelController {
     
     typealias ExampleCell = ExampleTable.Cell
     
     // MARK: Lifecycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
         title = "Example"
-        delegate = self
         dataSource = ExampleTable()
     }
     
     // MARK: TableViewModelControllerDelegate
     
-    func cell(forIdentifier identifier: String) -> TableCell {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         return .subtitle
     }
     
-    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
-
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
         cell.accessoryType = .disclosureIndicator
+    }
 
-        guard let exampleCell = ExampleCell(rawValue: item.identifier) else {
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        guard let cellType = ExampleCell(rawValue: dataSource.identifier(at: indexPath)) else {
             return
         }
-        
-        switch exampleCell {
+        let vc: UIViewController
+        switch cellType {
         case .form:
-            cell.action = { _ in
-                /// - TODO: check later
-//                self.pushTable(from: item, in: FormTVMC())
-            }
+            vc = FormTVMC(dataSource: FormTable())
         case .settings:
-            cell.action = { _ in
-                /// - TODO: check later
-//                self.pushTable(from: item, in: SettingsTVMC())
-            }
+            vc = SettingsTVMC(dataSource: SettingsTable.fromJson)
         case .github:
-            cell.action = { _ in
-                /// - TODO: check later
-//                self.pushTable(from: item, in: GithubTVMC())
-            }
+            vc = GithubTVMC()
         }
+        show(vc, sender: self)
     }
     
 }

@@ -17,7 +17,7 @@ class MappableTVMC: TableViewModelController {
     }
 }
 
-final class SettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
+final class SettingsTVMC: MappableTVMC {
     
     typealias SettingsCell = SettingsTable.Cell
     
@@ -35,7 +35,7 @@ final class SettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
     
     // MARK: TableViewModelControllerDelegate
 
-    func cell(forIdentifier identifier: String) -> TableCell {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         guard let settingsCell = SettingsCell(rawValue: identifier) else {
             return .basic
         }
@@ -52,7 +52,7 @@ final class SettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
         }
     }
     
-    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
 
@@ -86,7 +86,7 @@ final class SettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
 
 // MARK: - WiFiSettingsTVC
 
-class WiFiSettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
+class WiFiSettingsTVMC: MappableTVMC {
     
     typealias WifiCell = SettingsTable.Wifi.Cell
 
@@ -100,7 +100,7 @@ class WiFiSettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
     
     // MARK: TableViewModelControllerDelegate
     
-    func cell(forIdentifier identifier: String) -> TableCell {
+    override func cell(forIdentifier identifier: String) -> TableCell {
         guard let wifiCell = WifiCell(rawValue: identifier) else {
             return .basic
         }
@@ -113,7 +113,7 @@ class WiFiSettingsTVMC: MappableTVMC, TableViewModelControllerDelegate {
         }
     }
     
-    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
 
