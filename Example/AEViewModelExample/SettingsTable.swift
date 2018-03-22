@@ -46,7 +46,6 @@ struct SettingsViewModel: ViewModel, Codable {
     let detail: String?
     let image: String?
     var submodel: SettingsDataSource?
-//    let custom: [String : String]?
     
     // MARK: Codable
     
@@ -59,7 +58,6 @@ struct SettingsViewModel: ViewModel, Codable {
         detail = try container.decodeIfPresent(String.self, forKey: .detail)
         image = try container.decodeIfPresent(String.self, forKey: .image)
         submodel = try container.decodeIfPresent(SettingsDataSource.self, forKey: .table)
-//        custom = try container.decodeIfPresent([String : String].self, forKey: .custom)
     }
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -67,7 +65,6 @@ struct SettingsViewModel: ViewModel, Codable {
         try container.encodeIfPresent(detail, forKey: .detail)
         try container.encodeIfPresent(image, forKey: .image)
         try container.encodeIfPresent(submodel, forKey: .table)
-//        try container.encodeIfPresent(custom, forKey: .custom)
     }
 }
 struct SettingsItem: Item, Codable {

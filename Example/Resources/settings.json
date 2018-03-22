@@ -19,10 +19,7 @@
           "id": "airplane",
           "data": {
             "title": "Airplane Mode",
-            "image": "IconOrange",
-            "custom": {
-              "enabled": false
-            }
+            "image": "IconOrange"
           }
         },
         {
@@ -79,9 +76,6 @@
                   ]
                 }
               ]
-            },
-            "custom": {
-              "current-network": "Off"
             }
           }},
         {
@@ -247,10 +241,7 @@
           "id": "vpn",
           "data": {
             "title": "VPN",
-            "image": "IconBlue",
-            "custom": {
-              "enabled": false
-            }
+            "image": "IconBlue"
           }
         },
         {
