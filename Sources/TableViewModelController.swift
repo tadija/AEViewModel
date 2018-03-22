@@ -58,15 +58,12 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     open func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
-        cell.action = { [unowned self] sender in
+        cell.callback = { [unowned self] sender in
             self.delegate?.performAction(for: cell, at: indexPath, sender: self)
         }
     }
 
-    open func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
-        /// - TODO: check later
-        cell.action(cell)
-    }
+    open func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
 
     // MARK: Helpers
     
