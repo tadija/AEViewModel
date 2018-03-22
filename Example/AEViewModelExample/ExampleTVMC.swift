@@ -32,7 +32,7 @@ final class ExampleTVMC: TableViewModelController {
         cell.accessoryType = .disclosureIndicator
     }
 
-    override func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         guard let cellType = ExampleCell(rawValue: dataSource.cellIdentifier(at: indexPath)) else {
             return
         }

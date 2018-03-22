@@ -62,7 +62,7 @@ final class MainSettingsTVMC: SettingsTVMC {
         }
     }
 
-    override func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
         guard let settingsCell = SettingsCell(rawValue: item.cellIdentifier) else {
             return
@@ -103,7 +103,7 @@ class WiFiSettingsTVMC: SettingsTVMC {
         }
     }
 
-    override func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
         guard let wifiCell = WifiCell(rawValue: item.cellIdentifier) else {
             return

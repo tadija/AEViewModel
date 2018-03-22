@@ -9,7 +9,7 @@ import UIKit
 public protocol CollectionViewModelControllerDelegate: class {
     func cell(forIdentifier identifier: String) -> CollectionCell
     func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath)
-    func performAction(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController)
+    func action(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController)
 }
 
 open class CollectionViewModelController: UICollectionViewController, CollectionViewModelControllerDelegate {
@@ -60,11 +60,11 @@ open class CollectionViewModelController: UICollectionViewController, Collection
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.callback = { [unowned self] sender in
-            self.delegate?.performAction(for: cell, at: indexPath, sender: self)
+            self.delegate?.action(for: cell, at: indexPath, sender: self)
         }
     }
 
-    open func performAction(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController) {}
+    open func action(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController) {}
     
     // MARK: Helpers
     
@@ -134,7 +134,7 @@ extension CollectionViewModelController {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewModelCell else {
             return
         }
-        delegate?.performAction(for: cell, at: indexPath, sender: self)
+        delegate?.action(for: cell, at: indexPath, sender: self)
     }
     
 }

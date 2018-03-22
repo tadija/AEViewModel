@@ -7,8 +7,6 @@
 import UIKit
 
 public protocol ViewModelCell: class {
-    static var nib: UINib? { get }
-
     var callback: (_ sender: Any) -> Void { get set }
 
     func customize()

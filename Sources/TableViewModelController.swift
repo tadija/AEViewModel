@@ -9,7 +9,7 @@ import UIKit
 public protocol TableViewModelControllerDelegate: class {
     func cell(forIdentifier identifier: String) -> TableCell
     func update(_ cell: TableViewModelCell, at indexPath: IndexPath)
-    func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
+    func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
 }
 
 open class TableViewModelController: UITableViewController, TableViewModelControllerDelegate {
@@ -59,11 +59,11 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.callback = { [unowned self] sender in
-            self.delegate?.performAction(for: cell, at: indexPath, sender: self)
+            self.delegate?.action(for: cell, at: indexPath, sender: self)
         }
     }
 
-    open func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
+    open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
 
     // MARK: Helpers
     
@@ -147,7 +147,7 @@ extension TableViewModelController {
             return
         }
         if cell.selectionStyle != .none {
-            delegate?.performAction(for: cell, at: indexPath, sender: self)
+            delegate?.action(for: cell, at: indexPath, sender: self)
         }
     }
     

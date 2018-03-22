@@ -50,7 +50,7 @@ final class GithubTVMC: TableViewModelController {
         return .customNib(nib: GithubRepoCell.nib)
     }
 
-    override func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         if let repo = dataSource.viewModel(at: indexPath) as? Repo, let url = URL(string: repo.url) {
             let browser = SFSafariViewController(url: url)
             browser.title = title

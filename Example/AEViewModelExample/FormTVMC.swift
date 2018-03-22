@@ -52,7 +52,7 @@ final class FormTVMC: TableViewModelController {
         }
     }
 
-    override func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let id = dataSource.cellIdentifier(at: indexPath)
         guard let cellType = FormCell(rawValue: id) else {
             return
