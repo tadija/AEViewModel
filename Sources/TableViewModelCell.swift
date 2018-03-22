@@ -8,25 +8,7 @@ import UIKit
 
 // MARK: - TableViewModelCell
 
-public protocol TableViewModelCell: class {
-    static var nib: UINib? { get }
-    
-    var callback: (_ sender: Any) -> Void { get set }
-    
-    func customize()
-    func update(with item: Item)
-    func reset()
-}
-
-public extension TableViewModelCell {
-    static var nib: UINib? {
-        let className = String(describing: type(of: self))
-        guard let nibName = className.components(separatedBy: ".").first else {
-            return nil
-        }
-        return UINib(nibName: nibName, bundle: nil)
-    }
-}
+public typealias TableViewModelCell = UITableViewCell & ViewModelCell
 
 // MARK: - TableCell
 
@@ -45,7 +27,7 @@ public enum TableCell {
 
 // MARK: - System Cells
     
-open class TableCellBasic: UITableViewCell, TableViewModelCell {
+open class TableCellBasic: UITableViewCell, ViewModelCell {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

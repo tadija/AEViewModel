@@ -8,8 +8,8 @@ import UIKit
 
 public protocol TableViewModelControllerDelegate: class {
     func cell(forIdentifier identifier: String) -> TableCell
-    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath)
-    func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
+    func update(_ cell: TableViewModelCell, at indexPath: IndexPath)
+    func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
 }
 
 open class TableViewModelController: UITableViewController, TableViewModelControllerDelegate {
@@ -55,7 +55,7 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
         return .basic
     }
 
-    open func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    open func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.callback = { [unowned self] sender in
@@ -63,7 +63,7 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
         }
     }
 
-    open func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
+    open func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
 
     // MARK: Helpers
     
@@ -130,7 +130,7 @@ extension TableViewModelController {
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let id = dataSource.cellIdentifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
-        if let cell = cell as? UITableViewCell & TableViewModelCell {
+        if let cell = cell as? TableViewModelCell {
             delegate?.update(cell, at: indexPath)
         }
         return cell
@@ -143,7 +143,7 @@ extension TableViewModelController {
 extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell & TableViewModelCell else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? TableViewModelCell else {
             return
         }
         if cell.selectionStyle != .none {

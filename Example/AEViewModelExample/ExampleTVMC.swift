@@ -26,13 +26,13 @@ final class ExampleTVMC: TableViewModelController {
         return .subtitle
     }
     
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
         cell.accessoryType = .disclosureIndicator
     }
 
-    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func performAction(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         guard let cellType = ExampleCell(rawValue: dataSource.cellIdentifier(at: indexPath)) else {
             return
         }

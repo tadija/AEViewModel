@@ -8,20 +8,11 @@ import UIKit
 
 public protocol CollectionViewModelControllerDelegate: class {
     func cell(forIdentifier identifier: String) -> CollectionCell
-    func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath)
+    func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath)
+    func performAction(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController)
 }
 
-public extension CollectionViewModelControllerDelegate where Self: CollectionViewModelController {
-    func cell(forIdentifier identifier: String) -> CollectionCell {
-        return .empty
-    }
-    func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
-    }
-}
-
-open class CollectionViewModelController: UICollectionViewController {
+open class CollectionViewModelController: UICollectionViewController, CollectionViewModelControllerDelegate {
     
     // MARK: Properties
 
@@ -46,12 +37,34 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     // MARK: Lifecycle
+
+    open override func loadView() {
+        super.loadView()
+        if delegate == nil {
+            delegate = self
+        }
+    }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
         reload()
     }
+
+    // MARK: CollectionViewModelControllerDelegate
+
+    open func cell(forIdentifier identifier: String) -> CollectionCell {
+        return .empty
+    }
+
+    open func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
+        cell.callback = { [unowned self] sender in
+            self.delegate?.performAction(for: cell, at: indexPath, sender: self)
+        }
+    }
+
+    open func performAction(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController) {}
     
     // MARK: Helpers
     
@@ -105,7 +118,7 @@ extension CollectionViewModelController {
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let id = dataSource.cellIdentifier(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
-        if let cell = cell as? UICollectionViewCell & CollectionViewModelCell {
+        if let cell = cell as? CollectionViewModelCell {
             delegate?.update(cell, at: indexPath)
         }
         return cell
@@ -118,11 +131,10 @@ extension CollectionViewModelController {
 extension CollectionViewModelController {
     
     open override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard
-            let cell = collectionView.cellForItem(at: indexPath),
-            let collectionViewModelCell = cell as? CollectionViewModelCell
-        else { return }
-        collectionViewModelCell.action(cell)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewModelCell else {
+            return
+        }
+        delegate?.performAction(for: cell, at: indexPath, sender: self)
     }
     
 }

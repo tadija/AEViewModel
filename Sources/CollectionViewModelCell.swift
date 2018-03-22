@@ -8,25 +8,7 @@ import UIKit
 
 // MARK: - CollectionViewModelCell
 
-public protocol CollectionViewModelCell: class {
-    static var nib: UINib? { get }
-    
-    var action: (_ sender: Any) -> Void { get set }
-    
-    func customize()
-    func update(with item: Item)
-    func reset()
-}
-
-public extension CollectionViewModelCell {
-    static var nib: UINib? {
-        let className = String(describing: type(of: self))
-        guard let nibName = className.components(separatedBy: ".").first else {
-            return nil
-        }
-        return UINib(nibName: nibName, bundle: nil)
-    }
-}
+public typealias CollectionViewModelCell = UICollectionViewCell & ViewModelCell
 
 // MARK: - CollectionCell
 
@@ -38,7 +20,7 @@ public enum CollectionCell {
 
 // MARK: - Cells
     
-open class CollectionCellEmpty: UICollectionViewCell, CollectionViewModelCell {
+open class CollectionCellEmpty: UICollectionViewCell, ViewModelCell {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -55,13 +37,13 @@ open class CollectionCellEmpty: UICollectionViewCell, CollectionViewModelCell {
         reset()
     }
     
-    public var action: (Any) -> Void = { _ in }
+    public var callback: (Any) -> Void = { _ in }
     
     open func customize() {}
     open func update(with item: Item) {}
     open func reset() {}
     
-    @objc public func callAction(sender: Any) {
-        action(sender)
+    @objc public func performCallback(sender: Any) {
+        callback(sender)
     }
 }
