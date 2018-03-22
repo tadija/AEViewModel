@@ -28,6 +28,18 @@ extension MappableTable {
             let table = try! MappableTable(jsonData: data)
             return table
         }
+
+        static var codable: SettingsDataSource {
+            do {
+                let url = Bundle.main.url(forResource: "settings", withExtension: "json")!
+                let data = try Data(contentsOf: url)
+                let table = try JSONDecoder().decode(SettingsDataSource.self, from: data)
+                return table
+            } catch {
+                print(error)
+                fatalError()
+            }
+        }
         
         struct Wifi {
             enum Cell: String {

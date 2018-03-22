@@ -41,7 +41,8 @@ final class ExampleTVMC: TableViewModelController {
         case .form:
             vc = FormTVMC(dataSource: FormTable())
         case .settings:
-            vc = SettingsTVMC(dataSource: SettingsTable.fromJson)
+//            vc = SettingsTVMC(dataSource: SettingsTable.fromJson)
+            vc = SettingsTVMC(dataSource: SettingsTable.codable)
         case .github:
             vc = GithubTVMC()
         }
