@@ -11,7 +11,7 @@ import UIKit
 public protocol TableViewModelCell: class {
     static var nib: UINib? { get }
     
-    var action: (_ sender: Any) -> Void { get set }
+    var callback: (_ sender: Any) -> Void { get set }
     
     func customize()
     func update(with item: Item)
@@ -46,8 +46,6 @@ public enum TableCell {
 // MARK: - System Cells
     
 open class TableCellBasic: UITableViewCell, TableViewModelCell {
-    public var useAutomaticDisclosureIndicator = true
-    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -66,7 +64,7 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
         reset()
     }
     
-    public var action: (Any) -> Void = { _ in }
+    public var callback: (Any) -> Void = { _ in }
 
     open func reset() {
         textLabel?.text = nil
@@ -75,23 +73,17 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
     }
     open func customize() {}
     open func update(with item: Item) {
-        if let data = item.data {
-            textLabel?.text = data.title
-            detailTextLabel?.text = data.detail
-            if let imageName = data.image, let image = UIImage(named: imageName) {
+        if let model = item.model {
+            textLabel?.text = model.title
+            detailTextLabel?.text = model.detail
+            if let imageName = model.image, let image = UIImage(named: imageName) {
                 imageView?.image = image
             }
         }
-        configureAutomaticDisclosureIndicator(with: item)
     }
-    
-    open func configureAutomaticDisclosureIndicator(with item: Item) {
-        if useAutomaticDisclosureIndicator, let table = item.data?.submodel as? Table, table.sections.count >= 0 {
-            accessoryType = .disclosureIndicator
-        }
-    }
-    @objc public func callAction(sender: Any) {
-        action(sender)
+
+    @objc public func performCallback(sender: Any) {
+        callback(sender)
     }
 }
 
@@ -135,7 +127,7 @@ public extension TableCellToggle where Self: TableCellBasic {
     }
     private func configureToggle() {
         accessoryView = toggle
-        toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
+        toggle.addTarget(self, action: #selector(performCallback(sender:)), for: .valueChanged)
     }
 }
     
@@ -175,11 +167,11 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
         textField.delegate = self
     }
     open override func update(with item: Item) {
-        textField.placeholder = item.data?.title
+        textField.placeholder = item.model?.title
     }
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        callAction(sender: textField)
+        performCallback(sender: textField)
         return false
     }
 }
@@ -200,9 +192,9 @@ open class TableCellButton: TableCellBasic {
         button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-        button.addTarget(self, action: #selector(callAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(performCallback(sender:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
-        button.setTitle(item.data?.title, for: .normal)
+        button.setTitle(item.model?.title, for: .normal)
     }
 }

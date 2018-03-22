@@ -11,7 +11,7 @@ struct FormSection: Section {
     var items: [Item]
 }
 
-struct FormTable: Table {
+struct FormTable: DataSource {
     
     // MARK: Types
     

@@ -9,24 +9,22 @@ import SafariServices
 
 final class GithubTVMC: TableViewModelController {
     
-    typealias CellType = BasicTable.GithubCellType
+    typealias CellType = BasicDataSource.GithubCellType
     
     // MARK: Properties
     
-    private let dataSource = GithubDataSource()
+    private let github = GithubDataSource()
     
     private var repos = [Repo]() {
         didSet {
-            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, data: $0) }
+            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, model: $0) }
             let section = BasicSection(items: items)
-            let table = BasicTable(sections: [section])
-            model = table
+            dataSource = BasicDataSource(sections: [section])
         }
     }
     
     func repo(at indexPath: IndexPath) -> Repo? {
-        let repo = item(at: indexPath)?.data as? Repo
-        return repo
+        return dataSource.item(at: indexPath).model as? Repo
     }
     
     // MARK: Init
@@ -54,19 +52,15 @@ final class GithubTVMC: TableViewModelController {
         }
     }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
     
     override func cell(forIdentifier identifier: String) -> TableCell {
         return .customNib(nib: GithubRepoCell.nib)
     }
-    
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
-        
-        cell.action = { _ in
-            if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
-                self.pushBrowser(with: url, title: repo.name)
-            }
+
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        if let repo = repo(at: indexPath), let url = URL(string: repo.url) {
+            pushBrowser(with: url, title: repo.name)
         }
     }
     
@@ -80,6 +74,7 @@ final class GithubTVMC: TableViewModelController {
     
     private func configureSelf() {
         title = "Github"
+        delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
@@ -94,7 +89,7 @@ final class GithubTVMC: TableViewModelController {
     
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        dataSource.reload { [weak self] (repos) in
+        github.reload { [weak self] (repos) in
             DispatchQueue.main.async {
                 sender.endRefreshing()
             }

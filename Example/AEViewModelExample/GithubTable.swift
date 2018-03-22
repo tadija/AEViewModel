@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-extension BasicTable {
+extension BasicDataSource {
     
     enum GithubCellType: String {
         case repo

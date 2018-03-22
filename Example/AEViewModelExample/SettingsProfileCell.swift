@@ -17,31 +17,23 @@ class SettingsProfileCell: TableCellBasic {
     let name = UILabel()
     let subtitle = UILabel()
     
-    // MARK: - TableCell
+    // MARK: TableCell
     
     override func customize() {
-        configureSubviews()
         configureHierarchy()
         configureLayout()
         configureAppearance()
     }
     
     override func update(with item: Item) {
-        name.text = item.data?.title
-        subtitle.text = item.data?.detail
+        name.text = item.model?.title
+        subtitle.text = item.model?.detail
         
         let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
         profileImageView.loadImage(from: url)
     }
     
     // MARK: Helpers
-    
-    private func configureSubviews() {
-        mainStack.axis = .horizontal
-        mainStack.alignment = .center
-        
-        textStack.axis = .vertical
-    }
     
     private func configureHierarchy() {
         textStack.addArrangedSubview(name)
@@ -71,6 +63,10 @@ class SettingsProfileCell: TableCellBasic {
     }
     
     private func configureAppearance() {
+        mainStack.axis = .horizontal
+        mainStack.alignment = .center
+        textStack.axis = .vertical
+        
         profileImageView.layer.cornerRadius = 28
         profileImageView.layer.masksToBounds = true
         

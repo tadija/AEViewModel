@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B2EAE1B1EEB3BD4001FE287 /* MappableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1A1EEB3BD4001FE287 /* MappableDataSource.swift */; };
 		8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */; };
-		8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE321EEF3332001FE287 /* Mappable.framework */; };
 		8B2EAE4A1EF0889F001FE287 /* AEViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; };
 		8B2EAE4B1EF0889F001FE287 /* AEViewModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8B7281AE1EE2E607007245E7 /* ExampleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleTable.swift */; };
@@ -73,11 +71,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8B2EAE1A1EEB3BD4001FE287 /* MappableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappableDataSource.swift; sourceTree = "<group>"; };
 		8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVMC.swift; sourceTree = "<group>"; };
 		8B2EAE2C1EEF31A1001FE287 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B2EAE2D1EEF31A1001FE287 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
-		8B2EAE321EEF3332001FE287 /* Mappable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mappable.framework; path = Carthage/Build/iOS/Mappable.framework; sourceTree = "<group>"; };
 		8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AEViewModel.xcodeproj; path = ../AEViewModel.xcodeproj; sourceTree = "<group>"; };
 		8B7281AD1EE2E607007245E7 /* ExampleTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTable.swift; sourceTree = "<group>"; };
 		8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTVMC.swift; sourceTree = "<group>"; };
@@ -110,7 +106,6 @@
 			files = (
 				8B2EAE4A1EF0889F001FE287 /* AEViewModel.framework in Frameworks */,
 				8BE0C5051EF4808F00E6F95F /* Network.framework in Frameworks */,
-				8B2EAE331EEF3332001FE287 /* Mappable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,7 +127,6 @@
 				8B2EAE2C1EEF31A1001FE287 /* Cartfile */,
 				8B2EAE2D1EEF31A1001FE287 /* Cartfile.resolved */,
 				8BE0C5041EF4808F00E6F95F /* Network.framework */,
-				8B2EAE321EEF3332001FE287 /* Mappable.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,18 +197,17 @@
 				8BE0C4EE1EF32F4200E6F95F /* SettingsTable.swift */,
 				8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */,
 				8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */,
-				8BE0C50A1EF4813A00E6F95F /* Helpers */,
+				8BE0C50A1EF4813A00E6F95F /* Resources */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		8BE0C50A1EF4813A00E6F95F /* Helpers */ = {
+		8BE0C50A1EF4813A00E6F95F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8B2EAE1A1EEB3BD4001FE287 /* MappableDataSource.swift */,
 				8B893A8D1E9860C300B3101B /* settings.json */,
 			);
-			name = Helpers;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		8BE0C50D1EF482A500E6F95F /* Github */ = {
@@ -344,7 +337,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Mappable.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Network.framework",
 			);
 			name = Carthage;
@@ -376,7 +368,6 @@
 				8BF92E411EF5F1F700278777 /* GithubRepoCell.swift in Sources */,
 				8BE0C5131EF492F400E6F95F /* GithubDataSource.swift in Sources */,
 				8BB518001EAC19B700A181AE /* SettingsProfileCell.swift in Sources */,
-				8B2EAE1B1EEB3BD4001FE287 /* MappableDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

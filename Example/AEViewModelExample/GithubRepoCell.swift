@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-extension Repo: ItemData {
+extension Repo: ViewModel {
     var ownerImageURL: URL? {
         let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
         return URL(string: avatarURL)
@@ -46,7 +46,7 @@ final class GithubRepoCell: TableCellBasic {
     override func update(with item: Item) {
         accessoryType = .disclosureIndicator
         
-        if let repo = item.data as? Repo {
+        if let repo = item.model as? Repo {
             if let url = repo.ownerImageURL {
                 repoOwnerAvatar.loadImage(from: url)
             }

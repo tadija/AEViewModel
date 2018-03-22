@@ -6,27 +6,43 @@
 
 import UIKit
 
+public protocol CollectionViewModelControllerDelegate: class {
+    func cell(forIdentifier identifier: String) -> CollectionCell
+    func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath)
+}
+
+public extension CollectionViewModelControllerDelegate where Self: CollectionViewModelController {
+    func cell(forIdentifier identifier: String) -> CollectionCell {
+        return .empty
+    }
+    func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
+    }
+}
+
 open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: Properties
-    
-    open var model: Collection? {
+
+    public weak var delegate: CollectionViewModelControllerDelegate?
+
+    open var isAutomaticReloadEnabled = true
+
+    open var dataSource: DataSource = BasicDataSource() {
         didSet {
-            reload()
+            if isAutomaticReloadEnabled {
+                reload()
+            }
         }
     }
     
-    open var automaticReloadEnabled = true
-    
     // MARK: Init
     
-    public convenience init() {
-        self.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    public convenience init(collectionViewLayout layout: UICollectionViewLayout, model: Collection) {
+    public convenience init(layout: UICollectionViewLayout = UICollectionViewFlowLayout(),
+                            dataSource: DataSource = BasicDataSource()) {
         self.init(collectionViewLayout: layout)
-        self.model = model
+        self.dataSource = dataSource
     }
     
     // MARK: Lifecycle
@@ -34,124 +50,40 @@ open class CollectionViewModelController: UICollectionViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerCells()
-    }
-    
-    // MARK: Abstract
-    
-    open func cell(forIdentifier identifier: String) -> CollectionCell {
-        return .empty
-    }
-    
-    open func configureCell(_ cell: CollectionViewModelCell, at indexPath: IndexPath) {
-        if let item = item(at: indexPath) {
-            cell.update(with: item)
-        }
-    }
-    
-    // MARK: API
-    
-    public func section(at index: Int) -> Section? {
-        let section = model?.sections[index]
-        return section
-    }
-    
-    public func item(at indexPath: IndexPath) -> Item? {
-        let item = model?.sections[indexPath.section].items[indexPath.item]
-        return item
-    }
-    
-    public func item(from cell: CollectionViewModelCell) -> Item? {
-        guard
-            let collectionViewCell = cell as? UICollectionViewCell,
-            let indexPath = collectionView?.indexPath(for: collectionViewCell),
-            let item = item(at: indexPath)
-        else { return nil }
-        return item
-    }
-    
-    public func pushCollection(from item: Item, in cvmc: CollectionViewModelController) {
-        if let model = item.data?.submodel as? Collection {
-            cvmc.model = model
-            navigationController?.pushViewController(cvmc, animated: true)
-        }
-    }
-    
-    public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {
-        guard let cv = collectionView else {
-            return nil
-        }
-        var newIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-        if newIndexPath.row >= collectionView(cv, numberOfItemsInSection: indexPath.section) {
-            let newSection = indexPath.section + 1
-            newIndexPath = IndexPath(item: 0, section: newSection)
-            if newSection >= numberOfSections(in: cv) {
-                return nil
-            }
-        }
-        return newIndexPath
-    }
-    
-    public func previousIndexPath(from indexPath: IndexPath) -> IndexPath? {
-        guard let cv = collectionView else {
-            return nil
-        }
-        var newIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
-        if newIndexPath.row < 0 {
-            let newSection = indexPath.section - 1
-            if newSection < 0 {
-                return nil
-            }
-            let maxRow = collectionView(cv, numberOfItemsInSection: newSection) - 1
-            newIndexPath = IndexPath(item: maxRow, section: newSection)
-        }
-        return newIndexPath
+        reload()
     }
     
     // MARK: Helpers
     
     private func reload() {
         if Thread.isMainThread {
-            registerCellsAndReloadDataIfNeeded()
+            registerCells()
+            collectionView?.reloadData()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCellsAndReloadDataIfNeeded()
+                self?.registerCells()
+                self?.collectionView?.reloadData()
             }
         }
     }
     
-    private func registerCellsAndReloadDataIfNeeded() {
-        registerCells()
-        if automaticReloadEnabled {
-            reloadData()
-        }
-    }
-    
     private func registerCells() {
-        var uniqueIdentifiers: Set<String> = Set<String>()
-        model?.sections.forEach { section in
-            let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
-            uniqueIdentifiers.formUnion(sectionIdentifiers)
-        }
-        uniqueIdentifiers.forEach { identifier in
+        dataSource.uniqueIdentifiers.forEach { identifier in
             registerCell(with: identifier)
         }
     }
     
     private func registerCell(with identifier: String) {
-        switch cell(forIdentifier: identifier) {
+        guard let delegate = delegate else {
+            return
+        }
+        switch delegate.cell(forIdentifier: identifier) {
         case .empty:
             collectionView?.register(CollectionCellEmpty.self, forCellWithReuseIdentifier: identifier)
         case .customClass(let cellClass):
             collectionView?.register(cellClass, forCellWithReuseIdentifier: identifier)
         case .customNib(let cellNib):
             collectionView?.register(cellNib, forCellWithReuseIdentifier: identifier)
-        }
-    }
-    
-    private func reloadData() {
-        if model != nil {
-            collectionView?.reloadData()
         }
     }
     
@@ -162,21 +94,19 @@ open class CollectionViewModelController: UICollectionViewController {
 extension CollectionViewModelController {
     
     open override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return model?.sections.count ?? 0
+        return dataSource.sections.count
     }
     
     open override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model?.sections[section].items.count ?? 0
+        return dataSource.sections[section].items.count
     }
     
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let item = item(at: indexPath) else {
-            return UICollectionViewCell()
-        }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.identifier, for: indexPath)
-        if let cell = cell as? CollectionViewModelCell {
-            configureCell(cell, at: indexPath)
+        let identifier = dataSource.identifier(at: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        if let cell = cell as? UICollectionViewCell & CollectionViewModelCell {
+            delegate?.update(cell, at: indexPath)
         }
         return cell
     }

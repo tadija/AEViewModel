@@ -12,44 +12,40 @@ final class ExampleTVMC: TableViewModelController {
     typealias ExampleCell = ExampleTable.Cell
     
     // MARK: Lifecycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
         title = "Example"
-        model = ExampleTable()
+        dataSource = ExampleTable()
     }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
     
     override func cell(forIdentifier identifier: String) -> TableCell {
         return .subtitle
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
         
-        guard
-            let item = item(at: indexPath),
-            let exampleCell = ExampleCell(rawValue: item.identifier)
-        else {
+        cell.accessoryType = .disclosureIndicator
+    }
+
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        guard let cellType = ExampleCell(rawValue: dataSource.identifier(at: indexPath)) else {
             return
         }
-        
-        switch exampleCell {
+        let vc: UIViewController
+        switch cellType {
         case .form:
-            cell.action = { _ in
-                self.pushTable(from: item, in: FormTVMC())
-            }
+            vc = FormTVMC(dataSource: FormTable())
         case .settings:
-            cell.action = { _ in
-                self.pushTable(from: item, in: SettingsTVMC())
-            }
+            vc = MainSettingsTVMC(dataSource: SettingsTable())
         case .github:
-            cell.action = { _ in
-                self.pushTable(from: item, in: GithubTVMC())
-            }
+            vc = GithubTVMC()
         }
+        show(vc, sender: self)
     }
     
 }
