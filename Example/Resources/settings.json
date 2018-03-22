@@ -51,13 +51,13 @@
                   "header": "Choose a network...",
                   "items": [
                     {
-                      "id": "appleNetwork",
+                      "id": "wifiNetwork",
                       "data": {
                         "title": "Apple"
                       }
                     },
                     {
-                      "id": "twitterNetwork",
+                      "id": "wifiNetwork",
                       "data": {
                         "title": "Twitter"
                       }

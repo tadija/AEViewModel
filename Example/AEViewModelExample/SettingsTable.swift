@@ -20,15 +20,13 @@ extension SettingsTable {
         case carrier
     }
     
-    static var codable: SettingsDataSource {
+    init() {
         do {
             let url = Bundle.main.url(forResource: "settings", withExtension: "json")!
             let data = try Data(contentsOf: url)
-            let table = try JSONDecoder().decode(SettingsDataSource.self, from: data)
-            return table
+            self = try JSONDecoder().decode(SettingsDataSource.self, from: data)
         } catch {
-            print(error)
-            fatalError()
+            fatalError(error.localizedDescription)
         }
     }
     

@@ -7,21 +7,32 @@
 import UIKit
 import AEViewModel
 
-class MappableTVMC: TableViewModelController {
+class SettingsTVMC: TableViewModelController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = (dataSource as? SettingsTable)?.title
     }
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
+        
+        guard
+            let item = dataSource.item(at: indexPath) as? SettingsItem,
+            let vm = item.model as? SettingsViewModel,
+            let child = vm.submodel, child.sections.count > 0
+        else {
+            return
+        }
+        cell.accessoryType = .disclosureIndicator
+    }
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return (dataSource.sections[section] as? SettingsSection)?.header
     }
-    
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return (dataSource.sections[section] as? SettingsSection)?.footer
     }
 }
 
-final class SettingsTVMC: MappableTVMC {
+final class MainSettingsTVMC: SettingsTVMC {
     
     typealias SettingsCell = SettingsTable.Cell
     
@@ -40,7 +51,6 @@ final class SettingsTVMC: MappableTVMC {
         guard let settingsCell = SettingsCell(rawValue: identifier) else {
             return .basic
         }
-        
         switch settingsCell {
         case .profile:
             return .customClass(type: SettingsProfileCell.self)
@@ -67,7 +77,7 @@ final class SettingsTVMC: MappableTVMC {
             show(vc, sender: self)
         case .bluetooth, .cellular, .hotspot, .carrier:
             let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
-            let vc = MappableTVMC(dataSource: dataSource)
+            let vc = SettingsTVMC(dataSource: dataSource)
             show(vc, sender: self)
         }
     }
@@ -76,7 +86,7 @@ final class SettingsTVMC: MappableTVMC {
 
 // MARK: - WiFiSettingsTVC
 
-class WiFiSettingsTVMC: MappableTVMC {
+class WiFiSettingsTVMC: SettingsTVMC {
     
     typealias WifiCell = SettingsTable.Wifi.Cell
     
@@ -104,8 +114,7 @@ class WiFiSettingsTVMC: MappableTVMC {
              .joinNetworksSwitch:
             print("handleEvent with id: \(item.identifier)")
         case .wifiNetwork:
-            let vc = TableViewModelController()
-            show(vc, sender: self)
+            print("join network with title: \(String(describing: item.model?.title))")
         }
     }
     
