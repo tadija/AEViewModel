@@ -75,7 +75,7 @@ final class GithubTVMC: TableViewModelController {
                 sender.endRefreshing()
             }
             if let repos = repos {
-                let items = repos.map { BasicItem(identifier: "GithubRepoCell", viewModel: $0) }
+                let items = repos.map { BasicItem(identifier: GithubRepoCell.reuseIdentifier, viewModel: $0) }
                 let section = BasicSection(items: items)
                 self?.dataSource = BasicDataSource(sections: [section])
             }
