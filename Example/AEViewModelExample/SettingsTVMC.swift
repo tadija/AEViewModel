@@ -7,7 +7,11 @@
 import UIKit
 import AEViewModel
 
-class MappableTVMC: TableViewModelController {    
+class MappableTVMC: TableViewModelController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = (dataSource as? MappableTable)?.title
+    }
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return (dataSource.sections[section] as? MappableSection)?.header
     }
@@ -25,8 +29,7 @@ final class SettingsTVMC: MappableTVMC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = (dataSource as? MappableTable)?.title
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
