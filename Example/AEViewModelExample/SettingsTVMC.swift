@@ -17,7 +17,7 @@ class SettingsTVMC: TableViewModelController {
         
         guard
             let item = dataSource.item(at: indexPath) as? SettingsItem,
-            let vm = item.model as? SettingsViewModel,
+            let vm = item.viewModel as? SettingsViewModel,
             let child = vm.submodel, child.sections.count > 0
         else {
             return
@@ -72,11 +72,11 @@ final class MainSettingsTVMC: SettingsTVMC {
         case .profile, .airplane, .vpn:
             print("handleEvent with id: \(item.identifier)")
         case .wifi:
-            let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
+            let dataSource: DataSource = (item.viewModel as? SettingsViewModel)?.submodel ?? BasicDataSource()
             let vc = WiFiSettingsTVMC(dataSource: dataSource)
             show(vc, sender: self)
         case .bluetooth, .cellular, .hotspot, .carrier:
-            let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
+            let dataSource: DataSource = (item.viewModel as? SettingsViewModel)?.submodel ?? BasicDataSource()
             let vc = SettingsTVMC(dataSource: dataSource)
             show(vc, sender: self)
         }
@@ -114,7 +114,7 @@ class WiFiSettingsTVMC: SettingsTVMC {
              .joinNetworksSwitch:
             print("handleEvent with id: \(item.identifier)")
         case .wifiNetwork:
-            print("join network with title: \(String(describing: item.model?.title))")
+            print("join network with title: \(String(describing: item.viewModel?.title))")
         }
     }
     

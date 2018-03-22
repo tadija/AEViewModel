@@ -35,22 +35,20 @@ struct ExampleTable: DataSource {
         ]
         
         // MARK: Items
-
-        /// - TODO: check later
         
         struct Form: Item {
             let identifier = Cell.form.rawValue
-            var model: ViewModel? = BasicViewModel(title: "Form", detail: "Static Table View Model") //, child: FormTable())
+            var viewModel: ViewModel? = BasicViewModel(title: "Form", detail: "Static Table View Model")
         }
         
         struct Settings: Item {
             let identifier = Cell.settings.rawValue
-            var model: ViewModel? = BasicViewModel(title: "Settings", detail: "JSON Table View Model") //, child: SettingsTable.fromJson)
+            var viewModel: ViewModel? = BasicViewModel(title: "Settings", detail: "JSON Table View Model")
         }
         
         struct Github: Item {
             let identifier = Cell.github.rawValue
-            var model: ViewModel? = BasicViewModel(title: "Github", detail: "Trending Swift Repos") //, child: BasicTable())
+            var viewModel: ViewModel? = BasicViewModel(title: "Github", detail: "Trending Swift Repos")
         }
         
     }
