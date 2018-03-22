@@ -114,7 +114,7 @@ class WiFiSettingsTVMC: SettingsTVMC {
              .joinNetworksSwitch:
             print("handleEvent with id: \(item.identifier)")
         case .wifiNetwork:
-            print("join network with title: \(String(describing: item.viewModel?.title))")
+            print("join network with title: \(String(describing: item.viewModel.title))")
         }
     }
     

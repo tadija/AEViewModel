@@ -67,7 +67,7 @@ struct SettingsViewModel: ViewModel, Codable {
 }
 struct SettingsItem: Item, Codable {
     let identifier: String
-    var viewModel: ViewModel?
+    var viewModel: ViewModel
     
     // MARK: Codable
     
@@ -82,7 +82,7 @@ struct SettingsItem: Item, Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(identifier, forKey: .id)
-        try container.encode(viewModel, forKey: .data)
+        try container.encodeIfPresent(viewModel as? SettingsViewModel, forKey: .data)
     }
 }
 struct SettingsSection: Section, Codable {

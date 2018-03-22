@@ -73,12 +73,10 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
     }
     open func customize() {}
     open func update(with item: Item) {
-        if let vm = item.viewModel {
-            textLabel?.text = vm.title
-            detailTextLabel?.text = vm.detail
-            if let imageName = vm.image, let image = UIImage(named: imageName) {
-                imageView?.image = image
-            }
+        textLabel?.text = item.viewModel.title
+        detailTextLabel?.text = item.viewModel.detail
+        if let imageName = item.viewModel.image, let image = UIImage(named: imageName) {
+            imageView?.image = image
         }
     }
 
@@ -167,7 +165,7 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
         textField.delegate = self
     }
     open override func update(with item: Item) {
-        textField.placeholder = item.viewModel?.title
+        textField.placeholder = item.viewModel.title
     }
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -195,6 +193,6 @@ open class TableCellButton: TableCellBasic {
         button.addTarget(self, action: #selector(performCallback(sender:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
-        button.setTitle(item.viewModel?.title, for: .normal)
+        button.setTitle(item.viewModel.title, for: .normal)
     }
 }

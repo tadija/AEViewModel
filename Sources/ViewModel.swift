@@ -16,7 +16,7 @@ public protocol ViewModel {
 
 public protocol Item {
     var identifier: String { get }
-    var viewModel: ViewModel? { get set }
+    var viewModel: ViewModel { get }
 }
 
 public protocol Section {

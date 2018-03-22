@@ -22,9 +22,9 @@ public struct BasicViewModel: ViewModel {
 
 public struct BasicItem: Item {
     public let identifier: String
-    public var viewModel: ViewModel?
+    public var viewModel: ViewModel
 
-    public init(identifier: String, viewModel: ViewModel? = nil) {
+    public init(identifier: String, viewModel: ViewModel = BasicViewModel()) {
         self.identifier = identifier
         self.viewModel = viewModel
     }
@@ -83,7 +83,7 @@ extension BasicItem: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(identifier, forKey: .identifier)
-        try container.encode(viewModel, forKey: .viewModel)
+        try container.encodeIfPresent(viewModel as? BasicViewModel, forKey: .viewModel)
     }
 }
 

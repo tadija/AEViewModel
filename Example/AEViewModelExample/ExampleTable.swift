@@ -38,17 +38,17 @@ struct ExampleTable: DataSource {
         
         struct Form: Item {
             let identifier = Cell.form.rawValue
-            var viewModel: ViewModel? = BasicViewModel(title: "Form", detail: "Static Table View Model")
+            var viewModel: ViewModel = BasicViewModel(title: "Form", detail: "Static Table View Model")
         }
         
         struct Settings: Item {
             let identifier = Cell.settings.rawValue
-            var viewModel: ViewModel? = BasicViewModel(title: "Settings", detail: "JSON Table View Model")
+            var viewModel: ViewModel = BasicViewModel(title: "Settings", detail: "JSON Table View Model")
         }
         
         struct Github: Item {
             let identifier = Cell.github.rawValue
-            var viewModel: ViewModel? = BasicViewModel(title: "Github", detail: "Trending Swift Repos")
+            var viewModel: ViewModel = BasicViewModel(title: "Github", detail: "Trending Swift Repos")
         }
         
     }
