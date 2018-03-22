@@ -39,8 +39,8 @@ open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: Init
     
-    public convenience init(layout: UICollectionViewLayout = UICollectionViewFlowLayout(),
-                            dataSource: DataSource = BasicDataSource()) {
+    public convenience init(dataSource: DataSource = BasicDataSource(),
+                            layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         self.init(collectionViewLayout: layout)
         self.dataSource = dataSource
     }

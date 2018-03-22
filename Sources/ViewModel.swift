@@ -15,8 +15,8 @@ public protocol ViewModel {
 }
 
 public protocol Item {
-    var cellIdentifier: String { get }
     var viewModel: ViewModel { get }
+    var cellIdentifier: String { get }
 }
 
 public protocol Section {
@@ -38,6 +38,9 @@ public extension ViewModel {
 public extension DataSource {
     func item(at indexPath: IndexPath) -> Item {
         return sections[indexPath.section].items[indexPath.item]
+    }
+    func viewModel(at indexPath: IndexPath) -> ViewModel {
+        return item(at: indexPath).viewModel
     }
     func cellIdentifier(at indexPath: IndexPath) -> String {
         return item(at: indexPath).cellIdentifier

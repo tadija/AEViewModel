@@ -51,7 +51,7 @@ final class GithubTVMC: TableViewModelController {
     }
 
     override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
-        if let repo = dataSource.item(at: indexPath).viewModel as? Repo, let url = URL(string: repo.url) {
+        if let repo = dataSource.viewModel(at: indexPath) as? Repo, let url = URL(string: repo.url) {
             let browser = SFSafariViewController(url: url)
             browser.title = title
             present(browser, animated: true, completion: nil)
@@ -75,7 +75,7 @@ final class GithubTVMC: TableViewModelController {
                 sender.endRefreshing()
             }
             if let repos = repos {
-                let items = repos.map { BasicItem(identifier: "GithubRepoCell", viewModel: $0) }
+                let items = repos.map { BasicItem(viewModel: $0, cellIdentifier: "GithubRepoCell") }
                 let section = BasicSection(items: items)
                 self?.dataSource = BasicDataSource(sections: [section])
             }

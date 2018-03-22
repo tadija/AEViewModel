@@ -30,7 +30,7 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     
     // MARK: Init
     
-    public convenience init(style: UITableViewStyle = .grouped, dataSource: DataSource = BasicDataSource()) {
+    public convenience init(dataSource: DataSource = BasicDataSource(), style: UITableViewStyle = .grouped) {
         self.init(style: style)
         self.dataSource = dataSource
     }

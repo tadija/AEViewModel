@@ -16,9 +16,8 @@ class SettingsTVMC: TableViewModelController {
         super.update(cell, at: indexPath)
         
         guard
-            let item = dataSource.item(at: indexPath) as? SettingsItem,
-            let vm = item.viewModel as? SettingsViewModel,
-            let child = vm.submodel, child.sections.count > 0
+            let viewModel = dataSource.viewModel(at: indexPath) as? SettingsViewModel,
+            let child = viewModel.submodel, child.sections.count > 0
         else {
             return
         }

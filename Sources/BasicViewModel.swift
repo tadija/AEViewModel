@@ -21,17 +21,17 @@ public struct BasicViewModel: ViewModel {
 }
 
 public struct BasicItem: Item {
-    public let cellIdentifier: String
     public var viewModel: ViewModel
+    public let cellIdentifier: String
 
-    public init(identifier: String, viewModel: ViewModel = BasicViewModel()) {
-        self.cellIdentifier = identifier
+    public init(viewModel: ViewModel = BasicViewModel(), cellIdentifier: String) {
         self.viewModel = viewModel
+        self.cellIdentifier = cellIdentifier
     }
 
-    public init(identifier: String, title: String? = nil, detail: String? = nil, image: String? = nil) {
-        self.cellIdentifier = identifier
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil, cellIdentifier: String) {
         self.viewModel = BasicViewModel(title: title, detail: detail, image: image)
+        self.cellIdentifier = cellIdentifier
     }
 }
 
@@ -73,17 +73,17 @@ extension BasicViewModel: Codable {
 
 extension BasicItem: Codable {
     public enum CodingKeys: String, CodingKey {
-        case identifier, viewModel
+        case viewModel, cellIdentifier
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        cellIdentifier = try container.decode(String.self, forKey: .identifier)
         viewModel = try container.decode(BasicViewModel.self, forKey: .viewModel)
+        cellIdentifier = try container.decode(String.self, forKey: .cellIdentifier)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(cellIdentifier, forKey: .identifier)
         try container.encodeIfPresent(viewModel as? BasicViewModel, forKey: .viewModel)
+        try container.encode(cellIdentifier, forKey: .cellIdentifier)
     }
 }
 
