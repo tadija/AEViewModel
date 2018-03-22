@@ -13,23 +13,25 @@ public typealias CollectionViewModelCell = UICollectionViewCell & ViewModelCell
 // MARK: - CollectionCell
 
 public enum CollectionCell {
-    case empty
+    case basic
     case customClass(type: CollectionViewModelCell.Type)
     case customNib(nib: UINib?)
 }
 
 // MARK: - Cells
     
-open class CollectionCellEmpty: UICollectionViewCell, ViewModelCell {
+open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        reset()
         customize()
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
+        reset()
         customize()
     }
     open override func prepareForReuse() {

@@ -53,7 +53,7 @@ open class CollectionViewModelController: UICollectionViewController, Collection
     // MARK: CollectionViewModelControllerDelegate
 
     open func cell(forIdentifier identifier: String) -> CollectionCell {
-        return .empty
+        return .basic
     }
 
     open func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath) {
@@ -91,8 +91,8 @@ open class CollectionViewModelController: UICollectionViewController, Collection
             return
         }
         switch delegate.cell(forIdentifier: identifier) {
-        case .empty:
-            collectionView?.register(CollectionCellEmpty.self, forCellWithReuseIdentifier: identifier)
+        case .basic:
+            collectionView?.register(CollectionCellBasic.self, forCellWithReuseIdentifier: identifier)
         case .customClass(let cellClass):
             collectionView?.register(cellClass, forCellWithReuseIdentifier: identifier)
         case .customNib(let cellNib):
