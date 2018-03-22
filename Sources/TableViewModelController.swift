@@ -6,9 +6,17 @@
 
 import UIKit
 
-open class TableViewModelController: UITableViewController {
+public protocol TableViewModelControllerDelegate: class {
+    func cell(forIdentifier identifier: String) -> TableCell
+    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath)
+    func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
+}
+
+open class TableViewModelController: UITableViewController, TableViewModelControllerDelegate {
     
     // MARK: Properties
+
+    public weak var delegate: TableViewModelControllerDelegate?
 
     open var isAutomaticReloadEnabled = true
 
@@ -22,49 +30,53 @@ open class TableViewModelController: UITableViewController {
     
     // MARK: Init
     
-    public convenience init(style: UITableViewStyle, dataSource: DataSource) {
+    public convenience init(style: UITableViewStyle = .grouped, dataSource: DataSource = BasicDataSource()) {
         self.init(style: style)
         self.dataSource = dataSource
     }
     
-    public convenience init() {
-        self.init(style: .grouped)
-    }
-    
     // MARK: Lifecycle
-    
+
+    open override func loadView() {
+        super.loadView()
+        if delegate == nil {
+            delegate = self
+        }
+    }
+
     open override func viewDidLoad() {
         super.viewDidLoad()
-
-        registerCells()
+        reload()
     }
-    
-    // MARK: Abstract
-    
+
+    // MARK: TableViewModelControllerDelegate
+
     open func cell(forIdentifier identifier: String) -> TableCell {
         return .basic
     }
-    
+
     open func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
+        cell.callback = { [unowned self] sender in
+            self.delegate?.performAction(for: cell, at: indexPath, sender: self)
+        }
     }
-    
+
+    open func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
+
     // MARK: Helpers
     
     private func reload() {
         if Thread.isMainThread {
-            registerCellsAndReloadDataIfNeeded()
+            registerCells()
+            tableView.reloadData()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCellsAndReloadDataIfNeeded()
+                self?.registerCells()
+                self?.tableView.reloadData()
             }
         }
-    }
-    
-    private func registerCellsAndReloadDataIfNeeded() {
-        registerCells()
-        tableView.reloadData()
     }
     
     private func registerCells() {
@@ -74,7 +86,10 @@ open class TableViewModelController: UITableViewController {
     }
     
     private func registerCell(with identifier: String) {
-        switch cell(forIdentifier: identifier) {
+        guard let delegate = delegate else {
+            fatalError("Delegate must be provided by now.")
+        }
+        switch delegate.cell(forIdentifier: identifier) {
         case .basic:
             tableView.register(TableCellBasic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
@@ -116,7 +131,7 @@ extension TableViewModelController {
         let identifier = dataSource.identifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         if let cell = cell as? UITableViewCell & TableViewModelCell {
-            update(cell, at: indexPath)
+            delegate?.update(cell, at: indexPath)
         }
         return cell
     }
@@ -128,13 +143,11 @@ extension TableViewModelController {
 extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard
-            let cell = tableView.cellForRow(at: indexPath),
-            let tableViewModelCell = cell as? TableViewModelCell
-        else { return }
-        
+        guard let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell & TableViewModelCell else {
+            return
+        }
         if cell.selectionStyle != .none {
-            tableViewModelCell.action(cell)
+            delegate?.performAction(for: cell, at: indexPath, sender: self)
         }
     }
     

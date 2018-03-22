@@ -6,9 +6,26 @@
 
 import UIKit
 
+public protocol CollectionViewModelControllerDelegate: class {
+    func cell(forIdentifier identifier: String) -> CollectionCell
+    func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath)
+}
+
+public extension CollectionViewModelControllerDelegate where Self: CollectionViewModelController {
+    func cell(forIdentifier identifier: String) -> CollectionCell {
+        return .empty
+    }
+    func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
+    }
+}
+
 open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: Properties
+
+    public weak var delegate: CollectionViewModelControllerDelegate?
 
     open var isAutomaticReloadEnabled = true
 
@@ -22,11 +39,8 @@ open class CollectionViewModelController: UICollectionViewController {
     
     // MARK: Init
     
-    public convenience init() {
-        self.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    public convenience init(collectionViewLayout layout: UICollectionViewLayout, dataSource: DataSource) {
+    public convenience init(layout: UICollectionViewLayout = UICollectionViewFlowLayout(),
+                            dataSource: DataSource = BasicDataSource()) {
         self.init(collectionViewLayout: layout)
         self.dataSource = dataSource
     }
@@ -36,35 +50,21 @@ open class CollectionViewModelController: UICollectionViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerCells()
-    }
-    
-    // MARK: Abstract
-    
-    open func cell(forIdentifier identifier: String) -> CollectionCell {
-        return .empty
-    }
-    
-    open func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
+        reload()
     }
     
     // MARK: Helpers
     
     private func reload() {
         if Thread.isMainThread {
-            registerCellsAndReloadDataIfNeeded()
+            registerCells()
+            collectionView?.reloadData()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCellsAndReloadDataIfNeeded()
+                self?.registerCells()
+                self?.collectionView?.reloadData()
             }
         }
-    }
-    
-    private func registerCellsAndReloadDataIfNeeded() {
-        registerCells()
-        collectionView?.reloadData()
     }
     
     private func registerCells() {
@@ -74,7 +74,10 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     private func registerCell(with identifier: String) {
-        switch cell(forIdentifier: identifier) {
+        guard let delegate = delegate else {
+            return
+        }
+        switch delegate.cell(forIdentifier: identifier) {
         case .empty:
             collectionView?.register(CollectionCellEmpty.self, forCellWithReuseIdentifier: identifier)
         case .customClass(let cellClass):
@@ -103,7 +106,7 @@ extension CollectionViewModelController {
         let identifier = dataSource.identifier(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         if let cell = cell as? UICollectionViewCell & CollectionViewModelCell {
-            update(cell, at: indexPath)
+            delegate?.update(cell, at: indexPath)
         }
         return cell
     }

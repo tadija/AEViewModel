@@ -29,8 +29,7 @@ public struct BasicItem: Item {
         self.model = model
     }
 
-    public init(identifier: String,
-                title: String? = nil, detail: String? = nil, image: String? = nil) {
+    public init(identifier: String, title: String? = nil, detail: String? = nil, image: String? = nil) {
         self.identifier = identifier
         self.model = BasicViewModel(title: title, detail: detail, image: image)
     }

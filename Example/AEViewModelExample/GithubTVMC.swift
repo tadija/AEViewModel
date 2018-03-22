@@ -52,19 +52,15 @@ final class GithubTVMC: TableViewModelController {
         }
     }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
     
     override func cell(forIdentifier identifier: String) -> TableCell {
         return .customNib(nib: GithubRepoCell.nib)
     }
-    
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.update(cell, at: indexPath)
-        
-        cell.action = { _ in
-            if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
-                self.pushBrowser(with: url, title: repo.name)
-            }
+
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        if let repo = repo(at: indexPath), let url = URL(string: repo.url) {
+            pushBrowser(with: url, title: repo.name)
         }
     }
     
@@ -78,6 +74,7 @@ final class GithubTVMC: TableViewModelController {
     
     private func configureSelf() {
         title = "Github"
+        delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150

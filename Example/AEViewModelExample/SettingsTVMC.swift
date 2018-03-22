@@ -7,17 +7,32 @@
 import UIKit
 import AEViewModel
 
-class MappableTVMC: TableViewModelController {    
-    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? MappableSection)?.header
+class SettingsTVMC: TableViewModelController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = (dataSource as? SettingsTable)?.title
     }
-    
+    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
+        
+        guard
+            let item = dataSource.item(at: indexPath) as? SettingsItem,
+            let vm = item.model as? SettingsViewModel,
+            let child = vm.submodel, child.sections.count > 0
+        else {
+            return
+        }
+        cell.accessoryType = .disclosureIndicator
+    }
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return (dataSource.sections[section] as? SettingsSection)?.header
+    }
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? MappableSection)?.footer
+        return (dataSource.sections[section] as? SettingsSection)?.footer
     }
 }
 
-final class SettingsTVMC: MappableTVMC {
+final class MainSettingsTVMC: SettingsTVMC {
     
     typealias SettingsCell = SettingsTable.Cell
     
@@ -25,20 +40,17 @@ final class SettingsTVMC: MappableTVMC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = (dataSource as? MappableTable)?.title
-        
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
 
-    override func cell(forIdentifier identifier: String) -> TableCell {        
+    override func cell(forIdentifier identifier: String) -> TableCell {
         guard let settingsCell = SettingsCell(rawValue: identifier) else {
             return .basic
         }
-        
         switch settingsCell {
         case .profile:
             return .customClass(type: SettingsProfileCell.self)
@@ -50,34 +62,23 @@ final class SettingsTVMC: MappableTVMC {
             return .basic
         }
     }
-    
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.update(cell, at: indexPath)
 
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
         guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
             return
         }
-        
         switch settingsCell {
         case .profile, .airplane, .vpn:
-            cell.action = { _ in
-                print("handleEvent with id: \(item.identifier)")
-            }
+            print("handleEvent with id: \(item.identifier)")
         case .wifi:
-            cell.action = { _ in
-//                let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
-                /// - TODO: check later
-//                wifiSubmenu.title = (item.model?.child as? MappableTable)?.title
-//                self.pushTable(from: item, in: wifiSubmenu)
-            }
+            let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
+            let vc = WiFiSettingsTVMC(dataSource: dataSource)
+            show(vc, sender: self)
         case .bluetooth, .cellular, .hotspot, .carrier:
-            cell.action = { _ in
-//                let defaultSubmenu = MappableTVMC(style: .grouped)
-                /// - TODO: check later
-//                defaultSubmenu.title = (item.model?.child as? MappableTable)?.title
-//                self.pushTable(from: item, in: defaultSubmenu)
-            }
+            let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
+            let vc = SettingsTVMC(dataSource: dataSource)
+            show(vc, sender: self)
         }
     }
     
@@ -85,17 +86,16 @@ final class SettingsTVMC: MappableTVMC {
 
 // MARK: - WiFiSettingsTVC
 
-class WiFiSettingsTVMC: MappableTVMC {
+class WiFiSettingsTVMC: SettingsTVMC {
     
     typealias WifiCell = SettingsTable.Wifi.Cell
     
-    // MARK: Override
+    // MARK: TableViewModelControllerDelegate
     
     override func cell(forIdentifier identifier: String) -> TableCell {
         guard let wifiCell = WifiCell(rawValue: identifier) else {
             return .basic
         }
-        
         switch wifiCell {
         case .wifiSwitch, .joinNetworksSwitch:
             return .toggleBasic
@@ -103,27 +103,18 @@ class WiFiSettingsTVMC: MappableTVMC {
             return .basic
         }
     }
-    
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
-        super.update(cell, at: indexPath)
 
+    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
         guard let wifiCell = WifiCell(rawValue: item.identifier) else {
             return
         }
-        
         switch wifiCell {
         case .wifiSwitch,
              .joinNetworksSwitch:
-            cell.action = { _ in
-                print("handleEvent with id: \(item.identifier)")
-            }
+            print("handleEvent with id: \(item.identifier)")
         case .wifiNetwork:
-            cell.action = { _ in
-                /// - TODO: check later
-//                let tvc = TableViewModelController(style: .grouped)
-//                self.pushTable(from: item, in: tvc)
-            }
+            print("join network with title: \(String(describing: item.model?.title))")
         }
     }
     
