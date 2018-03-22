@@ -37,17 +37,17 @@ struct ExampleTable: DataSource {
         // MARK: Items
         
         struct Form: Item {
-            let cellIdentifier = Cell.form.rawValue
+            let identifier = Cell.form.rawValue
             var viewModel: ViewModel = BasicViewModel(title: "Form", detail: "Static Table View Model")
         }
         
         struct Settings: Item {
-            let cellIdentifier = Cell.settings.rawValue
+            let identifier = Cell.settings.rawValue
             var viewModel: ViewModel = BasicViewModel(title: "Settings", detail: "JSON Table View Model")
         }
         
         struct Github: Item {
-            let cellIdentifier = Cell.github.rawValue
+            let identifier = Cell.github.rawValue
             var viewModel: ViewModel = BasicViewModel(title: "Github", detail: "Trending Swift Repos")
         }
         

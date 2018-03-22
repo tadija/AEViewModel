@@ -24,13 +24,13 @@ struct FormTable: DataSource {
         var item: BasicItem {
             switch self {
             case .username:
-                return BasicItem(title: "Username", cellIdentifier: rawValue)
+                return BasicItem(identifier: rawValue, title: "Username")
             case .password:
-                return BasicItem(title: "Password", cellIdentifier: rawValue)
+                return BasicItem(identifier: rawValue, title: "Password")
             case .accept:
-                return BasicItem(title: "Accept Terms", cellIdentifier: rawValue)
+                return BasicItem(identifier: rawValue, title: "Accept Terms")
             case .register:
-                return BasicItem(title: "Register", cellIdentifier: rawValue)
+                return BasicItem(identifier: rawValue, title: "Register")
             }
         }
     }

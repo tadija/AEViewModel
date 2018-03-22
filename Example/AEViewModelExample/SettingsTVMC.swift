@@ -64,12 +64,12 @@ final class MainSettingsTVMC: SettingsTVMC {
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
-        guard let settingsCell = SettingsCell(rawValue: item.cellIdentifier) else {
+        guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
             return
         }
         switch settingsCell {
         case .profile, .airplane, .vpn:
-            print("handleEvent with id: \(item.cellIdentifier)")
+            print("handleEvent with id: \(item.identifier)")
         case .wifi:
             let dataSource: DataSource = (item.viewModel as? SettingsViewModel)?.submodel ?? BasicDataSource()
             let vc = WiFiSettingsTVMC(dataSource: dataSource)
@@ -105,13 +105,13 @@ class WiFiSettingsTVMC: SettingsTVMC {
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
-        guard let wifiCell = WifiCell(rawValue: item.cellIdentifier) else {
+        guard let wifiCell = WifiCell(rawValue: item.identifier) else {
             return
         }
         switch wifiCell {
         case .wifiSwitch,
              .joinNetworksSwitch:
-            print("handleEvent with id: \(item.cellIdentifier)")
+            print("handleEvent with id: \(item.identifier)")
         case .wifiNetwork:
             print("join network with title: \(String(describing: item.viewModel.title))")
         }

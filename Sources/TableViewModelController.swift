@@ -80,7 +80,7 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     }
     
     private func registerCells() {
-        dataSource.uniqueCellIdentifiers.forEach { id in
+        dataSource.uniqueIdentifiers.forEach { id in
             registerCell(with: id)
         }
     }
@@ -128,7 +128,7 @@ extension TableViewModelController {
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let id = dataSource.cellIdentifier(at: indexPath)
+        let id = dataSource.identifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
         if let cell = cell as? TableViewModelCell {
             delegate?.update(cell, at: indexPath)

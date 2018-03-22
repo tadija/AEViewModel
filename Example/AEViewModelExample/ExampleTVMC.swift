@@ -33,7 +33,7 @@ final class ExampleTVMC: TableViewModelController {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
-        guard let cellType = ExampleCell(rawValue: dataSource.cellIdentifier(at: indexPath)) else {
+        guard let cellType = ExampleCell(rawValue: dataSource.identifier(at: indexPath)) else {
             return
         }
         let vc: UIViewController
