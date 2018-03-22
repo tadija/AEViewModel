@@ -10,14 +10,14 @@ import AEViewModel
 class MappableTVMC: TableViewModelController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = (dataSource as? MappableTable)?.title
+        title = (dataSource as? SettingsTable)?.title
     }
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? MappableSection)?.header
+        return (dataSource.sections[section] as? SettingsSection)?.header
     }
     
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? MappableSection)?.footer
+        return (dataSource.sections[section] as? SettingsSection)?.footer
     }
 }
 
@@ -62,11 +62,11 @@ final class SettingsTVMC: MappableTVMC {
         case .profile, .airplane, .vpn:
             print("handleEvent with id: \(item.identifier)")
         case .wifi:
-            let dataSource = (item.model as? MappableItemData)?.submodel ?? BasicDataSource()
+            let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
             let vc = WiFiSettingsTVMC(dataSource: dataSource)
             show(vc, sender: self)
         case .bluetooth, .cellular, .hotspot, .carrier:
-            let dataSource = (item.model as? MappableItemData)?.submodel ?? BasicDataSource()
+            let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
             let vc = MappableTVMC(dataSource: dataSource)
             show(vc, sender: self)
         }
