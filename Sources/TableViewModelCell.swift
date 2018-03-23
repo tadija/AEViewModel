@@ -167,6 +167,7 @@ open class TableCellButton: TableCellBasic {
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
         
         button.addTarget(self, action: #selector(performCallback(sender:)), for: .touchUpInside)
     }

@@ -8,10 +8,6 @@ import AEViewModel
 import SafariServices
 
 final class GithubTVMC: TableViewModelController {
-    
-    // MARK: Properties
-    
-    private let github = GithubDataSource()
 
     // MARK: Init
     
@@ -68,15 +64,9 @@ final class GithubTVMC: TableViewModelController {
     
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        github.reload { [weak self] (repos) in
-            DispatchQueue.main.async {
-                sender.endRefreshing()
-            }
-            if let repos = repos {
-                let items = repos.map { BasicItem(identifier: GithubRepoCell.reuseIdentifier, viewModel: $0) }
-                let section = BasicSection(items: items)
-                self?.dataSource = BasicDataSource(title: "Github", sections: [section])
-            }
+        GithubDataSource.load { [weak self] (dataSource) in
+            sender.endRefreshing()
+            self?.dataSource = dataSource
         }
     }
     

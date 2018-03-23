@@ -18,7 +18,7 @@ final class GithubRepoCell: TableCellBasic {
     @IBOutlet weak var forks: UILabel!
     @IBOutlet weak var stars: UILabel!
     
-    // MARK: - TableCell
+    // MARK: ViewModelCell
     
     override func customize() {
         accessoryType = .disclosureIndicator
@@ -38,19 +38,4 @@ final class GithubRepoCell: TableCellBasic {
         }
     }
     
-}
-
-extension Repo: ViewModel {
-    var ownerImageURL: URL? {
-        let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
-        return URL(string: avatarURL)
-    }
-    var updatedFormatted: String {
-        let df = Repo.dateFormatter
-        df.dateStyle = .medium
-        df.timeStyle = .short
-        let date = df.string(from: updated)
-        return date
-    }
-    private static let dateFormatter = DateFormatter()
 }
