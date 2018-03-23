@@ -15,8 +15,6 @@ final class FormTVMC: TableViewModelController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "Registration"
         dataSource = FormTable()
     }
 
@@ -72,10 +70,6 @@ final class FormTVMC: TableViewModelController {
         case .register:
             presentAlert()
         }
-    }
-    
-    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? FormSection)?.header
     }
     
     // MARK: Helpers

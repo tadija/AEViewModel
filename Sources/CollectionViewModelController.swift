@@ -73,14 +73,20 @@ open class CollectionViewModelController: UICollectionViewController, Collection
     
     private func reload() {
         if Thread.isMainThread {
-            registerCells()
-            collectionView?.reloadData()
+            performReload()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCells()
-                self?.collectionView?.reloadData()
+                self?.performReload()
             }
         }
+    }
+
+    private func performReload() {
+        if let title = dataSource.title {
+            self.title = title
+        }
+        registerCells()
+        collectionView?.reloadData()
     }
     
     private func registerCells() {

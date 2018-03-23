@@ -8,10 +8,6 @@ import UIKit
 import AEViewModel
 
 class SettingsTVMC: TableViewModelController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = (dataSource as? SettingsTable)?.title
-    }
     override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
@@ -22,12 +18,6 @@ class SettingsTVMC: TableViewModelController {
             return
         }
         cell.accessoryType = .disclosureIndicator
-    }
-    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? SettingsSection)?.header
-    }
-    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? SettingsSection)?.footer
     }
 }
 

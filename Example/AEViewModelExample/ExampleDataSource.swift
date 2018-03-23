@@ -13,9 +13,10 @@ struct ExampleDataSource: DataSource {
         static let settings = "settings"
         static let github = "github"
     }
-    
+
+    var title: String? = "Example"
     var sections: [Section] = [General()]
-    
+
     struct General: Section {
         var items: [Item] = [Form(), Settings(), Github()]
         

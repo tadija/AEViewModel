@@ -21,9 +21,12 @@ public protocol Item {
 
 public protocol Section {
     var items: [Item] { get set }
+    var header: String? { get }
+    var footer: String? { get }
 }
 
 public protocol DataSource {
+    var title: String? { get }
     var sections: [Section] { get set }
 }
 
@@ -35,7 +38,14 @@ public extension ViewModel {
     var image: String? { return nil }
 }
 
+public extension Section {
+    var header: String? { return nil }
+    var footer: String? { return nil }
+}
+
 public extension DataSource {
+    var title: String? { return nil }
+
     func item(at indexPath: IndexPath) -> Item {
         return sections[indexPath.section].items[indexPath.item]
     }

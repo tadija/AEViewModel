@@ -7,8 +7,8 @@
 import AEViewModel
 
 struct FormSection: Section {
-    let header: String
     var items: [Item]
+    var header: String?
 }
 
 struct FormTable: DataSource {
@@ -36,12 +36,13 @@ struct FormTable: DataSource {
     }
     
     // MARK: Table
-    
+
+    var title: String? = "Registration"
     var sections: [Section]
     
     init() {
-        let credentials = FormSection(header: "Input", items: [Cell.username.item, Cell.password.item])
-        let actions = FormSection(header: "Actions", items: [Cell.accept.item, Cell.register.item])
+        let credentials = FormSection(items: [Cell.username.item, Cell.password.item], header: "Input")
+        let actions = FormSection(items: [Cell.accept.item, Cell.register.item], header: "Actions")
         sections = [credentials, actions]
     }
     

@@ -23,8 +23,6 @@ final class GithubTVMC: TableViewModelController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Github"
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
@@ -77,7 +75,7 @@ final class GithubTVMC: TableViewModelController {
             if let repos = repos {
                 let items = repos.map { BasicItem(identifier: GithubRepoCell.reuseIdentifier, viewModel: $0) }
                 let section = BasicSection(items: items)
-                self?.dataSource = BasicDataSource(sections: [section])
+                self?.dataSource = BasicDataSource(title: "Github", sections: [section])
             }
         }
     }

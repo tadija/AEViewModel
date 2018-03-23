@@ -37,17 +37,23 @@ public struct BasicItem: Item {
 
 public struct BasicSection: Section {
     public var items: [Item]
+    public let header: String?
+    public let footer: String?
 
-    public init(items: [Item] = [Item]()) {
+    public init(items: [Item] = [Item](), header: String? = nil, footer: String? = nil) {
         self.items = items
+        self.header = header
+        self.footer = footer
     }
 }
 
 public struct BasicDataSource: DataSource {
+    public let title: String?
     public var sections: [Section]
 
-    public init(sections: [Section] = [Section]()) {
+    public init(title: String? = nil, sections: [Section] = [Section]()) {
         self.sections = sections
+        self.title = title
     }
 }
 
@@ -89,28 +95,34 @@ extension BasicItem: Codable {
 
 extension BasicSection: Codable {
     public enum CodingKeys: String, CodingKey {
-        case items
+        case items, header, footer
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         items = try container.decode([BasicItem].self, forKey: .items)
+        header = try container.decode(String.self, forKey: .header)
+        footer = try container.decode(String.self, forKey: .footer)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(items, forKey: .items)
+        try container.encode(header, forKey: .header)
+        try container.encode(footer, forKey: .footer)
     }
 }
 
 extension BasicDataSource: Codable {
     public enum CodingKeys: String, CodingKey {
-        case sections
+        case title, sections
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        title = try container.decode(String.self, forKey: .title)
         sections = try container.decode([BasicSection].self, forKey: .sections)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(title, forKey: .title)
         try container.encode(sections, forKey: .sections)
     }
 }

@@ -73,14 +73,20 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     
     private func reload() {
         if Thread.isMainThread {
-            registerCells()
-            tableView.reloadData()
+            performReload()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCells()
-                self?.tableView.reloadData()
+                self?.performReload()
             }
         }
+    }
+
+    private func performReload() {
+        if let title = dataSource.title {
+            self.title = title
+        }
+        registerCells()
+        tableView.reloadData()
     }
     
     private func registerCells() {
@@ -138,6 +144,14 @@ extension TableViewModelController {
             delegate?.update(cell, at: indexPath)
         }
         return cell
+    }
+
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dataSource.sections[section].header
+    }
+
+    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return dataSource.sections[section].footer
     }
     
 }

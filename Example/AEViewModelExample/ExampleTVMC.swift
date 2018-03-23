@@ -15,8 +15,6 @@ final class ExampleTVMC: TableViewModelController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Example"
         dataSource = ExampleDataSource()
     }
     
