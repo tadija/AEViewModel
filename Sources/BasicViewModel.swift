@@ -65,15 +65,15 @@ extension BasicViewModel: Codable {
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        title = try container.decode(String.self, forKey: .title)
-        detail = try container.decode(String.self, forKey: .detail)
-        image = try container.decode(String.self, forKey: .image)
+        title = try container.decodeIfPresent(String.self, forKey: .title)
+        detail = try container.decodeIfPresent(String.self, forKey: .detail)
+        image = try container.decodeIfPresent(String.self, forKey: .image)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(title, forKey: .title)
-        try container.encode(detail, forKey: .detail)
-        try container.encode(image, forKey: .image)
+        try container.encodeIfPresent(title, forKey: .title)
+        try container.encodeIfPresent(detail, forKey: .detail)
+        try container.encodeIfPresent(image, forKey: .image)
     }
 }
 
@@ -99,14 +99,14 @@ extension BasicSection: Codable {
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        header = try container.decode(String.self, forKey: .header)
-        footer = try container.decode(String.self, forKey: .footer)
+        header = try container.decodeIfPresent(String.self, forKey: .header)
+        footer = try container.decodeIfPresent(String.self, forKey: .footer)
         items = try container.decode([BasicItem].self, forKey: .items)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(header, forKey: .header)
-        try container.encode(footer, forKey: .footer)
+        try container.encodeIfPresent(header, forKey: .header)
+        try container.encodeIfPresent(footer, forKey: .footer)
         try container.encode(items, forKey: .items)
     }
 }
@@ -117,12 +117,12 @@ extension BasicDataSource: Codable {
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        title = try container.decode(String.self, forKey: .title)
+        title = try container.decodeIfPresent(String.self, forKey: .title)
         sections = try container.decode([BasicSection].self, forKey: .sections)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(title, forKey: .title)
+        try container.encodeIfPresent(title, forKey: .title)
         try container.encode(sections, forKey: .sections)
     }
 }

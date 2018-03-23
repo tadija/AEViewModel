@@ -11,26 +11,22 @@ class SettingsTVMC: TableViewModelController {
     override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
-        guard
-            let viewModel = dataSource.viewModel(at: indexPath) as? SettingsViewModel,
-            let child = viewModel.submodel, child.sections.count > 0
-        else {
-            return
+        if let child = dataSource.viewModel(at: indexPath).child, child.sections.count > 0 {
+            cell.accessoryType = .disclosureIndicator
         }
-        cell.accessoryType = .disclosureIndicator
     }
 }
 
 final class MainSettingsTVMC: SettingsTVMC {
     
-    typealias SettingsCell = SettingsTable.Cell
+    typealias Id = SettingsDataSource.Id
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        dataSource = SettingsTable()
+        dataSource = SettingsDataSource()
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
@@ -39,37 +35,35 @@ final class MainSettingsTVMC: SettingsTVMC {
     // MARK: TableViewModelControllerDelegate
 
     override func cellType(forIdentifier identifier: String) -> TableCellType {
-        guard let settingsCell = SettingsCell(rawValue: identifier) else {
-            return .basic
-        }
-        switch settingsCell {
-        case .profile:
+        switch identifier {
+        case Id.profile:
             return .customClass(SettingsProfileCell.self)
-        case .airplane, .vpn:
+        case Id.airplane, Id.vpn:
             return .toggleBasic
-        case .wifi, .bluetooth, .hotspot, .carrier:
+        case Id.wifi, Id.bluetooth, Id.hotspot, Id.carrier:
             return .rightDetail
-        case .cellular:
+        case Id.cellular:
             return .basic
+        default:
+            fatalError("Identifier not supported.")
         }
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
-        guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
-            return
-        }
-        switch settingsCell {
-        case .profile, .airplane, .vpn:
+        switch item.identifier {
+        case Id.profile, Id.airplane, Id.vpn:
             print("handleEvent with id: \(item.identifier)")
-        case .wifi:
-            let dataSource: DataSource = (item.viewModel as? SettingsViewModel)?.submodel ?? BasicDataSource()
-            let vc = WiFiSettingsTVMC(dataSource: dataSource)
+        case Id.wifi:
+            let ds = item.viewModel.child ?? BasicDataSource()
+            let vc = WiFiSettingsTVMC(dataSource: ds)
             show(vc, sender: self)
-        case .bluetooth, .cellular, .hotspot, .carrier:
-            let dataSource: DataSource = (item.viewModel as? SettingsViewModel)?.submodel ?? BasicDataSource()
-            let vc = SettingsTVMC(dataSource: dataSource)
+        case Id.bluetooth, Id.cellular, Id.hotspot, Id.carrier:
+            let ds = item.viewModel.child ?? BasicDataSource()
+            let vc = SettingsTVMC(dataSource: ds)
             show(vc, sender: self)
+        default:
+            break
         }
     }
     
@@ -79,33 +73,31 @@ final class MainSettingsTVMC: SettingsTVMC {
 
 class WiFiSettingsTVMC: SettingsTVMC {
     
-    typealias WifiCell = SettingsTable.Wifi.Cell
+    typealias Id = SettingsDataSource.Id.Wifi
     
     // MARK: TableViewModelControllerDelegate
     
     override func cellType(forIdentifier identifier: String) -> TableCellType {
-        guard let wifiCell = WifiCell(rawValue: identifier) else {
-            return .basic
-        }
-        switch wifiCell {
-        case .wifiSwitch, .joinNetworksSwitch:
+        switch identifier {
+        case Id.wifiSwitch, Id.joinNetworksSwitch:
             return .toggleBasic
-        case .wifiNetwork:
+        case Id.wifiNetwork:
             return .basic
+        default:
+            fatalError("Identifier not supported.")
         }
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
-        guard let wifiCell = WifiCell(rawValue: item.identifier) else {
-            return
-        }
-        switch wifiCell {
-        case .wifiSwitch,
-             .joinNetworksSwitch:
+        switch item.identifier {
+        case Id.wifiSwitch,
+             Id.joinNetworksSwitch:
             print("handleEvent with id: \(item.identifier)")
-        case .wifiNetwork:
+        case Id.wifiNetwork:
             print("join network with title: \(String(describing: item.viewModel.title))")
+        default:
+            break
         }
     }
     

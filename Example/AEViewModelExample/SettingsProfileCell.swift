@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-class SettingsProfileCell: TableCellBasic {
+final class SettingsProfileCell: TableCellBasic {
     
     // MARK: Outlets
     
@@ -53,16 +53,16 @@ class SettingsProfileCell: TableCellBasic {
         
         profileImageView.widthAnchor.constraint(equalToConstant: 56).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 56).isActive = true
-        
-        let spacing: CGFloat = 12
-        mainStack.isLayoutMarginsRelativeArrangement = true
-        mainStack.layoutMargins = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        mainStack.spacing = spacing
     }
     
     private func configureAppearance() {
+        let spacing: CGFloat = 12
         mainStack.axis = .horizontal
         mainStack.alignment = .center
+        mainStack.isLayoutMarginsRelativeArrangement = true
+        mainStack.layoutMargins = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        mainStack.spacing = spacing
+        
         textStack.axis = .vertical
         
         profileImageView.layer.cornerRadius = 28

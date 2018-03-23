@@ -6,19 +6,26 @@
 
 import AEViewModel
 
-typealias SettingsTable = SettingsDataSource
-
-extension SettingsTable {
-    enum Cell: String {
-        case profile
-        case airplane
-        case wifi
-        case bluetooth
-        case cellular
-        case hotspot
-        case vpn
-        case carrier
+struct SettingsDataSource: DataSource, Codable {
+    struct Id {
+        static let profile = "profile"
+        static let airplane = "airplane"
+        static let wifi = "wifi"
+        static let bluetooth = "bluetooth"
+        static let cellular = "cellular"
+        static let hotspot = "hotspot"
+        static let vpn = "vpn"
+        static let carrier = "carrier"
+        
+        struct Wifi {
+            static let wifiSwitch = "wifiSwitch"
+            static let wifiNetwork = "wifiNetwork"
+            static let joinNetworksSwitch = "joinNetworksSwitch"
+        }
     }
+    
+    let title: String?
+    var sections: [Section]
     
     init() {
         do {
@@ -26,91 +33,10 @@ extension SettingsTable {
             let data = try Data(contentsOf: url)
             self = try JSONDecoder().decode(SettingsDataSource.self, from: data)
         } catch {
-            fatalError(error.localizedDescription)
+            debugPrint(error)
+            fatalError("Failed to load SettingsDataSource from settings.json.")
         }
     }
-    
-    struct Wifi {
-        enum Cell: String {
-            case wifiSwitch
-            case wifiNetwork
-            case joinNetworksSwitch
-        }
-    }
-}
-
-struct SettingsViewModel: ViewModel, Codable {
-    let title: String?
-    let detail: String?
-    let image: String?
-    var submodel: SettingsDataSource?
-    
-    // MARK: Codable
-    
-    enum CodingKeys: String, CodingKey {
-        case title, detail, image, table, custom
-    }
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        title = try container.decodeIfPresent(String.self, forKey: .title)
-        detail = try container.decodeIfPresent(String.self, forKey: .detail)
-        image = try container.decodeIfPresent(String.self, forKey: .image)
-        submodel = try container.decodeIfPresent(SettingsDataSource.self, forKey: .table)
-    }
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(title, forKey: .title)
-        try container.encodeIfPresent(detail, forKey: .detail)
-        try container.encodeIfPresent(image, forKey: .image)
-        try container.encodeIfPresent(submodel, forKey: .table)
-    }
-}
-struct SettingsItem: Item, Codable {
-    var viewModel: ViewModel
-    let identifier: String
-    
-    // MARK: Codable
-    
-    enum CodingKeys: String, CodingKey {
-        case id, data
-    }
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        viewModel = try container.decode(SettingsViewModel.self, forKey: .data)
-        identifier = try container.decode(String.self, forKey: .id)
-    }
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(viewModel as? SettingsViewModel, forKey: .data)
-        try container.encode(identifier, forKey: .id)
-    }
-}
-struct SettingsSection: Section, Codable {
-    let header: String?
-    let footer: String?
-    var items: [Item]
-    
-    // MARK: Codable
-    
-    enum CodingKeys: String, CodingKey {
-        case header, footer, items
-    }
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        header = try container.decodeIfPresent(String.self, forKey: .header)
-        footer = try container.decodeIfPresent(String.self, forKey: .footer)
-        items = try container.decode([SettingsItem].self, forKey: .items)
-    }
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(header, forKey: .header)
-        try container.encodeIfPresent(footer, forKey: .footer)
-        try container.encode(items, forKey: .items)
-    }
-}
-struct SettingsDataSource: DataSource, Codable {
-    var sections: [Section]
-    let title: String?
     
     // MARK: Codable
     
@@ -120,7 +46,7 @@ struct SettingsDataSource: DataSource, Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         title = try container.decode(String.self, forKey: .title)
-        sections = try container.decode([SettingsSection].self, forKey: .sections)
+        sections = try container.decode([BasicSection].self, forKey: .sections)
     }
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
