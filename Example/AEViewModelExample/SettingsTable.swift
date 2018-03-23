@@ -86,9 +86,9 @@ struct SettingsItem: Item, Codable {
     }
 }
 struct SettingsSection: Section, Codable {
-    var items: [Item]
     let header: String?
     let footer: String?
+    var items: [Item]
     
     // MARK: Codable
     
@@ -97,15 +97,15 @@ struct SettingsSection: Section, Codable {
     }
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode([SettingsItem].self, forKey: .items)
         header = try container.decodeIfPresent(String.self, forKey: .header)
         footer = try container.decodeIfPresent(String.self, forKey: .footer)
+        items = try container.decode([SettingsItem].self, forKey: .items)
     }
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(items, forKey: .items)
         try container.encodeIfPresent(header, forKey: .header)
         try container.encodeIfPresent(footer, forKey: .footer)
+        try container.encode(items, forKey: .items)
     }
 }
 struct SettingsDataSource: DataSource, Codable {

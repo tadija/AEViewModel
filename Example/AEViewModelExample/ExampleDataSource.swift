@@ -7,7 +7,6 @@
 import AEViewModel
 
 struct ExampleDataSource: DataSource {
-    
     struct Id {
         static let form = "form"
         static let settings = "settings"
@@ -35,5 +34,4 @@ struct ExampleDataSource: DataSource {
             var viewModel: ViewModel = BasicViewModel(title: "Github", detail: "Trending Swift Repos")
         }
     }
-    
 }

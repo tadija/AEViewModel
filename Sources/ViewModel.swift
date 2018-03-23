@@ -20,9 +20,9 @@ public protocol Item {
 }
 
 public protocol Section {
-    var items: [Item] { get set }
     var header: String? { get }
     var footer: String? { get }
+    var items: [Item] { get set }
 }
 
 public protocol DataSource {

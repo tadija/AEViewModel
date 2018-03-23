@@ -36,14 +36,14 @@ public struct BasicItem: Item {
 }
 
 public struct BasicSection: Section {
-    public var items: [Item]
     public let header: String?
     public let footer: String?
-
-    public init(items: [Item] = [Item](), header: String? = nil, footer: String? = nil) {
-        self.items = items
+    public var items: [Item]
+    
+    public init(header: String? = nil, footer: String? = nil, items: [Item] = [Item]()) {
         self.header = header
         self.footer = footer
+        self.items = items
     }
 }
 
@@ -95,19 +95,19 @@ extension BasicItem: Codable {
 
 extension BasicSection: Codable {
     public enum CodingKeys: String, CodingKey {
-        case items, header, footer
+        case header, footer, items
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode([BasicItem].self, forKey: .items)
         header = try container.decode(String.self, forKey: .header)
         footer = try container.decode(String.self, forKey: .footer)
+        items = try container.decode([BasicItem].self, forKey: .items)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(items, forKey: .items)
         try container.encode(header, forKey: .header)
         try container.encode(footer, forKey: .footer)
+        try container.encode(items, forKey: .items)
     }
 }
 

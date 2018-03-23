@@ -13,7 +13,7 @@
 		8B2EAE4B1EF0889F001FE287 /* AEViewModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8B7281AE1EE2E607007245E7 /* ExampleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleDataSource.swift */; };
 		8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */; };
-		8B7281C51EE340E5007245E7 /* FormTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C41EE340E5007245E7 /* FormTable.swift */; };
+		8B7281C51EE340E5007245E7 /* FormDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C41EE340E5007245E7 /* FormDataSource.swift */; };
 		8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C71EE346A9007245E7 /* FormTVMC.swift */; };
 		8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A7B1E98606700B3101B /* AppDelegate.swift */; };
 		8B893A811E98606700B3101B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A7F1E98606700B3101B /* Main.storyboard */; };
@@ -78,7 +78,7 @@
 		8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AEViewModel.xcodeproj; path = ../AEViewModel.xcodeproj; sourceTree = "<group>"; };
 		8B7281AD1EE2E607007245E7 /* ExampleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleDataSource.swift; sourceTree = "<group>"; };
 		8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTVMC.swift; sourceTree = "<group>"; };
-		8B7281C41EE340E5007245E7 /* FormTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTable.swift; sourceTree = "<group>"; };
+		8B7281C41EE340E5007245E7 /* FormDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDataSource.swift; sourceTree = "<group>"; };
 		8B7281C71EE346A9007245E7 /* FormTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTVMC.swift; sourceTree = "<group>"; };
 		8B893A781E98606700B3101B /* AEViewModelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AEViewModelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893A7B1E98606700B3101B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		8BE0C5081EF480FB00E6F95F /* Form */ = {
 			isa = PBXGroup;
 			children = (
-				8B7281C41EE340E5007245E7 /* FormTable.swift */,
+				8B7281C41EE340E5007245E7 /* FormDataSource.swift */,
 				8B7281C71EE346A9007245E7 /* FormTVMC.swift */,
 			);
 			name = Form;
@@ -363,7 +363,7 @@
 			files = (
 				8BE0C5151EF4945300E6F95F /* GithubTVMC.swift in Sources */,
 				8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */,
-				8B7281C51EE340E5007245E7 /* FormTable.swift in Sources */,
+				8B7281C51EE340E5007245E7 /* FormDataSource.swift in Sources */,
 				8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */,
 				8BE0C5111EF492BA00E6F95F /* GithubModels.swift in Sources */,
 				8BE0C4EF1EF32F4200E6F95F /* SettingsTable.swift in Sources */,
