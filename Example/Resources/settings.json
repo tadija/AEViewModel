@@ -28,7 +28,7 @@
             "title": "Wi-Fi",
             "detail": "Off",
             "image": "IconBlue",
-            "table": {
+            "child": {
               "title": "Wi-Fi",
               "sections": [
                 {
@@ -40,7 +40,7 @@
                       }
                     },
                     {
-                      "identifier": "currentNetwork",
+                      "identifier": "wifiNetwork",
                       "viewModel": {
                         "title": "ae 5GHz"
                       }
@@ -84,7 +84,7 @@
             "title": "Bluetooth",
             "detail": "On",
             "image": "IconBlue",
-            "table": {
+            "child": {
               "title": "Bluetooth",
               "sections": [
                 {
@@ -130,7 +130,7 @@
           "viewModel": {
             "title": "Cellular",
             "image": "IconGreen",
-            "table": {
+            "child": {
               "title": "Cellular",
               "sections": [
                 {
@@ -208,7 +208,7 @@
             "title": "Personal Hotspot",
             "detail": "Off",
             "image": "IconGreen",
-            "table": {
+            "child": {
               "title": "Personal Hotspot",
               "sections": [
                 {
@@ -249,7 +249,7 @@
             "title": "Carrier",
             "detail": "Telenor SRB",
             "image": "IconGreen",
-            "table": {
+            "child": {
               "title": "Network Selection",
               "sections": [
                 {

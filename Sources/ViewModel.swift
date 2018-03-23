@@ -12,6 +12,7 @@ public protocol ViewModel {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
+    var child: DataSource? { get }
 }
 
 public protocol Item {
@@ -36,6 +37,7 @@ public extension ViewModel {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }
+    var child: DataSource? { return nil }
 }
 
 public extension Section {

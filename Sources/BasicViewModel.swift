@@ -12,11 +12,13 @@ public struct BasicViewModel: ViewModel {
     public let title: String?
     public let detail: String?
     public let image: String?
+    public let child: DataSource?
 
-    public init(title: String? = nil, detail: String? = nil, image: String? = nil) {
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil, child: DataSource? = nil) {
         self.title = title
         self.detail = detail
         self.image = image
+        self.child = child
     }
 }
 
@@ -61,19 +63,21 @@ public struct BasicDataSource: DataSource {
 
 extension BasicViewModel: Codable {
     public enum CodingKeys: String, CodingKey {
-        case title, detail, image
+        case title, detail, image, child
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         detail = try container.decodeIfPresent(String.self, forKey: .detail)
         image = try container.decodeIfPresent(String.self, forKey: .image)
+        child = try container.decodeIfPresent(BasicDataSource.self, forKey: .child)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(detail, forKey: .detail)
         try container.encodeIfPresent(image, forKey: .image)
+        try container.encodeIfPresent(child, forKey: .child)
     }
 }
 
