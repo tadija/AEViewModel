@@ -6,8 +6,6 @@
 
 import Foundation
 
-// MARK: - Protocols
-
 public protocol ViewModel {
     var title: String? { get }
     var detail: String? { get }
@@ -57,6 +55,7 @@ public extension DataSource {
     func viewModel(at indexPath: IndexPath) -> ViewModel {
         return item(at: indexPath).viewModel
     }
+
     var uniqueIdentifiers: Set<String> {
         var ids: Set<String> = Set<String>()
         sections.forEach { section in

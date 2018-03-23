@@ -91,7 +91,7 @@ extension BasicItem: Codable {
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-                identifier = try container.decode(String.self, forKey: .identifier)
+        identifier = try container.decode(String.self, forKey: .identifier)
         viewModel = try container.decode(BasicViewModel.self, forKey: .viewModel)
     }
     public func encode(to encoder: Encoder) throws {

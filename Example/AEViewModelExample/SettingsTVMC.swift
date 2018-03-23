@@ -71,7 +71,7 @@ final class MainSettingsTVMC: SettingsTVMC {
 
 // MARK: - WiFiSettingsTVC
 
-class WiFiSettingsTVMC: SettingsTVMC {
+final class WiFiSettingsTVMC: SettingsTVMC {
     
     typealias Id = SettingsDataSource.Id.Wifi
     
@@ -95,7 +95,7 @@ class WiFiSettingsTVMC: SettingsTVMC {
              Id.joinNetworksSwitch:
             print("handleEvent with id: \(item.identifier)")
         case Id.wifiNetwork:
-            print("join network with title: \(String(describing: item.viewModel.title))")
+            print("join network with title: \(item.viewModel.title ?? "n/a")")
         default:
             break
         }

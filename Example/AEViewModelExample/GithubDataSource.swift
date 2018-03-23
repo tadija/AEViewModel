@@ -25,13 +25,14 @@ struct GithubDataSource {
     // MARK: Helpers
     
     private static func fetchTrendingSwiftRepos(then handler: @escaping ([Repo]?) -> Void) {
-        URLSession.shared.dataTask(with: trendingSwiftReposURL) { (data, response, error) in
+        URLSession.shared.dataTask(with: trendingSwiftReposURL) { (data, _, error) in
             if let data = data {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
-                let root = try? decoder.decode(GithubResponse.self, from: data)
-                handler(root?.items)
+                let response = try? decoder.decode(GithubResponse.self, from: data)
+                handler(response?.items)
             } else {
+                debugPrint("Error with loading data: \(String(describing: error?.localizedDescription))")
                 handler(nil)
             }
         }.resume()

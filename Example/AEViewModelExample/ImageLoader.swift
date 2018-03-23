@@ -17,16 +17,8 @@ extension UIImageView {
 }
 
 private class ImageLoader {
-    
-    // MARK: Singleton
-    
     static let shared = ImageLoader()
-    
-    // MARK: Properties
-
     private var cache = NSCache<NSString, UIImage>()
-    
-    // MARK: API
     
     func loadImage(with url: URL?, completion: @escaping (UIImage?) -> Void) {
         guard let url = url else {
@@ -52,5 +44,4 @@ private class ImageLoader {
             }).resume()
         }
     }
-
 }
