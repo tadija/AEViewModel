@@ -7,21 +7,12 @@
 import UIKit
 
 public protocol CollectionViewModelControllerDelegate: class {
-    func cell(forIdentifier identifier: String) -> CollectionCell
-    func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath)
+    func cellType(forIdentifier identifier: String) -> CollectionCellType
+    func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath)
+    func action(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController)
 }
 
-public extension CollectionViewModelControllerDelegate where Self: CollectionViewModelController {
-    func cell(forIdentifier identifier: String) -> CollectionCell {
-        return .empty
-    }
-    func update(_ cell: UICollectionViewCell & CollectionViewModelCell, at indexPath: IndexPath) {
-        let item = dataSource.item(at: indexPath)
-        cell.update(with: item)
-    }
-}
-
-open class CollectionViewModelController: UICollectionViewController {
+open class CollectionViewModelController: UICollectionViewController, CollectionViewModelControllerDelegate {
     
     // MARK: Properties
 
@@ -38,38 +29,69 @@ open class CollectionViewModelController: UICollectionViewController {
     }
     
     // MARK: Init
+
+    public convenience init() {
+        self.init(dataSource: BasicDataSource())
+    }
     
-    public convenience init(layout: UICollectionViewLayout = UICollectionViewFlowLayout(),
-                            dataSource: DataSource = BasicDataSource()) {
+    public convenience init(dataSource: DataSource, layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         self.init(collectionViewLayout: layout)
         self.dataSource = dataSource
     }
     
     // MARK: Lifecycle
+
+    open override func loadView() {
+        super.loadView()
+        if delegate == nil {
+            delegate = self
+        }
+    }
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
         reload()
     }
+
+    // MARK: CollectionViewModelControllerDelegate
+
+    open func cellType(forIdentifier identifier: String) -> CollectionCellType {
+        return .basic
+    }
+
+    open func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
+        cell.update(with: item)
+        cell.callback = { [unowned self] sender in
+            self.delegate?.action(for: cell, at: indexPath, sender: self)
+        }
+    }
+
+    open func action(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController) {}
     
     // MARK: Helpers
     
     private func reload() {
         if Thread.isMainThread {
-            registerCells()
-            collectionView?.reloadData()
+            performReload()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCells()
-                self?.collectionView?.reloadData()
+                self?.performReload()
             }
         }
     }
+
+    private func performReload() {
+        if let title = dataSource.title {
+            self.title = title
+        }
+        registerCells()
+        collectionView?.reloadData()
+    }
     
     private func registerCells() {
-        dataSource.uniqueIdentifiers.forEach { identifier in
-            registerCell(with: identifier)
+        dataSource.uniqueIdentifiers.forEach { id in
+            registerCell(with: id)
         }
     }
     
@@ -77,13 +99,13 @@ open class CollectionViewModelController: UICollectionViewController {
         guard let delegate = delegate else {
             return
         }
-        switch delegate.cell(forIdentifier: identifier) {
-        case .empty:
-            collectionView?.register(CollectionCellEmpty.self, forCellWithReuseIdentifier: identifier)
+        switch delegate.cellType(forIdentifier: identifier) {
+        case .basic:
+            collectionView?.register(CollectionCellBasic.self, forCellWithReuseIdentifier: identifier)
         case .customClass(let cellClass):
             collectionView?.register(cellClass, forCellWithReuseIdentifier: identifier)
-        case .customNib(let cellNib):
-            collectionView?.register(cellNib, forCellWithReuseIdentifier: identifier)
+        case .customNib(let cellClass):
+            collectionView?.register(cellClass.nib, forCellWithReuseIdentifier: identifier)
         }
     }
     
@@ -103,9 +125,9 @@ extension CollectionViewModelController {
     
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = dataSource.identifier(at: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
-        if let cell = cell as? UICollectionViewCell & CollectionViewModelCell {
+        let id = dataSource.identifier(at: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
+        if let cell = cell as? CollectionViewModelCell {
             delegate?.update(cell, at: indexPath)
         }
         return cell
@@ -118,11 +140,10 @@ extension CollectionViewModelController {
 extension CollectionViewModelController {
     
     open override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard
-            let cell = collectionView.cellForItem(at: indexPath),
-            let collectionViewModelCell = cell as? CollectionViewModelCell
-        else { return }
-        collectionViewModelCell.action(cell)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewModelCell else {
+            return
+        }
+        delegate?.action(for: cell, at: indexPath, sender: self)
     }
     
 }

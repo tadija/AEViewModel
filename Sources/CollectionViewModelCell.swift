@@ -6,48 +6,28 @@
 
 import UIKit
 
-// MARK: - CollectionViewModelCell
+public typealias CollectionViewModelCell = UICollectionViewCell & ViewModelCell
 
-public protocol CollectionViewModelCell: class {
-    static var nib: UINib? { get }
-    
-    var action: (_ sender: Any) -> Void { get set }
-    
-    func customize()
-    func update(with item: Item)
-    func reset()
-}
-
-public extension CollectionViewModelCell {
-    static var nib: UINib? {
-        let className = String(describing: type(of: self))
-        guard let nibName = className.components(separatedBy: ".").first else {
-            return nil
-        }
-        return UINib(nibName: nibName, bundle: nil)
-    }
-}
-
-// MARK: - CollectionCell
-
-public enum CollectionCell {
-    case empty
-    case customClass(type: CollectionViewModelCell.Type)
-    case customNib(nib: UINib?)
+public enum CollectionCellType {
+    case basic
+    case customClass(CollectionViewModelCell.Type)
+    case customNib(CollectionViewModelCell.Type)
 }
 
 // MARK: - Cells
     
-open class CollectionCellEmpty: UICollectionViewCell, CollectionViewModelCell {
+open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        reset()
         customize()
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
+        reset()
         customize()
     }
     open override func prepareForReuse() {
@@ -55,13 +35,13 @@ open class CollectionCellEmpty: UICollectionViewCell, CollectionViewModelCell {
         reset()
     }
     
-    public var action: (Any) -> Void = { _ in }
+    public var callback: (Any) -> Void = { _ in }
     
     open func customize() {}
     open func update(with item: Item) {}
     open func reset() {}
     
-    @objc public func callAction(sender: Any) {
-        action(sender)
+    @objc public func performCallback(sender: Any) {
+        callback(sender)
     }
 }

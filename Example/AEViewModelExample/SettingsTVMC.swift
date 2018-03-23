@@ -8,38 +8,25 @@ import UIKit
 import AEViewModel
 
 class SettingsTVMC: TableViewModelController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = (dataSource as? SettingsTable)?.title
-    }
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
-        guard
-            let item = dataSource.item(at: indexPath) as? SettingsItem,
-            let vm = item.model as? SettingsViewModel,
-            let child = vm.submodel, child.sections.count > 0
-        else {
-            return
+        if let child = dataSource.viewModel(at: indexPath).child, child.sections.count > 0 {
+            cell.accessoryType = .disclosureIndicator
         }
-        cell.accessoryType = .disclosureIndicator
-    }
-    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? SettingsSection)?.header
-    }
-    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? SettingsSection)?.footer
     }
 }
 
 final class MainSettingsTVMC: SettingsTVMC {
     
-    typealias SettingsCell = SettingsTable.Cell
+    typealias Id = SettingsDataSource.Id
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        dataSource = SettingsDataSource.create()
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
@@ -47,38 +34,36 @@ final class MainSettingsTVMC: SettingsTVMC {
     
     // MARK: TableViewModelControllerDelegate
 
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        guard let settingsCell = SettingsCell(rawValue: identifier) else {
-            return .basic
-        }
-        switch settingsCell {
-        case .profile:
-            return .customClass(type: SettingsProfileCell.self)
-        case .airplane, .vpn:
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        switch identifier {
+        case Id.profile:
+            return .customClass(SettingsProfileCell.self)
+        case Id.airplane, Id.vpn:
             return .toggleBasic
-        case .wifi, .bluetooth, .hotspot, .carrier:
+        case Id.wifi, Id.bluetooth, Id.hotspot, Id.carrier:
             return .rightDetail
-        case .cellular:
+        case Id.cellular:
             return .basic
+        default:
+            fatalError("Identifier not supported.")
         }
     }
 
-    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
-        guard let settingsCell = SettingsCell(rawValue: item.identifier) else {
-            return
-        }
-        switch settingsCell {
-        case .profile, .airplane, .vpn:
+        switch item.identifier {
+        case Id.profile, Id.airplane, Id.vpn:
             print("handleEvent with id: \(item.identifier)")
-        case .wifi:
-            let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
-            let vc = WiFiSettingsTVMC(dataSource: dataSource)
+        case Id.wifi:
+            let ds = item.viewModel.child ?? BasicDataSource()
+            let vc = WiFiSettingsTVMC(dataSource: ds)
             show(vc, sender: self)
-        case .bluetooth, .cellular, .hotspot, .carrier:
-            let dataSource: DataSource = (item.model as? SettingsViewModel)?.submodel ?? BasicDataSource()
-            let vc = SettingsTVMC(dataSource: dataSource)
+        case Id.bluetooth, Id.cellular, Id.hotspot, Id.carrier:
+            let ds = item.viewModel.child ?? BasicDataSource()
+            let vc = SettingsTVMC(dataSource: ds)
             show(vc, sender: self)
+        default:
+            break
         }
     }
     
@@ -88,33 +73,31 @@ final class MainSettingsTVMC: SettingsTVMC {
 
 class WiFiSettingsTVMC: SettingsTVMC {
     
-    typealias WifiCell = SettingsTable.Wifi.Cell
+    typealias Id = SettingsDataSource.Id.Wifi
     
     // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        guard let wifiCell = WifiCell(rawValue: identifier) else {
-            return .basic
-        }
-        switch wifiCell {
-        case .wifiSwitch, .joinNetworksSwitch:
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        switch identifier {
+        case Id.wifiSwitch, Id.joinNetworksSwitch:
             return .toggleBasic
-        case .wifiNetwork:
+        case Id.wifiNetwork:
             return .basic
+        default:
+            fatalError("Identifier not supported.")
         }
     }
 
-    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let item = dataSource.item(at: indexPath)
-        guard let wifiCell = WifiCell(rawValue: item.identifier) else {
-            return
-        }
-        switch wifiCell {
-        case .wifiSwitch,
-             .joinNetworksSwitch:
+        switch item.identifier {
+        case Id.wifiSwitch,
+             Id.joinNetworksSwitch:
             print("handleEvent with id: \(item.identifier)")
-        case .wifiNetwork:
-            print("join network with title: \(String(describing: item.model?.title))")
+        case Id.wifiNetwork:
+            print("join network with title: \(String(describing: item.viewModel.title))")
+        default:
+            break
         }
     }
     

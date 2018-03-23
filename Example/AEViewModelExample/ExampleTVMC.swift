@@ -9,43 +9,38 @@ import AEViewModel
 
 final class ExampleTVMC: TableViewModelController {
     
-    typealias ExampleCell = ExampleTable.Cell
+    typealias Id = ExampleDataSource.Id
     
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "Example"
-        dataSource = ExampleTable()
+        dataSource = ExampleDataSource()
     }
     
     // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
         return .subtitle
     }
     
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
-        
+
         cell.accessoryType = .disclosureIndicator
     }
 
-    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
-        guard let cellType = ExampleCell(rawValue: dataSource.identifier(at: indexPath)) else {
-            return
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        switch dataSource.identifier(at: indexPath) {
+        case Id.form:
+            show(FormTVMC(), sender: self)
+        case Id.settings:
+            show(MainSettingsTVMC(), sender: self)
+        case Id.github:
+            show(GithubTVMC(), sender: self)
+        default:
+            break
         }
-        let vc: UIViewController
-        switch cellType {
-        case .form:
-            vc = FormTVMC(dataSource: FormTable())
-        case .settings:
-            vc = MainSettingsTVMC(dataSource: SettingsTable())
-        case .github:
-            vc = GithubTVMC()
-        }
-        show(vc, sender: self)
     }
     
 }

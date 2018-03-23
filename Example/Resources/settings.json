@@ -4,8 +4,8 @@
     {
       "items": [
         {
-          "id": "profile",
-          "data": {
+          "identifier": "profile",
+          "viewModel": {
             "title": "Marko Tadic",
             "detail": "Apple ID, iCloud, iTunes & App Store",
             "image": "IconGray"
@@ -16,32 +16,32 @@
     {
       "items": [
         {
-          "id": "airplane",
-          "data": {
+          "identifier": "airplane",
+          "viewModel": {
             "title": "Airplane Mode",
             "image": "IconOrange"
           }
         },
         {
-          "id": "wifi",
-          "data": {
+          "identifier": "wifi",
+          "viewModel": {
             "title": "Wi-Fi",
             "detail": "Off",
             "image": "IconBlue",
-            "table": {
+            "child": {
               "title": "Wi-Fi",
               "sections": [
                 {
                   "items": [
                     {
-                      "id": "wifiSwitch",
-                      "data": {
+                      "identifier": "wifiSwitch",
+                      "viewModel": {
                         "title": "Wi-Fi"
                       }
                     },
                     {
-                      "id": "currentNetwork",
-                      "data": {
+                      "identifier": "wifiNetwork",
+                      "viewModel": {
                         "title": "ae 5GHz"
                       }
                     }
@@ -51,14 +51,14 @@
                   "header": "Choose a network...",
                   "items": [
                     {
-                      "id": "wifiNetwork",
-                      "data": {
+                      "identifier": "wifiNetwork",
+                      "viewModel": {
                         "title": "Apple"
                       }
                     },
                     {
-                      "id": "wifiNetwork",
-                      "data": {
+                      "identifier": "wifiNetwork",
+                      "viewModel": {
                         "title": "Twitter"
                       }
                     }
@@ -68,8 +68,8 @@
                   "footer": "Known networks will be joined automatically. If no known networks are available, you will be asked before joining a new network.",
                   "items": [
                     {
-                      "id": "joinNetworksSwitch",
-                      "data": {
+                      "identifier": "joinNetworksSwitch",
+                      "viewModel": {
                         "title": "Ask to Join Networks"
                       }
                     }
@@ -79,20 +79,20 @@
             }
           }},
         {
-          "id": "bluetooth",
-          "data": {
+          "identifier": "bluetooth",
+          "viewModel": {
             "title": "Bluetooth",
             "detail": "On",
             "image": "IconBlue",
-            "table": {
+            "child": {
               "title": "Bluetooth",
               "sections": [
                 {
                   "footer": "Now discoverable as \"aePhone6S\".",
                   "items": [
                     {
-                      "id": "bluetoothSwitch",
-                      "data": {
+                      "identifier": "bluetoothSwitch",
+                      "viewModel": {
                         "title": "Bluetooth"
                       }
                     }
@@ -102,15 +102,15 @@
                   "header": "My Devices",
                   "items": [
                     {
-                      "id": "aePods",
-                      "data": {
+                      "identifier": "aePods",
+                      "viewModel": {
                         "title": "aePods",
                         "detail": "Not Connected"
                       }
                     },
                     {
-                      "id": "aeWatch",
-                      "data": {
+                      "identifier": "aeWatch",
+                      "viewModel": {
                         "title": "aeWatch",
                         "detail": "Connected"
                       }
@@ -126,24 +126,24 @@
             }
           }},
         {
-          "id": "cellular",
-          "data": {
+          "identifier": "cellular",
+          "viewModel": {
             "title": "Cellular",
             "image": "IconGreen",
-            "table": {
+            "child": {
               "title": "Cellular",
               "sections": [
                 {
                   "items": [
                     {
-                      "id": "cellularData",
-                      "data": {
+                      "identifier": "cellularData",
+                      "viewModel": {
                         "title": "Cellular Data"
                       }
                     },
                     {
-                      "id": "cellularDataOptions",
-                      "data": {
+                      "identifier": "cellularDataOptions",
+                      "viewModel": {
                         "title": "Cellular Data Options",
                         "detail": "Roaming Off"
                       }
@@ -153,8 +153,8 @@
                 {
                   "items": [
                     {
-                      "id": "personalHotspot",
-                      "data": {
+                      "identifier": "personalHotspot",
+                      "viewModel": {
                         "title": "Personal Hotspot",
                         "detail": "Off"
                       }
@@ -165,15 +165,15 @@
                   "header": "Call Time",
                   "items": [
                     {
-                      "id": "currentPeriodCallTime",
-                      "data": {
+                      "identifier": "currentPeriodCallTime",
+                      "viewModel": {
                         "title": "Current Period",
                         "detail": "17 Hours, 31 Minutes"
                       }
                     },
                     {
-                      "id": "lifetimeCallTime",
-                      "data": {
+                      "identifier": "lifetimeCallTime",
+                      "viewModel": {
                         "title": "Lifetime",
                         "detail": "17 Hours, 31 Minutes"
                       }
@@ -184,15 +184,15 @@
                   "header": "Cellular Data Usage",
                   "items": [
                     {
-                      "id": "currentPeriodDataUsage",
-                      "data": {
+                      "identifier": "currentPeriodDataUsage",
+                      "viewModel": {
                         "title": "Current Period",
                         "detail": "15.1 GB"
                       }
                     },
                     {
-                      "id": "currentPeriodRoaming",
-                      "data": {
+                      "identifier": "currentPeriodRoaming",
+                      "viewModel": {
                         "title": "Current Period Roaming",
                         "detail": "425 MB"
                       }
@@ -203,31 +203,30 @@
             }
           }},
         {
-          "id": "hotspot",
-          "data": {
+          "identifier": "hotspot",
+          "viewModel": {
             "title": "Personal Hotspot",
             "detail": "Off",
             "image": "IconGreen",
-            "table": {
+            "child": {
               "title": "Personal Hotspot",
               "sections": [
                 {
                   "footer": "Turn on Personal Hotspot to share your iPhone's internet connection. Additional usage charges may apply. Other devices signed into your iCloud account will be able to use Personal Hotspot without having to turn it on manually.",
                   "items": [
                     {
-                      "id": "hotspotSwitch",
-                      "data": {
+                      "identifier": "hotspotSwitch",
+                      "viewModel": {
                         "title": "Personal Hotspot"
                       }
                     }
                   ]
                 },
                 {
-                  "footer-image": "HotspotFooter",
                   "items": [
                     {
-                      "id": "hotspotWifiPassword",
-                      "data": {
+                      "identifier": "hotspotWifiPassword",
+                      "viewModel": {
                         "title": "Wi-Fi Password",
                         "detail": "MyPassword"
                       }
@@ -238,27 +237,27 @@
             }
           }},
         {
-          "id": "vpn",
-          "data": {
+          "identifier": "vpn",
+          "viewModel": {
             "title": "VPN",
             "image": "IconBlue"
           }
         },
         {
-          "id": "carrier",
-          "data": {
+          "identifier": "carrier",
+          "viewModel": {
             "title": "Carrier",
             "detail": "Telenor SRB",
             "image": "IconGreen",
-            "table": {
+            "child": {
               "title": "Network Selection",
               "sections": [
                 {
                   "header": "Carriers",
                   "items": [
                     {
-                      "id": "carrierSwitch",
-                      "data": {
+                      "identifier": "carrierSwitch",
+                      "viewModel": {
                         "title": "Automatic"
                       }
                     }

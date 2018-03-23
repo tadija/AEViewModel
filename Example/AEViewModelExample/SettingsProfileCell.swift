@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-class SettingsProfileCell: TableCellBasic {
+final class SettingsProfileCell: TableCellBasic {
     
     // MARK: Outlets
     
@@ -17,7 +17,7 @@ class SettingsProfileCell: TableCellBasic {
     let name = UILabel()
     let subtitle = UILabel()
     
-    // MARK: TableCell
+    // MARK: ViewModelCell
     
     override func customize() {
         configureHierarchy()
@@ -26,11 +26,9 @@ class SettingsProfileCell: TableCellBasic {
     }
     
     override func update(with item: Item) {
-        name.text = item.model?.title
-        subtitle.text = item.model?.detail
-        
-        let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
-        profileImageView.loadImage(from: url)
+        name.text = item.viewModel.title
+        subtitle.text = item.viewModel.detail
+        profileImageView.loadImage(from: URL(string: "https://avatars1.githubusercontent.com/u/2762374"))
     }
     
     // MARK: Helpers
@@ -55,16 +53,16 @@ class SettingsProfileCell: TableCellBasic {
         
         profileImageView.widthAnchor.constraint(equalToConstant: 56).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 56).isActive = true
-        
-        let spacing: CGFloat = 12
-        mainStack.isLayoutMarginsRelativeArrangement = true
-        mainStack.layoutMargins = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        mainStack.spacing = spacing
     }
     
     private func configureAppearance() {
+        let spacing: CGFloat = 12
         mainStack.axis = .horizontal
         mainStack.alignment = .center
+        mainStack.isLayoutMarginsRelativeArrangement = true
+        mainStack.layoutMargins = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        mainStack.spacing = spacing
+        
         textStack.axis = .vertical
         
         profileImageView.layer.cornerRadius = 28

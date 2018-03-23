@@ -8,25 +8,7 @@ import AEViewModel
 import SafariServices
 
 final class GithubTVMC: TableViewModelController {
-    
-    typealias CellType = BasicDataSource.GithubCellType
-    
-    // MARK: Properties
-    
-    private let github = GithubDataSource()
-    
-    private var repos = [Repo]() {
-        didSet {
-            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, model: $0) }
-            let section = BasicSection(items: items)
-            dataSource = BasicDataSource(sections: [section])
-        }
-    }
-    
-    func repo(at indexPath: IndexPath) -> Repo? {
-        return dataSource.item(at: indexPath).model as? Repo
-    }
-    
+
     // MARK: Init
     
     public convenience init() {
@@ -37,12 +19,16 @@ final class GithubTVMC: TableViewModelController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureSelf()
+
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150
+
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
     }
     
     private var initialAppear = true
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -54,56 +40,33 @@ final class GithubTVMC: TableViewModelController {
     
     // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        return .customNib(nib: GithubRepoCell.nib)
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        return .customNib(GithubRepoCell.self)
     }
 
-    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
-        if let repo = repo(at: indexPath), let url = URL(string: repo.url) {
-            pushBrowser(with: url, title: repo.name)
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+        if let repo = dataSource.viewModel(at: indexPath) as? Repo, let url = URL(string: repo.url) {
+            let browser = SFSafariViewController(url: url)
+            browser.title = title
+            present(browser, animated: true, completion: nil)
         }
     }
     
     // MARK: Helpers
-    
-    private func pushBrowser(with url: URL, title: String? = nil) {
-        let browser = SFSafariViewController(url: url)
-        browser.title = title
-        present(browser, animated: true, completion: nil)
-    }
-    
-    private func configureSelf() {
-        title = "Github"
-        delegate = self
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 150
-        
-        configureRefreshControl()
-    }
-    
-    private func configureRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-    }
-    
-    @objc
-    private func refresh(_ sender: UIRefreshControl) {
-        github.reload { [weak self] (repos) in
-            DispatchQueue.main.async {
-                sender.endRefreshing()
-            }
-            if let repos = repos {
-                self?.repos = repos
-            }
-        }
-    }
-    
+
     private func performManualRefresh() {
         if let refreshControl = refreshControl {
             tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
             refreshControl.beginRefreshing()
             refresh(refreshControl)
+        }
+    }
+    
+    @objc
+    private func refresh(_ sender: UIRefreshControl) {
+        GithubDataSource.load { [weak self] (dataSource) in
+            sender.endRefreshing()
+            self?.dataSource = dataSource
         }
     }
     

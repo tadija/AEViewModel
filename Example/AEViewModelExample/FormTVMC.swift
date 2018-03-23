@@ -9,72 +9,61 @@ import AEViewModel
 
 final class FormTVMC: TableViewModelController {
     
-    typealias FormCell = FormTable.Cell
+    typealias Id = FormDataSource.Id
     
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "Registration"
+        dataSource = FormDataSource()
     }
 
     // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        guard let formCell = FormCell(rawValue: identifier) else {
-            return .basic
-        }
-        switch formCell {
-        case .username, .password:
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        switch identifier {
+        case Id.username, Id.password:
             return .textInput
-        case .accept:
+        case Id.accept:
             return .toggleBasic
-        case .register:
+        case Id.register:
             return .button
+        default:
+            fatalError("Identifier not supported.")
         }
     }
     
-    override func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
-
+        
         let id = dataSource.identifier(at: indexPath)
-        guard let formCell = FormCell(rawValue: id) else {
-            return
-        }
-        switch formCell {
-        case .password:
+        switch id {
+        case Id.password:
             (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
-        case .register:
+        case Id.register:
             (cell as? TableCellButton)?.button.isEnabled = false
-        case .username, .accept:
+        default:
             break
         }
     }
 
-    override func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
         let id = dataSource.identifier(at: indexPath)
-        guard let cellType = FormCell(rawValue: id) else {
-            return
-        }
-        switch cellType {
-        case .username:
+        switch id {
+        case Id.username:
             let nextIndexPath = indexPath.next(in: tableView)
             becomeFirstResponder(at: nextIndexPath)
-        case .password:
+        case Id.password:
             let previousIndexPath = indexPath.previous(in: tableView)
             becomeFirstResponder(at: previousIndexPath)
-        case .accept:
+        case Id.accept:
             let toggle = (cell as? TableCellToggle)?.toggle
             didToggleAcceptCell(at: indexPath, sender: toggle)
-            break
-        case .register:
+        case Id.register:
             presentAlert()
+        default:
+            break
         }
-    }
-    
-    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (dataSource.sections[section] as? FormSection)?.header
     }
     
     // MARK: Helpers

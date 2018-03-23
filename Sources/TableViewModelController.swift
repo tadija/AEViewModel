@@ -7,9 +7,9 @@
 import UIKit
 
 public protocol TableViewModelControllerDelegate: class {
-    func cell(forIdentifier identifier: String) -> TableCell
-    func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath)
-    func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
+    func cellType(forIdentifier identifier: String) -> TableCellType
+    func update(_ cell: TableViewModelCell, at indexPath: IndexPath)
+    func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
 }
 
 open class TableViewModelController: UITableViewController, TableViewModelControllerDelegate {
@@ -29,8 +29,12 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     }
     
     // MARK: Init
+
+    public convenience init() {
+        self.init(dataSource: BasicDataSource(), style: .grouped)
+    }
     
-    public convenience init(style: UITableViewStyle = .grouped, dataSource: DataSource = BasicDataSource()) {
+    public convenience init(dataSource: DataSource, style: UITableViewStyle = .grouped) {
         self.init(style: style)
         self.dataSource = dataSource
     }
@@ -51,37 +55,43 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
 
     // MARK: TableViewModelControllerDelegate
 
-    open func cell(forIdentifier identifier: String) -> TableCell {
+    open func cellType(forIdentifier identifier: String) -> TableCellType {
         return .basic
     }
 
-    open func update(_ cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath) {
+    open func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.callback = { [unowned self] sender in
-            self.delegate?.performAction(for: cell, at: indexPath, sender: self)
+            self.delegate?.action(for: cell, at: indexPath, sender: self)
         }
     }
 
-    open func performAction(for cell: UITableViewCell & TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
+    open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
 
     // MARK: Helpers
     
     private func reload() {
         if Thread.isMainThread {
-            registerCells()
-            tableView.reloadData()
+            performReload()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCells()
-                self?.tableView.reloadData()
+                self?.performReload()
             }
         }
     }
+
+    private func performReload() {
+        if let title = dataSource.title {
+            self.title = title
+        }
+        registerCells()
+        tableView.reloadData()
+    }
     
     private func registerCells() {
-        dataSource.uniqueIdentifiers.forEach { identifier in
-            registerCell(with: identifier)
+        dataSource.uniqueIdentifiers.forEach { id in
+            registerCell(with: id)
         }
     }
     
@@ -89,7 +99,7 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
         guard let delegate = delegate else {
             fatalError("Delegate must be provided by now.")
         }
-        switch delegate.cell(forIdentifier: identifier) {
+        switch delegate.cellType(forIdentifier: identifier) {
         case .basic:
             tableView.register(TableCellBasic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
@@ -108,8 +118,8 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
             tableView.register(TableCellTextInput.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
-        case .customNib(let cellNib):
-            tableView.register(cellNib, forCellReuseIdentifier: identifier)
+        case .customNib(let cellClass):
+            tableView.register(cellClass.nib, forCellReuseIdentifier: identifier)
         }
     }
     
@@ -128,12 +138,20 @@ extension TableViewModelController {
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = dataSource.identifier(at: indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        if let cell = cell as? UITableViewCell & TableViewModelCell {
+        let id = dataSource.identifier(at: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
+        if let cell = cell as? TableViewModelCell {
             delegate?.update(cell, at: indexPath)
         }
         return cell
+    }
+
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dataSource.sections[section].header
+    }
+
+    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return dataSource.sections[section].footer
     }
     
 }
@@ -143,11 +161,11 @@ extension TableViewModelController {
 extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? UITableViewCell & TableViewModelCell else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? TableViewModelCell else {
             return
         }
         if cell.selectionStyle != .none {
-            delegate?.performAction(for: cell, at: indexPath, sender: self)
+            delegate?.action(for: cell, at: indexPath, sender: self)
         }
     }
     

@@ -6,7 +6,17 @@
 
 import UIKit
 
-class ImageLoader {
+extension UIImageView {
+    func loadImage(from url: URL?, placeholer: UIImage? = nil, completion: (() -> Void)? = nil) {
+        image = placeholer
+        ImageLoader.shared.loadImage(with: url) { [weak self] (image) in
+            self?.image = image
+            completion?()
+        }
+    }
+}
+
+private class ImageLoader {
     
     // MARK: Singleton
     
@@ -18,7 +28,10 @@ class ImageLoader {
     
     // MARK: API
     
-    func loadImage(with url: URL, completion: @escaping (UIImage?) -> Void) {
+    func loadImage(with url: URL?, completion: @escaping (UIImage?) -> Void) {
+        guard let url = url else {
+            completion(nil); return
+        }
         let cacheKey = url.absoluteString as NSString
         if let image = cache.object(forKey: cacheKey) {
             DispatchQueue.main.async {
@@ -39,21 +52,5 @@ class ImageLoader {
             }).resume()
         }
     }
-    
-}
 
-extension UIImage {
-    static func load(from url: URL, completion: @escaping (UIImage?) -> Void) {
-        ImageLoader.shared.loadImage(with: url, completion: completion)
-    }
-}
-
-extension UIImageView {
-    func loadImage(from url: URL, placeholer: UIImage? = nil, completion: (() -> Void)? = nil) {
-        image = placeholer
-        ImageLoader.shared.loadImage(with: url) { [weak self] (image) in
-            self?.image = image
-            completion?()
-        }
-    }
 }

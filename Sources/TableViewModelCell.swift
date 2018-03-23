@@ -6,31 +6,9 @@
 
 import UIKit
 
-// MARK: - TableViewModelCell
+public typealias TableViewModelCell = UITableViewCell & ViewModelCell
 
-public protocol TableViewModelCell: class {
-    static var nib: UINib? { get }
-    
-    var callback: (_ sender: Any) -> Void { get set }
-    
-    func customize()
-    func update(with item: Item)
-    func reset()
-}
-
-public extension TableViewModelCell {
-    static var nib: UINib? {
-        let className = String(describing: type(of: self))
-        guard let nibName = className.components(separatedBy: ".").first else {
-            return nil
-        }
-        return UINib(nibName: nibName, bundle: nil)
-    }
-}
-
-// MARK: - TableCell
-
-public enum TableCell {
+public enum TableCellType {
     case basic
     case subtitle
     case leftDetail
@@ -39,13 +17,13 @@ public enum TableCell {
     case toggleBasic
     case toggleSubtitle
     case textInput
-    case customClass(type: TableViewModelCell.Type)
-    case customNib(nib: UINib?)
+    case customClass(TableViewModelCell.Type)
+    case customNib(TableViewModelCell.Type)
 }
 
 // MARK: - System Cells
     
-open class TableCellBasic: UITableViewCell, TableViewModelCell {
+open class TableCellBasic: UITableViewCell, ViewModelCell {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -73,12 +51,10 @@ open class TableCellBasic: UITableViewCell, TableViewModelCell {
     }
     open func customize() {}
     open func update(with item: Item) {
-        if let model = item.model {
-            textLabel?.text = model.title
-            detailTextLabel?.text = model.detail
-            if let imageName = model.image, let image = UIImage(named: imageName) {
-                imageView?.image = image
-            }
+        textLabel?.text = item.viewModel.title
+        detailTextLabel?.text = item.viewModel.detail
+        if let imageName = item.viewModel.image, let image = UIImage(named: imageName) {
+            imageView?.image = image
         }
     }
 
@@ -167,7 +143,7 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
         textField.delegate = self
     }
     open override func update(with item: Item) {
-        textField.placeholder = item.model?.title
+        textField.placeholder = item.viewModel.title
     }
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -191,10 +167,11 @@ open class TableCellButton: TableCellBasic {
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
         
         button.addTarget(self, action: #selector(performCallback(sender:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
-        button.setTitle(item.model?.title, for: .normal)
+        button.setTitle(item.viewModel.title, for: .normal)
     }
 }
