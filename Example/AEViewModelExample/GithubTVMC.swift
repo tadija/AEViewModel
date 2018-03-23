@@ -46,8 +46,8 @@ final class GithubTVMC: TableViewModelController {
     
     // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        return .customNib(nib: GithubRepoCell.nib)
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        return .customNib(GithubRepoCell.self)
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {

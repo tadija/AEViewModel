@@ -6,16 +6,12 @@
 
 import UIKit
 
-// MARK: - CollectionViewModelCell
-
 public typealias CollectionViewModelCell = UICollectionViewCell & ViewModelCell
 
-// MARK: - CollectionCell
-
-public enum CollectionCell {
+public enum CollectionCellType {
     case basic
-    case customClass(type: CollectionViewModelCell.Type)
-    case customNib(nib: UINib?)
+    case customClass(CollectionViewModelCell.Type)
+    case customNib(CollectionViewModelCell.Type)
 }
 
 // MARK: - Cells

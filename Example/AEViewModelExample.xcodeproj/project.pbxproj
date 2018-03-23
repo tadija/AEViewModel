@@ -11,7 +11,7 @@
 		8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */; };
 		8B2EAE4A1EF0889F001FE287 /* AEViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; };
 		8B2EAE4B1EF0889F001FE287 /* AEViewModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8B7281AE1EE2E607007245E7 /* ExampleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleTable.swift */; };
+		8B7281AE1EE2E607007245E7 /* ExampleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleDataSource.swift */; };
 		8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */; };
 		8B7281C51EE340E5007245E7 /* FormTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C41EE340E5007245E7 /* FormTable.swift */; };
 		8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C71EE346A9007245E7 /* FormTVMC.swift */; };
@@ -76,7 +76,7 @@
 		8B2EAE2C1EEF31A1001FE287 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8B2EAE2D1EEF31A1001FE287 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AEViewModel.xcodeproj; path = ../AEViewModel.xcodeproj; sourceTree = "<group>"; };
-		8B7281AD1EE2E607007245E7 /* ExampleTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTable.swift; sourceTree = "<group>"; };
+		8B7281AD1EE2E607007245E7 /* ExampleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleDataSource.swift; sourceTree = "<group>"; };
 		8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTVMC.swift; sourceTree = "<group>"; };
 		8B7281C41EE340E5007245E7 /* FormTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTable.swift; sourceTree = "<group>"; };
 		8B7281C71EE346A9007245E7 /* FormTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTVMC.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		8BE0C5071EF480F000E6F95F /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				8B7281AD1EE2E607007245E7 /* ExampleTable.swift */,
+				8B7281AD1EE2E607007245E7 /* ExampleDataSource.swift */,
 				8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */,
 			);
 			name = Example;
@@ -368,7 +368,7 @@
 				8BE0C5111EF492BA00E6F95F /* GithubModels.swift in Sources */,
 				8BE0C4EF1EF32F4200E6F95F /* SettingsTable.swift in Sources */,
 				8BF92E3D1EF5CC3300278777 /* ImageLoader.swift in Sources */,
-				8B7281AE1EE2E607007245E7 /* ExampleTable.swift in Sources */,
+				8B7281AE1EE2E607007245E7 /* ExampleDataSource.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
 				8BE0C50F1EF482D300E6F95F /* Github.swift in Sources */,
 				8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */,

@@ -17,11 +17,12 @@ final class FormTVMC: TableViewModelController {
         super.viewDidLoad()
 
         title = "Registration"
+        dataSource = FormTable()
     }
 
     // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
         guard let formCell = FormCell(rawValue: identifier) else {
             return .basic
         }

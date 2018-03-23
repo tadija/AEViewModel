@@ -6,51 +6,33 @@
 
 import AEViewModel
 
-struct ExampleTable: DataSource {
+struct ExampleDataSource: DataSource {
     
-    // MARK: Types
-    
-    enum Cell: String {
-        case form
-        case settings
-        case github
+    struct Id {
+        static let form = "form"
+        static let settings = "settings"
+        static let github = "github"
     }
     
-    // MARK: Table
-    
-    var sections: [Section] = [
-        General()
-    ]
-    
-    // MARK: Sections
+    var sections: [Section] = [General()]
     
     struct General: Section {
-        
-        // MARK: Section
-        
-        var items: [Item] = [
-            Form(),
-            Settings(),
-            Github()
-        ]
-        
-        // MARK: Items
+        var items: [Item] = [Form(), Settings(), Github()]
         
         struct Form: Item {
-            let identifier = Cell.form.rawValue
+            let identifier = Id.form
             var viewModel: ViewModel = BasicViewModel(title: "Form", detail: "Static Table View Model")
         }
         
         struct Settings: Item {
-            let identifier = Cell.settings.rawValue
+            let identifier = Id.settings
             var viewModel: ViewModel = BasicViewModel(title: "Settings", detail: "JSON Table View Model")
         }
         
         struct Github: Item {
-            let identifier = Cell.github.rawValue
+            let identifier = Id.github
             var viewModel: ViewModel = BasicViewModel(title: "Github", detail: "Trending Swift Repos")
         }
-        
     }
     
 }

@@ -7,7 +7,7 @@
 import UIKit
 
 public protocol TableViewModelControllerDelegate: class {
-    func cell(forIdentifier identifier: String) -> TableCell
+    func cellType(forIdentifier identifier: String) -> TableCellType
     func update(_ cell: TableViewModelCell, at indexPath: IndexPath)
     func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
 }
@@ -29,8 +29,12 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     }
     
     // MARK: Init
+
+    public convenience init() {
+        self.init(dataSource: BasicDataSource(), style: .grouped)
+    }
     
-    public convenience init(dataSource: DataSource = BasicDataSource(), style: UITableViewStyle = .grouped) {
+    public convenience init(dataSource: DataSource, style: UITableViewStyle = .grouped) {
         self.init(style: style)
         self.dataSource = dataSource
     }
@@ -51,7 +55,7 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
 
     // MARK: TableViewModelControllerDelegate
 
-    open func cell(forIdentifier identifier: String) -> TableCell {
+    open func cellType(forIdentifier identifier: String) -> TableCellType {
         return .basic
     }
 
@@ -89,7 +93,7 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
         guard let delegate = delegate else {
             fatalError("Delegate must be provided by now.")
         }
-        switch delegate.cell(forIdentifier: identifier) {
+        switch delegate.cellType(forIdentifier: identifier) {
         case .basic:
             tableView.register(TableCellBasic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
@@ -108,8 +112,8 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
             tableView.register(TableCellTextInput.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
-        case .customNib(let cellNib):
-            tableView.register(cellNib, forCellReuseIdentifier: identifier)
+        case .customNib(let cellClass):
+            tableView.register(cellClass.nib, forCellReuseIdentifier: identifier)
         }
     }
     

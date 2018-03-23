@@ -40,19 +40,21 @@ final class MainSettingsTVMC: SettingsTVMC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dataSource = SettingsTable()
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
     
     // MARK: TableViewModelControllerDelegate
 
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
         guard let settingsCell = SettingsCell(rawValue: identifier) else {
             return .basic
         }
         switch settingsCell {
         case .profile:
-            return .customClass(type: SettingsProfileCell.self)
+            return .customClass(SettingsProfileCell.self)
         case .airplane, .vpn:
             return .toggleBasic
         case .wifi, .bluetooth, .hotspot, .carrier:
@@ -91,7 +93,7 @@ class WiFiSettingsTVMC: SettingsTVMC {
     
     // MARK: TableViewModelControllerDelegate
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
         guard let wifiCell = WifiCell(rawValue: identifier) else {
             return .basic
         }

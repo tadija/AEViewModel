@@ -7,7 +7,7 @@
 import UIKit
 
 public protocol CollectionViewModelControllerDelegate: class {
-    func cell(forIdentifier identifier: String) -> CollectionCell
+    func cellType(forIdentifier identifier: String) -> CollectionCellType
     func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath)
     func action(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: CollectionViewModelController)
 }
@@ -29,9 +29,12 @@ open class CollectionViewModelController: UICollectionViewController, Collection
     }
     
     // MARK: Init
+
+    public convenience init() {
+        self.init(dataSource: BasicDataSource())
+    }
     
-    public convenience init(dataSource: DataSource = BasicDataSource(),
-                            layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
+    public convenience init(dataSource: DataSource, layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         self.init(collectionViewLayout: layout)
         self.dataSource = dataSource
     }
@@ -52,7 +55,7 @@ open class CollectionViewModelController: UICollectionViewController, Collection
 
     // MARK: CollectionViewModelControllerDelegate
 
-    open func cell(forIdentifier identifier: String) -> CollectionCell {
+    open func cellType(forIdentifier identifier: String) -> CollectionCellType {
         return .basic
     }
 
@@ -90,13 +93,13 @@ open class CollectionViewModelController: UICollectionViewController, Collection
         guard let delegate = delegate else {
             return
         }
-        switch delegate.cell(forIdentifier: identifier) {
+        switch delegate.cellType(forIdentifier: identifier) {
         case .basic:
             collectionView?.register(CollectionCellBasic.self, forCellWithReuseIdentifier: identifier)
         case .customClass(let cellClass):
             collectionView?.register(cellClass, forCellWithReuseIdentifier: identifier)
-        case .customNib(let cellNib):
-            collectionView?.register(cellNib, forCellWithReuseIdentifier: identifier)
+        case .customNib(let cellClass):
+            collectionView?.register(cellClass.nib, forCellWithReuseIdentifier: identifier)
         }
     }
     

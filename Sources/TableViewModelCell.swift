@@ -6,13 +6,9 @@
 
 import UIKit
 
-// MARK: - TableViewModelCell
-
 public typealias TableViewModelCell = UITableViewCell & ViewModelCell
 
-// MARK: - TableCell
-
-public enum TableCell {
+public enum TableCellType {
     case basic
     case subtitle
     case leftDetail
@@ -21,8 +17,8 @@ public enum TableCell {
     case toggleBasic
     case toggleSubtitle
     case textInput
-    case customClass(type: TableViewModelCell.Type)
-    case customNib(nib: UINib?)
+    case customClass(TableViewModelCell.Type)
+    case customNib(TableViewModelCell.Type)
 }
 
 // MARK: - System Cells
