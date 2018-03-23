@@ -26,7 +26,7 @@ final class MainSettingsTVMC: SettingsTVMC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        dataSource = SettingsDataSource()
+        dataSource = SettingsDataSource.create()
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44

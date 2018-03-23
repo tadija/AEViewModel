@@ -57,6 +57,10 @@ public struct BasicDataSource: DataSource {
         self.sections = sections
         self.title = title
     }
+    
+    public init(with data: Data, decoder: JSONDecoder = JSONDecoder()) throws {
+        self = try decoder.decode(BasicDataSource.self, from: data)
+    }
 }
 
 // MARK: - Codable
