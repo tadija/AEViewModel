@@ -10,7 +10,7 @@ public protocol Model {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
-    var child: DataSource? { get }
+    var child: ViewModel? { get }
 }
 
 public protocol Item {
@@ -24,7 +24,7 @@ public protocol Section {
     var items: [Item] { get set }
 }
 
-public protocol DataSource {
+public protocol ViewModel {
     var title: String? { get }
     var sections: [Section] { get set }
 }
@@ -35,7 +35,7 @@ public extension Model {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }
-    var child: DataSource? { return nil }
+    var child: ViewModel? { return nil }
 }
 
 public extension Section {
@@ -43,7 +43,7 @@ public extension Section {
     var footer: String? { return nil }
 }
 
-public extension DataSource {
+public extension ViewModel {
     var title: String? { return nil }
 
     func item(at indexPath: IndexPath) -> Item {

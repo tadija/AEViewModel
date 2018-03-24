@@ -12,9 +12,9 @@ public struct BasicModel: Model {
     public let title: String?
     public let detail: String?
     public let image: String?
-    public let child: DataSource?
+    public let child: ViewModel?
 
-    public init(title: String? = nil, detail: String? = nil, image: String? = nil, child: DataSource? = nil) {
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil, child: ViewModel? = nil) {
         self.title = title
         self.detail = detail
         self.image = image
@@ -49,7 +49,7 @@ public struct BasicSection: Section {
     }
 }
 
-public struct BasicDataSource: DataSource {
+public struct BasicViewModel: ViewModel {
     public let title: String?
     public var sections: [Section]
 
@@ -59,7 +59,7 @@ public struct BasicDataSource: DataSource {
     }
     
     public init(with data: Data, decoder: JSONDecoder = JSONDecoder()) throws {
-        self = try decoder.decode(BasicDataSource.self, from: data)
+        self = try decoder.decode(BasicViewModel.self, from: data)
     }
 }
 
@@ -74,7 +74,7 @@ extension BasicModel: Codable {
         title = try container.decodeIfPresent(String.self, forKey: .title)
         detail = try container.decodeIfPresent(String.self, forKey: .detail)
         image = try container.decodeIfPresent(String.self, forKey: .image)
-        child = try container.decodeIfPresent(BasicDataSource.self, forKey: .child)
+        child = try container.decodeIfPresent(BasicViewModel.self, forKey: .child)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -119,7 +119,7 @@ extension BasicSection: Codable {
     }
 }
 
-extension BasicDataSource: Codable {
+extension BasicViewModel: Codable {
     public enum CodingKeys: String, CodingKey {
         case title, sections
     }
