@@ -38,7 +38,7 @@ open class CollectionViewModelController: UICollectionViewController {
         reload()
     }
 
-    // MARK: CollectionViewModelControllerDelegate
+    // MARK: API
 
     open func cellType(forIdentifier identifier: String) -> CollectionCellType {
         return .basic
@@ -48,11 +48,11 @@ open class CollectionViewModelController: UICollectionViewController {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.callback = { [weak self] sender in
-            self?.action(for: cell, at: indexPath)
+            self?.action(for: cell, at: indexPath, sender: sender)
         }
     }
 
-    open func action(for cell: CollectionViewModelCell, at indexPath: IndexPath) {}
+    open func action(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: Any) {}
     
     // MARK: Helpers
     
@@ -125,7 +125,7 @@ extension CollectionViewModelController {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewModelCell else {
             return
         }
-        action(for: cell, at: indexPath)
+        action(for: cell, at: indexPath, sender: self)
     }
     
 }

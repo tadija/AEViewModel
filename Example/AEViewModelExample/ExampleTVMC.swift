@@ -30,7 +30,7 @@ final class ExampleTVMC: TableViewModelController {
         cell.accessoryType = .disclosureIndicator
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
         switch dataSource.identifier(at: indexPath) {
         case Id.form:
             show(FormTVMC(), sender: self)

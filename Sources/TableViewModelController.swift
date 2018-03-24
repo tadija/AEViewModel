@@ -38,7 +38,7 @@ open class TableViewModelController: UITableViewController {
         reload()
     }
 
-    // MARK: TableViewModelControllerDelegate
+    // MARK: API
 
     open func cellType(forIdentifier identifier: String) -> TableCellType {
         return .basic
@@ -48,11 +48,11 @@ open class TableViewModelController: UITableViewController {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.callback = { [weak self] sender in
-            self?.action(for: cell, at: indexPath)
+            self?.action(for: cell, at: indexPath, sender: sender)
         }
     }
 
-    open func action(for cell: TableViewModelCell, at indexPath: IndexPath) {}
+    open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {}
 
     // MARK: Helpers
     
@@ -147,7 +147,7 @@ extension TableViewModelController {
             return
         }
         if cell.selectionStyle != .none {
-            action(for: cell, at: indexPath)
+            action(for: cell, at: indexPath, sender: self)
         }
     }
     

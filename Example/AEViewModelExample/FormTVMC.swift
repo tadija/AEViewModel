@@ -47,7 +47,7 @@ final class FormTVMC: TableViewModelController {
         }
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
         let id = dataSource.identifier(at: indexPath)
         switch id {
         case Id.username:
