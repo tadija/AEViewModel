@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-struct SettingsViewModel {
+struct SettingsViewModel: ViewModel {
     struct Id {
         static let profile = "profile"
         static let airplane = "airplane"
@@ -23,12 +23,17 @@ struct SettingsViewModel {
             static let joinNetworksSwitch = "joinNetworksSwitch"
         }
     }
-    
-    static func create() -> BasicViewModel {
+
+    var title: String?
+    var sections: [Section]
+
+    init() {
         do {
             let url = Bundle.main.url(forResource: "settings", withExtension: "json")!
             let data = try Data(contentsOf: url)
-            return try BasicViewModel(with: data)
+            let viewModel = try BasicViewModel(with: data)
+            title = viewModel.title
+            sections = viewModel.sections
         } catch {
             debugPrint(error)
             fatalError("Failed to load settings.json.")

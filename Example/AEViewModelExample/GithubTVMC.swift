@@ -9,6 +9,12 @@ import SafariServices
 
 final class GithubTVMC: TableViewModelController {
 
+    // MARK: Properties
+
+    var github: GithubViewModel? {
+        return viewModel as? GithubViewModel
+    }
+
     // MARK: Init
     
     public convenience init() {
@@ -19,6 +25,8 @@ final class GithubTVMC: TableViewModelController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        viewModel = GithubViewModel()
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
@@ -64,7 +72,7 @@ final class GithubTVMC: TableViewModelController {
     
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        GithubViewModel.load { [weak self] (viewModel) in
+        github?.reload() { [weak self] (viewModel) in
             sender.endRefreshing()
             self?.viewModel = viewModel
         }

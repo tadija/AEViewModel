@@ -14,24 +14,10 @@ struct ExampleViewModel: ViewModel {
     }
 
     var title: String? = "Example"
-    var sections: [Section] = [General()]
-
-    struct General: Section {
-        var items: [Item] = [Form(), Settings(), Github()]
-        
-        struct Form: Item {
-            let identifier = Id.form
-            var model: Model = BasicModel(title: "Form", detail: "Static Table View Model")
-        }
-        
-        struct Settings: Item {
-            let identifier = Id.settings
-            var model: Model = BasicModel(title: "Settings", detail: "JSON Table View Model")
-        }
-        
-        struct Github: Item {
-            let identifier = Id.github
-            var model: Model = BasicModel(title: "Github", detail: "Trending Swift Repos")
-        }
-    }
+    var sections: [Section] = [BasicSection(items: [
+        BasicItem(identifier: Id.form, title: "Form", detail: "Static Table View Model"),
+        BasicItem(identifier: Id.settings, title: "Settings", detail: "JSON Table View Model"),
+        BasicItem(identifier: Id.github, title: "Github", detail: "Trending Swift Repos")
+        ])
+    ]
 }

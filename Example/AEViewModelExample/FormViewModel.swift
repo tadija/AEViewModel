@@ -15,16 +15,18 @@ struct FormViewModel: ViewModel {
     }
     
     var title: String? = "Registration"
-    var sections: [Section]
+    var sections: [Section] = [Input(), Actions()]
 
-    init() {
-        sections = [
-            BasicSection(header: "Input",
-                         items: [BasicItem(identifier: Id.username, title: "Username"),
-                                 BasicItem(identifier: Id.password, title: "Password")]),
-            BasicSection(header: "Actions",
-                         items: [BasicItem(identifier: Id.accept, title: "Accept Terms"),
-                                 BasicItem(identifier: Id.register, title: "Register")])
-        ]
+    struct Input: Section {
+        var header: String? = "Input"
+        var items: [Item] = [BasicItem(identifier: Id.username, title: "Username"),
+                             BasicItem(identifier: Id.password, title: "Password")]
     }
+
+    struct Actions: Section {
+        var header: String? = "Actions"
+        var items: [Item] = [BasicItem(identifier: Id.accept, title: "Accept Terms"),
+                             BasicItem(identifier: Id.register, title: "Register")]
+    }
+
 }

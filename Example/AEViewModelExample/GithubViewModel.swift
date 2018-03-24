@@ -6,25 +6,27 @@
 
 import AEViewModel
 
-struct GithubViewModel {
+final class GithubViewModel: ViewModel {
     struct Id {
         static let repo = "repo"
     }
-    
-    static func load(then handler: @escaping (BasicViewModel) -> Void) {
-        fetchTrendingSwiftRepos { (repos) in
+
+    var title: String? = "Github"
+    var sections: [Section] = [Section]()
+
+    func reload(then handler: @escaping (GithubViewModel) -> Void) {
+        fetchTrendingSwiftRepos { [weak self] (repos) in
             let items = repos?.map { BasicItem(identifier: Id.repo, model: $0) } ?? [BasicItem]()
-            let section = BasicSection(items: items)
-            let viewModel = BasicViewModel(title: "Github", sections: [section])
+            self?.sections = [BasicSection(items: items)]
             DispatchQueue.main.async {
-                handler(viewModel)
+                handler(self ?? GithubViewModel())
             }
         }
     }
     
     // MARK: Helpers
     
-    private static func fetchTrendingSwiftRepos(then handler: @escaping ([Repo]?) -> Void) {
+    private func fetchTrendingSwiftRepos(then handler: @escaping ([Repo]?) -> Void) {
         URLSession.shared.dataTask(with: trendingSwiftReposURL) { (data, _, error) in
             if let data = data {
                 let decoder = JSONDecoder()
@@ -38,7 +40,7 @@ struct GithubViewModel {
         }.resume()
     }
     
-    private static var trendingSwiftReposURL: URL {
+    private var trendingSwiftReposURL: URL {
         var components = URLComponents(string: "https://api.github.com/search/repositories")!
         components.queryItems = [
             URLQueryItem(name: "q", value: "pushed:>=\(lastWeekDate) language:swift"),
@@ -49,7 +51,7 @@ struct GithubViewModel {
         return url
     }
     
-    private static var lastWeekDate: String {
+    private var lastWeekDate: String {
         let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())!
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
