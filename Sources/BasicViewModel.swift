@@ -54,8 +54,13 @@ public struct BasicViewModel: ViewModel {
     public var sections: [Section]
 
     public init(title: String? = nil, sections: [Section] = [Section]()) {
-        self.sections = sections
         self.title = title
+        self.sections = sections
+    }
+
+    public init(title: String? = nil, items: [Item]) {
+        self.title = title
+        self.sections = [BasicSection(items: items)]
     }
     
     public init(with data: Data, decoder: JSONDecoder = JSONDecoder()) throws {
