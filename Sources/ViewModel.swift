@@ -6,7 +6,7 @@
 
 import Foundation
 
-public protocol ViewModel {
+public protocol Model {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
@@ -15,7 +15,7 @@ public protocol ViewModel {
 
 public protocol Item {
     var identifier: String { get }
-    var viewModel: ViewModel { get }
+    var model: Model { get }
 }
 
 public protocol Section {
@@ -31,7 +31,7 @@ public protocol DataSource {
 
 // MARK: - Helpers
 
-public extension ViewModel {
+public extension Model {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }
@@ -52,8 +52,8 @@ public extension DataSource {
     func identifier(at indexPath: IndexPath) -> String {
         return item(at: indexPath).identifier
     }
-    func viewModel(at indexPath: IndexPath) -> ViewModel {
-        return item(at: indexPath).viewModel
+    func model(at indexPath: IndexPath) -> Model {
+        return item(at: indexPath).model
     }
 
     var uniqueIdentifiers: Set<String> {

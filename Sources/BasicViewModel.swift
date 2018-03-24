@@ -8,7 +8,7 @@ import Foundation
 
 // MARK: - Model
 
-public struct BasicViewModel: ViewModel {
+public struct BasicModel: Model {
     public let title: String?
     public let detail: String?
     public let image: String?
@@ -24,16 +24,16 @@ public struct BasicViewModel: ViewModel {
 
 public struct BasicItem: Item {
     public let identifier: String
-    public var viewModel: ViewModel
+    public var model: Model
 
-    public init(identifier: String, viewModel: ViewModel = BasicViewModel()) {
+    public init(identifier: String, model: Model = BasicModel()) {
         self.identifier = identifier
-        self.viewModel = viewModel
+        self.model = model
     }
 
     public init(identifier: String, title: String? = nil, detail: String? = nil, image: String? = nil) {
         self.identifier = identifier
-        self.viewModel = BasicViewModel(title: title, detail: detail, image: image)
+        self.model = BasicModel(title: title, detail: detail, image: image)
     }
 }
 
@@ -65,7 +65,7 @@ public struct BasicDataSource: DataSource {
 
 // MARK: - Codable
 
-extension BasicViewModel: Codable {
+extension BasicModel: Codable {
     public enum CodingKeys: String, CodingKey {
         case title, detail, image, child
     }
@@ -87,17 +87,17 @@ extension BasicViewModel: Codable {
 
 extension BasicItem: Codable {
     public enum CodingKeys: String, CodingKey {
-        case identifier, viewModel
+        case identifier, model
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         identifier = try container.decode(String.self, forKey: .identifier)
-        viewModel = try container.decode(BasicViewModel.self, forKey: .viewModel)
+        model = try container.decode(BasicModel.self, forKey: .model)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(identifier, forKey: .identifier)
-        try container.encodeIfPresent(viewModel as? BasicViewModel, forKey: .viewModel)
+        try container.encodeIfPresent(model as? BasicModel, forKey: .model)
     }
 }
 
