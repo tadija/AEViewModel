@@ -49,7 +49,7 @@ final class MainSettingsTVMC: SettingsTVMC {
         }
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         switch item.identifier {
         case Id.profile, Id.airplane, Id.vpn:
@@ -88,7 +88,7 @@ final class WiFiSettingsTVMC: SettingsTVMC {
         }
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         switch item.identifier {
         case Id.wifiSwitch,

@@ -6,17 +6,9 @@
 
 import UIKit
 
-public protocol TableViewModelControllerDelegate: class {
-    func cellType(forIdentifier identifier: String) -> TableCellType
-    func update(_ cell: TableViewModelCell, at indexPath: IndexPath)
-    func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController)
-}
-
-open class TableViewModelController: UITableViewController, TableViewModelControllerDelegate {
+open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
-
-    public weak var delegate: TableViewModelControllerDelegate?
 
     open var isAutomaticReloadEnabled = true
 
@@ -41,13 +33,6 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     
     // MARK: Lifecycle
 
-    open override func loadView() {
-        super.loadView()
-        if delegate == nil {
-            delegate = self
-        }
-    }
-
     open override func viewDidLoad() {
         super.viewDidLoad()
         reload()
@@ -62,12 +47,12 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     open func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
-        cell.callback = { [unowned self] sender in
-            self.delegate?.action(for: cell, at: indexPath, sender: self)
+        cell.callback = { [weak self] sender in
+            self?.action(for: cell, at: indexPath)
         }
     }
 
-    open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: TableViewModelController) {}
+    open func action(for cell: TableViewModelCell, at indexPath: IndexPath) {}
 
     // MARK: Helpers
     
@@ -96,10 +81,7 @@ open class TableViewModelController: UITableViewController, TableViewModelContro
     }
     
     private func registerCell(with identifier: String) {
-        guard let delegate = delegate else {
-            fatalError("Delegate must be provided by now.")
-        }
-        switch delegate.cellType(forIdentifier: identifier) {
+        switch cellType(forIdentifier: identifier) {
         case .basic:
             tableView.register(TableCellBasic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
@@ -141,7 +123,7 @@ extension TableViewModelController {
         let id = dataSource.identifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
         if let cell = cell as? TableViewModelCell {
-            delegate?.update(cell, at: indexPath)
+            update(cell, at: indexPath)
         }
         return cell
     }
@@ -165,7 +147,7 @@ extension TableViewModelController {
             return
         }
         if cell.selectionStyle != .none {
-            delegate?.action(for: cell, at: indexPath, sender: self)
+            action(for: cell, at: indexPath)
         }
     }
     
