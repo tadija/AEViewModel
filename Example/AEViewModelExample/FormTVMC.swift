@@ -9,75 +9,72 @@ import AEViewModel
 
 final class FormTVMC: TableViewModelController {
     
-    typealias FormCell = FormTable.Cell
+    typealias Id = FormViewModel.Id
     
     // MARK: Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Registration"
+        viewModel = FormViewModel()
     }
-    
+
     // MARK: Override
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        guard let formCell = FormCell(rawValue: identifier) else {
-            return .basic
-        }
-        
-        switch formCell {
-        case .username, .password:
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        switch identifier {
+        case Id.username, Id.password:
             return .textInput
-        case .accept:
+        case Id.accept:
             return .toggleBasic
-        case .register:
+        case Id.register:
             return .button
+        default:
+            fatalError("Identifier not supported.")
         }
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
+    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
         
-        guard
-            let item = item(at: indexPath),
-            let formCell = FormCell(rawValue: item.identifier)
-        else {
-            return
-        }
-        
-        switch formCell {
-        case .username:
-            cell.action = { _ in
-                let nextIndexPath = self.nextIndexPath(from: indexPath)
-                self.becomeFirstResponder(at: nextIndexPath)
-            }
-        case .password:
+        let id = viewModel.identifier(at: indexPath)
+        switch id {
+        case Id.password:
             (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
-            cell.action = { _ in
-                let previousIndexPath = self.previousIndexPath(from: indexPath)
-                self.becomeFirstResponder(at: previousIndexPath)
-            }
-        case .accept:
-            cell.action = { sender in
-                let enabled = (sender as? UISwitch)?.isOn ?? false
-                let nextIndexPath = self.nextIndexPath(from: indexPath)
-                self.updateButton(at: nextIndexPath, enabled: enabled)
-            }
-        case .register:
+        case Id.register:
             (cell as? TableCellButton)?.button.isEnabled = false
-            cell.action = { _ in
-                self.presentAlert()
-            }
+        default:
+            break
         }
     }
-    
-    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (self.section(at: section) as? FormSection)?.header
+
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+        let id = viewModel.identifier(at: indexPath)
+        switch id {
+        case Id.username:
+            let nextIndexPath = indexPath.next(in: tableView)
+            becomeFirstResponder(at: nextIndexPath)
+        case Id.password:
+            let previousIndexPath = indexPath.previous(in: tableView)
+            becomeFirstResponder(at: previousIndexPath)
+        case Id.accept:
+            let toggle = (cell as? TableCellToggle)?.toggle
+            didToggleAcceptCell(at: indexPath, sender: toggle)
+        case Id.register:
+            presentAlert()
+        default:
+            break
+        }
     }
     
     // MARK: Helpers
-    
+
+    @objc
+    private func didToggleAcceptCell(at indexPath: IndexPath, sender: UISwitch?) {
+        let enabled = sender?.isOn ?? false
+        let nextIndexPath = indexPath.next(in: tableView)
+        updateButton(at: nextIndexPath, enabled: enabled)
+    }
+
     private func becomeFirstResponder(at indexPath: IndexPath?) {
         if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCellTextInput {
             cell.textField.becomeFirstResponder()

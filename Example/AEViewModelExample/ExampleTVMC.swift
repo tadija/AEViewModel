@@ -9,46 +9,37 @@ import AEViewModel
 
 final class ExampleTVMC: TableViewModelController {
     
-    typealias ExampleCell = ExampleTable.Cell
+    typealias Id = ExampleViewModel.Id
     
     // MARK: Lifecycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        title = "Example"
-        model = ExampleTable()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel = ExampleViewModel()
     }
     
     // MARK: Override
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
         return .subtitle
     }
     
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
-        
-        guard
-            let item = item(at: indexPath),
-            let exampleCell = ExampleCell(rawValue: item.identifier)
-        else {
-            return
-        }
-        
-        switch exampleCell {
-        case .form:
-            cell.action = { _ in
-                self.pushTable(from: item, in: FormTVMC())
-            }
-        case .settings:
-            cell.action = { _ in
-                self.pushTable(from: item, in: SettingsTVMC())
-            }
-        case .github:
-            cell.action = { _ in
-                self.pushTable(from: item, in: GithubTVMC())
-            }
+    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
+
+        cell.accessoryType = .disclosureIndicator
+    }
+
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+        switch viewModel.identifier(at: indexPath) {
+        case Id.form:
+            show(FormTVMC(), sender: self)
+        case Id.settings:
+            show(MainSettingsTVMC(), sender: self)
+        case Id.github:
+            show(GithubTVMC(), sender: self)
+        default:
+            break
         }
     }
     

@@ -8,27 +8,13 @@ import AEViewModel
 import SafariServices
 
 final class GithubTVMC: TableViewModelController {
-    
-    typealias CellType = BasicTable.GithubCellType
-    
+
     // MARK: Properties
-    
-    private let dataSource = GithubDataSource()
-    
-    private var repos = [Repo]() {
-        didSet {
-            let items = repos.map { BasicItem(identifier: CellType.repo.rawValue, data: $0) }
-            let section = BasicSection(items: items)
-            let table = BasicTable(sections: [section])
-            model = table
-        }
+
+    var github: GithubViewModel? {
+        return viewModel as? GithubViewModel
     }
-    
-    func repo(at indexPath: IndexPath) -> Repo? {
-        let repo = item(at: indexPath)?.data as? Repo
-        return repo
-    }
-    
+
     // MARK: Init
     
     public convenience init() {
@@ -39,12 +25,18 @@ final class GithubTVMC: TableViewModelController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureSelf()
+
+        viewModel = GithubViewModel()
+
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150
+
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
     }
     
     private var initialAppear = true
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -56,59 +48,33 @@ final class GithubTVMC: TableViewModelController {
     
     // MARK: Override
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        return .customNib(nib: GithubRepoCell.nib)
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        return .customNib(GithubRepoCell.self)
     }
-    
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
-        
-        cell.action = { _ in
-            if let repo = self.repo(at: indexPath), let url = URL(string: repo.url) {
-                self.pushBrowser(with: url, title: repo.name)
-            }
+
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+        if let repo = viewModel.model(at: indexPath) as? Repo, let url = URL(string: repo.url) {
+            let browser = SFSafariViewController(url: url)
+            browser.title = title
+            present(browser, animated: true, completion: nil)
         }
     }
     
     // MARK: Helpers
-    
-    private func pushBrowser(with url: URL, title: String? = nil) {
-        let browser = SFSafariViewController(url: url)
-        browser.title = title
-        present(browser, animated: true, completion: nil)
-    }
-    
-    private func configureSelf() {
-        title = "Github"
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 150
-        
-        configureRefreshControl()
-    }
-    
-    private func configureRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-    }
-    
-    @objc
-    private func refresh(_ sender: UIRefreshControl) {
-        dataSource.reload { [weak self] (repos) in
-            DispatchQueue.main.async {
-                sender.endRefreshing()
-            }
-            if let repos = repos {
-                self?.repos = repos
-            }
-        }
-    }
-    
+
     private func performManualRefresh() {
         if let refreshControl = refreshControl {
             tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
             refreshControl.beginRefreshing()
             refresh(refreshControl)
+        }
+    }
+    
+    @objc
+    private func refresh(_ sender: UIRefreshControl) {
+        github?.reload() { [weak self] (viewModel) in
+            sender.endRefreshing()
+            self?.viewModel = viewModel
         }
     }
     

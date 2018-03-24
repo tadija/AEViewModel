@@ -9,131 +9,79 @@ import UIKit
 open class TableViewModelController: UITableViewController {
     
     // MARK: Properties
-    
-    open var model: Table? {
+
+    open var isAutomaticReloadEnabled = true
+
+    open var viewModel: ViewModel = BasicViewModel() {
         didSet {
-            reload()
+            if isAutomaticReloadEnabled {
+                reload()
+            }
         }
     }
     
-    open var automaticReloadEnabled = true
-    
     // MARK: Init
-    
-    public convenience init(style: UITableViewStyle, model: Table) {
-        self.init(style: style)
-        self.model = model
+
+    public convenience init() {
+        self.init(viewModel: BasicViewModel(), style: .grouped)
     }
     
-    public convenience init() {
-        self.init(style: .grouped)
+    public convenience init(viewModel: ViewModel, style: UITableViewStyle = .grouped) {
+        self.init(style: style)
+        self.viewModel = viewModel
     }
     
     // MARK: Lifecycle
-    
+
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
-        registerCells()
+        reload()
     }
-    
-    // MARK: Abstract
-    
-    open func cell(forIdentifier identifier: String) -> TableCell {
+
+    // MARK: API
+
+    open func cellType(forIdentifier identifier: String) -> TableCellType {
         return .basic
     }
-    
-    open func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        if let item = item(at: indexPath) {
-            cell.update(with: item)
+
+    open func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+        let item = viewModel.item(at: indexPath)
+        cell.update(with: item)
+        cell.callback = { [weak self] sender in
+            self?.action(for: cell, at: indexPath, sender: sender)
         }
     }
-    
-    // MARK: API
-    
-    public func section(at index: Int) -> Section? {
-        let section = model?.sections[index]
-        return section
-    }
-    
-    public func item(at indexPath: IndexPath) -> Item? {
-        let item = model?.sections[indexPath.section].items[indexPath.item]
-        return item
-    }
-    
-    public func item(from cell: TableViewModelCell) -> Item? {
-        guard
-            let tableViewCell = cell as? UITableViewCell,
-            let indexPath = tableView.indexPath(for: tableViewCell),
-            let item = item(at: indexPath)
-        else { return nil }
-        return item
-    }
-    
-    public func pushTable(from item: Item, in tvmc: TableViewModelController) {
-        if let model = item.data?.submodel as? Table {
-            tvmc.model = model
-            navigationController?.pushViewController(tvmc, animated: true)
-        }
-    }
-    
-    public func nextIndexPath(from indexPath: IndexPath) -> IndexPath? {
-        var newIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-        if newIndexPath.row >= tableView(tableView, numberOfRowsInSection: indexPath.section) {
-            let newSection = indexPath.section + 1
-            newIndexPath = IndexPath(row: 0, section: newSection)
-            if newSection >= numberOfSections(in: tableView) {
-                return nil
-            }
-        }
-        return newIndexPath
-    }
-    
-    public func previousIndexPath(from indexPath: IndexPath) -> IndexPath? {
-        var newIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
-        if newIndexPath.row < 0 {
-            let newSection = indexPath.section - 1
-            if newSection < 0 {
-                return nil
-            }
-            let maxRow = tableView(tableView, numberOfRowsInSection: newSection) - 1
-            newIndexPath = IndexPath(row: maxRow, section: newSection)
-        }
-        return newIndexPath
-    }
-    
+
+    open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {}
+
     // MARK: Helpers
     
     private func reload() {
         if Thread.isMainThread {
-            registerCellsAndReloadDataIfNeeded()
+            performReload()
         } else {
             DispatchQueue.main.async { [weak self] in
-                self?.registerCellsAndReloadDataIfNeeded()
+                self?.performReload()
             }
         }
     }
-    
-    private func registerCellsAndReloadDataIfNeeded() {
-        registerCells()
-        if automaticReloadEnabled {
-            reloadData()
+
+    private func performReload() {
+        if let title = viewModel.title {
+            self.title = title
         }
+        registerCells()
+        tableView.reloadData()
     }
     
     private func registerCells() {
-        var uniqueIdentifiers: Set<String> = Set<String>()
-        model?.sections.forEach { section in
-            let sectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
-            uniqueIdentifiers.formUnion(sectionIdentifiers)
-        }
-        uniqueIdentifiers.forEach { identifier in
-            registerCell(with: identifier)
+        viewModel.uniqueIdentifiers.forEach { id in
+            registerCell(with: id)
         }
     }
     
     private func registerCell(with identifier: String) {
-        switch cell(forIdentifier: identifier) {
+        switch cellType(forIdentifier: identifier) {
         case .basic:
             tableView.register(TableCellBasic.self, forCellReuseIdentifier: identifier)
         case .subtitle:
@@ -152,14 +100,8 @@ open class TableViewModelController: UITableViewController {
             tableView.register(TableCellTextInput.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
-        case .customNib(let cellNib):
-            tableView.register(cellNib, forCellReuseIdentifier: identifier)
-        }
-    }
-    
-    private func reloadData() {
-        if model != nil {
-            tableView.reloadData()
+        case .customNib(let cellClass):
+            tableView.register(cellClass.nib, forCellReuseIdentifier: identifier)
         }
     }
     
@@ -170,22 +112,28 @@ open class TableViewModelController: UITableViewController {
 extension TableViewModelController {
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return model?.sections.count ?? 0
+        return viewModel.sections.count
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.sections[section].items.count ?? 0
+        return viewModel.sections[section].items.count
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = item(at: indexPath) else {
-            return UITableViewCell()
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
+        let id = viewModel.identifier(at: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
         if let cell = cell as? TableViewModelCell {
-            configureCell(cell, at: indexPath)
+            update(cell, at: indexPath)
         }
         return cell
+    }
+
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.sections[section].header
+    }
+
+    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return viewModel.sections[section].footer
     }
     
 }
@@ -195,13 +143,11 @@ extension TableViewModelController {
 extension TableViewModelController {
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard
-            let cell = tableView.cellForRow(at: indexPath),
-            let tableViewModelCell = cell as? TableViewModelCell
-        else { return }
-        
+        guard let cell = tableView.cellForRow(at: indexPath) as? TableViewModelCell else {
+            return
+        }
         if cell.selectionStyle != .none {
-            tableViewModelCell.action(cell)
+            action(for: cell, at: indexPath, sender: self)
         }
     }
     

@@ -6,91 +6,62 @@
 
 import Foundation
 
-// MARK: - Protocols
-
-public protocol ViewModel {}
-
-public protocol DataSource: ViewModel {
+public protocol ViewModel {
+    var title: String? { get }
     var sections: [Section] { get set }
 }
 
-public protocol Section: ViewModel {
+public protocol Section {
+    var header: String? { get }
+    var footer: String? { get }
     var items: [Item] { get set }
 }
 
-public protocol Item: ViewModel {
+public protocol Item {
     var identifier: String { get }
-    var data: ItemData? { get set }
+    var model: Model { get }
 }
 
-public protocol ItemData: ViewModel {
+public protocol Model {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
-    var submodel: ViewModel? { get }
+    var child: ViewModel? { get }
 }
 
-public extension ItemData {
+// MARK: - Helpers
+
+public extension ViewModel {
+    var title: String? { return nil }
+
+    func item(at indexPath: IndexPath) -> Item {
+        return sections[indexPath.section].items[indexPath.item]
+    }
+    func identifier(at indexPath: IndexPath) -> String {
+        return item(at: indexPath).identifier
+    }
+    func model(at indexPath: IndexPath) -> Model {
+        return item(at: indexPath).model
+    }
+
+    var uniqueIdentifiers: Set<String> {
+        var ids: Set<String> = Set<String>()
+        sections.forEach { section in
+            let allSectionIdentifiers: [String] = section.items.flatMap({ $0.identifier })
+            ids.formUnion(allSectionIdentifiers)
+        }
+        return ids
+    }
+}
+
+public extension Section {
+    var header: String? { return nil }
+    var footer: String? { return nil }
+}
+
+public extension Model {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }
-    var submodel: ViewModel? { return nil }
+    var child: ViewModel? { return nil }
 }
-
-// MARK: - Basic Structs
-
-public struct BasicDataSource: DataSource {
-    public var sections: [Section]
-    
-    public init(sections: [Section] = [Section]()) {
-        self.sections = sections
-    }
-}
-
-public struct BasicSection: Section {
-    public var items: [Item]
-    
-    public init(items: [Item] = [Item]()) {
-        self.items = items
-    }
-}
-
-public struct BasicItem: Item {
-    public let identifier: String
-    public var data: ItemData?
-    
-    public init(identifier: String, data: ItemData? = nil) {
-        self.identifier = identifier
-        self.data = data
-    }
-    
-    public init(identifier: String,
-                title: String? = nil, detail: String? = nil, image: String? = nil, submodel: ViewModel? = nil) {
-        self.identifier = identifier
-        self.data = BasicItemData(title: title, detail: detail, image: image, submodel: submodel)
-    }
-}
-
-public struct BasicItemData: ItemData {
-    public let title: String?
-    public let detail: String?
-    public let image: String?
-    public var submodel: ViewModel?
-    
-    public init(title: String? = nil, detail: String? = nil, image: String? = nil, submodel: ViewModel? = nil) {
-        self.title = title
-        self.detail = detail
-        self.image = image
-        self.submodel = submodel
-    }
-}
-
-// MARK: - Table
-
-public typealias Table = DataSource
-public typealias BasicTable = BasicDataSource
-
-// MARK: - Collection
-
-public typealias Collection = DataSource
-public typealias BasicCollection = BasicDataSource

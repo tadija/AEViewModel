@@ -6,31 +6,9 @@
 
 import UIKit
 
-// MARK: - TableViewModelCell
+public typealias TableViewModelCell = UITableViewCell & ViewModelCell
 
-public protocol TableViewModelCell: class {
-    static var nib: UINib? { get }
-    
-    var action: (_ sender: Any) -> Void { get set }
-    
-    func customize()
-    func update(with item: Item)
-    func reset()
-}
-
-public extension TableViewModelCell {
-    static var nib: UINib? {
-        let className = String(describing: type(of: self))
-        guard let nibName = className.components(separatedBy: ".").first else {
-            return nil
-        }
-        return UINib(nibName: nibName, bundle: nil)
-    }
-}
-
-// MARK: - TableCell
-
-public enum TableCell {
+public enum TableCellType {
     case basic
     case subtitle
     case leftDetail
@@ -39,59 +17,49 @@ public enum TableCell {
     case toggleBasic
     case toggleSubtitle
     case textInput
-    case customClass(type: TableViewModelCell.Type)
-    case customNib(nib: UINib?)
+    case customClass(TableViewModelCell.Type)
+    case customNib(TableViewModelCell.Type)
 }
 
 // MARK: - System Cells
     
-open class TableCellBasic: UITableViewCell, TableViewModelCell {
-    public var useAutomaticDisclosureIndicator = true
-    
+open class TableCellBasic: UITableViewCell, ViewModelCell {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         reset()
-        customize()
+        setup()
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
         reset()
-        customize()
+        setup()
     }
     open override func prepareForReuse() {
         super.prepareForReuse()
         reset()
     }
     
-    public var action: (Any) -> Void = { _ in }
+    public var callback: (Any) -> Void = { _ in }
 
     open func reset() {
         textLabel?.text = nil
         detailTextLabel?.text = nil
         imageView?.image = nil
     }
-    open func customize() {}
+    open func setup() {}
     open func update(with item: Item) {
-        if let data = item.data {
-            textLabel?.text = data.title
-            detailTextLabel?.text = data.detail
-            if let imageName = data.image, let image = UIImage(named: imageName) {
-                imageView?.image = image
-            }
-        }
-        configureAutomaticDisclosureIndicator(with: item)
-    }
-    
-    open func configureAutomaticDisclosureIndicator(with item: Item) {
-        if useAutomaticDisclosureIndicator, let table = item.data?.submodel as? Table, table.sections.count >= 0 {
-            accessoryType = .disclosureIndicator
+        textLabel?.text = item.model.title
+        detailTextLabel?.text = item.model.detail
+        if let imageName = item.model.image, let image = UIImage(named: imageName) {
+            imageView?.image = image
         }
     }
-    @objc public func callAction(sender: Any) {
-        action(sender)
+
+    @objc public func performCallback(sender: Any) {
+        callback(sender)
     }
 }
 
@@ -135,14 +103,14 @@ public extension TableCellToggle where Self: TableCellBasic {
     }
     private func configureToggle() {
         accessoryView = toggle
-        toggle.addTarget(self, action: #selector(callAction), for: .valueChanged)
+        toggle.addTarget(self, action: #selector(performCallback(sender:)), for: .valueChanged)
     }
 }
     
 open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
     public let toggle = UISwitch()
     
-    open override func customize() {
+    open override func setup() {
         configureCell()
     }
 }
@@ -150,7 +118,7 @@ open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
 open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
     public let toggle = UISwitch()
     
-    open override func customize() {
+    open override func setup() {
         configureCell()
     }
 }
@@ -158,7 +126,7 @@ open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
 open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
     public let textField = UITextField()
     
-    open override func customize() {
+    open override func setup() {
         selectionStyle = .none
         configureTextField()
     }
@@ -175,11 +143,11 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
         textField.delegate = self
     }
     open override func update(with item: Item) {
-        textField.placeholder = item.data?.title
+        textField.placeholder = item.model.title
     }
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        callAction(sender: textField)
+        performCallback(sender: textField)
         return false
     }
 }
@@ -187,7 +155,7 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
 open class TableCellButton: TableCellBasic {
     public let button = UIButton(type: .system)
     
-    open override func customize() {
+    open override func setup() {
         selectionStyle = .none
         configureButton()
     }
@@ -199,10 +167,13 @@ open class TableCellButton: TableCellBasic {
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        let height = button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
+        height.priority = .defaultHigh
+        height.isActive = true
         
-        button.addTarget(self, action: #selector(callAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(performCallback(sender:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
-        button.setTitle(item.data?.title, for: .normal)
+        button.setTitle(item.model.title, for: .normal)
     }
 }

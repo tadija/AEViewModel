@@ -7,77 +7,63 @@
 import UIKit
 import AEViewModel
 
-class MappableTVMC: TableViewModelController {    
-    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (self.section(at: section) as? MappableSection)?.header
-    }
-    
-    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return (self.section(at: section) as? MappableSection)?.footer
+class SettingsTVMC: TableViewModelController {
+    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+        super.update(cell, at: indexPath)
+        
+        if let child = viewModel.model(at: indexPath).child, child.sections.count > 0 {
+            cell.accessoryType = .disclosureIndicator
+        }
     }
 }
 
-final class SettingsTVMC: MappableTVMC {
+final class MainSettingsTVMC: SettingsTVMC {
     
-    typealias SettingsCell = SettingsTable.Cell
+    typealias Id = SettingsViewModel.Id
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = (model as? MappableTable)?.title
-        
+
+        viewModel = SettingsViewModel()
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
     
     // MARK: Override
 
-    override func cell(forIdentifier identifier: String) -> TableCell {        
-        guard let settingsCell = SettingsCell(rawValue: identifier) else {
-            return .basic
-        }
-        
-        switch settingsCell {
-        case .profile:
-            return .customClass(type: SettingsProfileCell.self)
-        case .airplane, .vpn:
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        switch identifier {
+        case Id.profile:
+            return .customClass(SettingsProfileCell.self)
+        case Id.airplane, Id.vpn:
             return .toggleBasic
-        case .wifi, .bluetooth, .hotspot, .carrier:
+        case Id.wifi, Id.bluetooth, Id.hotspot, Id.carrier:
             return .rightDetail
-        case .cellular:
+        case Id.cellular:
             return .basic
+        default:
+            fatalError("Identifier not supported.")
         }
     }
-    
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
-        
-        guard
-            let item = item(at: indexPath),
-            let settingsCell = SettingsCell(rawValue: item.identifier)
-        else {
-            return
-        }
-        
-        switch settingsCell {
-        case .profile, .airplane, .vpn:
-            cell.action = { _ in
-                print("handleEvent with id: \(item.identifier)")
-            }
-        case .wifi:
-            cell.action = { _ in
-                let wifiSubmenu = WiFiSettingsTVMC(style: .grouped)
-                wifiSubmenu.title = (item.data?.submodel as? MappableTable)?.title
-                self.pushTable(from: item, in: wifiSubmenu)
-            }
-        case .bluetooth, .cellular, .hotspot, .carrier:
-            cell.action = { _ in
-                let defaultSubmenu = MappableTVMC(style: .grouped)
-                defaultSubmenu.title = (item.data?.submodel as? MappableTable)?.title
-                self.pushTable(from: item, in: defaultSubmenu)
-            }
+
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+        let item = viewModel.item(at: indexPath)
+        switch item.identifier {
+        case Id.profile, Id.airplane, Id.vpn:
+            print("handleEvent with id: \(item.identifier)")
+        case Id.wifi:
+            let vm = item.model.child ?? BasicViewModel()
+            let vc = WiFiSettingsTVMC(viewModel: vm)
+            show(vc, sender: self)
+        case Id.bluetooth, Id.cellular, Id.hotspot, Id.carrier:
+            let vm = item.model.child ?? BasicViewModel()
+            let vc = SettingsTVMC(viewModel: vm)
+            show(vc, sender: self)
+        default:
+            break
         }
     }
     
@@ -85,46 +71,33 @@ final class SettingsTVMC: MappableTVMC {
 
 // MARK: - WiFiSettingsTVC
 
-class WiFiSettingsTVMC: MappableTVMC {
+final class WiFiSettingsTVMC: SettingsTVMC {
     
-    typealias WifiCell = SettingsTable.Wifi.Cell
+    typealias Id = SettingsViewModel.Id.Wifi
     
     // MARK: Override
     
-    override func cell(forIdentifier identifier: String) -> TableCell {
-        guard let wifiCell = WifiCell(rawValue: identifier) else {
-            return .basic
-        }
-        
-        switch wifiCell {
-        case .wifiSwitch, .joinNetworksSwitch:
+    override func cellType(forIdentifier identifier: String) -> TableCellType {
+        switch identifier {
+        case Id.wifiSwitch, Id.joinNetworksSwitch:
             return .toggleBasic
-        case .wifiNetwork:
+        case Id.wifiNetwork:
             return .basic
+        default:
+            fatalError("Identifier not supported.")
         }
     }
-    
-    override func configureCell(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        super.configureCell(cell, at: indexPath)
-        
-        guard
-            let item = item(at: indexPath),
-            let wifiCell = WifiCell(rawValue: item.identifier)
-        else {
-            return
-        }
-        
-        switch wifiCell {
-        case .wifiSwitch,
-             .joinNetworksSwitch:
-            cell.action = { _ in
-                print("handleEvent with id: \(item.identifier)")
-            }
-        case .wifiNetwork:
-            cell.action = { _ in
-                let tvc = TableViewModelController(style: .grouped)
-                self.pushTable(from: item, in: tvc)
-            }
+
+    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+        let item = viewModel.item(at: indexPath)
+        switch item.identifier {
+        case Id.wifiSwitch,
+             Id.joinNetworksSwitch:
+            print("handleEvent with id: \(item.identifier)")
+        case Id.wifiNetwork:
+            print("join network with title: \(item.model.title ?? "n/a")")
+        default:
+            break
         }
     }
     
