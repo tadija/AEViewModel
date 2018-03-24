@@ -30,12 +30,12 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         reset()
-        customize()
+        setup()
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
         reset()
-        customize()
+        setup()
     }
     open override func prepareForReuse() {
         super.prepareForReuse()
@@ -49,7 +49,7 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
         detailTextLabel?.text = nil
         imageView?.image = nil
     }
-    open func customize() {}
+    open func setup() {}
     open func update(with item: Item) {
         textLabel?.text = item.model.title
         detailTextLabel?.text = item.model.detail
@@ -110,7 +110,7 @@ public extension TableCellToggle where Self: TableCellBasic {
 open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
     public let toggle = UISwitch()
     
-    open override func customize() {
+    open override func setup() {
         configureCell()
     }
 }
@@ -118,7 +118,7 @@ open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
 open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
     public let toggle = UISwitch()
     
-    open override func customize() {
+    open override func setup() {
         configureCell()
     }
 }
@@ -126,7 +126,7 @@ open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
 open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
     public let textField = UITextField()
     
-    open override func customize() {
+    open override func setup() {
         selectionStyle = .none
         configureTextField()
     }
@@ -155,7 +155,7 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
 open class TableCellButton: TableCellBasic {
     public let button = UIButton(type: .system)
     
-    open override func customize() {
+    open override func setup() {
         selectionStyle = .none
         configureButton()
     }

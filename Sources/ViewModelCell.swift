@@ -8,7 +8,7 @@ import UIKit
 
 public protocol ViewModelCell: class {
     var callback: (_ sender: Any) -> Void { get set }
-    func customize()
+    func setup()
     func update(with item: Item)
     func reset()
 }

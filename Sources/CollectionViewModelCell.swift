@@ -23,12 +23,12 @@ open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         reset()
-        customize()
+        setup()
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
         reset()
-        customize()
+        setup()
     }
     open override func prepareForReuse() {
         super.prepareForReuse()
@@ -37,7 +37,7 @@ open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
     
     public var callback: (Any) -> Void = { _ in }
     
-    open func customize() {}
+    open func setup() {}
     open func update(with item: Item) {}
     open func reset() {}
     
