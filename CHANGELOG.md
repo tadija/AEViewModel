@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.6.0
+
+- Major improvements and refactoring
+- README.md is up to date
+
 ## Version 0.5.1
 
 - Minor fixes and improvements
