@@ -6,18 +6,18 @@
 
 import AEViewModel
 
-struct GithubDataSource {
+struct GithubViewModel {
     struct Id {
         static let repo = "repo"
     }
     
-    static func load(then handler: @escaping (BasicDataSource) -> Void) {
+    static func load(then handler: @escaping (BasicViewModel) -> Void) {
         fetchTrendingSwiftRepos { (repos) in
             let items = repos?.map { BasicItem(identifier: Id.repo, model: $0) } ?? [BasicItem]()
             let section = BasicSection(items: items)
-            let dataSource = BasicDataSource(title: "Github", sections: [section])
+            let viewModel = BasicViewModel(title: "Github", sections: [section])
             DispatchQueue.main.async {
-                handler(dataSource)
+                handler(viewModel)
             }
         }
     }

@@ -45,7 +45,7 @@ final class GithubTVMC: TableViewModelController {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        if let repo = dataSource.model(at: indexPath) as? Repo, let url = URL(string: repo.url) {
+        if let repo = viewModel.model(at: indexPath) as? Repo, let url = URL(string: repo.url) {
             let browser = SFSafariViewController(url: url)
             browser.title = title
             present(browser, animated: true, completion: nil)
@@ -64,9 +64,9 @@ final class GithubTVMC: TableViewModelController {
     
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        GithubDataSource.load { [weak self] (dataSource) in
+        GithubViewModel.load { [weak self] (viewModel) in
             sender.endRefreshing()
-            self?.dataSource = dataSource
+            self?.viewModel = viewModel
         }
     }
     

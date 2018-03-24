@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-struct ExampleDataSource: DataSource {
+struct ExampleViewModel: ViewModel {
     struct Id {
         static let form = "form"
         static let settings = "settings"

@@ -9,13 +9,13 @@ import AEViewModel
 
 final class FormTVMC: TableViewModelController {
     
-    typealias Id = FormDataSource.Id
+    typealias Id = FormViewModel.Id
     
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource = FormDataSource()
+        viewModel = FormViewModel()
     }
 
     // MARK: TableViewModelControllerDelegate
@@ -36,7 +36,7 @@ final class FormTVMC: TableViewModelController {
     override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
-        let id = dataSource.identifier(at: indexPath)
+        let id = viewModel.identifier(at: indexPath)
         switch id {
         case Id.password:
             (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
@@ -48,7 +48,7 @@ final class FormTVMC: TableViewModelController {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        let id = dataSource.identifier(at: indexPath)
+        let id = viewModel.identifier(at: indexPath)
         switch id {
         case Id.username:
             let nextIndexPath = indexPath.next(in: tableView)
