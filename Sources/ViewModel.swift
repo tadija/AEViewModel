@@ -6,16 +6,9 @@
 
 import Foundation
 
-public protocol Model {
+public protocol ViewModel {
     var title: String? { get }
-    var detail: String? { get }
-    var image: String? { get }
-    var child: ViewModel? { get }
-}
-
-public protocol Item {
-    var identifier: String { get }
-    var model: Model { get }
+    var sections: [Section] { get set }
 }
 
 public protocol Section {
@@ -24,24 +17,19 @@ public protocol Section {
     var items: [Item] { get set }
 }
 
-public protocol ViewModel {
+public protocol Item {
+    var identifier: String { get }
+    var model: Model { get }
+}
+
+public protocol Model {
     var title: String? { get }
-    var sections: [Section] { get set }
+    var detail: String? { get }
+    var image: String? { get }
+    var child: ViewModel? { get }
 }
 
 // MARK: - Helpers
-
-public extension Model {
-    var title: String? { return nil }
-    var detail: String? { return nil }
-    var image: String? { return nil }
-    var child: ViewModel? { return nil }
-}
-
-public extension Section {
-    var header: String? { return nil }
-    var footer: String? { return nil }
-}
 
 public extension ViewModel {
     var title: String? { return nil }
@@ -64,4 +52,16 @@ public extension ViewModel {
         }
         return ids
     }
+}
+
+public extension Section {
+    var header: String? { return nil }
+    var footer: String? { return nil }
+}
+
+public extension Model {
+    var title: String? { return nil }
+    var detail: String? { return nil }
+    var image: String? { return nil }
+    var child: ViewModel? { return nil }
 }
