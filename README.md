@@ -154,7 +154,7 @@ This is almost a duplicate of `TableViewModelController` but it's using `Collect
 
 ### Example
 
-You should check out the entire [demo project](Example), here's just a teaser:
+You should just look at [the example project](Example), here's a quick preview:
 
 ```swift
 import AEViewModel
