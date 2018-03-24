@@ -18,7 +18,7 @@ final class ExampleTVMC: TableViewModelController {
         viewModel = ExampleViewModel()
     }
     
-    // MARK: TableViewModelControllerDelegate
+    // MARK: Override
     
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         return .subtitle

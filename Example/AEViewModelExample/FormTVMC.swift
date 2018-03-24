@@ -18,7 +18,7 @@ final class FormTVMC: TableViewModelController {
         viewModel = FormViewModel()
     }
 
-    // MARK: TableViewModelControllerDelegate
+    // MARK: Override
     
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         switch identifier {

@@ -32,7 +32,7 @@ final class MainSettingsTVMC: SettingsTVMC {
         tableView.estimatedRowHeight = 44
     }
     
-    // MARK: TableViewModelControllerDelegate
+    // MARK: Override
 
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         switch identifier {
@@ -75,7 +75,7 @@ final class WiFiSettingsTVMC: SettingsTVMC {
     
     typealias Id = SettingsViewModel.Id.Wifi
     
-    // MARK: TableViewModelControllerDelegate
+    // MARK: Override
     
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         switch identifier {
