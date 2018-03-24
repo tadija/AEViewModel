@@ -45,7 +45,7 @@ final class GithubTVMC: TableViewModelController {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        if let repo = dataSource.viewModel(at: indexPath) as? Repo, let url = URL(string: repo.url) {
+        if let repo = dataSource.model(at: indexPath) as? Repo, let url = URL(string: repo.url) {
             let browser = SFSafariViewController(url: url)
             browser.title = title
             present(browser, animated: true, completion: nil)

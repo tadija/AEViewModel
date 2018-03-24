@@ -13,7 +13,7 @@ struct GithubDataSource {
     
     static func load(then handler: @escaping (BasicDataSource) -> Void) {
         fetchTrendingSwiftRepos { (repos) in
-            let items = repos?.map { BasicItem(identifier: Id.repo, viewModel: $0) } ?? [BasicItem]()
+            let items = repos?.map { BasicItem(identifier: Id.repo, model: $0) } ?? [BasicItem]()
             let section = BasicSection(items: items)
             let dataSource = BasicDataSource(title: "Github", sections: [section])
             DispatchQueue.main.async {
@@ -88,7 +88,7 @@ struct Owner: Codable {
     }
 }
 
-extension Repo: ViewModel {
+extension Repo: Model {
     var ownerImageURL: URL? {
         let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
         return URL(string: avatarURL)

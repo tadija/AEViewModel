@@ -21,17 +21,17 @@ struct ExampleDataSource: DataSource {
         
         struct Form: Item {
             let identifier = Id.form
-            var viewModel: ViewModel = BasicViewModel(title: "Form", detail: "Static Table View Model")
+            var model: Model = BasicModel(title: "Form", detail: "Static Table View Model")
         }
         
         struct Settings: Item {
             let identifier = Id.settings
-            var viewModel: ViewModel = BasicViewModel(title: "Settings", detail: "JSON Table View Model")
+            var model: Model = BasicModel(title: "Settings", detail: "JSON Table View Model")
         }
         
         struct Github: Item {
             let identifier = Id.github
-            var viewModel: ViewModel = BasicViewModel(title: "Github", detail: "Trending Swift Repos")
+            var model: Model = BasicModel(title: "Github", detail: "Trending Swift Repos")
         }
     }
 }
