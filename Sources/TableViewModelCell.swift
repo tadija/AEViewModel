@@ -30,12 +30,12 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         reset()
-        customize()
+        setup()
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
         reset()
-        customize()
+        setup()
     }
     open override func prepareForReuse() {
         super.prepareForReuse()
@@ -49,11 +49,11 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
         detailTextLabel?.text = nil
         imageView?.image = nil
     }
-    open func customize() {}
+    open func setup() {}
     open func update(with item: Item) {
-        textLabel?.text = item.viewModel.title
-        detailTextLabel?.text = item.viewModel.detail
-        if let imageName = item.viewModel.image, let image = UIImage(named: imageName) {
+        textLabel?.text = item.model.title
+        detailTextLabel?.text = item.model.detail
+        if let imageName = item.model.image, let image = UIImage(named: imageName) {
             imageView?.image = image
         }
     }
@@ -110,7 +110,7 @@ public extension TableCellToggle where Self: TableCellBasic {
 open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
     public let toggle = UISwitch()
     
-    open override func customize() {
+    open override func setup() {
         configureCell()
     }
 }
@@ -118,7 +118,7 @@ open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
 open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
     public let toggle = UISwitch()
     
-    open override func customize() {
+    open override func setup() {
         configureCell()
     }
 }
@@ -126,7 +126,7 @@ open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
 open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
     public let textField = UITextField()
     
-    open override func customize() {
+    open override func setup() {
         selectionStyle = .none
         configureTextField()
     }
@@ -143,7 +143,7 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
         textField.delegate = self
     }
     open override func update(with item: Item) {
-        textField.placeholder = item.viewModel.title
+        textField.placeholder = item.model.title
     }
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -155,7 +155,7 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
 open class TableCellButton: TableCellBasic {
     public let button = UIButton(type: .system)
     
-    open override func customize() {
+    open override func setup() {
         selectionStyle = .none
         configureButton()
     }
@@ -174,6 +174,6 @@ open class TableCellButton: TableCellBasic {
         button.addTarget(self, action: #selector(performCallback(sender:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
-        button.setTitle(item.viewModel.title, for: .normal)
+        button.setTitle(item.model.title, for: .normal)
     }
 }

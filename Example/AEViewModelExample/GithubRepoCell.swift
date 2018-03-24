@@ -20,14 +20,14 @@ final class GithubRepoCell: TableCellBasic {
     
     // MARK: ViewModelCell
     
-    override func customize() {
+    override func setup() {
         accessoryType = .disclosureIndicator
         ownerImage.layer.cornerRadius = 32
         ownerImage.layer.masksToBounds = true
     }
     
     override func update(with item: Item) {
-        if let repo = item.viewModel as? Repo {
+        if let repo = item.model as? Repo {
             ownerImage.loadImage(from: repo.ownerImageURL)
             ownerUsername.text = "@\(repo.owner.username)"
             repoUpdateDate.text = repo.updatedFormatted

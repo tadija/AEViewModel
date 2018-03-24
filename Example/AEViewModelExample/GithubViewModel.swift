@@ -6,25 +6,27 @@
 
 import AEViewModel
 
-struct GithubDataSource {
+final class GithubViewModel: ViewModel {
     struct Id {
         static let repo = "repo"
     }
-    
-    static func load(then handler: @escaping (BasicDataSource) -> Void) {
-        fetchTrendingSwiftRepos { (repos) in
-            let items = repos?.map { BasicItem(identifier: Id.repo, viewModel: $0) } ?? [BasicItem]()
-            let section = BasicSection(items: items)
-            let dataSource = BasicDataSource(title: "Github", sections: [section])
+
+    var title: String? = "Github"
+    var sections: [Section] = [Section]()
+
+    func reload(then handler: @escaping (GithubViewModel) -> Void) {
+        fetchTrendingSwiftRepos { [weak self] (repos) in
+            let items = repos?.map { BasicItem(identifier: Id.repo, model: $0) } ?? [BasicItem]()
+            self?.sections = [BasicSection(items: items)]
             DispatchQueue.main.async {
-                handler(dataSource)
+                handler(self ?? GithubViewModel())
             }
         }
     }
     
     // MARK: Helpers
     
-    private static func fetchTrendingSwiftRepos(then handler: @escaping ([Repo]?) -> Void) {
+    private func fetchTrendingSwiftRepos(then handler: @escaping ([Repo]?) -> Void) {
         URLSession.shared.dataTask(with: trendingSwiftReposURL) { (data, _, error) in
             if let data = data {
                 let decoder = JSONDecoder()
@@ -38,7 +40,7 @@ struct GithubDataSource {
         }.resume()
     }
     
-    private static var trendingSwiftReposURL: URL {
+    private var trendingSwiftReposURL: URL {
         var components = URLComponents(string: "https://api.github.com/search/repositories")!
         components.queryItems = [
             URLQueryItem(name: "q", value: "pushed:>=\(lastWeekDate) language:swift"),
@@ -49,7 +51,7 @@ struct GithubDataSource {
         return url
     }
     
-    private static var lastWeekDate: String {
+    private var lastWeekDate: String {
         let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())!
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
@@ -88,7 +90,7 @@ struct Owner: Codable {
     }
 }
 
-extension Repo: ViewModel {
+extension Repo: Model {
     var ownerImageURL: URL? {
         let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
         return URL(string: avatarURL)

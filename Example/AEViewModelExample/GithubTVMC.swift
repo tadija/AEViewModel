@@ -9,6 +9,12 @@ import SafariServices
 
 final class GithubTVMC: TableViewModelController {
 
+    // MARK: Properties
+
+    var github: GithubViewModel? {
+        return viewModel as? GithubViewModel
+    }
+
     // MARK: Init
     
     public convenience init() {
@@ -19,6 +25,8 @@ final class GithubTVMC: TableViewModelController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        viewModel = GithubViewModel()
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
@@ -45,7 +53,7 @@ final class GithubTVMC: TableViewModelController {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        if let repo = dataSource.viewModel(at: indexPath) as? Repo, let url = URL(string: repo.url) {
+        if let repo = viewModel.model(at: indexPath) as? Repo, let url = URL(string: repo.url) {
             let browser = SFSafariViewController(url: url)
             browser.title = title
             present(browser, animated: true, completion: nil)
@@ -64,9 +72,9 @@ final class GithubTVMC: TableViewModelController {
     
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        GithubDataSource.load { [weak self] (dataSource) in
+        github?.reload() { [weak self] (viewModel) in
             sender.endRefreshing()
-            self?.dataSource = dataSource
+            self?.viewModel = viewModel
         }
     }
     

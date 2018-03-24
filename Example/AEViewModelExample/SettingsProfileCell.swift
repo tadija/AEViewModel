@@ -19,15 +19,15 @@ final class SettingsProfileCell: TableCellBasic {
     
     // MARK: ViewModelCell
     
-    override func customize() {
+    override func setup() {
         configureHierarchy()
         configureLayout()
         configureAppearance()
     }
     
     override func update(with item: Item) {
-        name.text = item.viewModel.title
-        subtitle.text = item.viewModel.detail
+        name.text = item.model.title
+        subtitle.text = item.model.detail
         profileImageView.loadImage(from: URL(string: "https://avatars1.githubusercontent.com/u/2762374"))
     }
     
