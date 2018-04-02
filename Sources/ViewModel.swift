@@ -8,13 +8,13 @@ import Foundation
 
 public protocol ViewModel {
     var title: String? { get }
-    var sections: [Section] { get set }
+    var sections: [Section] { get }
 }
 
 public protocol Section {
     var header: String? { get }
     var footer: String? { get }
-    var items: [Item] { get set }
+    var items: [Item] { get }
 }
 
 public protocol Item {
@@ -47,7 +47,7 @@ public extension ViewModel {
     var uniqueIdentifiers: Set<String> {
         var ids: Set<String> = Set<String>()
         sections.forEach { section in
-            let allSectionIdentifiers: [String] = section.items.compactMap({ $0.identifier })
+            let allSectionIdentifiers: [String] = section.items.map({ $0.identifier })
             ids.formUnion(allSectionIdentifiers)
         }
         return ids
