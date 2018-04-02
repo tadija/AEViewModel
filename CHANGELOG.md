@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.6.2
+
+- Hot fix with workaround for bug in Swift 4.1 [SR-7335]
+- Bumped `swift_version` in podspec file to 4.1
+
 ## Version 0.6.1
 
 - Migrated to Swift 4.1 with Xcode 9.3 (9E145)
