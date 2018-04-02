@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.6.1
+
+- Migrated to Swift 4.1 with Xcode 9.3 (9E145)
+
 ## Version 0.6.0
 
 - Major improvements and refactoring
