@@ -47,7 +47,7 @@ public extension ViewModel {
     var uniqueIdentifiers: Set<String> {
         var ids: Set<String> = Set<String>()
         sections.forEach { section in
-            let allSectionIdentifiers: [String] = section.items.compactMap({ $0.identifier })
+            let allSectionIdentifiers: [String] = section.items.map({ $0.identifier })
             ids.formUnion(allSectionIdentifiers)
         }
         return ids
