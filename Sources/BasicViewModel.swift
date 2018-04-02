@@ -82,7 +82,9 @@ extension BasicViewModel: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(title, forKey: .title)
-        try container.encode(sections, forKey: .sections)
+        if let sections = sections as? [BasicSection] {
+            try container.encode(sections, forKey: .sections)
+        }
     }
 }
 
@@ -100,7 +102,9 @@ extension BasicSection: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(header, forKey: .header)
         try container.encodeIfPresent(footer, forKey: .footer)
-        try container.encode(items, forKey: .items)
+        if let items = items as? [BasicItem] {
+            try container.encode(items, forKey: .items)
+        }
     }
 }
 
@@ -136,6 +140,8 @@ extension BasicModel: Codable {
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(detail, forKey: .detail)
         try container.encodeIfPresent(image, forKey: .image)
-        try container.encodeIfPresent(child, forKey: .child)
+        if let child = child as? BasicViewModel {
+            try container.encodeIfPresent(child, forKey: .child)
+        }
     }
 }
