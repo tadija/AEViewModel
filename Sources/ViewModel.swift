@@ -8,13 +8,13 @@ import Foundation
 
 public protocol ViewModel {
     var title: String? { get }
-    var sections: [Section] { get set }
+    var sections: [Section] { get }
 }
 
 public protocol Section {
     var header: String? { get }
     var footer: String? { get }
-    var items: [Item] { get set }
+    var items: [Item] { get }
 }
 
 public protocol Item {
