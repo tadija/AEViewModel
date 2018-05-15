@@ -6,7 +6,7 @@
 
 import UIKit
 
-open class TableViewModelController: UITableViewController {
+open class TableViewModelController: UITableViewController, ViewModelCellDelegate {
     
     // MARK: Properties
 
@@ -47,12 +47,18 @@ open class TableViewModelController: UITableViewController {
     open func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         let item = viewModel.item(at: indexPath)
         cell.update(with: item)
-        cell.callback = { [weak self] sender in
-            self?.action(for: cell, at: indexPath, sender: sender)
-        }
+        cell.delegate = self
     }
 
     open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {}
+
+    // MARK: ViewModelCellDelegate
+
+    public func action(for cell: ViewModelCell, sender: Any) {
+        if let cell = cell as? TableViewModelCell, let indexPath = tableView.indexPath(for: cell) {
+            action(for: cell, at: indexPath, sender: sender)
+        }
+    }
 
     // MARK: Helpers
     

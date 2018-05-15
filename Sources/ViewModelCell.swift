@@ -6,8 +6,13 @@
 
 import UIKit
 
+public protocol ViewModelCellDelegate: class {
+    func action(for cell: ViewModelCell, sender: Any)
+}
+
 public protocol ViewModelCell: class {
-    var callback: (_ sender: Any) -> Void { get set }
+    var delegate: ViewModelCellDelegate? { get set }
+    
     func setup()
     func update(with item: Item)
     func reset()

@@ -24,6 +24,8 @@ public enum TableCellType {
 // MARK: - System Cells
     
 open class TableCellBasic: UITableViewCell, ViewModelCell {
+    public weak var delegate: ViewModelCellDelegate?
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -41,8 +43,6 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
         super.prepareForReuse()
         reset()
     }
-    
-    public var callback: (Any) -> Void = { _ in }
 
     open func reset() {
         textLabel?.text = nil
@@ -59,7 +59,7 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
     }
 
     @objc public func performCallback(sender: Any) {
-        callback(sender)
+        delegate?.action(for: self, sender: sender)
     }
 }
 
