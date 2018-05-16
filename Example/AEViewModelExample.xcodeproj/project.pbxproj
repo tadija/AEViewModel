@@ -20,6 +20,8 @@
 		8B893A831E98606700B3101B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A821E98606700B3101B /* Assets.xcassets */; };
 		8B893A861E98606700B3101B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A841E98606700B3101B /* LaunchScreen.storyboard */; };
 		8B893A8E1E9860C300B3101B /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A8D1E9860C300B3101B /* settings.json */; };
+		8B93712C20ACD75D0087DC89 /* CellsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93712B20ACD75D0087DC89 /* CellsViewModel.swift */; };
+		8B93712F20ACD76D0087DC89 /* CellsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93712E20ACD76D0087DC89 /* CellsTVMC.swift */; };
 		8B93F639206559420018F6BD /* GithubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93F638206559420018F6BD /* GithubViewModel.swift */; };
 		8BB518001EAC19B700A181AE /* SettingsProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */; };
 		8BE0C4EF1EF32F4200E6F95F /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C4EE1EF32F4200E6F95F /* SettingsViewModel.swift */; };
@@ -82,6 +84,8 @@
 		8B893A851E98606700B3101B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B893A871E98606700B3101B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B893A8D1E9860C300B3101B /* settings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = settings.json; path = ../Resources/settings.json; sourceTree = "<group>"; };
+		8B93712B20ACD75D0087DC89 /* CellsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsViewModel.swift; sourceTree = "<group>"; };
+		8B93712E20ACD76D0087DC89 /* CellsTVMC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsTVMC.swift; sourceTree = "<group>"; };
 		8B93F638206559420018F6BD /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
 		8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsProfileCell.swift; sourceTree = "<group>"; };
 		8BE0C4EE1EF32F4200E6F95F /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 				8B893A7B1E98606700B3101B /* AppDelegate.swift */,
 				8B893A7F1E98606700B3101B /* Main.storyboard */,
 				8BE0C5071EF480F000E6F95F /* Example */,
+				8B93713020ACD7710087DC89 /* Cells */,
 				8BE0C5081EF480FB00E6F95F /* Form */,
 				8BE0C5091EF480FF00E6F95F /* Settings */,
 				8BE0C50D1EF482A500E6F95F /* Github */,
@@ -152,6 +157,15 @@
 				8B32764A1E9AF40F00FD9502 /* Resources */,
 			);
 			path = AEViewModelExample;
+			sourceTree = "<group>";
+		};
+		8B93713020ACD7710087DC89 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8B93712B20ACD75D0087DC89 /* CellsViewModel.swift */,
+				8B93712E20ACD76D0087DC89 /* CellsTVMC.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		8B9D885820644D110060C60A /* Helpers */ = {
@@ -316,7 +330,9 @@
 				8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */,
 				8B7281C51EE340E5007245E7 /* FormViewModel.swift in Sources */,
 				8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */,
+				8B93712C20ACD75D0087DC89 /* CellsViewModel.swift in Sources */,
 				8BE0C4EF1EF32F4200E6F95F /* SettingsViewModel.swift in Sources */,
+				8B93712F20ACD76D0087DC89 /* CellsTVMC.swift in Sources */,
 				8BF92E3D1EF5CC3300278777 /* ImageLoader.swift in Sources */,
 				8B7281AE1EE2E607007245E7 /* ExampleViewModel.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
