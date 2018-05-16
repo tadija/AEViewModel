@@ -11,6 +11,7 @@ struct FormViewModel: ViewModel {
         static let username = "username"
         static let password = "password"
         static let accept = "accept"
+        static let slider = "slider"
         static let register = "register"
     }
     
@@ -25,7 +26,8 @@ struct FormViewModel: ViewModel {
 
     struct Actions: Section {
         var header: String? = "Actions"
-        var items: [Item] = [BasicItem(identifier: Id.accept, title: "Accept Terms"),
+        var items: [Item] = [BasicItem(identifier: Id.slider),
+                             BasicItem(identifier: Id.accept, title: "Accept Terms"),
                              BasicItem(identifier: Id.register, title: "Register")]
     }
 

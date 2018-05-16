@@ -24,6 +24,8 @@ final class FormTVMC: TableViewModelController {
         switch identifier {
         case Id.username, Id.password:
             return .textInput
+        case Id.slider:
+            return .slider
         case Id.accept:
             return .toggleBasic
         case Id.register:
@@ -40,6 +42,8 @@ final class FormTVMC: TableViewModelController {
         switch id {
         case Id.password:
             (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
+        case Id.slider:
+            (cell as? TableCellSlider)?.slider.setValue(0.5, animated: false)
         case Id.register:
             (cell as? TableCellButton)?.button.isEnabled = false
         default:
@@ -56,6 +60,10 @@ final class FormTVMC: TableViewModelController {
         case Id.password:
             let previousIndexPath = indexPath.previous(in: tableView)
             becomeFirstResponder(at: previousIndexPath)
+        case Id.slider:
+            if let slider = sender as? UISlider {
+                print("Slider value: \(slider.value)")
+            }
         case Id.accept:
             let toggle = (cell as? TableCellToggle)?.toggle
             didToggleAcceptCell(at: indexPath, sender: toggle)
