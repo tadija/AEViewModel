@@ -6,7 +6,7 @@
 
 import UIKit
 
-open class CollectionViewModelController: UICollectionViewController {
+open class CollectionViewModelController: UICollectionViewController, ViewModelCellDelegate {
     
     // MARK: Properties
 
@@ -47,12 +47,18 @@ open class CollectionViewModelController: UICollectionViewController {
     open func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath) {
         let item = viewModel.item(at: indexPath)
         cell.update(with: item)
-        cell.callback = { [weak self] sender in
-            self?.action(for: cell, at: indexPath, sender: sender)
-        }
+        cell.delegate = self
     }
 
     open func action(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: Any) {}
+
+    // MARK: ViewModelCellDelegate
+
+    public func action(for cell: ViewModelCell, sender: Any) {
+        if let cell = cell as? CollectionViewModelCell, let indexPath = collectionView?.indexPath(for: cell) {
+            action(for: cell, at: indexPath, sender: sender)
+        }
+    }
     
     // MARK: Helpers
     

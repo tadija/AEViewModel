@@ -17,6 +17,8 @@ public enum CollectionCellType {
 // MARK: - Cells
     
 open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
+    public weak var delegate: ViewModelCellDelegate?
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -35,13 +37,11 @@ open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
         reset()
     }
     
-    public var callback: (Any) -> Void = { _ in }
-    
     open func setup() {}
     open func update(with item: Item) {}
     open func reset() {}
     
     @objc public func performCallback(sender: Any) {
-        callback(sender)
+        delegate?.action(for: self, sender: sender)
     }
 }
