@@ -17,6 +17,7 @@ public enum TableCellType {
     case toggleBasic
     case toggleSubtitle
     case textInput
+    case slider
     case customClass(TableViewModelCell.Type)
     case customNib(TableViewModelCell.Type)
 }
@@ -178,5 +179,27 @@ open class TableCellButton: TableCellBasic {
     }
     open override func update(with item: Item) {
         button.setTitle(item.model.title, for: .normal)
+    }
+}
+
+open class TableCellSlider: TableCellBasic {
+    public let slider = UISlider()
+
+    open override func setup() {
+        super.setup()
+        setupCellWithSlider()
+    }
+    private func setupCellWithSlider() {
+        selectionStyle = .none
+
+        contentView.addSubview(slider)
+        slider.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        slider.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        slider.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        slider.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
+
+        slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
 }

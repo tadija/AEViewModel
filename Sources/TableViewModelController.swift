@@ -104,6 +104,8 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
             tableView.register(TableCellToggleSubtitle.self, forCellReuseIdentifier: identifier)
         case .textInput:
             tableView.register(TableCellTextInput.self, forCellReuseIdentifier: identifier)
+        case .slider:
+            tableView.register(TableCellSlider.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellClass):
