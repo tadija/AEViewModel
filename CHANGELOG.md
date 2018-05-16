@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.6.3
+
+- Minor bug fixes and improvements
+
 ## Version 0.6.2
 
 - Hot fix with workaround for bug in Swift 4.1 [SR-7335]
