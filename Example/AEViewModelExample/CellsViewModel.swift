@@ -14,7 +14,7 @@ struct CellsViewModel: ViewModel {
         case rightDetail
         case textInput
         case slider
-        case toggleBasic
+        case toggle
         case toggleSubtitle
         case button
     }
@@ -35,7 +35,7 @@ struct CellsViewModel: ViewModel {
                 BasicItem(identifier: Id.slider.rawValue),
             ]),
             BasicSection(header: "Actions", items: [
-                BasicItem(identifier: Id.toggleBasic.rawValue, title: "Toggle"),
+                BasicItem(identifier: Id.toggle.rawValue, title: "Toggle"),
                 BasicItem(identifier: Id.toggleSubtitle.rawValue, title: "Togle", detail: "Subtitle"),
                 BasicItem(identifier: Id.button.rawValue, title: "Button"),
             ]),

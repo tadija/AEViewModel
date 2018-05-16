@@ -98,8 +98,8 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
             tableView.register(TableCellRightDetail.self, forCellReuseIdentifier: identifier)
         case .button:
             tableView.register(TableCellButton.self, forCellReuseIdentifier: identifier)
-        case .toggleBasic:
-            tableView.register(TableCellToggleBasic.self, forCellReuseIdentifier: identifier)
+        case .toggle:
+            tableView.register(TableCellToggle.self, forCellReuseIdentifier: identifier)
         case .toggleSubtitle:
             tableView.register(TableCellToggleSubtitle.self, forCellReuseIdentifier: identifier)
         case .textInput:

@@ -27,7 +27,7 @@ final class FormTVMC: TableViewModelController {
         case Id.slider:
             return .slider
         case Id.accept:
-            return .toggleBasic
+            return .toggle
         case Id.register:
             return .button
         default:

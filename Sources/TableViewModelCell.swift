@@ -13,11 +13,11 @@ public enum TableCellType {
     case subtitle
     case leftDetail
     case rightDetail
-    case button
-    case toggleBasic
-    case toggleSubtitle
     case textInput
     case slider
+    case toggle
+    case toggleSubtitle
+    case button
     case customClass(TableViewModelCell.Type)
     case customNib(TableViewModelCell.Type)
 }
@@ -62,6 +62,12 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
     @objc public func performCallback(_ sender: Any) {
         delegate?.action(for: self, sender: sender)
     }
+
+    public func enforceMinimumHeight(for view: UIView, height: CGFloat = 44) {
+        let height = view.heightAnchor.constraint(greaterThanOrEqualToConstant: height)
+        height.priority = .defaultHigh
+        height.isActive = true
+    }
 }
 
 open class TableCellSubtitle: TableCellBasic {
@@ -93,37 +99,38 @@ open class TableCellRightDetail: TableCellBasic {
 
 // MARK: - Custom Cells
 
-public protocol TableCellToggle {
+public protocol TableCellWithToggle {
     var toggle: UISwitch { get }
 }
 
-public extension TableCellToggle where Self: TableCellBasic {
+public extension TableCellWithToggle where Self: TableCellBasic {
     func setupCellWithToggle() {
         selectionStyle = .none
-        accessoryView = toggle
         toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
 }
     
-open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
+open class TableCellToggle: TableCellBasic, TableCellWithToggle {
     public let toggle = UISwitch()
     
     open override func setup() {
         super.setup()
         setupCellWithToggle()
+        accessoryView = toggle
     }
 }
 
-open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
+open class TableCellToggleSubtitle: TableCellSubtitle, TableCellWithToggle {
     public let toggle = UISwitch()
     
     open override func setup() {
         super.setup()
         setupCellWithToggle()
+        accessoryView = toggle
     }
 }
 
-open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
+open class TableCellTextInput: TableCellBasic {
     public let textField = UITextField()
     
     open override func setup() {
@@ -139,18 +146,14 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
         let margins = contentView.layoutMarginsGuide
         textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-        textField.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
-        textField.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
-        
-        textField.delegate = self
+        textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        enforceMinimumHeight(for: textField)
+
+        textField.addTarget(self, action: #selector(performCallback(_:)), for: .editingChanged)
     }
     open override func update(with item: Item) {
         textField.placeholder = item.model.title
-    }
-    open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        performCallback(textField)
-        return false
     }
 }
 
@@ -171,10 +174,8 @@ open class TableCellButton: TableCellBasic {
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        let height = button.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
-        height.priority = .defaultHigh
-        height.isActive = true
-        
+        enforceMinimumHeight(for: button)
+
         button.addTarget(self, action: #selector(performCallback(_:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
@@ -198,7 +199,8 @@ open class TableCellSlider: TableCellBasic {
         let margins = contentView.layoutMarginsGuide
         slider.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         slider.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-        slider.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
+        slider.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        slider.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
 
         slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
