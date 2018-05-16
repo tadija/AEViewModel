@@ -43,8 +43,7 @@ It may not be quick and easy (for everyone) to grasp at the first look, but if y
 ## Features
 - Create custom table / collection based interface faster with less boilerplate
 - Usable with static (menus, forms etc.) and dynamic (local, remote etc.) data
-- Provides often used cells (Toggle, TextInput, Button) out of the box (and more coming)
-- Proper usage enforces more clean and maintainable code (by leveraging [MVVM](https://en.wikipedia.org/wiki/Model–view–viewmodel) pattern)
+- Provides often used cells (TextInput, Slider, Toggle, Button etc.) out of the box
 
 ## Usage
 
@@ -66,7 +65,7 @@ In case of something more specific, create custom types that conform to these pr
 
 ### ViewModelCell
 
-There is a simple protocol in [ViewModelCell.swift](Sources/ViewModelCell.swift) which is used both for table and collection view cells. Note that `TableViewModelCell` and `CollectionViewModelCell` are just simple typealiases:
+There is a simple protocol in [ViewModelCell.swift](Sources/ViewModelCell.swift) which is used both for table and collection view cells. Note that `TableViewModelCell` and `CollectionViewModelCell` are just a simple typealiases:
 
 ```swift
 public typealias TableViewModelCell = UITableViewCell & ViewModelCell
@@ -82,11 +81,11 @@ func setup()
 /// Called in `tableView(_:cellForRowAt:)`, update interface with model here.
 func update(with item: Item)
 
-/// Called in `prepareForReuse`, reset interface here.
+/// Called in `setup` and `prepareForReuse`, reset interface here.
 func reset()
 ```
 
-Because each cell has a `callback: (_ sender: Any) -> Void` closure, that's what you want to call in the implementation of custom cell action.
+To use default callback from cell to view controller just call `performCallback(_:)` where it makes sense for your cell.
 
 ### TableViewModelCell
 
@@ -98,10 +97,11 @@ public enum TableCellType {
     case subtitle
     case leftDetail
     case rightDetail
-    case button
-    case toggleBasic
-    case toggleSubtitle
     case textInput
+    case slider
+    case toggle
+    case toggleSubtitle
+    case button
     case customClass(TableViewModelCell.Type)
     case customNib(TableViewModelCell.Type)
 }
@@ -133,18 +133,16 @@ open func cellType(forIdentifier identifier: String) -> TableCellType {
 }
 
 /// - Note: Update cell at the given index path. 
-/// If there's no need to do anything specific beside updating cell with item 
-/// and setting up cell's `callback` closure, just leave this job to the superclass.
+/// `TableViewModelController` does this by default, so if that's enough for your case just skip this,
+/// otherwise call `super.update(cell, at: indexPath)` and add custom logic after that.
 open func update(_ cell: c, at indexPath: IndexPath) {
     let item = viewModel.item(at: indexPath)
     cell.update(with: item)
-    cell.callback = { [weak self] sender in
-        self?.action(for: cell, at: indexPath, sender: sender)
-    }
+    cell.delegate = self
 }
 
 /// - Note: Handle action from cell for the given index path.
-/// This will be called in `tableView(_:didSelectRowAt:)` (or by cell's `callback` closure)
+/// This will be called in `tableView(_:didSelectRowAt:)` or when `performCallback(_:)` is called
 open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {}
 ```
 
@@ -154,33 +152,44 @@ This is almost a duplicate of `TableViewModelController` but it's using `Collect
 
 ### Example
 
-You should just look at [the example project](Example), here's a quick preview:
+You should take a look at [the example project](Example), but here's a quick preview:
 
 ```swift
 import AEViewModel
 
 struct ExampleViewModel: ViewModel {
     struct Id {
+        static let cells = "cells"
         static let form = "form"
         static let settings = "settings"
         static let github = "github"
     }
+
     var title: String? = "Example"
-    var sections: [Section] = [BasicSection(items: [
-        BasicItem(identifier: Id.form, title: "Form", detail: "Static Table View Model"),
-        BasicItem(identifier: Id.settings, title: "Settings", detail: "JSON Table View Model"),
-        BasicItem(identifier: Id.github, title: "Github", detail: "Trending Swift Repos")
+    var sections: [Section] = [
+        BasicSection(footer: "Default cells which are provided out of the box.", items: [
+            BasicItem(identifier: Id.cells, title: "Cells")
+        ]),
+        BasicSection(header: "Demo", items: [
+            BasicItem(identifier: Id.form, title: "Form", detail: "Static View Model"),
+            BasicItem(identifier: Id.settings, title: "Settings", detail: "JSON View Model"),
+            BasicItem(identifier: Id.github, title: "Github", detail: "Remote View Model")
         ])
     ]
 }
 
 final class ExampleTVMC: TableViewModelController {
+    
     typealias Id = ExampleViewModel.Id
+    
+    // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = ExampleViewModel()
     }
+    
+    // MARK: Override
     
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         return .subtitle
@@ -193,6 +202,8 @@ final class ExampleTVMC: TableViewModelController {
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
         switch viewModel.identifier(at: indexPath) {
+        case Id.cells:
+            show(CellsTVMC(), sender: self)
         case Id.form:
             show(FormTVMC(), sender: self)
         case Id.settings:
@@ -203,6 +214,7 @@ final class ExampleTVMC: TableViewModelController {
             break
         }
     }
+    
 }
 ```
 
