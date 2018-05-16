@@ -98,12 +98,14 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
             tableView.register(TableCellRightDetail.self, forCellReuseIdentifier: identifier)
         case .button:
             tableView.register(TableCellButton.self, forCellReuseIdentifier: identifier)
-        case .toggleBasic:
-            tableView.register(TableCellToggleBasic.self, forCellReuseIdentifier: identifier)
+        case .toggle:
+            tableView.register(TableCellToggle.self, forCellReuseIdentifier: identifier)
         case .toggleSubtitle:
             tableView.register(TableCellToggleSubtitle.self, forCellReuseIdentifier: identifier)
         case .textInput:
             tableView.register(TableCellTextInput.self, forCellReuseIdentifier: identifier)
+        case .slider:
+            tableView.register(TableCellSlider.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellClass):

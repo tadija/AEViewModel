@@ -39,7 +39,7 @@ final class MainSettingsTVMC: SettingsTVMC {
         case Id.profile:
             return .customClass(SettingsProfileCell.self)
         case Id.airplane, Id.vpn:
-            return .toggleBasic
+            return .toggle
         case Id.wifi, Id.bluetooth, Id.hotspot, Id.carrier:
             return .rightDetail
         case Id.cellular:
@@ -80,7 +80,7 @@ final class WiFiSettingsTVMC: SettingsTVMC {
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         switch identifier {
         case Id.wifiSwitch, Id.joinNetworksSwitch:
-            return .toggleBasic
+            return .toggle
         case Id.wifiNetwork:
             return .basic
         default:

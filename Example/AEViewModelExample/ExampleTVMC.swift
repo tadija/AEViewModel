@@ -26,12 +26,13 @@ final class ExampleTVMC: TableViewModelController {
     
     override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
-
         cell.accessoryType = .disclosureIndicator
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
         switch viewModel.identifier(at: indexPath) {
+        case Id.cells:
+            show(CellsTVMC(), sender: self)
         case Id.form:
             show(FormTVMC(), sender: self)
         case Id.settings:
