@@ -58,7 +58,7 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
         }
     }
 
-    @objc public func performCallback(sender: Any) {
+    @objc public func performCallback(_ sender: Any) {
         delegate?.action(for: self, sender: sender)
     }
 }
@@ -100,7 +100,7 @@ public extension TableCellToggle where Self: TableCellBasic {
     func setupCellWithToggle() {
         selectionStyle = .none
         accessoryView = toggle
-        toggle.addTarget(self, action: #selector(performCallback(sender:)), for: .valueChanged)
+        toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
 }
     
@@ -148,7 +148,7 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
     }
     open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        performCallback(sender: textField)
+        performCallback(textField)
         return false
     }
 }
@@ -174,7 +174,7 @@ open class TableCellButton: TableCellBasic {
         height.priority = .defaultHigh
         height.isActive = true
         
-        button.addTarget(self, action: #selector(performCallback(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(performCallback(_:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
         button.setTitle(item.model.title, for: .normal)
