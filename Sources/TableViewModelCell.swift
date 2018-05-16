@@ -26,17 +26,15 @@ public enum TableCellType {
 open class TableCellBasic: UITableViewCell, ViewModelCell {
     public weak var delegate: ViewModelCellDelegate?
 
+    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setup()
+    }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        reset()
-        setup()
-    }
     open override func awakeFromNib() {
         super.awakeFromNib()
-        reset()
         setup()
     }
     open override func prepareForReuse() {
@@ -44,12 +42,14 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
         reset()
     }
 
+    open func setup() {
+        reset()
+    }
     open func reset() {
         textLabel?.text = nil
         detailTextLabel?.text = nil
         imageView?.image = nil
     }
-    open func setup() {}
     open func update(with item: Item) {
         textLabel?.text = item.model.title
         detailTextLabel?.text = item.model.detail
@@ -64,29 +64,29 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
 }
 
 open class TableCellSubtitle: TableCellBasic {
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }
 
 open class TableCellLeftDetail: TableCellBasic {
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value2, reuseIdentifier: reuseIdentifier)
+    }
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }
 
 open class TableCellRightDetail: TableCellBasic {
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+    }
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }
 
@@ -97,11 +97,8 @@ public protocol TableCellToggle {
 }
 
 public extension TableCellToggle where Self: TableCellBasic {
-    func configureCell() {
+    func setupCellWithToggle() {
         selectionStyle = .none
-        configureToggle()
-    }
-    private func configureToggle() {
         accessoryView = toggle
         toggle.addTarget(self, action: #selector(performCallback(sender:)), for: .valueChanged)
     }
@@ -111,7 +108,8 @@ open class TableCellToggleBasic: TableCellBasic, TableCellToggle {
     public let toggle = UISwitch()
     
     open override func setup() {
-        configureCell()
+        super.setup()
+        setupCellWithToggle()
     }
 }
 
@@ -119,7 +117,8 @@ open class TableCellToggleSubtitle: TableCellSubtitle, TableCellToggle {
     public let toggle = UISwitch()
     
     open override func setup() {
-        configureCell()
+        super.setup()
+        setupCellWithToggle()
     }
 }
 
@@ -127,10 +126,12 @@ open class TableCellTextInput: TableCellBasic, UITextFieldDelegate {
     public let textField = UITextField()
     
     open override func setup() {
-        selectionStyle = .none
-        configureTextField()
+        super.setup()
+        setupCellWithTextField()
     }
-    private func configureTextField() {
+    private func setupCellWithTextField() {
+        selectionStyle = .none
+
         contentView.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -156,10 +157,12 @@ open class TableCellButton: TableCellBasic {
     public let button = UIButton(type: .system)
     
     open override func setup() {
-        selectionStyle = .none
-        configureButton()
+        super.setup()
+        setupCellWithButton()
     }
-    private func configureButton() {
+    private func setupCellWithButton() {
+        selectionStyle = .none
+        
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
         
