@@ -7,9 +7,13 @@
 import UIKit
 import AEViewModel
 
-final class FormTVMC: TableViewModelController {
+final class FormTVMC: TableViewModelController, UITextFieldDelegate {
     
     typealias Id = FormViewModel.Id
+
+    // MARK: Propertis
+
+    private var username = String()
     
     // MARK: Lifecycle
 
@@ -24,8 +28,6 @@ final class FormTVMC: TableViewModelController {
         switch identifier {
         case Id.username, Id.password:
             return .textInput
-        case Id.slider:
-            return .slider
         case Id.accept:
             return .toggle
         case Id.register:
@@ -40,10 +42,12 @@ final class FormTVMC: TableViewModelController {
         
         let id = viewModel.identifier(at: indexPath)
         switch id {
+        case Id.username:
+            (cell as? TableCellTextInput)?.textField.delegate = self
         case Id.password:
-            (cell as? TableCellTextInput)?.textField.isSecureTextEntry = true
-        case Id.slider:
-            (cell as? TableCellSlider)?.slider.setValue(0.5, animated: false)
+            let textInputCell = (cell as? TableCellTextInput)
+            textInputCell?.textField.delegate = self
+            textInputCell?.textField.isSecureTextEntry = true
         case Id.register:
             (cell as? TableCellButton)?.button.isEnabled = false
         default:
@@ -55,14 +59,8 @@ final class FormTVMC: TableViewModelController {
         let id = viewModel.identifier(at: indexPath)
         switch id {
         case Id.username:
-            let nextIndexPath = indexPath.next(in: tableView)
-            becomeFirstResponder(at: nextIndexPath)
-        case Id.password:
-            let previousIndexPath = indexPath.previous(in: tableView)
-            becomeFirstResponder(at: previousIndexPath)
-        case Id.slider:
-            if let slider = sender as? UISlider {
-                print("Slider value: \(slider.value)")
+            if let textField = sender as? UITextField {
+                username = textField.text ?? String()
             }
         case Id.accept:
             let toggle = (cell as? TableCellToggle)?.toggle
@@ -73,7 +71,26 @@ final class FormTVMC: TableViewModelController {
             break
         }
     }
-    
+
+    // MARK: UITextFieldDelegate
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+
+        guard
+            let cell = textField.superview?.superview as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell),
+            viewModel.identifier(at: indexPath) == Id.username
+        else {
+            return false
+        }
+
+        let nextIndexPath = indexPath.next(in: tableView)
+        becomeFirstResponder(at: nextIndexPath)
+
+        return true
+    }
+
     // MARK: Helpers
 
     @objc
@@ -96,7 +113,7 @@ final class FormTVMC: TableViewModelController {
     }
     
     private func presentAlert() {
-        let alert = UIAlertController(title: "Thank you",
+        let alert = UIAlertController(title: "Thank you \(username)",
                                       message: "Nice to have you onboard!",
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
