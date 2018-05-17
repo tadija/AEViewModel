@@ -16,7 +16,7 @@ public enum CollectionCellType {
 
 // MARK: - Cells
     
-open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
+open class CollectionCellBasic: CollectionViewModelCell {
     public weak var delegate: ViewModelCellDelegate?
 
     public override init(frame: CGRect) {

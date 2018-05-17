@@ -25,7 +25,7 @@ public enum TableCellType {
 
 // MARK: - System Cells
     
-open class TableCellBasic: UITableViewCell, ViewModelCell {
+open class TableCellBasic: TableViewModelCell {
     public weak var delegate: ViewModelCellDelegate?
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -231,7 +231,7 @@ open class TableCellSliderLabels: TableCellBasic {
 
         mainStack.addArrangedSubview(labelStack)
         mainStack.addArrangedSubview(slider)
-        
+
         slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
