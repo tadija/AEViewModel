@@ -98,35 +98,28 @@ open class TableCellRightDetail: TableCellBasic {
 }
 
 // MARK: - Custom Cells
+    
+open class TableCellToggle: TableCellBasic {
+    public let toggle = UISwitch()
+    
+    open override func configure() {
+        super.configure()
 
-public protocol TableCellWithToggle {
-    var toggle: UISwitch { get }
-}
-
-public extension TableCellWithToggle where Self: TableCellBasic {
-    func configureCellWithToggle() {
         selectionStyle = .none
+        accessoryView = toggle
         toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
 }
-    
-open class TableCellToggle: TableCellBasic, TableCellWithToggle {
-    public let toggle = UISwitch()
-    
-    open override func configure() {
-        super.configure()
-        configureCellWithToggle()
-        accessoryView = toggle
-    }
-}
 
-open class TableCellToggleSubtitle: TableCellSubtitle, TableCellWithToggle {
+open class TableCellToggleSubtitle: TableCellSubtitle {
     public let toggle = UISwitch()
     
     open override func configure() {
         super.configure()
-        configureCellWithToggle()
+
+        selectionStyle = .none
         accessoryView = toggle
+        toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
 }
 
@@ -135,14 +128,12 @@ open class TableCellTextInput: TableCellBasic {
     
     open override func configure() {
         super.configure()
-        configureCellWithTextField()
-    }
-    private func configureCellWithTextField() {
+
         selectionStyle = .none
 
         contentView.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let margins = contentView.layoutMarginsGuide
         textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
@@ -162,14 +153,12 @@ open class TableCellButton: TableCellBasic {
     
     open override func configure() {
         super.configure()
-        configureCellWithButton()
-    }
-    private func configureCellWithButton() {
+
         selectionStyle = .none
-        
+
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -188,9 +177,7 @@ open class TableCellSlider: TableCellBasic {
 
     open override func configure() {
         super.configure()
-        configureCellWithSlider()
-    }
-    private func configureCellWithSlider() {
+
         selectionStyle = .none
 
         contentView.addSubview(slider)
