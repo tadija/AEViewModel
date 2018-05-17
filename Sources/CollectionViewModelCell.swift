@@ -18,18 +18,16 @@ public enum CollectionCellType {
     
 open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
     public weak var delegate: ViewModelCellDelegate?
-    
+
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        reset()
-        setup()
-    }
     open override func awakeFromNib() {
         super.awakeFromNib()
-        reset()
         setup()
     }
     open override func prepareForReuse() {
@@ -37,11 +35,13 @@ open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
         reset()
     }
     
-    open func setup() {}
+    open func setup() {
+        reset()
+    }
     open func update(with item: Item) {}
     open func reset() {}
     
-    @objc public func performCallback(sender: Any) {
+    @objc public func performCallback(_ sender: Any) {
         delegate?.action(for: self, sender: sender)
     }
 }
