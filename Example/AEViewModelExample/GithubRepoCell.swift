@@ -20,8 +20,8 @@ final class GithubRepoCell: TableCellBasic {
     
     // MARK: ViewModelCell
     
-    override func setup() {
-        super.setup()
+    override func configure() {
+        super.configure()
         
         accessoryType = .disclosureIndicator
         ownerImage.layer.cornerRadius = 32

@@ -13,9 +13,9 @@ public protocol ViewModelCellDelegate: class {
 public protocol ViewModelCell: class {
     var delegate: ViewModelCellDelegate? { get set }
     
-    func setup()
-    func update(with item: Item)
+    func configure()
     func reset()
+    func update(with item: Item)
 }
 
 public extension ViewModelCell {

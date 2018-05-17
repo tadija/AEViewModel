@@ -19,8 +19,8 @@ final class SettingsProfileCell: TableCellBasic {
     
     // MARK: ViewModelCell
     
-    override func setup() {
-        super.setup()
+    override func configure() {
+        super.configure()
         
         configureHierarchy()
         configureLayout()

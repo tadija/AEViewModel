@@ -21,25 +21,25 @@ open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        configure()
     }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
-        setup()
+        configure()
     }
     open override func prepareForReuse() {
         super.prepareForReuse()
         reset()
     }
     
-    open func setup() {
+    open func configure() {
         reset()
     }
-    open func update(with item: Item) {}
     open func reset() {}
+    open func update(with item: Item) {}
     
     @objc public func performCallback(_ sender: Any) {
         delegate?.action(for: self, sender: sender)

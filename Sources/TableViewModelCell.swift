@@ -29,21 +29,21 @@ open class TableCellBasic: UITableViewCell, ViewModelCell {
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
+        configure()
     }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
-        setup()
+        configure()
     }
     open override func prepareForReuse() {
         super.prepareForReuse()
         reset()
     }
 
-    open func setup() {
+    open func configure() {
         reset()
     }
     open func reset() {
@@ -104,7 +104,7 @@ public protocol TableCellWithToggle {
 }
 
 public extension TableCellWithToggle where Self: TableCellBasic {
-    func setupCellWithToggle() {
+    func configureCellWithToggle() {
         selectionStyle = .none
         toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
@@ -113,9 +113,9 @@ public extension TableCellWithToggle where Self: TableCellBasic {
 open class TableCellToggle: TableCellBasic, TableCellWithToggle {
     public let toggle = UISwitch()
     
-    open override func setup() {
-        super.setup()
-        setupCellWithToggle()
+    open override func configure() {
+        super.configure()
+        configureCellWithToggle()
         accessoryView = toggle
     }
 }
@@ -123,9 +123,9 @@ open class TableCellToggle: TableCellBasic, TableCellWithToggle {
 open class TableCellToggleSubtitle: TableCellSubtitle, TableCellWithToggle {
     public let toggle = UISwitch()
     
-    open override func setup() {
-        super.setup()
-        setupCellWithToggle()
+    open override func configure() {
+        super.configure()
+        configureCellWithToggle()
         accessoryView = toggle
     }
 }
@@ -133,11 +133,11 @@ open class TableCellToggleSubtitle: TableCellSubtitle, TableCellWithToggle {
 open class TableCellTextInput: TableCellBasic {
     public let textField = UITextField()
     
-    open override func setup() {
-        super.setup()
-        setupCellWithTextField()
+    open override func configure() {
+        super.configure()
+        configureCellWithTextField()
     }
-    private func setupCellWithTextField() {
+    private func configureCellWithTextField() {
         selectionStyle = .none
 
         contentView.addSubview(textField)
@@ -160,11 +160,11 @@ open class TableCellTextInput: TableCellBasic {
 open class TableCellButton: TableCellBasic {
     public let button = UIButton(type: .system)
     
-    open override func setup() {
-        super.setup()
-        setupCellWithButton()
+    open override func configure() {
+        super.configure()
+        configureCellWithButton()
     }
-    private func setupCellWithButton() {
+    private func configureCellWithButton() {
         selectionStyle = .none
         
         contentView.addSubview(button)
@@ -186,11 +186,11 @@ open class TableCellButton: TableCellBasic {
 open class TableCellSlider: TableCellBasic {
     public let slider = UISlider()
 
-    open override func setup() {
-        super.setup()
-        setupCellWithSlider()
+    open override func configure() {
+        super.configure()
+        configureCellWithSlider()
     }
-    private func setupCellWithSlider() {
+    private func configureCellWithSlider() {
         selectionStyle = .none
 
         contentView.addSubview(slider)
