@@ -15,6 +15,7 @@ public enum TableCellType {
     case rightDetail
     case textInput
     case slider
+    case sliderLabels
     case toggle
     case toggleSubtitle
     case button
@@ -190,5 +191,51 @@ open class TableCellSlider: TableCellBasic {
         slider.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
 
         slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+    }
+}
+
+open class TableCellSliderLabels: TableCellBasic {
+    public let mainStack = UIStackView()
+    public let slider = UISlider()
+    public let labelStack = UIStackView()
+    public let leftLabel = UILabel()
+    public let centerLabel = UILabel()
+    public let rightLabel = UILabel()
+
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        mainStack.axis = .vertical
+        mainStack.alignment = .fill
+        mainStack.distribution = .fillProportionally
+        mainStack.spacing = 4
+
+        labelStack.axis = .horizontal
+        labelStack.alignment = .center
+        labelStack.distribution = .equalSpacing
+
+        contentView.addSubview(mainStack)
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        mainStack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        mainStack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        mainStack.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        mainStack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+
+        labelStack.addArrangedSubview(leftLabel)
+        labelStack.addArrangedSubview(centerLabel)
+        labelStack.addArrangedSubview(rightLabel)
+
+        mainStack.addArrangedSubview(labelStack)
+        mainStack.addArrangedSubview(slider)
+        
+        slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+    }
+    open override func update(with item: Item) {
+        leftLabel.text = item.model.title
+        rightLabel.text = item.model.detail
     }
 }
