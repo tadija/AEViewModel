@@ -15,6 +15,7 @@ public enum TableCellType {
     case rightDetail
     case textInput
     case slider
+    case sliderLabels
     case toggle
     case toggleSubtitle
     case button
@@ -24,26 +25,26 @@ public enum TableCellType {
 
 // MARK: - System Cells
     
-open class TableCellBasic: UITableViewCell, ViewModelCell {
+open class TableCellBasic: TableViewModelCell {
     public weak var delegate: ViewModelCellDelegate?
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setup()
+        configure()
     }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     open override func awakeFromNib() {
         super.awakeFromNib()
-        setup()
+        configure()
     }
     open override func prepareForReuse() {
         super.prepareForReuse()
         reset()
     }
 
-    open func setup() {
+    open func configure() {
         reset()
     }
     open func reset() {
@@ -98,51 +99,42 @@ open class TableCellRightDetail: TableCellBasic {
 }
 
 // MARK: - Custom Cells
+    
+open class TableCellToggle: TableCellBasic {
+    public let toggle = UISwitch()
+    
+    open override func configure() {
+        super.configure()
 
-public protocol TableCellWithToggle {
-    var toggle: UISwitch { get }
-}
-
-public extension TableCellWithToggle where Self: TableCellBasic {
-    func setupCellWithToggle() {
         selectionStyle = .none
+        accessoryView = toggle
         toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
 }
-    
-open class TableCellToggle: TableCellBasic, TableCellWithToggle {
-    public let toggle = UISwitch()
-    
-    open override func setup() {
-        super.setup()
-        setupCellWithToggle()
-        accessoryView = toggle
-    }
-}
 
-open class TableCellToggleSubtitle: TableCellSubtitle, TableCellWithToggle {
+open class TableCellToggleSubtitle: TableCellSubtitle {
     public let toggle = UISwitch()
     
-    open override func setup() {
-        super.setup()
-        setupCellWithToggle()
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
         accessoryView = toggle
+        toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
 }
 
 open class TableCellTextInput: TableCellBasic {
     public let textField = UITextField()
     
-    open override func setup() {
-        super.setup()
-        setupCellWithTextField()
-    }
-    private func setupCellWithTextField() {
+    open override func configure() {
+        super.configure()
+
         selectionStyle = .none
 
         contentView.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let margins = contentView.layoutMarginsGuide
         textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
@@ -160,16 +152,14 @@ open class TableCellTextInput: TableCellBasic {
 open class TableCellButton: TableCellBasic {
     public let button = UIButton(type: .system)
     
-    open override func setup() {
-        super.setup()
-        setupCellWithButton()
-    }
-    private func setupCellWithButton() {
+    open override func configure() {
+        super.configure()
+
         selectionStyle = .none
-        
+
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -186,11 +176,9 @@ open class TableCellButton: TableCellBasic {
 open class TableCellSlider: TableCellBasic {
     public let slider = UISlider()
 
-    open override func setup() {
-        super.setup()
-        setupCellWithSlider()
-    }
-    private func setupCellWithSlider() {
+    open override func configure() {
+        super.configure()
+
         selectionStyle = .none
 
         contentView.addSubview(slider)
@@ -203,5 +191,51 @@ open class TableCellSlider: TableCellBasic {
         slider.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
 
         slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+    }
+}
+
+open class TableCellSliderLabels: TableCellBasic {
+    public let mainStack = UIStackView()
+    public let slider = UISlider()
+    public let labelStack = UIStackView()
+    public let leftLabel = UILabel()
+    public let centerLabel = UILabel()
+    public let rightLabel = UILabel()
+
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        mainStack.axis = .vertical
+        mainStack.alignment = .fill
+        mainStack.distribution = .fillProportionally
+        mainStack.spacing = 4
+
+        labelStack.axis = .horizontal
+        labelStack.alignment = .center
+        labelStack.distribution = .equalSpacing
+
+        contentView.addSubview(mainStack)
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        mainStack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        mainStack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        mainStack.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        mainStack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+
+        labelStack.addArrangedSubview(leftLabel)
+        labelStack.addArrangedSubview(centerLabel)
+        labelStack.addArrangedSubview(rightLabel)
+
+        mainStack.addArrangedSubview(labelStack)
+        mainStack.addArrangedSubview(slider)
+
+        slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+    }
+    open override func update(with item: Item) {
+        leftLabel.text = item.model.title
+        rightLabel.text = item.model.detail
     }
 }

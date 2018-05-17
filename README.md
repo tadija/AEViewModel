@@ -75,14 +75,14 @@ public typealias CollectionViewModelCell = UICollectionViewCell & ViewModelCell
 When creating custom cells, the easiest way is to subclass from `TableCellBasic` or `CollectionCellBasic` and override methods from this protocol:
 
 ```swift
-/// Called in `init` and `awakeFromNib`, setup initial interface here.
-func setup()
+/// Called in `init` and `awakeFromNib`, configure outlets and layout here.
+func configure()
+
+/// Called in `configure` and `prepareForReuse`, reset interface here.
+func reset()
 
 /// Called in `tableView(_:cellForRowAt:)`, update interface with model here.
 func update(with item: Item)
-
-/// Called in `setup` and `prepareForReuse`, reset interface here.
-func reset()
 ```
 
 To use default callback from cell to view controller just call `performCallback(_:)` where it makes sense for your cell.

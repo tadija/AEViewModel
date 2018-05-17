@@ -16,32 +16,32 @@ public enum CollectionCellType {
 
 // MARK: - Cells
     
-open class CollectionCellBasic: UICollectionViewCell, ViewModelCell {
+open class CollectionCellBasic: CollectionViewModelCell {
     public weak var delegate: ViewModelCellDelegate?
-    
+
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+    }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        reset()
-        setup()
-    }
     open override func awakeFromNib() {
         super.awakeFromNib()
-        reset()
-        setup()
+        configure()
     }
     open override func prepareForReuse() {
         super.prepareForReuse()
         reset()
     }
     
-    open func setup() {}
-    open func update(with item: Item) {}
+    open func configure() {
+        reset()
+    }
     open func reset() {}
+    open func update(with item: Item) {}
     
-    @objc public func performCallback(sender: Any) {
+    @objc public func performCallback(_ sender: Any) {
         delegate?.action(for: self, sender: sender)
     }
 }

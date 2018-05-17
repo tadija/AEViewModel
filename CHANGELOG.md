@@ -1,9 +1,15 @@
 # Changelog
 
+## Version 0.6.5
+
+- Added new default cell `TableCellSliderLabels`
+- Renamed `setup` -> `configure`
+- Improvements and refactoring
+
 ## Version 0.6.4
 
-- Added new default cell with UISlider (TableCellSlider)
-- Other improvements and refactoring
+- Added new default cell `TableCellSlider`
+- Improvements and refactoring
 - Improved demo project
 
 ## Version 0.6.3

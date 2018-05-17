@@ -37,6 +37,8 @@ final class CellsTVMC: TableViewModelController {
             return .textInput
         case .slider:
             return .slider
+        case .sliderLabels:
+            return .sliderLabels
         case .toggle:
             return .toggle
         case .toggleSubtitle:
