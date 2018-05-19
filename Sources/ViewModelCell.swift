@@ -12,7 +12,8 @@ public protocol ViewModelCellDelegate: class {
 
 public protocol ViewModelCell: class {
     var delegate: ViewModelCellDelegate? { get set }
-    
+    var userInfo: [AnyHashable : Any] { get set }
+
     func configure()
     func reset()
     func update(with item: Item)

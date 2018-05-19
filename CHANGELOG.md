@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.6.6
+
+- Added `userInfo` property to `ViewModelCell`
+- Enabled overriding of `performCallback` in cells
+- Added `TableCellStack` and `CollectionCellStack`
+
 ## Version 0.6.5
 
 - Added new default cell `TableCellSliderLabels`
