@@ -20,13 +20,13 @@ public protocol Section {
 public protocol Item {
     var identifier: String { get }
     var viewModel: ViewModel { get }
+    var child: DataSource? { get }
 }
 
 public protocol ViewModel {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
-    var child: DataSource? { get }
 }
 
 // MARK: - Helpers
@@ -59,9 +59,12 @@ public extension Section {
     var footer: String? { return nil }
 }
 
+public extension Item {
+    var child: DataSource? { return nil }
+}
+
 public extension ViewModel {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }
-    var child: DataSource? { return nil }
 }

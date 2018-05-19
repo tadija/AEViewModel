@@ -42,15 +42,20 @@ public struct BasicSection: Section {
 public struct BasicItem: Item {
     public let identifier: String
     public var viewModel: ViewModel
+    public let child: DataSource?
 
-    public init(identifier: String, viewModel: ViewModel = BasicViewModel()) {
+    public init(identifier: String, viewModel: ViewModel = BasicViewModel(), child: DataSource? = nil) {
         self.identifier = identifier
         self.viewModel = viewModel
+        self.child = child
     }
 
-    public init(identifier: String, title: String? = nil, detail: String? = nil, image: String? = nil) {
+    public init(identifier: String,
+                title: String? = nil, detail: String? = nil, image: String? = nil,
+                child: DataSource? = nil) {
         self.identifier = identifier
         self.viewModel = BasicViewModel(title: title, detail: detail, image: image)
+        self.child = child
     }
 }
 
@@ -58,13 +63,11 @@ public struct BasicViewModel: ViewModel {
     public let title: String?
     public let detail: String?
     public let image: String?
-    public let child: DataSource?
 
-    public init(title: String? = nil, detail: String? = nil, image: String? = nil, child: DataSource? = nil) {
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil) {
         self.title = title
         self.detail = detail
         self.image = image
-        self.child = child
     }
 }
 
@@ -110,38 +113,38 @@ extension BasicSection: Codable {
 
 extension BasicItem: Codable {
     public enum CodingKeys: String, CodingKey {
-        case identifier, viewModel
+        case identifier, viewModel, child
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         identifier = try container.decode(String.self, forKey: .identifier)
         viewModel = try container.decode(BasicViewModel.self, forKey: .viewModel)
+        child = try container.decodeIfPresent(BasicDataSource.self, forKey: .child)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(identifier, forKey: .identifier)
         try container.encodeIfPresent(viewModel as? BasicViewModel, forKey: .viewModel)
+        if let child = child as? BasicDataSource {
+            try container.encodeIfPresent(child, forKey: .child)
+        }
     }
 }
 
 extension BasicViewModel: Codable {
     public enum CodingKeys: String, CodingKey {
-        case title, detail, image, child
+        case title, detail, image
     }
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         detail = try container.decodeIfPresent(String.self, forKey: .detail)
         image = try container.decodeIfPresent(String.self, forKey: .image)
-        child = try container.decodeIfPresent(BasicDataSource.self, forKey: .child)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(detail, forKey: .detail)
         try container.encodeIfPresent(image, forKey: .image)
-        if let child = child as? BasicDataSource {
-            try container.encodeIfPresent(child, forKey: .child)
-        }
     }
 }

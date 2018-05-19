@@ -51,7 +51,7 @@ It may not be quick and easy (for everyone) to grasp at the first look, but if y
 
 I suggest to start by getting familiar with [DataSource.swift](Sources/DataSource.swift), because you're essentially gonna use that stuff for everything.
 
-These are just very simple protocols starting with `DataSource` which must have sections, then `Section` must have items, where each `Item` contains `identifier` and a `ViewModel`.
+These are just very simple protocols starting with `DataSource` which must have sections, then `Section` must have items, where each `Item` contains `identifier: String`, `viewModel: ViewModel` and `child: DataSource?`.
 
 ```swift
 /// - Note: ViewModel is whatever you choose it to be, easy like this:

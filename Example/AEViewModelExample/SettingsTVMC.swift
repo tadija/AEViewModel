@@ -11,7 +11,7 @@ class SettingsTVMC: TableViewModelController {
     override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
-        if let child = dataSource.viewModel(at: indexPath).child, child.sections.count > 0 {
+        if let child = dataSource.item(at: indexPath).child, child.sections.count > 0 {
             cell.accessoryType = .disclosureIndicator
         }
     }
@@ -55,11 +55,11 @@ final class MainSettingsTVMC: SettingsTVMC {
         case Id.profile, Id.airplane, Id.vpn:
             print("handleEvent with id: \(item.identifier)")
         case Id.wifi:
-            let ds = item.viewModel.child ?? BasicDataSource()
+            let ds = item.child ?? BasicDataSource()
             let vc = WiFiSettingsTVMC(dataSource: ds)
             show(vc, sender: self)
         case Id.bluetooth, Id.cellular, Id.hotspot, Id.carrier:
-            let ds = item.viewModel.child ?? BasicDataSource()
+            let ds = item.child ?? BasicDataSource()
             let vc = SettingsTVMC(dataSource: ds)
             show(vc, sender: self)
         default:
