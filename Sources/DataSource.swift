@@ -6,7 +6,7 @@
 
 import Foundation
 
-public protocol ViewModel {
+public protocol DataSource {
     var title: String? { get }
     var sections: [Section] { get }
 }
@@ -26,12 +26,12 @@ public protocol Model {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
-    var child: ViewModel? { get }
+    var child: DataSource? { get }
 }
 
 // MARK: - Helpers
 
-public extension ViewModel {
+public extension DataSource {
     var title: String? { return nil }
 
     func item(at indexPath: IndexPath) -> Item {
@@ -63,5 +63,5 @@ public extension Model {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }
-    var child: ViewModel? { return nil }
+    var child: DataSource? { return nil }
 }

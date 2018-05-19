@@ -47,19 +47,19 @@ It may not be quick and easy (for everyone) to grasp at the first look, but if y
 
 ## Usage
 
-### ViewModel
+### DataSource
 
-I suggest to start by getting familiar with [ViewModel.swift](Sources/ViewModel.swift), because you're essentially gonna use that stuff for everything.
+I suggest to start by getting familiar with [DataSource.swift](Sources/DataSource.swift), because you're essentially gonna use that stuff for everything.
 
-These are just very simple protocols starting with `ViewModel` which must have sections, then `Section` must have items, where each `Item` contains `identifier` and `Model`. Model here is whatever you choose it to be, easy like this:
+These are just very simple protocols starting with `DataSource` which must have sections, then `Section` must have items, where each `Item` contains `identifier` and `Model`. Model here is whatever you choose it to be, easy like this:
 
 ```swift
 struct MyCustomModel: Model {}
 ```
 
-### BasicViewModel
+### BasicDataSource
 
-There are simple structs conforming to all of these protocols in [BasicViewModel.swift](Sources/BasicViewModel.swift) and most of the time it should be possible to just use those. As these structs conform to `Codable` too, it is also possible to create `BasicViewModel` from JSON data for example.
+There are simple structs conforming to all of these protocols in [BasicDataSource.swift](Sources/BasicDataSource.swift) and most of the time it should be possible to just use those. As these structs conform to `Codable` too, it is also possible to create `BasicDataSource` from JSON data for example.
 
 In case of something more specific, create custom types that conform to these protocols and use those instead.
 
@@ -85,7 +85,7 @@ func reset()
 func update(with item: Item)
 ```
 
-To use default callback from cell to view controller just call `performCallback(_:)` where it makes sense for your cell.
+To use default callback from cell to view controller just call `performCallback(_:)` where it makes sense for your cell, or override it with custom logic and call `super` at some moment.
 
 ### TableViewModelCell
 
@@ -97,10 +97,11 @@ public enum TableCellType {
     case subtitle
     case leftDetail
     case rightDetail
-    case textInput
+    case textField
     case slider
+    case sliderWithLabels
     case toggle
-    case toggleSubtitle
+    case toggleWithSubtitle
     case button
     case customClass(TableViewModelCell.Type)
     case customNib(TableViewModelCell.Type)
@@ -123,7 +124,7 @@ public enum CollectionCellType {
 
 Final part of this story is `TableViewModelController`, which you guessed it, inherits from `UITableViewController`.  
 
-Only this one is nice enough to register, dequeue and update all cells you'll ever need by just configuring its `viewModel` property and overriding these methods:
+Only this one is nice enough to register, dequeue and update all cells you'll ever need by just configuring its `dataSource` property and overriding these methods:
 
 ```swift
 /// - Note: Return proper cell type for the given item identifier.
@@ -157,7 +158,7 @@ You should take a look at [the example project](Example), but here's a quick pre
 ```swift
 import AEViewModel
 
-struct ExampleViewModel: ViewModel {
+struct ExampleDataSource: DataSource {
     struct Id {
         static let cells = "cells"
         static let form = "form"
@@ -180,13 +181,13 @@ struct ExampleViewModel: ViewModel {
 
 final class ExampleTVMC: TableViewModelController {
     
-    typealias Id = ExampleViewModel.Id
+    typealias Id = ExampleDataSource.Id
     
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = ExampleViewModel()
+        dataSource = ExampleDataSource()
     }
     
     // MARK: Override
@@ -201,7 +202,7 @@ final class ExampleTVMC: TableViewModelController {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        switch viewModel.identifier(at: indexPath) {
+        switch dataSource.identifier(at: indexPath) {
         case Id.cells:
             show(CellsTVMC(), sender: self)
         case Id.form:

@@ -11,7 +11,7 @@ class SettingsTVMC: TableViewModelController {
     override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
-        if let child = viewModel.model(at: indexPath).child, child.sections.count > 0 {
+        if let child = dataSource.model(at: indexPath).child, child.sections.count > 0 {
             cell.accessoryType = .disclosureIndicator
         }
     }
@@ -19,14 +19,14 @@ class SettingsTVMC: TableViewModelController {
 
 final class MainSettingsTVMC: SettingsTVMC {
     
-    typealias Id = SettingsViewModel.Id
+    typealias Id = SettingsDataSource.Id
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel = SettingsViewModel()
+        dataSource = SettingsDataSource()
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
@@ -50,17 +50,17 @@ final class MainSettingsTVMC: SettingsTVMC {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        let item = viewModel.item(at: indexPath)
+        let item = dataSource.item(at: indexPath)
         switch item.identifier {
         case Id.profile, Id.airplane, Id.vpn:
             print("handleEvent with id: \(item.identifier)")
         case Id.wifi:
-            let vm = item.model.child ?? BasicViewModel()
-            let vc = WiFiSettingsTVMC(viewModel: vm)
+            let ds = item.model.child ?? BasicDataSource()
+            let vc = WiFiSettingsTVMC(dataSource: ds)
             show(vc, sender: self)
         case Id.bluetooth, Id.cellular, Id.hotspot, Id.carrier:
-            let vm = item.model.child ?? BasicViewModel()
-            let vc = SettingsTVMC(viewModel: vm)
+            let ds = item.model.child ?? BasicDataSource()
+            let vc = SettingsTVMC(dataSource: ds)
             show(vc, sender: self)
         default:
             break
@@ -73,7 +73,7 @@ final class MainSettingsTVMC: SettingsTVMC {
 
 final class WiFiSettingsTVMC: SettingsTVMC {
     
-    typealias Id = SettingsViewModel.Id.Wifi
+    typealias Id = SettingsDataSource.Id.Wifi
     
     // MARK: Override
     
@@ -89,7 +89,7 @@ final class WiFiSettingsTVMC: SettingsTVMC {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        let item = viewModel.item(at: indexPath)
+        let item = dataSource.item(at: indexPath)
         switch item.identifier {
         case Id.wifiSwitch,
              Id.joinNetworksSwitch:

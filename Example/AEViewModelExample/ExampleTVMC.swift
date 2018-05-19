@@ -9,13 +9,13 @@ import AEViewModel
 
 final class ExampleTVMC: TableViewModelController {
     
-    typealias Id = ExampleViewModel.Id
+    typealias Id = ExampleDataSource.Id
     
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = ExampleViewModel()
+        dataSource = ExampleDataSource()
     }
     
     // MARK: Override
@@ -30,7 +30,7 @@ final class ExampleTVMC: TableViewModelController {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        switch viewModel.identifier(at: indexPath) {
+        switch dataSource.identifier(at: indexPath) {
         case Id.cells:
             show(CellsTVMC(), sender: self)
         case Id.form:

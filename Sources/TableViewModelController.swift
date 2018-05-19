@@ -12,7 +12,7 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
 
     open var isAutomaticReloadEnabled = true
 
-    open var viewModel: ViewModel = BasicViewModel() {
+    open var dataSource: DataSource = BasicDataSource() {
         didSet {
             if isAutomaticReloadEnabled {
                 reload()
@@ -23,12 +23,12 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
     // MARK: Init
 
     public convenience init() {
-        self.init(viewModel: BasicViewModel(), style: .grouped)
+        self.init(dataSource: BasicDataSource(), style: .grouped)
     }
     
-    public convenience init(viewModel: ViewModel, style: UITableViewStyle = .grouped) {
+    public convenience init(dataSource: DataSource, style: UITableViewStyle = .grouped) {
         self.init(style: style)
-        self.viewModel = viewModel
+        self.dataSource = dataSource
     }
     
     // MARK: Lifecycle
@@ -45,7 +45,7 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
     }
 
     open func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
-        let item = viewModel.item(at: indexPath)
+        let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.delegate = self
     }
@@ -73,7 +73,7 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
     }
 
     private func performReload() {
-        if let title = viewModel.title {
+        if let title = dataSource.title {
             self.title = title
         }
         registerCells()
@@ -81,7 +81,7 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
     }
     
     private func registerCells() {
-        viewModel.uniqueIdentifiers.forEach { id in
+        dataSource.uniqueIdentifiers.forEach { id in
             registerCell(with: id)
         }
     }
@@ -122,15 +122,15 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
 extension TableViewModelController {
     
     open override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.sections.count
+        return dataSource.sections.count
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.sections[section].items.count
+        return dataSource.sections[section].items.count
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let id = viewModel.identifier(at: indexPath)
+        let id = dataSource.identifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
         if let cell = cell as? TableViewModelCell {
             update(cell, at: indexPath)
@@ -139,11 +139,11 @@ extension TableViewModelController {
     }
 
     open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.sections[section].header
+        return dataSource.sections[section].header
     }
 
     open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return viewModel.sections[section].footer
+        return dataSource.sections[section].footer
     }
     
 }

@@ -9,7 +9,7 @@ import AEViewModel
 
 final class FormTVMC: TableViewModelController, UITextFieldDelegate {
     
-    typealias Id = FormViewModel.Id
+    typealias Id = FormDataSource.Id
 
     // MARK: Propertis
 
@@ -19,7 +19,7 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = FormViewModel()
+        dataSource = FormDataSource()
     }
 
     // MARK: Override
@@ -40,7 +40,7 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
     override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
-        let id = viewModel.identifier(at: indexPath)
+        let id = dataSource.identifier(at: indexPath)
         switch id {
         case Id.username:
             (cell as? TableCellTextField)?.textField.delegate = self
@@ -56,7 +56,7 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        let id = viewModel.identifier(at: indexPath)
+        let id = dataSource.identifier(at: indexPath)
         switch id {
         case Id.username:
             if let textField = sender as? UITextField {
@@ -80,7 +80,7 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
         guard
             let cell = textField.superview?.superview as? UITableViewCell,
             let indexPath = tableView.indexPath(for: cell),
-            viewModel.identifier(at: indexPath) == Id.username
+            dataSource.identifier(at: indexPath) == Id.username
         else {
             return false
         }

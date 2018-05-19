@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-final class GithubViewModel: ViewModel {
+final class GithubDataSource: DataSource {
     struct Id {
         static let repo = "repo"
     }
@@ -14,12 +14,12 @@ final class GithubViewModel: ViewModel {
     var title: String? = "Github"
     var sections: [Section] = [Section]()
 
-    func reload(then handler: @escaping (GithubViewModel) -> Void) {
+    func reload(then handler: @escaping (GithubDataSource) -> Void) {
         fetchTrendingSwiftRepos { [weak self] (repos) in
             let items = repos?.map { BasicItem(identifier: Id.repo, model: $0) } ?? [BasicItem]()
             self?.sections = [BasicSection(items: items)]
             DispatchQueue.main.async {
-                handler(self ?? GithubViewModel())
+                handler(self ?? GithubDataSource())
             }
         }
     }

@@ -11,8 +11,8 @@ final class GithubTVMC: TableViewModelController {
 
     // MARK: Properties
 
-    var github: GithubViewModel? {
-        return viewModel as? GithubViewModel
+    var github: GithubDataSource? {
+        return dataSource as? GithubDataSource
     }
 
     // MARK: Init
@@ -26,7 +26,7 @@ final class GithubTVMC: TableViewModelController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel = GithubViewModel()
+        dataSource = GithubDataSource()
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 150
@@ -53,7 +53,7 @@ final class GithubTVMC: TableViewModelController {
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        if let repo = viewModel.model(at: indexPath) as? Repo, let url = URL(string: repo.url) {
+        if let repo = dataSource.model(at: indexPath) as? Repo, let url = URL(string: repo.url) {
             let browser = SFSafariViewController(url: url)
             browser.title = title
             present(browser, animated: true, completion: nil)
@@ -74,7 +74,7 @@ final class GithubTVMC: TableViewModelController {
     private func refresh(_ sender: UIRefreshControl) {
         github?.reload() { [weak self] (viewModel) in
             sender.endRefreshing()
-            self?.viewModel = viewModel
+            self?.dataSource = viewModel
         }
     }
     

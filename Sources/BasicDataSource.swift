@@ -8,7 +8,7 @@ import Foundation
 
 // MARK: - Model
 
-public struct BasicViewModel: ViewModel {
+public struct BasicDataSource: DataSource {
     public let title: String?
     public var sections: [Section]
 
@@ -23,7 +23,7 @@ public struct BasicViewModel: ViewModel {
     }
 
     public init(with data: Data, decoder: JSONDecoder = JSONDecoder()) throws {
-        self = try decoder.decode(BasicViewModel.self, from: data)
+        self = try decoder.decode(BasicDataSource.self, from: data)
     }
 }
 
@@ -58,9 +58,9 @@ public struct BasicModel: Model {
     public let title: String?
     public let detail: String?
     public let image: String?
-    public let child: ViewModel?
+    public let child: DataSource?
 
-    public init(title: String? = nil, detail: String? = nil, image: String? = nil, child: ViewModel? = nil) {
+    public init(title: String? = nil, detail: String? = nil, image: String? = nil, child: DataSource? = nil) {
         self.title = title
         self.detail = detail
         self.image = image
@@ -70,7 +70,7 @@ public struct BasicModel: Model {
 
 // MARK: - Codable
 
-extension BasicViewModel: Codable {
+extension BasicDataSource: Codable {
     public enum CodingKeys: String, CodingKey {
         case title, sections
     }
@@ -133,14 +133,14 @@ extension BasicModel: Codable {
         title = try container.decodeIfPresent(String.self, forKey: .title)
         detail = try container.decodeIfPresent(String.self, forKey: .detail)
         image = try container.decodeIfPresent(String.self, forKey: .image)
-        child = try container.decodeIfPresent(BasicViewModel.self, forKey: .child)
+        child = try container.decodeIfPresent(BasicDataSource.self, forKey: .child)
     }
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(detail, forKey: .detail)
         try container.encodeIfPresent(image, forKey: .image)
-        if let child = child as? BasicViewModel {
+        if let child = child as? BasicDataSource {
             try container.encodeIfPresent(child, forKey: .child)
         }
     }

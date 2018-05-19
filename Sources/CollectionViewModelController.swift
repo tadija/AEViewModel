@@ -12,7 +12,7 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
 
     open var isAutomaticReloadEnabled = true
 
-    open var viewModel: ViewModel = BasicViewModel() {
+    open var dataSource: DataSource = BasicDataSource() {
         didSet {
             if isAutomaticReloadEnabled {
                 reload()
@@ -23,12 +23,12 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
     // MARK: Init
 
     public convenience init() {
-        self.init(viewModel: BasicViewModel())
+        self.init(dataSource: BasicDataSource())
     }
     
-    public convenience init(viewModel: ViewModel, layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
+    public convenience init(dataSource: DataSource, layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         self.init(collectionViewLayout: layout)
-        self.viewModel = viewModel
+        self.dataSource = dataSource
     }
     
     // MARK: Lifecycle
@@ -45,7 +45,7 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
     }
 
     open func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath) {
-        let item = viewModel.item(at: indexPath)
+        let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.delegate = self
     }
@@ -73,7 +73,7 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
     }
 
     private func performReload() {
-        if let title = viewModel.title {
+        if let title = dataSource.title {
             self.title = title
         }
         registerCells()
@@ -81,7 +81,7 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
     }
     
     private func registerCells() {
-        viewModel.uniqueIdentifiers.forEach { id in
+        dataSource.uniqueIdentifiers.forEach { id in
             registerCell(with: id)
         }
     }
@@ -104,16 +104,16 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
 extension CollectionViewModelController {
     
     open override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return viewModel.sections.count
+        return dataSource.sections.count
     }
     
     open override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.sections[section].items.count
+        return dataSource.sections[section].items.count
     }
     
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let id = viewModel.identifier(at: indexPath)
+        let id = dataSource.identifier(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
         if let cell = cell as? CollectionViewModelCell {
             update(cell, at: indexPath)

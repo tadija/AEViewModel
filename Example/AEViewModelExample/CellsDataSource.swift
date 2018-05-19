@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-struct CellsViewModel: ViewModel {
+struct CellsDataSource: DataSource {
     public enum Id: String {
         case basic
         case subtitle
