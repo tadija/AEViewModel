@@ -54,10 +54,12 @@ open class TableCellBasic: TableViewModelCell {
         imageView?.image = nil
     }
     open func update(with item: Item) {
-        textLabel?.text = item.viewModel.title
-        detailTextLabel?.text = item.viewModel.detail
-        if let imageName = item.viewModel.image, let image = UIImage(named: imageName) {
-            imageView?.image = image
+        if let viewModel = item.viewModel as? BasicViewModel {
+            textLabel?.text = viewModel.title
+            detailTextLabel?.text = viewModel.detail
+            if let imageName = viewModel.image, let image = UIImage(named: imageName) {
+                imageView?.image = image
+            }
         }
     }
 
@@ -163,7 +165,9 @@ open class TableCellTextField: TableCellBasic {
         textField.addTarget(self, action: #selector(performCallback(_:)), for: .editingChanged)
     }
     open override func update(with item: Item) {
-        textField.placeholder = item.viewModel.title
+        if let viewModel = item.viewModel as? BasicViewModel {
+            textField.placeholder = viewModel.title
+        }
     }
 }
 
@@ -187,7 +191,9 @@ open class TableCellButton: TableCellBasic {
         button.addTarget(self, action: #selector(performCallback(_:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
-        button.setTitle(item.viewModel.title, for: .normal)
+        if let viewModel = item.viewModel as? BasicViewModel {
+            button.setTitle(viewModel.title, for: .normal)
+        }
     }
 }
 
@@ -242,7 +248,9 @@ open class TableCellSliderWithLabels: TableCellStack {
         slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
-        leftLabel.text = item.viewModel.title
-        rightLabel.text = item.viewModel.detail
+        if let viewModel = item.viewModel as? BasicViewModel {
+            leftLabel.text = viewModel.title
+            rightLabel.text = viewModel.detail
+        }
     }
 }

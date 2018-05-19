@@ -95,7 +95,7 @@ final class WiFiSettingsTVMC: SettingsTVMC {
              Id.joinNetworksSwitch:
             print("handleEvent with id: \(item.identifier)")
         case Id.wifiNetwork:
-            print("join network with title: \(item.viewModel.title ?? "n/a")")
+            print("join network with title: \((item.viewModel as? BasicViewModel)?.title ?? "n/a")")
         default:
             break
         }

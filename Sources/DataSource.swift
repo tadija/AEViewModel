@@ -23,11 +23,7 @@ public protocol Item {
     var child: DataSource? { get }
 }
 
-public protocol ViewModel {
-    var title: String? { get }
-    var detail: String? { get }
-    var image: String? { get }
-}
+public protocol ViewModel {}
 
 // MARK: - Helpers
 
@@ -61,10 +57,4 @@ public extension Section {
 
 public extension Item {
     var child: DataSource? { return nil }
-}
-
-public extension ViewModel {
-    var title: String? { return nil }
-    var detail: String? { return nil }
-    var image: String? { return nil }
 }
