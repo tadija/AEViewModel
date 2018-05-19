@@ -100,6 +100,23 @@ open class TableCellRightDetail: TableCellBasic {
 }
 
 // MARK: - Custom Cells
+
+open class TableCellStack: TableCellBasic {
+    public let stack = UIStackView()
+
+    open override func configure() {
+        super.configure()
+
+        contentView.addSubview(stack)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        stack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        stack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        stack.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        stack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+    }
+}
     
 open class TableCellToggle: TableCellBasic {
     public let toggle = UISwitch()
@@ -195,43 +212,32 @@ open class TableCellSlider: TableCellBasic {
     }
 }
 
-open class TableCellSliderLabels: TableCellBasic {
-    public let mainStack = UIStackView()
-    public let slider = UISlider()
+open class TableCellSliderLabels: TableCellStack {
     public let labelStack = UIStackView()
     public let leftLabel = UILabel()
     public let centerLabel = UILabel()
     public let rightLabel = UILabel()
+    public let slider = UISlider()
 
     open override func configure() {
         super.configure()
 
         selectionStyle = .none
 
-        mainStack.axis = .vertical
-        mainStack.alignment = .fill
-        mainStack.distribution = .fillProportionally
-        mainStack.spacing = 4
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fillProportionally
+        stack.spacing = 4
 
         labelStack.axis = .horizontal
         labelStack.alignment = .center
         labelStack.distribution = .equalSpacing
-
-        contentView.addSubview(mainStack)
-        mainStack.translatesAutoresizingMaskIntoConstraints = false
-
-        let margins = contentView.layoutMarginsGuide
-        mainStack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
-        mainStack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-        mainStack.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
-        mainStack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
-
         labelStack.addArrangedSubview(leftLabel)
         labelStack.addArrangedSubview(centerLabel)
         labelStack.addArrangedSubview(rightLabel)
 
-        mainStack.addArrangedSubview(labelStack)
-        mainStack.addArrangedSubview(slider)
+        stack.addArrangedSubview(labelStack)
+        stack.addArrangedSubview(slider)
 
         slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }

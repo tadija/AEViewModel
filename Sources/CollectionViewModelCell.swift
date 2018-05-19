@@ -46,3 +46,20 @@ open class CollectionCellBasic: CollectionViewModelCell {
         delegate?.action(for: self, sender: sender)
     }
 }
+
+open class CollectionCellStack: CollectionCellBasic {
+    public let stack = UIStackView()
+
+    open override func configure() {
+        super.configure()
+
+        contentView.addSubview(stack)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        stack.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        stack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        stack.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+        stack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+    }
+}
