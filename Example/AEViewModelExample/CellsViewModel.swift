@@ -12,11 +12,11 @@ struct CellsViewModel: ViewModel {
         case subtitle
         case leftDetail
         case rightDetail
-        case textInput
+        case textField
         case slider
-        case sliderLabels
+        case sliderWithLabels
         case toggle
-        case toggleSubtitle
+        case toggleWithSubtitle
         case button
     }
 
@@ -32,13 +32,13 @@ struct CellsViewModel: ViewModel {
                 BasicItem(identifier: Id.rightDetail.rawValue, title: "Right", detail: "Detail"),
             ]),
             BasicSection(header: "Input", items: [
-                BasicItem(identifier: Id.textInput.rawValue, title: "Text Input"),
+                BasicItem(identifier: Id.textField.rawValue, title: "Text Input"),
                 BasicItem(identifier: Id.slider.rawValue),
-                BasicItem(identifier: Id.sliderLabels.rawValue, title: "Left", detail: "Right"),
+                BasicItem(identifier: Id.sliderWithLabels.rawValue, title: "Left", detail: "Right"),
             ]),
             BasicSection(header: "Actions", items: [
                 BasicItem(identifier: Id.toggle.rawValue, title: "Toggle"),
-                BasicItem(identifier: Id.toggleSubtitle.rawValue, title: "Togle", detail: "Subtitle"),
+                BasicItem(identifier: Id.toggleWithSubtitle.rawValue, title: "Togle", detail: "Subtitle"),
                 BasicItem(identifier: Id.button.rawValue, title: "Button"),
             ]),
         ]

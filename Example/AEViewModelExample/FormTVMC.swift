@@ -27,7 +27,7 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         switch identifier {
         case Id.username, Id.password:
-            return .textInput
+            return .textField
         case Id.accept:
             return .toggle
         case Id.register:
@@ -43,9 +43,9 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
         let id = viewModel.identifier(at: indexPath)
         switch id {
         case Id.username:
-            (cell as? TableCellTextInput)?.textField.delegate = self
+            (cell as? TableCellTextField)?.textField.delegate = self
         case Id.password:
-            let textInputCell = (cell as? TableCellTextInput)
+            let textInputCell = (cell as? TableCellTextField)
             textInputCell?.textField.delegate = self
             textInputCell?.textField.isSecureTextEntry = true
         case Id.register:
@@ -101,7 +101,7 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
     }
 
     private func becomeFirstResponder(at indexPath: IndexPath?) {
-        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCellTextInput {
+        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCellTextField {
             cell.textField.becomeFirstResponder()
         }
     }

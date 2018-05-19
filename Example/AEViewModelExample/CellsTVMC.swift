@@ -33,16 +33,16 @@ final class CellsTVMC: TableViewModelController {
             return .leftDetail
         case .rightDetail:
             return .rightDetail
-        case .textInput:
-            return .textInput
+        case .textField:
+            return .textField
         case .slider:
             return .slider
-        case .sliderLabels:
-            return .sliderLabels
+        case .sliderWithLabels:
+            return .sliderWithLabels
         case .toggle:
             return .toggle
-        case .toggleSubtitle:
-            return .toggleSubtitle
+        case .toggleWithSubtitle:
+            return .toggleWithSubtitle
         case .button:
             return .button
         }

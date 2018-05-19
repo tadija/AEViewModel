@@ -13,11 +13,11 @@ public enum TableCellType {
     case subtitle
     case leftDetail
     case rightDetail
-    case textInput
+    case textField
     case slider
-    case sliderLabels
+    case sliderWithLabels
     case toggle
-    case toggleSubtitle
+    case toggleWithSubtitle
     case button
     case customClass(TableViewModelCell.Type)
     case customNib(TableViewModelCell.Type)
@@ -130,7 +130,7 @@ open class TableCellToggle: TableCellBasic {
     }
 }
 
-open class TableCellToggleSubtitle: TableCellSubtitle {
+open class TableCellToggleWithSubtitle: TableCellSubtitle {
     public let toggle = UISwitch()
     
     open override func configure() {
@@ -142,7 +142,7 @@ open class TableCellToggleSubtitle: TableCellSubtitle {
     }
 }
 
-open class TableCellTextInput: TableCellBasic {
+open class TableCellTextField: TableCellBasic {
     public let textField = UITextField()
     
     open override func configure() {
@@ -212,7 +212,7 @@ open class TableCellSlider: TableCellBasic {
     }
 }
 
-open class TableCellSliderLabels: TableCellStack {
+open class TableCellSliderWithLabels: TableCellStack {
     public let labelStack = UIStackView()
     public let leftLabel = UILabel()
     public let centerLabel = UILabel()
