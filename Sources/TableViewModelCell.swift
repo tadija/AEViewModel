@@ -27,6 +27,7 @@ public enum TableCellType {
     
 open class TableCellBasic: TableViewModelCell {
     public weak var delegate: ViewModelCellDelegate?
+    open var userInfo = [AnyHashable : Any]()
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
