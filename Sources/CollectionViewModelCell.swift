@@ -41,7 +41,7 @@ open class CollectionCellBasic: CollectionViewModelCell {
     open func reset() {}
     open func update(with item: Item) {}
     
-    @objc public func performCallback(_ sender: Any) {
+    @objc open func performCallback(_ sender: Any) {
         delegate?.action(for: self, sender: sender)
     }
 }

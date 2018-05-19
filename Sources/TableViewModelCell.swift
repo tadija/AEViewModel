@@ -60,7 +60,7 @@ open class TableCellBasic: TableViewModelCell {
         }
     }
 
-    @objc public func performCallback(_ sender: Any) {
+    @objc open func performCallback(_ sender: Any) {
         delegate?.action(for: self, sender: sender)
     }
 
