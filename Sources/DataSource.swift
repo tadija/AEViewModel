@@ -19,10 +19,10 @@ public protocol Section {
 
 public protocol Item {
     var identifier: String { get }
-    var model: Model { get }
+    var viewModel: ViewModel { get }
 }
 
-public protocol Model {
+public protocol ViewModel {
     var title: String? { get }
     var detail: String? { get }
     var image: String? { get }
@@ -40,8 +40,8 @@ public extension DataSource {
     func identifier(at indexPath: IndexPath) -> String {
         return item(at: indexPath).identifier
     }
-    func model(at indexPath: IndexPath) -> Model {
-        return item(at: indexPath).model
+    func viewModel(at indexPath: IndexPath) -> ViewModel {
+        return item(at: indexPath).viewModel
     }
 
     var uniqueIdentifiers: Set<String> {
@@ -59,7 +59,7 @@ public extension Section {
     var footer: String? { return nil }
 }
 
-public extension Model {
+public extension ViewModel {
     var title: String? { return nil }
     var detail: String? { return nil }
     var image: String? { return nil }

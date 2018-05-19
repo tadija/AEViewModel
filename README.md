@@ -51,10 +51,11 @@ It may not be quick and easy (for everyone) to grasp at the first look, but if y
 
 I suggest to start by getting familiar with [DataSource.swift](Sources/DataSource.swift), because you're essentially gonna use that stuff for everything.
 
-These are just very simple protocols starting with `DataSource` which must have sections, then `Section` must have items, where each `Item` contains `identifier` and `Model`. Model here is whatever you choose it to be, easy like this:
+These are just very simple protocols starting with `DataSource` which must have sections, then `Section` must have items, where each `Item` contains `identifier` and a `ViewModel`.
 
 ```swift
-struct MyCustomModel: Model {}
+/// - Note: ViewModel is whatever you choose it to be, easy like this:
+struct MyCustomWhatever: ViewModel {}
 ```
 
 ### BasicDataSource
@@ -81,7 +82,7 @@ func configure()
 /// Called in `configure` and `prepareForReuse`, reset interface here.
 func reset()
 
-/// Called in `tableView(_:cellForRowAt:)`, update interface with model here.
+/// Called in `tableView(_:cellForRowAt:)`, update interface with view model here.
 func update(with item: Item)
 ```
 
@@ -172,9 +173,9 @@ struct ExampleDataSource: DataSource {
             BasicItem(identifier: Id.cells, title: "Cells")
         ]),
         BasicSection(header: "Demo", items: [
-            BasicItem(identifier: Id.form, title: "Form", detail: "Static View Model"),
-            BasicItem(identifier: Id.settings, title: "Settings", detail: "JSON View Model"),
-            BasicItem(identifier: Id.github, title: "Github", detail: "Remote View Model")
+            BasicItem(identifier: Id.form, title: "Form", detail: "Static Data Source"),
+            BasicItem(identifier: Id.settings, title: "Settings", detail: "JSON Data Source"),
+            BasicItem(identifier: Id.github, title: "Github", detail: "Remote Data Source")
         ])
     ]
 }
