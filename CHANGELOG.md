@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 0.7.0
+
+- Renamed `ViewModel` -> `DataSource`
+- Renamed `Model` -> `ViewModel`
+- Moved `child` from `ViewModel` into `Item`
+- Removed `title`, `detail`, `image` properties from `ViewModel`
+- Added `callback(_:)` to `ViewModelCell`
+- Added default view models for slider and toggle cells
+- Renamed a few cells
+
 ## Version 0.6.6
 
 - Added `userInfo` property to `ViewModelCell`
@@ -42,7 +52,7 @@
 
 ## Version 0.5.0
 
-- Added initial support for UICollectionViewController
+- Added initial support for `UICollectionViewController`
 - Changed class names to have better compatibility in complex projects
 - Minor improvements and bug fixes
 

@@ -9,13 +9,13 @@ import AEViewModel
 
 final class CellsTVMC: TableViewModelController {
 
-    typealias Id = CellsViewModel.Id
+    typealias Id = CellsDataSource.Id
 
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = CellsViewModel()
+        dataSource = CellsDataSource()
     }
 
     // MARK: Override
@@ -33,23 +33,23 @@ final class CellsTVMC: TableViewModelController {
             return .leftDetail
         case .rightDetail:
             return .rightDetail
-        case .textInput:
-            return .textInput
+        case .textField:
+            return .textField
         case .slider:
             return .slider
-        case .sliderLabels:
-            return .sliderLabels
+        case .sliderWithLabels:
+            return .sliderWithLabels
         case .toggle:
             return .toggle
-        case .toggleSubtitle:
-            return .toggleSubtitle
+        case .toggleWithSubtitle:
+            return .toggleWithSubtitle
         case .button:
             return .button
         }
     }
 
     override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
-        guard let id = Id(rawValue: viewModel.identifier(at: indexPath)) else {
+        guard let id = Id(rawValue: dataSource.identifier(at: indexPath)) else {
             fatalError("Unsupported cell!")
         }
         tableView.deselectRow(at: indexPath, animated: true)

@@ -7,7 +7,7 @@
 import UIKit
 
 public protocol ViewModelCellDelegate: class {
-    func action(for cell: ViewModelCell, sender: Any)
+    func callback(from cell: ViewModelCell, sender: Any)
 }
 
 public protocol ViewModelCell: class {
@@ -17,6 +17,8 @@ public protocol ViewModelCell: class {
     func configure()
     func reset()
     func update(with item: Item)
+
+    func callback(_ sender: Any)
 }
 
 public extension ViewModelCell {

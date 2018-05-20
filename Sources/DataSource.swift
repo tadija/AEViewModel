@@ -6,7 +6,7 @@
 
 import Foundation
 
-public protocol ViewModel {
+public protocol DataSource {
     var title: String? { get }
     var sections: [Section] { get }
 }
@@ -19,19 +19,15 @@ public protocol Section {
 
 public protocol Item {
     var identifier: String { get }
-    var model: Model { get }
+    var viewModel: ViewModel { get }
+    var child: DataSource? { get }
 }
 
-public protocol Model {
-    var title: String? { get }
-    var detail: String? { get }
-    var image: String? { get }
-    var child: ViewModel? { get }
-}
+public protocol ViewModel {}
 
 // MARK: - Helpers
 
-public extension ViewModel {
+public extension DataSource {
     var title: String? { return nil }
 
     func item(at indexPath: IndexPath) -> Item {
@@ -40,8 +36,8 @@ public extension ViewModel {
     func identifier(at indexPath: IndexPath) -> String {
         return item(at: indexPath).identifier
     }
-    func model(at indexPath: IndexPath) -> Model {
-        return item(at: indexPath).model
+    func viewModel(at indexPath: IndexPath) -> ViewModel {
+        return item(at: indexPath).viewModel
     }
 
     var uniqueIdentifiers: Set<String> {
@@ -59,9 +55,6 @@ public extension Section {
     var footer: String? { return nil }
 }
 
-public extension Model {
-    var title: String? { return nil }
-    var detail: String? { return nil }
-    var image: String? { return nil }
-    var child: ViewModel? { return nil }
+public extension Item {
+    var child: DataSource? { return nil }
 }
