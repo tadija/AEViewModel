@@ -33,12 +33,21 @@ struct CellsDataSource: DataSource {
             ]),
             BasicSection(header: "Input", items: [
                 BasicItem(identifier: Id.textField.rawValue, title: "Text Input"),
-                BasicItem(identifier: Id.slider.rawValue),
-                BasicItem(identifier: Id.sliderWithLabels.rawValue, title: "Left", detail: "Right"),
+                BasicItem(identifier: Id.slider.rawValue, viewModel: TableCellSlider.ViewModel(value: 0.5)),
+                BasicItem(identifier: Id.sliderWithLabels.rawValue,
+                          viewModel: TableCellSliderWithLabels.ViewModel(leftText: "Left",
+                                                                         centerText: "Center",
+                                                                         rightText: "Right",
+                                                                         value: 0.75)
+                ),
             ]),
             BasicSection(header: "Actions", items: [
-                BasicItem(identifier: Id.toggle.rawValue, title: "Toggle"),
-                BasicItem(identifier: Id.toggleWithSubtitle.rawValue, title: "Togle", detail: "Subtitle"),
+                BasicItem(identifier: Id.toggle.rawValue,
+                          viewModel: TableCellToggle.ViewModel(title: "Title", isOn: true)),
+                BasicItem(identifier: Id.toggleWithSubtitle.rawValue,
+                          viewModel: TableCellToggleWithSubtitle.ViewModel(title: "Title",
+                                                                           subtitle: "Subtitle",
+                                                                           isOn: false)),
                 BasicItem(identifier: Id.button.rawValue, title: "Button"),
             ]),
         ]
