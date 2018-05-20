@@ -6,7 +6,7 @@
 
 import AEViewModel
 
-struct SettingsViewModel: ViewModel {
+struct SettingsDataSource: DataSource {
     struct Id {
         static let profile = "profile"
         static let airplane = "airplane"
@@ -31,7 +31,7 @@ struct SettingsViewModel: ViewModel {
         do {
             let url = Bundle.main.url(forResource: "settings", withExtension: "json")!
             let data = try Data(contentsOf: url)
-            let viewModel = try BasicViewModel(with: data)
+            let viewModel = try BasicDataSource(with: data)
             title = viewModel.title
             sections = viewModel.sections
         } catch {

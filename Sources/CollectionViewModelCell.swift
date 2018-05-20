@@ -42,8 +42,12 @@ open class CollectionCellBasic: CollectionViewModelCell {
     open func reset() {}
     open func update(with item: Item) {}
     
-    @objc open func performCallback(_ sender: Any) {
-        delegate?.action(for: self, sender: sender)
+    open func callback(_ sender: Any) {
+        delegate?.callback(from: self, sender: sender)
+    }
+    
+    @objc public func performCallback(_ sender: Any) {
+        callback(sender)
     }
 }
 

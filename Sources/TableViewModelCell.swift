@@ -13,11 +13,11 @@ public enum TableCellType {
     case subtitle
     case leftDetail
     case rightDetail
-    case textInput
+    case textField
     case slider
-    case sliderLabels
+    case sliderWithLabels
     case toggle
-    case toggleSubtitle
+    case toggleWithSubtitle
     case button
     case customClass(TableViewModelCell.Type)
     case customNib(TableViewModelCell.Type)
@@ -54,21 +54,27 @@ open class TableCellBasic: TableViewModelCell {
         imageView?.image = nil
     }
     open func update(with item: Item) {
-        textLabel?.text = item.model.title
-        detailTextLabel?.text = item.model.detail
-        if let imageName = item.model.image, let image = UIImage(named: imageName) {
-            imageView?.image = image
+        if let viewModel = item.viewModel as? BasicViewModel {
+            textLabel?.text = viewModel.title
+            detailTextLabel?.text = viewModel.detail
+            if let imageName = viewModel.image, let image = UIImage(named: imageName) {
+                imageView?.image = image
+            }
         }
     }
 
-    @objc open func performCallback(_ sender: Any) {
-        delegate?.action(for: self, sender: sender)
+    open func callback(_ sender: Any) {
+        delegate?.callback(from: self, sender: sender)
     }
 
     public func enforceMinimumHeight(for view: UIView, height: CGFloat = 44) {
         let height = view.heightAnchor.constraint(greaterThanOrEqualToConstant: height)
         height.priority = .defaultHigh
         height.isActive = true
+    }
+
+    @objc public func performCallback(_ sender: Any) {
+        callback(sender)
     }
 }
 
@@ -119,6 +125,16 @@ open class TableCellStack: TableCellBasic {
 }
     
 open class TableCellToggle: TableCellBasic {
+    public struct ViewModel: AEViewModel.ViewModel {
+        public let title: String
+        public let isOn: Bool
+
+        public init(title: String, isOn: Bool) {
+            self.title = title
+            self.isOn = isOn
+        }
+    }
+
     public let toggle = UISwitch()
     
     open override func configure() {
@@ -128,9 +144,29 @@ open class TableCellToggle: TableCellBasic {
         accessoryView = toggle
         toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? ViewModel {
+            textLabel?.text = viewModel.title
+            toggle.isOn = viewModel.isOn
+        } else {
+            super.update(with: item)
+        }
+    }
 }
 
-open class TableCellToggleSubtitle: TableCellSubtitle {
+open class TableCellToggleWithSubtitle: TableCellSubtitle {
+    public struct ViewModel: AEViewModel.ViewModel {
+        public let title: String
+        public let subtitle: String
+        public let isOn: Bool
+
+        public init(title: String, subtitle: String, isOn: Bool) {
+            self.title = title
+            self.subtitle = subtitle
+            self.isOn = isOn
+        }
+    }
+
     public let toggle = UISwitch()
     
     open override func configure() {
@@ -140,9 +176,18 @@ open class TableCellToggleSubtitle: TableCellSubtitle {
         accessoryView = toggle
         toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? ViewModel {
+            textLabel?.text = viewModel.title
+            detailTextLabel?.text = viewModel.subtitle
+            toggle.isOn = viewModel.isOn
+        } else {
+            super.update(with: item)
+        }
+    }
 }
 
-open class TableCellTextInput: TableCellBasic {
+open class TableCellTextField: TableCellBasic {
     public let textField = UITextField()
     
     open override func configure() {
@@ -163,7 +208,9 @@ open class TableCellTextInput: TableCellBasic {
         textField.addTarget(self, action: #selector(performCallback(_:)), for: .editingChanged)
     }
     open override func update(with item: Item) {
-        textField.placeholder = item.model.title
+        if let viewModel = item.viewModel as? BasicViewModel {
+            textField.placeholder = viewModel.title
+        }
     }
 }
 
@@ -187,11 +234,21 @@ open class TableCellButton: TableCellBasic {
         button.addTarget(self, action: #selector(performCallback(_:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
-        button.setTitle(item.model.title, for: .normal)
+        if let viewModel = item.viewModel as? BasicViewModel {
+            button.setTitle(viewModel.title, for: .normal)
+        }
     }
 }
 
 open class TableCellSlider: TableCellBasic {
+    public struct ViewModel: AEViewModel.ViewModel {
+        public let value: Float
+
+        public init(value: Float) {
+            self.value = value
+        }
+    }
+
     public let slider = UISlider()
 
     open override func configure() {
@@ -210,9 +267,28 @@ open class TableCellSlider: TableCellBasic {
 
         slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? ViewModel {
+            slider.value = viewModel.value
+        }
+    }
 }
 
-open class TableCellSliderLabels: TableCellStack {
+open class TableCellSliderWithLabels: TableCellStack {
+    public struct ViewModel: AEViewModel.ViewModel {
+        public let leftText: String?
+        public let centerText: String?
+        public let rightText: String?
+        public let value: Float
+        
+        public init(leftText: String? = nil, centerText: String? = nil, rightText: String? = nil, value: Float) {
+            self.leftText = leftText
+            self.centerText = centerText
+            self.rightText = rightText
+            self.value = value
+        }
+    }
+
     public let labelStack = UIStackView()
     public let leftLabel = UILabel()
     public let centerLabel = UILabel()
@@ -242,7 +318,11 @@ open class TableCellSliderLabels: TableCellStack {
         slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
-        leftLabel.text = item.model.title
-        rightLabel.text = item.model.detail
+        if let viewModel = item.viewModel as? ViewModel {
+            leftLabel.text = viewModel.leftText
+            centerLabel.text = viewModel.centerText
+            rightLabel.text = viewModel.rightText
+            slider.value = viewModel.value
+        }
     }
 }

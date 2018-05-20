@@ -28,9 +28,11 @@ final class SettingsProfileCell: TableCellBasic {
     }
     
     override func update(with item: Item) {
-        name.text = item.model.title
-        subtitle.text = item.model.detail
-        profileImageView.loadImage(from: URL(string: "https://avatars1.githubusercontent.com/u/2762374"))
+        if let viewModel = item.viewModel as? BasicViewModel {
+            name.text = viewModel.title
+            subtitle.text = viewModel.detail
+            profileImageView.loadImage(from: URL(string: "https://avatars1.githubusercontent.com/u/2762374"))
+        }
     }
     
     // MARK: Helpers
