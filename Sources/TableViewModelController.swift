@@ -54,7 +54,7 @@ open class TableViewModelController: UITableViewController, ViewModelCellDelegat
 
     // MARK: ViewModelCellDelegate
 
-    public func action(for cell: ViewModelCell, sender: Any) {
+    public func callback(from cell: ViewModelCell, sender: Any) {
         if let cell = cell as? TableViewModelCell, let indexPath = tableView.indexPath(for: cell) {
             action(for: cell, at: indexPath, sender: sender)
         }

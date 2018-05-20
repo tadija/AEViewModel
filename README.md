@@ -54,7 +54,7 @@ I suggest to start by getting familiar with [DataSource.swift](Sources/DataSourc
 These are just very simple protocols starting with `DataSource` which must have sections, then `Section` must have items, where each `Item` contains `identifier: String`, `viewModel: ViewModel` and `child: DataSource?`.
 
 ```swift
-/// - Note: ViewModel is whatever you choose it to be, easy like this:
+/// ViewModel is whatever you choose it to be, easy like this:
 struct MyCustomWhatever: ViewModel {}
 ```
 
@@ -84,6 +84,11 @@ func reset()
 
 /// Called in `tableView(_:cellForRowAt:)`, update interface with view model here.
 func update(with item: Item)
+
+/// Called in `tableView(_:didSelectRowAt:)` and whenever specific cell calls it (ie. toggle switch).
+/// Default implementation forwards call to `delegate` so you should just call this method
+/// where it makes sense for your cell, or override with custom logic and call `super` at some moment.
+func callback(_ sender: Any)
 ```
 
 To use default callback from cell to view controller just call `performCallback(_:)` where it makes sense for your cell, or override it with custom logic and call `super` at some moment.
@@ -144,7 +149,7 @@ open func update(_ cell: c, at indexPath: IndexPath) {
 }
 
 /// - Note: Handle action from cell for the given index path.
-/// This will be called in `tableView(_:didSelectRowAt:)` or when `performCallback(_:)` is called
+/// This will be called in `tableView(_:didSelectRowAt:)` or when `callback(_:)` is called
 open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {}
 ```
 

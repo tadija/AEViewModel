@@ -63,14 +63,18 @@ open class TableCellBasic: TableViewModelCell {
         }
     }
 
-    @objc open func performCallback(_ sender: Any) {
-        delegate?.action(for: self, sender: sender)
+    open func callback(_ sender: Any) {
+        delegate?.callback(from: self, sender: sender)
     }
 
     public func enforceMinimumHeight(for view: UIView, height: CGFloat = 44) {
         let height = view.heightAnchor.constraint(greaterThanOrEqualToConstant: height)
         height.priority = .defaultHigh
         height.isActive = true
+    }
+
+    @objc public func performCallback(_ sender: Any) {
+        callback(sender)
     }
 }
 

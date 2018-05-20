@@ -54,7 +54,7 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
 
     // MARK: ViewModelCellDelegate
 
-    public func action(for cell: ViewModelCell, sender: Any) {
+    public func callback(from cell: ViewModelCell, sender: Any) {
         if let cell = cell as? CollectionViewModelCell, let indexPath = collectionView?.indexPath(for: cell) {
             action(for: cell, at: indexPath, sender: sender)
         }
