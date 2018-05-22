@@ -18,7 +18,7 @@ final class GithubRepoCell: TableCellBasic {
     @IBOutlet weak var forks: UILabel!
     @IBOutlet weak var stars: UILabel!
     
-    // MARK: ViewModelCell
+    // MARK: Override
     
     override func configure() {
         super.configure()

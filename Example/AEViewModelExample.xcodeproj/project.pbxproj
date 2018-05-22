@@ -8,24 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		8B0EA5D520646FEC002DA0AC /* IndexPath+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0EA5D320646FEC002DA0AC /* IndexPath+Helpers.swift */; };
-		8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */; };
+		8B2EAE1F1EEB4245001FE287 /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2EAE1E1EEB4245001FE287 /* SettingsTVC.swift */; };
 		8B2EAE4A1EF0889F001FE287 /* AEViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; };
 		8B2EAE4B1EF0889F001FE287 /* AEViewModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2EAE471EF0888E001FE287 /* AEViewModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8B7281AE1EE2E607007245E7 /* ExampleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281AD1EE2E607007245E7 /* ExampleDataSource.swift */; };
-		8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */; };
+		8B7281B71EE2F849007245E7 /* ExampleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B61EE2F849007245E7 /* ExampleTVC.swift */; };
 		8B7281C51EE340E5007245E7 /* FormDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C41EE340E5007245E7 /* FormDataSource.swift */; };
-		8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C71EE346A9007245E7 /* FormTVMC.swift */; };
+		8B7281C81EE346A9007245E7 /* FormTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281C71EE346A9007245E7 /* FormTVC.swift */; };
 		8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B893A7B1E98606700B3101B /* AppDelegate.swift */; };
 		8B893A811E98606700B3101B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A7F1E98606700B3101B /* Main.storyboard */; };
 		8B893A831E98606700B3101B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A821E98606700B3101B /* Assets.xcassets */; };
 		8B893A861E98606700B3101B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A841E98606700B3101B /* LaunchScreen.storyboard */; };
 		8B893A8E1E9860C300B3101B /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B893A8D1E9860C300B3101B /* settings.json */; };
 		8B93712C20ACD75D0087DC89 /* CellsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93712B20ACD75D0087DC89 /* CellsDataSource.swift */; };
-		8B93712F20ACD76D0087DC89 /* CellsTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93712E20ACD76D0087DC89 /* CellsTVMC.swift */; };
+		8B93712F20ACD76D0087DC89 /* CellsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93712E20ACD76D0087DC89 /* CellsTVC.swift */; };
 		8B93F639206559420018F6BD /* GithubDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93F638206559420018F6BD /* GithubDataSource.swift */; };
 		8BB518001EAC19B700A181AE /* SettingsProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */; };
 		8BE0C4EF1EF32F4200E6F95F /* SettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C4EE1EF32F4200E6F95F /* SettingsDataSource.swift */; };
-		8BE0C5151EF4945300E6F95F /* GithubTVMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C5141EF4945300E6F95F /* GithubTVMC.swift */; };
+		8BE0C5151EF4945300E6F95F /* GithubTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0C5141EF4945300E6F95F /* GithubTVC.swift */; };
 		8BF92E3D1EF5CC3300278777 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF92E3C1EF5CC3300278777 /* ImageLoader.swift */; };
 		8BF92E411EF5F1F700278777 /* GithubRepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF92E401EF5F1F700278777 /* GithubRepoCell.swift */; };
 		8BF92E441EF5F2AD00278777 /* GithubRepoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BF92E431EF5F2AD00278777 /* GithubRepoCell.xib */; };
@@ -71,12 +71,12 @@
 
 /* Begin PBXFileReference section */
 		8B0EA5D320646FEC002DA0AC /* IndexPath+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+Helpers.swift"; sourceTree = "<group>"; };
-		8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVMC.swift; sourceTree = "<group>"; };
+		8B2EAE1E1EEB4245001FE287 /* SettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
 		8B2EAE411EF0888E001FE287 /* AEViewModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AEViewModel.xcodeproj; path = ../AEViewModel.xcodeproj; sourceTree = "<group>"; };
 		8B7281AD1EE2E607007245E7 /* ExampleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleDataSource.swift; sourceTree = "<group>"; };
-		8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTVMC.swift; sourceTree = "<group>"; };
+		8B7281B61EE2F849007245E7 /* ExampleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTVC.swift; sourceTree = "<group>"; };
 		8B7281C41EE340E5007245E7 /* FormDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDataSource.swift; sourceTree = "<group>"; };
-		8B7281C71EE346A9007245E7 /* FormTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTVMC.swift; sourceTree = "<group>"; };
+		8B7281C71EE346A9007245E7 /* FormTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTVC.swift; sourceTree = "<group>"; };
 		8B893A781E98606700B3101B /* AEViewModelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AEViewModelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893A7B1E98606700B3101B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B893A801E98606700B3101B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,11 +85,11 @@
 		8B893A871E98606700B3101B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B893A8D1E9860C300B3101B /* settings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = settings.json; path = ../Resources/settings.json; sourceTree = "<group>"; };
 		8B93712B20ACD75D0087DC89 /* CellsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsDataSource.swift; sourceTree = "<group>"; };
-		8B93712E20ACD76D0087DC89 /* CellsTVMC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsTVMC.swift; sourceTree = "<group>"; };
+		8B93712E20ACD76D0087DC89 /* CellsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellsTVC.swift; sourceTree = "<group>"; };
 		8B93F638206559420018F6BD /* GithubDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubDataSource.swift; sourceTree = "<group>"; };
 		8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsProfileCell.swift; sourceTree = "<group>"; };
 		8BE0C4EE1EF32F4200E6F95F /* SettingsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataSource.swift; sourceTree = "<group>"; };
-		8BE0C5141EF4945300E6F95F /* GithubTVMC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubTVMC.swift; sourceTree = "<group>"; };
+		8BE0C5141EF4945300E6F95F /* GithubTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubTVC.swift; sourceTree = "<group>"; };
 		8BF92E3C1EF5CC3300278777 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		8BF92E401EF5F1F700278777 /* GithubRepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubRepoCell.swift; sourceTree = "<group>"; };
 		8BF92E431EF5F2AD00278777 /* GithubRepoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GithubRepoCell.xib; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				8B93712B20ACD75D0087DC89 /* CellsDataSource.swift */,
-				8B93712E20ACD76D0087DC89 /* CellsTVMC.swift */,
+				8B93712E20ACD76D0087DC89 /* CellsTVC.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -181,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				8B7281AD1EE2E607007245E7 /* ExampleDataSource.swift */,
-				8B7281B61EE2F849007245E7 /* ExampleTVMC.swift */,
+				8B7281B61EE2F849007245E7 /* ExampleTVC.swift */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				8B7281C41EE340E5007245E7 /* FormDataSource.swift */,
-				8B7281C71EE346A9007245E7 /* FormTVMC.swift */,
+				8B7281C71EE346A9007245E7 /* FormTVC.swift */,
 			);
 			name = Form;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				8BE0C4EE1EF32F4200E6F95F /* SettingsDataSource.swift */,
-				8B2EAE1E1EEB4245001FE287 /* SettingsTVMC.swift */,
+				8B2EAE1E1EEB4245001FE287 /* SettingsTVC.swift */,
 				8BB517FF1EAC19B700A181AE /* SettingsProfileCell.swift */,
 				8BE0C50A1EF4813A00E6F95F /* Resources */,
 			);
@@ -218,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				8B93F638206559420018F6BD /* GithubDataSource.swift */,
-				8BE0C5141EF4945300E6F95F /* GithubTVMC.swift */,
+				8BE0C5141EF4945300E6F95F /* GithubTVC.swift */,
 				8BF92E401EF5F1F700278777 /* GithubRepoCell.swift */,
 				8BF92E431EF5F2AD00278777 /* GithubRepoCell.xib */,
 			);
@@ -326,17 +326,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BE0C5151EF4945300E6F95F /* GithubTVMC.swift in Sources */,
-				8B7281C81EE346A9007245E7 /* FormTVMC.swift in Sources */,
+				8BE0C5151EF4945300E6F95F /* GithubTVC.swift in Sources */,
+				8B7281C81EE346A9007245E7 /* FormTVC.swift in Sources */,
 				8B7281C51EE340E5007245E7 /* FormDataSource.swift in Sources */,
-				8B7281B71EE2F849007245E7 /* ExampleTVMC.swift in Sources */,
+				8B7281B71EE2F849007245E7 /* ExampleTVC.swift in Sources */,
 				8B93712C20ACD75D0087DC89 /* CellsDataSource.swift in Sources */,
 				8BE0C4EF1EF32F4200E6F95F /* SettingsDataSource.swift in Sources */,
-				8B93712F20ACD76D0087DC89 /* CellsTVMC.swift in Sources */,
+				8B93712F20ACD76D0087DC89 /* CellsTVC.swift in Sources */,
 				8BF92E3D1EF5CC3300278777 /* ImageLoader.swift in Sources */,
 				8B7281AE1EE2E607007245E7 /* ExampleDataSource.swift in Sources */,
 				8B893A7C1E98606700B3101B /* AppDelegate.swift in Sources */,
-				8B2EAE1F1EEB4245001FE287 /* SettingsTVMC.swift in Sources */,
+				8B2EAE1F1EEB4245001FE287 /* SettingsTVC.swift in Sources */,
 				8BF92E411EF5F1F700278777 /* GithubRepoCell.swift in Sources */,
 				8BB518001EAC19B700A181AE /* SettingsProfileCell.swift in Sources */,
 				8B0EA5D520646FEC002DA0AC /* IndexPath+Helpers.swift in Sources */,

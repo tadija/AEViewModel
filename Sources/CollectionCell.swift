@@ -6,18 +6,18 @@
 
 import UIKit
 
-public typealias CollectionViewModelCell = UICollectionViewCell & ViewModelCell
+public typealias CollectionCell = UICollectionViewCell & Cell
 
 public enum CollectionCellType {
     case basic
-    case customClass(CollectionViewModelCell.Type)
-    case customNib(CollectionViewModelCell.Type)
+    case customClass(CollectionCell.Type)
+    case customNib(CollectionCell.Type)
 }
 
 // MARK: - Cells
     
-open class CollectionCellBasic: CollectionViewModelCell {
-    public weak var delegate: ViewModelCellDelegate?
+open class CollectionCellBasic: CollectionCell {
+    public weak var delegate: CellDelegate?
     open var userInfo = [AnyHashable : Any]()
 
     public override init(frame: CGRect) {
@@ -42,12 +42,15 @@ open class CollectionCellBasic: CollectionViewModelCell {
     open func reset() {}
     open func update(with item: Item) {}
     
-    open func callback(_ sender: Any) {
+    open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
+        if let userInfo = userInfo {
+            self.userInfo = userInfo
+        }
         delegate?.callback(from: self, sender: sender)
     }
     
     @objc public func performCallback(_ sender: Any) {
-        callback(sender)
+        callback(sender: sender)
     }
 }
 

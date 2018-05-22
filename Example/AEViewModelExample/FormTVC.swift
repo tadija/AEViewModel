@@ -7,7 +7,7 @@
 import UIKit
 import AEViewModel
 
-final class FormTVMC: TableViewModelController, UITextFieldDelegate {
+final class FormTVC: TableViewController, UITextFieldDelegate {
     
     typealias Id = FormDataSource.Id
 
@@ -37,7 +37,7 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
         }
     }
     
-    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: TableCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
         let id = dataSource.identifier(at: indexPath)
@@ -55,7 +55,7 @@ final class FormTVMC: TableViewModelController, UITextFieldDelegate {
         }
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+    override func action(for cell: TableCell, at indexPath: IndexPath, sender: Any) {
         let id = dataSource.identifier(at: indexPath)
         switch id {
         case Id.username:

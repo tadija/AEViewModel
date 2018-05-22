@@ -18,13 +18,13 @@
 - [Intro](#intro)
 - [Features](#features)
 - [Usage](#usage)
-	- [ViewModel](#viewmodel)
-	- [BasicViewModel](#basicviewmodel)
-	- [ViewModelCell](#viewmodelcell)
-	- [TableViewModelCell](#tableviewmodelcell)
-	- [CollectionViewModelCell](#collectionviewmodelcell)
-	- [TableViewModelController](#tableviewmodelcontroller)
-	- [CollectionViewModelController](#collectionviewmodelcontroller)
+	- [DataSource](#datasource)
+	- [BasicDataSource](#basicdatasource)
+	- [Cell](#cell)
+	- [TableCell](#tablecell)
+	- [CollectionCell](#collectioncell)
+	- [TableViewController](#tableviewcontroller)
+	- [CollectionViewController](#collectionviewcontroller)
 	- [Example](#example)
 - [Installation](#installation)
 - [License](#license)
@@ -64,13 +64,13 @@ There are simple structs conforming to all of these protocols in [BasicDataSourc
 
 In case of something more specific, create custom types that conform to these protocols and use those instead.
 
-### ViewModelCell
+### Cell
 
-There is a simple protocol in [ViewModelCell.swift](Sources/ViewModelCell.swift) which is used both for table and collection view cells. Note that `TableViewModelCell` and `CollectionViewModelCell` are just a simple typealiases:
+There is a simple protocol in [Cell.swift](Sources/Cell.swift) which is used both for table and collection view cells. Note that `TableCell` and `CollectionCell` are just a simple typealiases:
 
 ```swift
-public typealias TableViewModelCell = UITableViewCell & ViewModelCell
-public typealias CollectionViewModelCell = UICollectionViewCell & ViewModelCell
+public typealias TableCell = UITableViewCell & Cell
+public typealias CollectionCell = UICollectionViewCell & Cell
 ```
 
 When creating custom cells, the easiest way is to subclass from `TableCellBasic` or `CollectionCellBasic` and override methods from this protocol:
@@ -86,14 +86,12 @@ func reset()
 func update(with item: Item)
 
 /// Called in `tableView(_:didSelectRowAt:)` and whenever specific cell calls it (ie. toggle switch).
-/// Default implementation forwards call to `delegate` so you should just call this method
-/// where it makes sense for your cell, or override with custom logic and call `super` at some moment.
-func callback(_ sender: Any)
+/// By default this call will be forwarded to `delegate` (after setting some `userInfo` optionally).
+/// If needed, call this where it makes sense for your cell, or override and call `super` at some moment.
+func callback(userInfo: [AnyHashable: Any]?, sender: Any)
 ```
 
-To use default callback from cell to view controller just call `performCallback(_:)` where it makes sense for your cell, or override it with custom logic and call `super` at some moment.
-
-### TableViewModelCell
+### TableCell
 
 There are a few often used table view cells provided out of the box:
 
@@ -109,26 +107,26 @@ public enum TableCellType {
     case toggle
     case toggleWithSubtitle
     case button
-    case customClass(TableViewModelCell.Type)
-    case customNib(TableViewModelCell.Type)
+    case customClass(TableCell.Type)
+    case customNib(TableCell.Type)
 }
 ```
 
-### CollectionViewModelCell
+### CollectionCell
 
 While for the collection view cells you probably want to create something custom... :)
 
 ```swift
 public enum CollectionCellType {
     case basic
-    case customClass(CollectionViewModelCell.Type)
-    case customNib(CollectionViewModelCell.Type)
+    case customClass(CollectionCell.Type)
+    case customNib(CollectionCell.Type)
 }
 ```
 
-### TableViewModelController
+### TableViewController
 
-Final part of this story is `TableViewModelController`, which you guessed it, inherits from `UITableViewController`.  
+Final part of this story is `TableViewController`, which you guessed it, inherits from `UITableViewController`.  
 
 Only this one is nice enough to register, dequeue and update all cells you'll ever need by just configuring its `dataSource` property and overriding these methods:
 
@@ -140,9 +138,9 @@ open func cellType(forIdentifier identifier: String) -> TableCellType {
 }
 
 /// - Note: Update cell at the given index path. 
-/// `TableViewModelController` does this by default, so if that's enough for your case just skip this,
+/// `TableViewController` does this by default, so if that's enough for your case just skip this,
 /// otherwise call `super.update(cell, at: indexPath)` and add custom logic after that.
-open func update(_ cell: c, at indexPath: IndexPath) {
+open func update(_ cell: TableCell, at indexPath: IndexPath) {
     let item = viewModel.item(at: indexPath)
     cell.update(with: item)
     cell.delegate = self
@@ -150,12 +148,12 @@ open func update(_ cell: c, at indexPath: IndexPath) {
 
 /// - Note: Handle action from cell for the given index path.
 /// This will be called in `tableView(_:didSelectRowAt:)` or when `callback(_:)` is called
-open func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {}
+open func action(for cell: TableCell, at indexPath: IndexPath, sender: Any) {}
 ```
 
-### CollectionViewModelController
+### CollectionViewController
 
-This is almost a duplicate of `TableViewModelController` but it's using `CollectionViewModelCell` so there's that.
+This is almost a duplicate of `TableViewController` but it's using `CollectionCell` so there's that.
 
 ### Example
 
@@ -185,7 +183,7 @@ struct ExampleDataSource: DataSource {
     ]
 }
 
-final class ExampleTVMC: TableViewModelController {
+final class ExampleTVC: TableViewController {
     
     typealias Id = ExampleDataSource.Id
     
@@ -202,21 +200,21 @@ final class ExampleTVMC: TableViewModelController {
         return .subtitle
     }
     
-    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: TableCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         cell.accessoryType = .disclosureIndicator
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+    override func action(for cell: TableCell, at indexPath: IndexPath, sender: Any) {
         switch dataSource.identifier(at: indexPath) {
         case Id.cells:
-            show(CellsTVMC(), sender: self)
+            show(CellsTVC(), sender: self)
         case Id.form:
-            show(FormTVMC(), sender: self)
+            show(FormTVC(), sender: self)
         case Id.settings:
-            show(MainSettingsTVMC(), sender: self)
+            show(MainSettingsTVC(), sender: self)
         case Id.github:
-            show(GithubTVMC(), sender: self)
+            show(GithubTVC(), sender: self)
         default:
             break
         }

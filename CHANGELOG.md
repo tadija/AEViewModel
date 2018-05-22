@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 0.8.0
+
+- Renamed `ViewModelCell` -> `Cell`
+- Renamed `ViewModelCellDelegate` -> `CellDelegate`
+- Renamed `TableViewModelCell` -> `TableCell`
+- Renamed `TableViewModelController` -> `TableViewController`
+- Renamed `CollectionViewModelCell` -> `CollectionCell`
+- Renamed `CollectionViewModelController` -> `CollectionViewController`
+- Added `userInfo` to `callback` in `ViewModelCell`
+- Added `TableCellUserInfo` enum for default `userInfo` keys
+
 ## Version 0.7.0
 
 - Renamed `ViewModel` -> `DataSource`

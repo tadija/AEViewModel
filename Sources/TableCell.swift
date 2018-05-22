@@ -6,7 +6,7 @@
 
 import UIKit
 
-public typealias TableViewModelCell = UITableViewCell & ViewModelCell
+public typealias TableCell = UITableViewCell & Cell
 
 public enum TableCellType {
     case basic
@@ -19,14 +19,19 @@ public enum TableCellType {
     case toggle
     case toggleWithSubtitle
     case button
-    case customClass(TableViewModelCell.Type)
-    case customNib(TableViewModelCell.Type)
+    case customClass(TableCell.Type)
+    case customNib(TableCell.Type)
+}
+
+public enum TableCellUserInfo: String {
+    case sliderValue
+    case toggleIsOn
 }
 
 // MARK: - System Cells
     
-open class TableCellBasic: TableViewModelCell {
-    public weak var delegate: ViewModelCellDelegate?
+open class TableCellBasic: TableCell {
+    public weak var delegate: CellDelegate?
     open var userInfo = [AnyHashable : Any]()
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -63,7 +68,10 @@ open class TableCellBasic: TableViewModelCell {
         }
     }
 
-    open func callback(_ sender: Any) {
+    open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
+        if let userInfo = userInfo {
+            self.userInfo = userInfo
+        }
         delegate?.callback(from: self, sender: sender)
     }
 
@@ -74,7 +82,7 @@ open class TableCellBasic: TableViewModelCell {
     }
 
     @objc public func performCallback(_ sender: Any) {
-        callback(sender)
+        callback(sender: sender)
     }
 }
 
@@ -152,6 +160,9 @@ open class TableCellToggle: TableCellBasic {
             super.update(with: item)
         }
     }
+    open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
+        super.callback(userInfo: [TableCellUserInfo.toggleIsOn: toggle.isOn], sender: sender)
+    }
 }
 
 open class TableCellToggleWithSubtitle: TableCellSubtitle {
@@ -184,6 +195,9 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
         } else {
             super.update(with: item)
         }
+    }
+    open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
+        super.callback(userInfo: [TableCellUserInfo.toggleIsOn: toggle.isOn], sender: sender)
     }
 }
 
@@ -272,6 +286,9 @@ open class TableCellSlider: TableCellBasic {
             slider.value = viewModel.value
         }
     }
+    open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
+        super.callback(userInfo: [TableCellUserInfo.sliderValue: slider.value], sender: sender)
+    }
 }
 
 open class TableCellSliderWithLabels: TableCellStack {
@@ -324,5 +341,8 @@ open class TableCellSliderWithLabels: TableCellStack {
             rightLabel.text = viewModel.rightText
             slider.value = viewModel.value
         }
+    }
+    open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
+        super.callback(userInfo: [TableCellUserInfo.sliderValue: slider.value], sender: sender)
     }
 }
