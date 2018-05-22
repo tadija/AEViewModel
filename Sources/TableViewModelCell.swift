@@ -23,6 +23,11 @@ public enum TableCellType {
     case customNib(TableViewModelCell.Type)
 }
 
+public enum TableCellUserInfo: String {
+    case toggleIsOn
+    case sliderValue
+}
+
 // MARK: - System Cells
     
 open class TableCellBasic: TableViewModelCell {
@@ -156,7 +161,7 @@ open class TableCellToggle: TableCellBasic {
         }
     }
     open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
-        super.callback(userInfo: ["toggle.isOn": toggle.isOn], sender: sender)
+        super.callback(userInfo: [TableCellUserInfo.toggleIsOn: toggle.isOn], sender: sender)
     }
 }
 
@@ -192,7 +197,7 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
         }
     }
     open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
-        super.callback(userInfo: ["toggle.isOn": toggle.isOn], sender: sender)
+        super.callback(userInfo: [TableCellUserInfo.toggleIsOn: toggle.isOn], sender: sender)
     }
 }
 
@@ -282,7 +287,7 @@ open class TableCellSlider: TableCellBasic {
         }
     }
     open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
-        super.callback(userInfo: ["slider.value": slider.value], sender: sender)
+        super.callback(userInfo: [TableCellUserInfo.sliderValue: slider.value], sender: sender)
     }
 }
 
@@ -338,6 +343,6 @@ open class TableCellSliderWithLabels: TableCellStack {
         }
     }
     open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
-        super.callback(userInfo: ["slider.value": slider.value], sender: sender)
+        super.callback(userInfo: [TableCellUserInfo.sliderValue: slider.value], sender: sender)
     }
 }
