@@ -42,12 +42,15 @@ open class CollectionCellBasic: CollectionViewModelCell {
     open func reset() {}
     open func update(with item: Item) {}
     
-    open func callback(_ sender: Any) {
+    open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
+        if let userInfo = userInfo {
+            self.userInfo = userInfo
+        }
         delegate?.callback(from: self, sender: sender)
     }
     
     @objc public func performCallback(_ sender: Any) {
-        callback(sender)
+        callback(sender: sender)
     }
 }
 

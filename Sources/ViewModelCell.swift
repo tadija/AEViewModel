@@ -18,7 +18,7 @@ public protocol ViewModelCell: class {
     func reset()
     func update(with item: Item)
 
-    func callback(_ sender: Any)
+    func callback(userInfo: [AnyHashable: Any]?, sender: Any)
 }
 
 public extension ViewModelCell {

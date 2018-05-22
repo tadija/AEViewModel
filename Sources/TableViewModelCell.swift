@@ -63,7 +63,10 @@ open class TableCellBasic: TableViewModelCell {
         }
     }
 
-    open func callback(_ sender: Any) {
+    open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
+        if let userInfo = userInfo {
+            self.userInfo = userInfo
+        }
         delegate?.callback(from: self, sender: sender)
     }
 
@@ -74,7 +77,7 @@ open class TableCellBasic: TableViewModelCell {
     }
 
     @objc public func performCallback(_ sender: Any) {
-        callback(sender)
+        callback(sender: sender)
     }
 }
 
