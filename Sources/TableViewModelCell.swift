@@ -155,6 +155,9 @@ open class TableCellToggle: TableCellBasic {
             super.update(with: item)
         }
     }
+    open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
+        super.callback(userInfo: ["toggle.isOn": toggle.isOn], sender: sender)
+    }
 }
 
 open class TableCellToggleWithSubtitle: TableCellSubtitle {
@@ -187,6 +190,9 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
         } else {
             super.update(with: item)
         }
+    }
+    open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
+        super.callback(userInfo: ["toggle.isOn": toggle.isOn], sender: sender)
     }
 }
 
@@ -275,6 +281,9 @@ open class TableCellSlider: TableCellBasic {
             slider.value = viewModel.value
         }
     }
+    open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
+        super.callback(userInfo: ["slider.value": slider.value], sender: sender)
+    }
 }
 
 open class TableCellSliderWithLabels: TableCellStack {
@@ -327,5 +336,8 @@ open class TableCellSliderWithLabels: TableCellStack {
             rightLabel.text = viewModel.rightText
             slider.value = viewModel.value
         }
+    }
+    open override func callback(userInfo: [AnyHashable : Any]?, sender: Any) {
+        super.callback(userInfo: ["slider.value": slider.value], sender: sender)
     }
 }
