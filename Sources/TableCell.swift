@@ -32,7 +32,7 @@ public enum TableCellUserInfo: String {
     
 open class TableCellBasic: TableCell {
     public weak var delegate: CellDelegate?
-    open var userInfo = [AnyHashable : Any]()
+    open var userInfo = [AnyHashable: Any]()
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -160,8 +160,8 @@ open class TableCellToggle: TableCellBasic {
             super.update(with: item)
         }
     }
-    open override func callback(userInfo: [AnyHashable : Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable : Any]()
+    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
+        var userInfo = userInfo ?? [AnyHashable: Any]()
         userInfo[TableCellUserInfo.toggleIsOn] = toggle.isOn
         super.callback(userInfo: userInfo, sender: sender)
     }
@@ -198,8 +198,8 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
             super.update(with: item)
         }
     }
-    open override func callback(userInfo: [AnyHashable : Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable : Any]()
+    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
+        var userInfo = userInfo ?? [AnyHashable: Any]()
         userInfo[TableCellUserInfo.toggleIsOn] = toggle.isOn
         super.callback(userInfo: userInfo, sender: sender)
     }
@@ -290,8 +290,8 @@ open class TableCellSlider: TableCellBasic {
             slider.value = viewModel.value
         }
     }
-    open override func callback(userInfo: [AnyHashable : Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable : Any]()
+    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
+        var userInfo = userInfo ?? [AnyHashable: Any]()
         userInfo[TableCellUserInfo.sliderValue] = slider.value
         super.callback(userInfo: userInfo, sender: sender)
     }
@@ -348,8 +348,8 @@ open class TableCellSliderWithLabels: TableCellStack {
             slider.value = viewModel.value
         }
     }
-    open override func callback(userInfo: [AnyHashable : Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable : Any]()
+    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
+        var userInfo = userInfo ?? [AnyHashable: Any]()
         userInfo[TableCellUserInfo.sliderValue] = slider.value
         super.callback(userInfo: userInfo, sender: sender)
     }

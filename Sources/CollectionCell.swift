@@ -18,7 +18,7 @@ public enum CollectionCellType {
     
 open class CollectionCellBasic: CollectionCell {
     public weak var delegate: CellDelegate?
-    open var userInfo = [AnyHashable : Any]()
+    open var userInfo = [AnyHashable: Any]()
 
     public override init(frame: CGRect) {
         super.init(frame: frame)

@@ -12,7 +12,7 @@ public protocol CellDelegate: class {
 
 public protocol Cell: class {
     var delegate: CellDelegate? { get set }
-    var userInfo: [AnyHashable : Any] { get set }
+    var userInfo: [AnyHashable: Any] { get set }
 
     func configure()
     func reset()
