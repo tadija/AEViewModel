@@ -6,12 +6,12 @@
 
 import UIKit
 
-public protocol ViewModelCellDelegate: class {
-    func callback(from cell: ViewModelCell, sender: Any)
+public protocol CellDelegate: class {
+    func callback(from cell: Cell, sender: Any)
 }
 
-public protocol ViewModelCell: class {
-    var delegate: ViewModelCellDelegate? { get set }
+public protocol Cell: class {
+    var delegate: CellDelegate? { get set }
     var userInfo: [AnyHashable : Any] { get set }
 
     func configure()
@@ -21,7 +21,7 @@ public protocol ViewModelCell: class {
     func callback(userInfo: [AnyHashable: Any]?, sender: Any)
 }
 
-public extension ViewModelCell {
+public extension Cell {
     static var reuseIdentifier: String {
         return String(describing: self)
     }

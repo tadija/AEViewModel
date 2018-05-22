@@ -17,7 +17,7 @@ final class SettingsProfileCell: TableCellBasic {
     let name = UILabel()
     let subtitle = UILabel()
     
-    // MARK: ViewModelCell
+    // MARK: Override
     
     override func configure() {
         super.configure()

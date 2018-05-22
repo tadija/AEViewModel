@@ -7,7 +7,7 @@
 import UIKit
 import AEViewModel
 
-final class CellsTVMC: TableViewModelController {
+final class CellsTVC: TableViewController {
 
     typealias Id = CellsDataSource.Id
 
@@ -48,7 +48,7 @@ final class CellsTVMC: TableViewModelController {
         }
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+    override func action(for cell: TableCell, at indexPath: IndexPath, sender: Any) {
         guard let id = Id(rawValue: dataSource.identifier(at: indexPath)) else {
             fatalError("Unsupported cell!")
         }

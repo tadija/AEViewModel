@@ -6,7 +6,7 @@
 
 import UIKit
 
-open class CollectionViewModelController: UICollectionViewController, ViewModelCellDelegate {
+open class CollectionViewController: UICollectionViewController, CellDelegate {
     
     // MARK: Properties
 
@@ -44,18 +44,18 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
         return .basic
     }
 
-    open func update(_ cell: CollectionViewModelCell, at indexPath: IndexPath) {
+    open func update(_ cell: CollectionCell, at indexPath: IndexPath) {
         let item = dataSource.item(at: indexPath)
         cell.update(with: item)
         cell.delegate = self
     }
 
-    open func action(for cell: CollectionViewModelCell, at indexPath: IndexPath, sender: Any) {}
+    open func action(for cell: CollectionCell, at indexPath: IndexPath, sender: Any) {}
 
-    // MARK: ViewModelCellDelegate
+    // MARK: CellDelegate
 
-    public func callback(from cell: ViewModelCell, sender: Any) {
-        if let cell = cell as? CollectionViewModelCell, let indexPath = collectionView?.indexPath(for: cell) {
+    public func callback(from cell: Cell, sender: Any) {
+        if let cell = cell as? CollectionCell, let indexPath = collectionView?.indexPath(for: cell) {
             action(for: cell, at: indexPath, sender: sender)
         }
     }
@@ -101,7 +101,7 @@ open class CollectionViewModelController: UICollectionViewController, ViewModelC
 
 // MARK: - UICollectionViewControllerDataSource
 
-extension CollectionViewModelController {
+extension CollectionViewController {
     
     open override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dataSource.sections.count
@@ -115,7 +115,7 @@ extension CollectionViewModelController {
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let id = dataSource.identifier(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
-        if let cell = cell as? CollectionViewModelCell {
+        if let cell = cell as? CollectionCell {
             update(cell, at: indexPath)
         }
         return cell
@@ -125,10 +125,10 @@ extension CollectionViewModelController {
 
 // MARK: - UICollectionViewControllerDelegate
 
-extension CollectionViewModelController {
+extension CollectionViewController {
     
     open override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewModelCell else {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionCell else {
             return
         }
         action(for: cell, at: indexPath, sender: self)

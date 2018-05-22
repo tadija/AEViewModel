@@ -6,7 +6,7 @@
 
 import UIKit
 
-public typealias TableViewModelCell = UITableViewCell & ViewModelCell
+public typealias TableCell = UITableViewCell & Cell
 
 public enum TableCellType {
     case basic
@@ -19,19 +19,19 @@ public enum TableCellType {
     case toggle
     case toggleWithSubtitle
     case button
-    case customClass(TableViewModelCell.Type)
-    case customNib(TableViewModelCell.Type)
+    case customClass(TableCell.Type)
+    case customNib(TableCell.Type)
 }
 
 public enum TableCellUserInfo: String {
-    case toggleIsOn
     case sliderValue
+    case toggleIsOn
 }
 
 // MARK: - System Cells
     
-open class TableCellBasic: TableViewModelCell {
-    public weak var delegate: ViewModelCellDelegate?
+open class TableCellBasic: TableCell {
+    public weak var delegate: CellDelegate?
     open var userInfo = [AnyHashable : Any]()
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

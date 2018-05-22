@@ -7,8 +7,8 @@
 import UIKit
 import AEViewModel
 
-class SettingsTVMC: TableViewModelController {
-    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+class SettingsTVC: TableViewController {
+    override func update(_ cell: TableCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         
         if let child = dataSource.item(at: indexPath).child, child.sections.count > 0 {
@@ -17,7 +17,7 @@ class SettingsTVMC: TableViewModelController {
     }
 }
 
-final class MainSettingsTVMC: SettingsTVMC {
+final class MainSettingsTVC: SettingsTVC {
     
     typealias Id = SettingsDataSource.Id
     
@@ -49,18 +49,18 @@ final class MainSettingsTVMC: SettingsTVMC {
         }
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+    override func action(for cell: TableCell, at indexPath: IndexPath, sender: Any) {
         let item = dataSource.item(at: indexPath)
         switch item.identifier {
         case Id.profile, Id.airplane, Id.vpn:
             print("handleEvent with id: \(item.identifier)")
         case Id.wifi:
             let ds = item.child ?? BasicDataSource()
-            let vc = WiFiSettingsTVMC(dataSource: ds)
+            let vc = WiFiSettingsTVC(dataSource: ds)
             show(vc, sender: self)
         case Id.bluetooth, Id.cellular, Id.hotspot, Id.carrier:
             let ds = item.child ?? BasicDataSource()
-            let vc = SettingsTVMC(dataSource: ds)
+            let vc = SettingsTVC(dataSource: ds)
             show(vc, sender: self)
         default:
             break
@@ -71,7 +71,7 @@ final class MainSettingsTVMC: SettingsTVMC {
 
 // MARK: - WiFiSettingsTVC
 
-final class WiFiSettingsTVMC: SettingsTVMC {
+final class WiFiSettingsTVC: SettingsTVC {
     
     typealias Id = SettingsDataSource.Id.Wifi
     
@@ -88,7 +88,7 @@ final class WiFiSettingsTVMC: SettingsTVMC {
         }
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+    override func action(for cell: TableCell, at indexPath: IndexPath, sender: Any) {
         let item = dataSource.item(at: indexPath)
         switch item.identifier {
         case Id.wifiSwitch,

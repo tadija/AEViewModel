@@ -7,7 +7,7 @@
 import UIKit
 import AEViewModel
 
-final class ExampleTVMC: TableViewModelController {
+final class ExampleTVC: TableViewController {
     
     typealias Id = ExampleDataSource.Id
     
@@ -24,21 +24,21 @@ final class ExampleTVMC: TableViewModelController {
         return .subtitle
     }
     
-    override func update(_ cell: TableViewModelCell, at indexPath: IndexPath) {
+    override func update(_ cell: TableCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         cell.accessoryType = .disclosureIndicator
     }
 
-    override func action(for cell: TableViewModelCell, at indexPath: IndexPath, sender: Any) {
+    override func action(for cell: TableCell, at indexPath: IndexPath, sender: Any) {
         switch dataSource.identifier(at: indexPath) {
         case Id.cells:
-            show(CellsTVMC(), sender: self)
+            show(CellsTVC(), sender: self)
         case Id.form:
-            show(FormTVMC(), sender: self)
+            show(FormTVC(), sender: self)
         case Id.settings:
-            show(MainSettingsTVMC(), sender: self)
+            show(MainSettingsTVC(), sender: self)
         case Id.github:
-            show(GithubTVMC(), sender: self)
+            show(GithubTVC(), sender: self)
         default:
             break
         }
