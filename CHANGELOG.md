@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.8.1
+
+- Minor bug fixes, improvements and refactoring
+
 ## Version 0.8.0
 
 - Renamed `ViewModelCell` -> `Cell`
