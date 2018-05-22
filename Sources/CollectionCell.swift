@@ -44,7 +44,7 @@ open class CollectionCellBasic: CollectionCell {
     
     open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
         if let userInfo = userInfo {
-            self.userInfo = userInfo
+            self.userInfo.merge(userInfo) { (_, new) in new }
         }
         delegate?.callback(from: self, sender: sender)
     }
