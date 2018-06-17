@@ -32,7 +32,12 @@ public enum TableCellUserInfo: String {
     
 open class TableCellBasic: TableCell {
     public weak var delegate: CellDelegate?
-    open var userInfo = [AnyHashable: Any]()
+
+    open var userInfo: [AnyHashable: Any] {
+        get { return _userInfo }
+        set { _userInfo.merge(newValue) { (_, new) in new } }
+    }
+    private var _userInfo = [AnyHashable: Any]()
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -68,10 +73,7 @@ open class TableCellBasic: TableCell {
         }
     }
 
-    open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        if let userInfo = userInfo {
-            self.userInfo.merge(userInfo) { (_, new) in new }
-        }
+    @objc open func callback(_ sender: Any) {
         delegate?.callback(from: self, sender: sender)
     }
 
@@ -79,10 +81,6 @@ open class TableCellBasic: TableCell {
         let height = view.heightAnchor.constraint(greaterThanOrEqualToConstant: height)
         height.priority = .defaultHigh
         height.isActive = true
-    }
-
-    @objc public func performCallback(_ sender: Any) {
-        callback(sender: sender)
     }
 }
 
@@ -150,7 +148,7 @@ open class TableCellToggle: TableCellBasic {
 
         selectionStyle = .none
         accessoryView = toggle
-        toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+        toggle.addTarget(self, action: #selector(callback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? ViewModel {
@@ -160,10 +158,10 @@ open class TableCellToggle: TableCellBasic {
             super.update(with: item)
         }
     }
-    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable: Any]()
+
+    open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.toggleIsOn] = toggle.isOn
-        super.callback(userInfo: userInfo, sender: sender)
+        super.callback(sender)
     }
 }
 
@@ -187,7 +185,7 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
 
         selectionStyle = .none
         accessoryView = toggle
-        toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+        toggle.addTarget(self, action: #selector(callback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? ViewModel {
@@ -198,10 +196,10 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
             super.update(with: item)
         }
     }
-    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable: Any]()
+
+    open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.toggleIsOn] = toggle.isOn
-        super.callback(userInfo: userInfo, sender: sender)
+        super.callback(sender)
     }
 }
 
@@ -223,7 +221,7 @@ open class TableCellTextField: TableCellBasic {
         textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         enforceMinimumHeight(for: textField)
 
-        textField.addTarget(self, action: #selector(performCallback(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(callback(_:)), for: .editingChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? BasicViewModel {
@@ -249,7 +247,7 @@ open class TableCellButton: TableCellBasic {
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         enforceMinimumHeight(for: button)
 
-        button.addTarget(self, action: #selector(performCallback(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(callback(_:)), for: .touchUpInside)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? BasicViewModel {
@@ -283,17 +281,17 @@ open class TableCellSlider: TableCellBasic {
         slider.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         slider.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
 
-        slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(callback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? ViewModel {
             slider.value = viewModel.value
         }
     }
-    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable: Any]()
+
+    open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.sliderValue] = slider.value
-        super.callback(userInfo: userInfo, sender: sender)
+        super.callback(sender)
     }
 }
 
@@ -338,7 +336,7 @@ open class TableCellSliderWithLabels: TableCellStack {
         stack.addArrangedSubview(labelStack)
         stack.addArrangedSubview(slider)
 
-        slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(callback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? ViewModel {
@@ -348,9 +346,9 @@ open class TableCellSliderWithLabels: TableCellStack {
             slider.value = viewModel.value
         }
     }
-    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable: Any]()
+
+    open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.sliderValue] = slider.value
-        super.callback(userInfo: userInfo, sender: sender)
+        super.callback(sender)
     }
 }

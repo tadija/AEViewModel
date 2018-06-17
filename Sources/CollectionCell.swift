@@ -18,7 +18,12 @@ public enum CollectionCellType {
     
 open class CollectionCellBasic: CollectionCell {
     public weak var delegate: CellDelegate?
-    open var userInfo = [AnyHashable: Any]()
+
+    open var userInfo: [AnyHashable: Any] {
+        get { return _userInfo }
+        set { _userInfo.merge(newValue) { (_, new) in new } }
+    }
+    private var _userInfo = [AnyHashable: Any]()
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,16 +46,9 @@ open class CollectionCellBasic: CollectionCell {
     }
     open func reset() {}
     open func update(with item: Item) {}
-    
-    open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        if let userInfo = userInfo {
-            self.userInfo.merge(userInfo) { (_, new) in new }
-        }
+
+    @objc open func callback(_ sender: Any) {
         delegate?.callback(from: self, sender: sender)
-    }
-    
-    @objc public func performCallback(_ sender: Any) {
-        callback(sender: sender)
     }
 }
 

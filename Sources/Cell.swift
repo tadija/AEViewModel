@@ -18,7 +18,7 @@ public protocol Cell: class {
     func reset()
     func update(with item: Item)
 
-    func callback(userInfo: [AnyHashable: Any]?, sender: Any)
+    func callback(_ sender: Any)
 }
 
 public extension Cell {
@@ -27,5 +27,8 @@ public extension Cell {
     }
     static var nib: UINib? {
         return UINib(nibName: reuseIdentifier, bundle: nil)
+    }
+    func callback(_ sender: Any) {
+        delegate?.callback(from: self, sender: sender)
     }
 }
