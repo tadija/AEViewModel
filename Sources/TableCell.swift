@@ -76,12 +76,6 @@ open class TableCellBasic: TableCell {
     @objc open func callback(_ sender: Any) {
         delegate?.callback(from: self, sender: sender)
     }
-
-    public func enforceMinimumHeight(for view: UIView, height: CGFloat = 44) {
-        let height = view.heightAnchor.constraint(greaterThanOrEqualToConstant: height)
-        height.priority = .defaultHigh
-        height.isActive = true
-    }
 }
 
 open class TableCellSubtitle: TableCellBasic {
@@ -219,7 +213,7 @@ open class TableCellTextField: TableCellBasic {
         textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        enforceMinimumHeight(for: textField)
+        textField.enforceMinimumHeight()
 
         textField.addTarget(self, action: #selector(callback(_:)), for: .editingChanged)
     }
@@ -245,7 +239,7 @@ open class TableCellButton: TableCellBasic {
         button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        enforceMinimumHeight(for: button)
+        button.enforceMinimumHeight()
 
         button.addTarget(self, action: #selector(callback(_:)), for: .touchUpInside)
     }
@@ -350,5 +344,15 @@ open class TableCellSliderWithLabels: TableCellStack {
     open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.sliderValue] = slider.value
         super.callback(sender)
+    }
+}
+
+// MARK: - Helpers
+
+extension UIView {
+    func enforceMinimumHeight(to height: CGFloat = 44) {
+        let height = heightAnchor.constraint(greaterThanOrEqualToConstant: height)
+        height.priority = .defaultHigh
+        height.isActive = true
     }
 }
