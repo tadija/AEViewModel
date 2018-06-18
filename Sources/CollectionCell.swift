@@ -107,8 +107,8 @@ open class CollectionCellSpinner: CollectionCellBasic {
         spinner.translatesAutoresizingMaskIntoConstraints = false
 
         let margins = contentView.layoutMarginsGuide
-        spinner.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
-        spinner.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        spinner.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
     }
 
     open override func reset() {
