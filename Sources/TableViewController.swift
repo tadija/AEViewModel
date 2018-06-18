@@ -106,6 +106,8 @@ open class TableViewController: UITableViewController, CellDelegate {
             tableView.register(TableCellSliderWithLabels.self, forCellReuseIdentifier: identifier)
         case .textField:
             tableView.register(TableCellTextField.self, forCellReuseIdentifier: identifier)
+        case .textView:
+            tableView.register(TableCellTextView.self, forCellReuseIdentifier: identifier)
         case .button:
             tableView.register(TableCellButton.self, forCellReuseIdentifier: identifier)
         case .spinner:

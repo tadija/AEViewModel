@@ -18,6 +18,7 @@ public enum TableCellType {
     case slider
     case sliderWithLabels
     case textField
+    case textView
     case button
     case spinner
     case customClass(TableCell.Type)
@@ -319,6 +320,47 @@ open class TableCellTextField: TableCellBasic {
         if let viewModel = item.viewModel as? BasicViewModel {
             textField.placeholder = viewModel.title
         }
+    }
+}
+
+open class TableCellTextView: TableCellBasic, UITextViewDelegate {
+    public let textView = UITextView()
+
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        contentView.addSubview(textView)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        textView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        textView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        textView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        textView.enforceMinimumHeight()
+
+        textView.delegate = self
+    }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? BasicViewModel {
+            var text = String()
+            if let title = viewModel.title {
+                text += title
+            }
+            if let detail = viewModel.detail {
+                text += "\n"
+                text += detail
+            }
+            textView.text = text
+        }
+    }
+
+    // MARK: UITextViewDelegate
+
+    open func textViewDidChange(_ textView: UITextView) {
+        callback(textView)
     }
 }
 
