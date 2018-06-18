@@ -108,6 +108,8 @@ open class TableViewController: UITableViewController, CellDelegate {
             tableView.register(TableCellTextField.self, forCellReuseIdentifier: identifier)
         case .button:
             tableView.register(TableCellButton.self, forCellReuseIdentifier: identifier)
+        case .spinner:
+            tableView.register(TableCellSpinner.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellClass):

@@ -76,13 +76,14 @@ open class CollectionCellSpinner: CollectionCellBasic {
     public let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
     open override func configure() {
+        super.configure()
+        
         contentView.addSubview(spinner)
         spinner.translatesAutoresizingMaskIntoConstraints = false
 
         let margins = contentView.layoutMarginsGuide
         spinner.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         spinner.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-        spinner.startAnimating()
     }
 
     open override func reset() {

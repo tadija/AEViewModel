@@ -19,6 +19,7 @@ public enum TableCellType {
     case sliderWithLabels
     case textField
     case button
+    case spinner
     case customClass(TableCell.Type)
     case customNib(TableCell.Type)
 }
@@ -344,6 +345,28 @@ open class TableCellButton: TableCellBasic {
         if let viewModel = item.viewModel as? BasicViewModel {
             button.setTitle(viewModel.title, for: .normal)
         }
+    }
+}
+
+open class TableCellSpinner: TableCellBasic {
+    public let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        contentView.addSubview(spinner)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        spinner.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        spinner.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+    }
+
+    open override func reset() {
+        super.reset()
+        spinner.startAnimating()
     }
 }
 
