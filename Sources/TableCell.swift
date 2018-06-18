@@ -13,12 +13,14 @@ public enum TableCellType {
     case subtitle
     case leftDetail
     case rightDetail
-    case textField
-    case slider
-    case sliderWithLabels
     case toggle
     case toggleWithSubtitle
+    case slider
+    case sliderWithLabels
+    case textField
+    case textView
     case button
+    case spinner
     case customClass(TableCell.Type)
     case customNib(TableCell.Type)
 }
@@ -28,11 +30,16 @@ public enum TableCellUserInfo: String {
     case toggleIsOn
 }
 
-// MARK: - System Cells
+// MARK: - Base Cells
     
 open class TableCellBasic: TableCell {
     public weak var delegate: CellDelegate?
-    open var userInfo = [AnyHashable: Any]()
+
+    open var userInfo: [AnyHashable: Any] {
+        get { return _userInfo }
+        set { _userInfo.merge(newValue) { (_, new) in new } }
+    }
+    private var _userInfo = [AnyHashable: Any]()
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -68,21 +75,8 @@ open class TableCellBasic: TableCell {
         }
     }
 
-    open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        if let userInfo = userInfo {
-            self.userInfo.merge(userInfo) { (_, new) in new }
-        }
+    @objc open func callback(_ sender: Any) {
         delegate?.callback(from: self, sender: sender)
-    }
-
-    public func enforceMinimumHeight(for view: UIView, height: CGFloat = 44) {
-        let height = view.heightAnchor.constraint(greaterThanOrEqualToConstant: height)
-        height.priority = .defaultHigh
-        height.isActive = true
-    }
-
-    @objc public func performCallback(_ sender: Any) {
-        callback(sender: sender)
     }
 }
 
@@ -113,8 +107,6 @@ open class TableCellRightDetail: TableCellBasic {
     }
 }
 
-// MARK: - Custom Cells
-
 open class TableCellStack: TableCellBasic {
     public let stack = UIStackView()
 
@@ -131,7 +123,9 @@ open class TableCellStack: TableCellBasic {
         stack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
     }
 }
-    
+
+// MARK: - Custom Cells
+
 open class TableCellToggle: TableCellBasic {
     public struct ViewModel: AEViewModel.ViewModel {
         public let title: String
@@ -144,13 +138,13 @@ open class TableCellToggle: TableCellBasic {
     }
 
     public let toggle = UISwitch()
-    
+
     open override func configure() {
         super.configure()
 
         selectionStyle = .none
         accessoryView = toggle
-        toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+        toggle.addTarget(self, action: #selector(callback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? ViewModel {
@@ -160,10 +154,10 @@ open class TableCellToggle: TableCellBasic {
             super.update(with: item)
         }
     }
-    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable: Any]()
+
+    open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.toggleIsOn] = toggle.isOn
-        super.callback(userInfo: userInfo, sender: sender)
+        super.callback(sender)
     }
 }
 
@@ -181,13 +175,13 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
     }
 
     public let toggle = UISwitch()
-    
+
     open override func configure() {
         super.configure()
 
         selectionStyle = .none
         accessoryView = toggle
-        toggle.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+        toggle.addTarget(self, action: #selector(callback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? ViewModel {
@@ -198,63 +192,10 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
             super.update(with: item)
         }
     }
-    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable: Any]()
+
+    open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.toggleIsOn] = toggle.isOn
-        super.callback(userInfo: userInfo, sender: sender)
-    }
-}
-
-open class TableCellTextField: TableCellBasic {
-    public let textField = UITextField()
-    
-    open override func configure() {
-        super.configure()
-
-        selectionStyle = .none
-
-        contentView.addSubview(textField)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-
-        let margins = contentView.layoutMarginsGuide
-        textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
-        textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-        textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        enforceMinimumHeight(for: textField)
-
-        textField.addTarget(self, action: #selector(performCallback(_:)), for: .editingChanged)
-    }
-    open override func update(with item: Item) {
-        if let viewModel = item.viewModel as? BasicViewModel {
-            textField.placeholder = viewModel.title
-        }
-    }
-}
-
-open class TableCellButton: TableCellBasic {
-    public let button = UIButton(type: .system)
-    
-    open override func configure() {
-        super.configure()
-
-        selectionStyle = .none
-
-        contentView.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        enforceMinimumHeight(for: button)
-
-        button.addTarget(self, action: #selector(performCallback(_:)), for: .touchUpInside)
-    }
-    open override func update(with item: Item) {
-        if let viewModel = item.viewModel as? BasicViewModel {
-            button.setTitle(viewModel.title, for: .normal)
-        }
+        super.callback(sender)
     }
 }
 
@@ -283,17 +224,17 @@ open class TableCellSlider: TableCellBasic {
         slider.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         slider.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
 
-        slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(callback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? ViewModel {
             slider.value = viewModel.value
         }
     }
-    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable: Any]()
+
+    open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.sliderValue] = slider.value
-        super.callback(userInfo: userInfo, sender: sender)
+        super.callback(sender)
     }
 }
 
@@ -303,7 +244,7 @@ open class TableCellSliderWithLabels: TableCellStack {
         public let centerText: String?
         public let rightText: String?
         public let value: Float
-        
+
         public init(leftText: String? = nil, centerText: String? = nil, rightText: String? = nil, value: Float) {
             self.leftText = leftText
             self.centerText = centerText
@@ -338,7 +279,7 @@ open class TableCellSliderWithLabels: TableCellStack {
         stack.addArrangedSubview(labelStack)
         stack.addArrangedSubview(slider)
 
-        slider.addTarget(self, action: #selector(performCallback(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(callback(_:)), for: .valueChanged)
     }
     open override func update(with item: Item) {
         if let viewModel = item.viewModel as? ViewModel {
@@ -348,9 +289,135 @@ open class TableCellSliderWithLabels: TableCellStack {
             slider.value = viewModel.value
         }
     }
-    open override func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        var userInfo = userInfo ?? [AnyHashable: Any]()
+
+    open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.sliderValue] = slider.value
-        super.callback(userInfo: userInfo, sender: sender)
+        super.callback(sender)
+    }
+}
+
+open class TableCellTextField: TableCellBasic {
+    public let textField = UITextField()
+
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        contentView.addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        textField.enforceMinimumHeight()
+
+        textField.addTarget(self, action: #selector(callback(_:)), for: .editingChanged)
+    }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? BasicViewModel {
+            textField.placeholder = viewModel.title
+        }
+    }
+}
+
+open class TableCellTextView: TableCellBasic, UITextViewDelegate {
+    public let textView = UITextView()
+
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        contentView.addSubview(textView)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        textView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        textView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        textView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        textView.enforceMinimumHeight()
+
+        textView.delegate = self
+    }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? BasicViewModel {
+            var text = String()
+            if let title = viewModel.title {
+                text += title
+            }
+            if let detail = viewModel.detail {
+                text += "\n"
+                text += detail
+            }
+            textView.text = text
+        }
+    }
+
+    // MARK: UITextViewDelegate
+
+    open func textViewDidChange(_ textView: UITextView) {
+        callback(textView)
+    }
+}
+
+open class TableCellButton: TableCellBasic {
+    public let button = UIButton(type: .system)
+    
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        contentView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        button.enforceMinimumHeight()
+
+        button.addTarget(self, action: #selector(callback(_:)), for: .touchUpInside)
+    }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? BasicViewModel {
+            button.setTitle(viewModel.title, for: .normal)
+        }
+    }
+}
+
+open class TableCellSpinner: TableCellBasic {
+    public let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        contentView.addSubview(spinner)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        spinner.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
+    }
+
+    open override func reset() {
+        super.reset()
+        spinner.startAnimating()
+    }
+}
+
+// MARK: - Helpers
+
+extension UIView {
+    func enforceMinimumHeight(to height: CGFloat = 44) {
+        let height = heightAnchor.constraint(greaterThanOrEqualToConstant: height)
+        height.priority = .defaultHigh
+        height.isActive = true
     }
 }

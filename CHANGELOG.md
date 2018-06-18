@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.8.2
+
+- Simplified callback logic
+- Added TableCellTextView, TableCellSpinner, CollectionCellButton, CollectionCellSpinner
+- Other improvements and refactoring
+
 ## Version 0.8.1
 
 - Minor bug fixes, improvements and refactoring

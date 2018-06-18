@@ -10,15 +10,22 @@ public typealias CollectionCell = UICollectionViewCell & Cell
 
 public enum CollectionCellType {
     case basic
+    case button
+    case spinner
     case customClass(CollectionCell.Type)
     case customNib(CollectionCell.Type)
 }
 
-// MARK: - Cells
+// MARK: - Base Cells
     
 open class CollectionCellBasic: CollectionCell {
     public weak var delegate: CellDelegate?
-    open var userInfo = [AnyHashable: Any]()
+
+    open var userInfo: [AnyHashable: Any] {
+        get { return _userInfo }
+        set { _userInfo.merge(newValue) { (_, new) in new } }
+    }
+    private var _userInfo = [AnyHashable: Any]()
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,16 +48,9 @@ open class CollectionCellBasic: CollectionCell {
     }
     open func reset() {}
     open func update(with item: Item) {}
-    
-    open func callback(userInfo: [AnyHashable: Any]? = nil, sender: Any) {
-        if let userInfo = userInfo {
-            self.userInfo.merge(userInfo) { (_, new) in new }
-        }
+
+    @objc open func callback(_ sender: Any) {
         delegate?.callback(from: self, sender: sender)
-    }
-    
-    @objc public func performCallback(_ sender: Any) {
-        callback(sender: sender)
     }
 }
 
@@ -68,5 +68,51 @@ open class CollectionCellStack: CollectionCellBasic {
         stack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         stack.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         stack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+    }
+}
+
+// MARK: - Custom Cells
+
+open class CollectionCellButton: CollectionCellBasic {
+    public let button = UIButton(type: .system)
+
+    open override func configure() {
+        super.configure()
+
+        contentView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        button.enforceMinimumHeight()
+
+        button.addTarget(self, action: #selector(callback(_:)), for: .touchUpInside)
+    }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? BasicViewModel {
+            button.setTitle(viewModel.title, for: .normal)
+        }
+    }
+}
+
+open class CollectionCellSpinner: CollectionCellBasic {
+    public let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+
+    open override func configure() {
+        super.configure()
+        
+        contentView.addSubview(spinner)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        spinner.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
+    }
+
+    open override func reset() {
+        super.reset()
+        spinner.startAnimating()
     }
 }

@@ -33,18 +33,22 @@ final class CellsTVC: TableViewController {
             return .leftDetail
         case .rightDetail:
             return .rightDetail
-        case .textField:
-            return .textField
-        case .slider:
-            return .slider
-        case .sliderWithLabels:
-            return .sliderWithLabels
         case .toggle:
             return .toggle
         case .toggleWithSubtitle:
             return .toggleWithSubtitle
+        case .slider:
+            return .slider
+        case .sliderWithLabels:
+            return .sliderWithLabels
+        case .textField:
+            return .textField
+        case .textView:
+            return .textView
         case .button:
             return .button
+        case .spinner:
+            return .spinner
         }
     }
 

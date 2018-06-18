@@ -90,6 +90,10 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
         switch cellType(forIdentifier: identifier) {
         case .basic:
             collectionView?.register(CollectionCellBasic.self, forCellWithReuseIdentifier: identifier)
+        case .button:
+            collectionView?.register(CollectionCellButton.self, forCellWithReuseIdentifier: identifier)
+        case .spinner:
+            collectionView?.register(CollectionCellSpinner.self, forCellWithReuseIdentifier: identifier)
         case .customClass(let cellClass):
             collectionView?.register(cellClass, forCellWithReuseIdentifier: identifier)
         case .customNib(let cellClass):

@@ -88,7 +88,7 @@ func update(with item: Item)
 /// Called in `tableView(_:didSelectRowAt:)` and whenever specific cell calls it (ie. toggle switch).
 /// By default this call will be forwarded to `delegate` (after setting some `userInfo` optionally).
 /// If needed, call this where it makes sense for your cell, or override and call `super` at some moment.
-func callback(userInfo: [AnyHashable: Any]?, sender: Any)
+func callback(_ sender: Any)
 ```
 
 ### TableCell
@@ -101,12 +101,14 @@ public enum TableCellType {
     case subtitle
     case leftDetail
     case rightDetail
-    case textField
-    case slider
-    case sliderWithLabels
     case toggle
     case toggleWithSubtitle
+    case slider
+    case sliderWithLabels
+    case textField
+    case textView
     case button
+    case spinner
     case customClass(TableCell.Type)
     case customNib(TableCell.Type)
 }
@@ -114,11 +116,13 @@ public enum TableCellType {
 
 ### CollectionCell
 
-While for the collection view cells you probably want to create something custom... :)
+While for the collection view cells you probably want to create something more custom... :)
 
 ```swift
 public enum CollectionCellType {
     case basic
+    case button
+    case spinner
     case customClass(CollectionCell.Type)
     case customNib(CollectionCell.Type)
 }
