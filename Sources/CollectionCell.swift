@@ -10,6 +10,7 @@ public typealias CollectionCell = UICollectionViewCell & Cell
 
 public enum CollectionCellType {
     case basic
+    case button
     case spinner
     case customClass(CollectionCell.Type)
     case customNib(CollectionCell.Type)
@@ -71,6 +72,30 @@ open class CollectionCellStack: CollectionCellBasic {
 }
 
 // MARK: - Custom Cells
+
+open class CollectionCellButton: CollectionCellBasic {
+    public let button = UIButton(type: .system)
+
+    open override func configure() {
+        super.configure()
+
+        contentView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        button.enforceMinimumHeight()
+
+        button.addTarget(self, action: #selector(callback(_:)), for: .touchUpInside)
+    }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? BasicViewModel {
+            button.setTitle(viewModel.title, for: .normal)
+        }
+    }
+}
 
 open class CollectionCellSpinner: CollectionCellBasic {
     public let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
