@@ -10,11 +10,12 @@ public typealias CollectionCell = UICollectionViewCell & Cell
 
 public enum CollectionCellType {
     case basic
+    case spinner
     case customClass(CollectionCell.Type)
     case customNib(CollectionCell.Type)
 }
 
-// MARK: - Cells
+// MARK: - Base Cells
     
 open class CollectionCellBasic: CollectionCell {
     public weak var delegate: CellDelegate?
@@ -66,5 +67,26 @@ open class CollectionCellStack: CollectionCellBasic {
         stack.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         stack.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         stack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+    }
+}
+
+// MARK: - Custom Cells
+
+open class CollectionCellSpinner: CollectionCellBasic {
+    public let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+
+    open override func configure() {
+        contentView.addSubview(spinner)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        spinner.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        spinner.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        spinner.startAnimating()
+    }
+
+    open override func reset() {
+        super.reset()
+        spinner.startAnimating()
     }
 }
