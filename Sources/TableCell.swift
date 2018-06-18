@@ -13,11 +13,11 @@ public enum TableCellType {
     case subtitle
     case leftDetail
     case rightDetail
-    case textField
-    case slider
-    case sliderWithLabels
     case toggle
     case toggleWithSubtitle
+    case slider
+    case sliderWithLabels
+    case textField
     case button
     case customClass(TableCell.Type)
     case customNib(TableCell.Type)
@@ -28,7 +28,7 @@ public enum TableCellUserInfo: String {
     case toggleIsOn
 }
 
-// MARK: - System Cells
+// MARK: - Base Cells
     
 open class TableCellBasic: TableCell {
     public weak var delegate: CellDelegate?
@@ -105,8 +105,6 @@ open class TableCellRightDetail: TableCellBasic {
     }
 }
 
-// MARK: - Custom Cells
-
 open class TableCellStack: TableCellBasic {
     public let stack = UIStackView()
 
@@ -123,7 +121,9 @@ open class TableCellStack: TableCellBasic {
         stack.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
     }
 }
-    
+
+// MARK: - Custom Cells
+
 open class TableCellToggle: TableCellBasic {
     public struct ViewModel: AEViewModel.ViewModel {
         public let title: String
@@ -136,7 +136,7 @@ open class TableCellToggle: TableCellBasic {
     }
 
     public let toggle = UISwitch()
-    
+
     open override func configure() {
         super.configure()
 
@@ -173,7 +173,7 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
     }
 
     public let toggle = UISwitch()
-    
+
     open override func configure() {
         super.configure()
 
@@ -194,59 +194,6 @@ open class TableCellToggleWithSubtitle: TableCellSubtitle {
     open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.toggleIsOn] = toggle.isOn
         super.callback(sender)
-    }
-}
-
-open class TableCellTextField: TableCellBasic {
-    public let textField = UITextField()
-    
-    open override func configure() {
-        super.configure()
-
-        selectionStyle = .none
-
-        contentView.addSubview(textField)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-
-        let margins = contentView.layoutMarginsGuide
-        textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
-        textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
-        textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        textField.enforceMinimumHeight()
-
-        textField.addTarget(self, action: #selector(callback(_:)), for: .editingChanged)
-    }
-    open override func update(with item: Item) {
-        if let viewModel = item.viewModel as? BasicViewModel {
-            textField.placeholder = viewModel.title
-        }
-    }
-}
-
-open class TableCellButton: TableCellBasic {
-    public let button = UIButton(type: .system)
-    
-    open override func configure() {
-        super.configure()
-
-        selectionStyle = .none
-
-        contentView.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        button.enforceMinimumHeight()
-
-        button.addTarget(self, action: #selector(callback(_:)), for: .touchUpInside)
-    }
-    open override func update(with item: Item) {
-        if let viewModel = item.viewModel as? BasicViewModel {
-            button.setTitle(viewModel.title, for: .normal)
-        }
     }
 }
 
@@ -295,7 +242,7 @@ open class TableCellSliderWithLabels: TableCellStack {
         public let centerText: String?
         public let rightText: String?
         public let value: Float
-        
+
         public init(leftText: String? = nil, centerText: String? = nil, rightText: String? = nil, value: Float) {
             self.leftText = leftText
             self.centerText = centerText
@@ -344,6 +291,59 @@ open class TableCellSliderWithLabels: TableCellStack {
     open override func callback(_ sender: Any) {
         userInfo[TableCellUserInfo.sliderValue] = slider.value
         super.callback(sender)
+    }
+}
+
+open class TableCellTextField: TableCellBasic {
+    public let textField = UITextField()
+
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        contentView.addSubview(textField)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+
+        let margins = contentView.layoutMarginsGuide
+        textField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        textField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        textField.enforceMinimumHeight()
+
+        textField.addTarget(self, action: #selector(callback(_:)), for: .editingChanged)
+    }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? BasicViewModel {
+            textField.placeholder = viewModel.title
+        }
+    }
+}
+
+open class TableCellButton: TableCellBasic {
+    public let button = UIButton(type: .system)
+    
+    open override func configure() {
+        super.configure()
+
+        selectionStyle = .none
+
+        contentView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        button.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        button.enforceMinimumHeight()
+
+        button.addTarget(self, action: #selector(callback(_:)), for: .touchUpInside)
+    }
+    open override func update(with item: Item) {
+        if let viewModel = item.viewModel as? BasicViewModel {
+            button.setTitle(viewModel.title, for: .normal)
+        }
     }
 }
 

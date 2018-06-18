@@ -96,18 +96,18 @@ open class TableViewController: UITableViewController, CellDelegate {
             tableView.register(TableCellLeftDetail.self, forCellReuseIdentifier: identifier)
         case .rightDetail:
             tableView.register(TableCellRightDetail.self, forCellReuseIdentifier: identifier)
-        case .button:
-            tableView.register(TableCellButton.self, forCellReuseIdentifier: identifier)
         case .toggle:
             tableView.register(TableCellToggle.self, forCellReuseIdentifier: identifier)
         case .toggleWithSubtitle:
             tableView.register(TableCellToggleWithSubtitle.self, forCellReuseIdentifier: identifier)
-        case .textField:
-            tableView.register(TableCellTextField.self, forCellReuseIdentifier: identifier)
         case .slider:
             tableView.register(TableCellSlider.self, forCellReuseIdentifier: identifier)
         case .sliderWithLabels:
             tableView.register(TableCellSliderWithLabels.self, forCellReuseIdentifier: identifier)
+        case .textField:
+            tableView.register(TableCellTextField.self, forCellReuseIdentifier: identifier)
+        case .button:
+            tableView.register(TableCellButton.self, forCellReuseIdentifier: identifier)
         case .customClass(let cellClass):
             tableView.register(cellClass, forCellReuseIdentifier: identifier)
         case .customNib(let cellClass):
