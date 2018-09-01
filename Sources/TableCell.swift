@@ -415,7 +415,7 @@ open class TableCellSpinner: TableCellBasic {
 // MARK: - Helpers
 
 extension UIView {
-    func enforceMinimumHeight(to height: CGFloat = 44) {
+    public func enforceMinimumHeight(to height: CGFloat = 44) {
         let height = heightAnchor.constraint(greaterThanOrEqualToConstant: height)
         height.priority = .defaultHigh
         height.isActive = true
