@@ -28,7 +28,7 @@ final class MainSettingsTVC: SettingsTVC {
 
         dataSource = SettingsDataSource()
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
     }
     

@@ -28,7 +28,7 @@ final class GithubTVC: TableViewController {
 
         dataSource = GithubDataSource()
 
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 150
 
         refreshControl = UIRefreshControl()
