@@ -8,7 +8,8 @@ s.license = { :type => 'MIT', :file => 'LICENSE' }
 s.source = { :git => 'https://github.com/tadija/AEViewModel.git', :tag => s.version }
 s.source_files = 'Sources/*.swift'
 
-s.swift_version = '4.1'
+s.swift_version = '4.2'
+
 s.ios.deployment_target = '9.0'
 
 s.homepage = 'https://github.com/tadija/AEViewModel'

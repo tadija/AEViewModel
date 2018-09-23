@@ -41,7 +41,7 @@ open class TableCellBasic: TableCell {
     }
     private var _userInfo = [AnyHashable: Any]()
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
     }
@@ -81,7 +81,7 @@ open class TableCellBasic: TableCell {
 }
 
 open class TableCellSubtitle: TableCellBasic {
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
     required public init?(coder aDecoder: NSCoder) {
@@ -90,7 +90,7 @@ open class TableCellSubtitle: TableCellBasic {
 }
 
 open class TableCellLeftDetail: TableCellBasic {
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value2, reuseIdentifier: reuseIdentifier)
     }
     required public init?(coder aDecoder: NSCoder) {
@@ -99,7 +99,7 @@ open class TableCellLeftDetail: TableCellBasic {
 }
 
 open class TableCellRightDetail: TableCellBasic {
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
     }
     required public init?(coder aDecoder: NSCoder) {
@@ -391,7 +391,7 @@ open class TableCellButton: TableCellBasic {
 }
 
 open class TableCellSpinner: TableCellBasic {
-    public let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    public let spinner = UIActivityIndicatorView(style: .gray)
 
     open override func configure() {
         super.configure()

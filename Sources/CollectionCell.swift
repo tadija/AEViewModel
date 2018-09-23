@@ -98,7 +98,7 @@ open class CollectionCellButton: CollectionCellBasic {
 }
 
 open class CollectionCellSpinner: CollectionCellBasic {
-    public let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    public let spinner = UIActivityIndicatorView(style: .gray)
 
     open override func configure() {
         super.configure()
