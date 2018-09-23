@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B0EA5D220646C10002DA0AC /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0EA5D120646C10002DA0AC /* Cell.swift */; };
-		8B3276011E9AD82A00FD9502 /* AEViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3275FF1E9AD82A00FD9502 /* AEViewModelTests.swift */; };
-		8B3276251E9AED1400FD9502 /* AEViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B3276241E9AED1400FD9502 /* AEViewModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B32764E1E9C284B00FD9502 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B32764D1E9C284B00FD9502 /* TableCell.swift */; };
-		8B7281B11EE2E96D007245E7 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B01EE2E96D007245E7 /* DataSource.swift */; };
-		8B7281B31EE2EFA2007245E7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7281B21EE2EFA2007245E7 /* TableViewController.swift */; };
 		8B893AB81E98665F00B3101B /* AEViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B893AAE1E98665F00B3101B /* AEViewModel.framework */; };
-		8B9D885020629D9C0060C60A /* BasicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9D884F20629D9C0060C60A /* BasicDataSource.swift */; };
-		8B9EC5EB1F5FFDAD00194BAE /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9EC5EA1F5FFDAD00194BAE /* CollectionCell.swift */; };
-		8B9EC5ED1F5FFDB100194BAE /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9EC5EC1F5FFDB100194BAE /* CollectionViewController.swift */; };
+		8BC392A12157BFC50029D779 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3929A2157BFC50029D779 /* CollectionCell.swift */; };
+		8BC392A22157BFC50029D779 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3929B2157BFC50029D779 /* Cell.swift */; };
+		8BC392A32157BFC50029D779 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3929C2157BFC50029D779 /* TableViewController.swift */; };
+		8BC392A42157BFC50029D779 /* BasicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3929D2157BFC50029D779 /* BasicDataSource.swift */; };
+		8BC392A52157BFC50029D779 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3929E2157BFC50029D779 /* TableCell.swift */; };
+		8BC392A62157BFC50029D779 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC3929F2157BFC50029D779 /* DataSource.swift */; };
+		8BC392A72157BFC50029D779 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC392A02157BFC50029D779 /* CollectionViewController.swift */; };
+		8BC392AB2157BFCF0029D779 /* AEViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC392AA2157BFCF0029D779 /* AEViewModelTests.swift */; };
+		8BC392AC2157BFDE0029D779 /* AEViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BC392962157BFBD0029D779 /* AEViewModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,24 +30,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8B0EA5D120646C10002DA0AC /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
-		8B3275FF1E9AD82A00FD9502 /* AEViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AEViewModelTests.swift; path = TableTests/AEViewModelTests.swift; sourceTree = "<group>"; };
 		8B3276071E9ADB3800FD9502 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		8B32760E1E9AE13200FD9502 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		8B32760F1E9AE13200FD9502 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8B3276101E9AE13200FD9502 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8B3276131E9AE1BA00FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = SOURCE_ROOT; };
-		8B3276241E9AED1400FD9502 /* AEViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AEViewModel.h; path = Sources/AEViewModel.h; sourceTree = SOURCE_ROOT; };
-		8B3276261E9AED4100FD9502 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
-		8B32764D1E9C284B00FD9502 /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		8B6DD41E1EFB0B13007A5F98 /* AEViewModel.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AEViewModel.podspec; sourceTree = "<group>"; };
-		8B7281B01EE2E96D007245E7 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
-		8B7281B21EE2EFA2007245E7 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		8B893AAE1E98665F00B3101B /* AEViewModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AEViewModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B893AB71E98665F00B3101B /* AEViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AEViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9D884F20629D9C0060C60A /* BasicDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDataSource.swift; sourceTree = "<group>"; };
-		8B9EC5EA1F5FFDAD00194BAE /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
-		8B9EC5EC1F5FFDB100194BAE /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		8BC392952157BFBD0029D779 /* AEViewModelTests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AEViewModelTests.plist; sourceTree = "<group>"; };
+		8BC392962157BFBD0029D779 /* AEViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEViewModel.h; sourceTree = "<group>"; };
+		8BC392972157BFBD0029D779 /* AEViewModel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AEViewModel.plist; sourceTree = "<group>"; };
+		8BC3929A2157BFC50029D779 /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		8BC3929B2157BFC50029D779 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		8BC3929C2157BFC50029D779 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		8BC3929D2157BFC50029D779 /* BasicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicDataSource.swift; sourceTree = "<group>"; };
+		8BC3929E2157BFC50029D779 /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		8BC3929F2157BFC50029D779 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		8BC392A02157BFC50029D779 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		8BC392AA2157BFCF0029D779 /* AEViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,24 +69,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8B3275FC1E9AD82A00FD9502 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				8B3275FF1E9AD82A00FD9502 /* AEViewModelTests.swift */,
-				8B3275FD1E9AD82A00FD9502 /* Supporting Files */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		8B3275FD1E9AD82A00FD9502 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8B3276131E9AE1BA00FD9502 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			path = TableTests;
-			sourceTree = "<group>";
-		};
 		8B3276111E9AE13B00FD9502 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,8 +84,9 @@
 			isa = PBXGroup;
 			children = (
 				8B3276071E9ADB3800FD9502 /* Package.swift */,
-				8B8AFF291E9866ED0090B362 /* Sources */,
-				8B3275FC1E9AD82A00FD9502 /* Tests */,
+				8BC392942157BFBD0029D779 /* Resources */,
+				8BC392982157BFC50029D779 /* Sources */,
+				8BC392A82157BFCF0029D779 /* Tests */,
 				8B893AAF1E98665F00B3101B /* Products */,
 				8B3276111E9AE13B00FD9502 /* Supporting Files */,
 			);
@@ -118,28 +101,52 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8B893AB01E98665F00B3101B /* Supporting Files */ = {
+		8BC392942157BFBD0029D779 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8B3276241E9AED1400FD9502 /* AEViewModel.h */,
-				8B3276261E9AED4100FD9502 /* Info.plist */,
+				8BC392962157BFBD0029D779 /* AEViewModel.h */,
+				8BC392972157BFBD0029D779 /* AEViewModel.plist */,
+				8BC392952157BFBD0029D779 /* AEViewModelTests.plist */,
 			);
-			name = "Supporting Files";
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		8B8AFF291E9866ED0090B362 /* Sources */ = {
+		8BC392982157BFC50029D779 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8B7281B01EE2E96D007245E7 /* DataSource.swift */,
-				8B9D884F20629D9C0060C60A /* BasicDataSource.swift */,
-				8B0EA5D120646C10002DA0AC /* Cell.swift */,
-				8B32764D1E9C284B00FD9502 /* TableCell.swift */,
-				8B7281B21EE2EFA2007245E7 /* TableViewController.swift */,
-				8B9EC5EA1F5FFDAD00194BAE /* CollectionCell.swift */,
-				8B9EC5EC1F5FFDB100194BAE /* CollectionViewController.swift */,
-				8B893AB01E98665F00B3101B /* Supporting Files */,
+				8BC392992157BFC50029D779 /* AEViewModel */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		8BC392992157BFC50029D779 /* AEViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8BC3929A2157BFC50029D779 /* CollectionCell.swift */,
+				8BC3929B2157BFC50029D779 /* Cell.swift */,
+				8BC3929C2157BFC50029D779 /* TableViewController.swift */,
+				8BC3929D2157BFC50029D779 /* BasicDataSource.swift */,
+				8BC3929E2157BFC50029D779 /* TableCell.swift */,
+				8BC3929F2157BFC50029D779 /* DataSource.swift */,
+				8BC392A02157BFC50029D779 /* CollectionViewController.swift */,
+			);
+			path = AEViewModel;
+			sourceTree = "<group>";
+		};
+		8BC392A82157BFCF0029D779 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8BC392A92157BFCF0029D779 /* AEViewModelTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		8BC392A92157BFCF0029D779 /* AEViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BC392AA2157BFCF0029D779 /* AEViewModelTests.swift */,
+			);
+			path = AEViewModelTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +156,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B3276251E9AED1400FD9502 /* AEViewModel.h in Headers */,
+				8BC392AC2157BFDE0029D779 /* AEViewModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,13 +262,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9EC5ED1F5FFDB100194BAE /* CollectionViewController.swift in Sources */,
-				8B9EC5EB1F5FFDAD00194BAE /* CollectionCell.swift in Sources */,
-				8B0EA5D220646C10002DA0AC /* Cell.swift in Sources */,
-				8B32764E1E9C284B00FD9502 /* TableCell.swift in Sources */,
-				8B9D885020629D9C0060C60A /* BasicDataSource.swift in Sources */,
-				8B7281B31EE2EFA2007245E7 /* TableViewController.swift in Sources */,
-				8B7281B11EE2E96D007245E7 /* DataSource.swift in Sources */,
+				8BC392A62157BFC50029D779 /* DataSource.swift in Sources */,
+				8BC392A52157BFC50029D779 /* TableCell.swift in Sources */,
+				8BC392A12157BFC50029D779 /* CollectionCell.swift in Sources */,
+				8BC392A42157BFC50029D779 /* BasicDataSource.swift in Sources */,
+				8BC392A72157BFC50029D779 /* CollectionViewController.swift in Sources */,
+				8BC392A32157BFC50029D779 /* TableViewController.swift in Sources */,
+				8BC392A22157BFC50029D779 /* Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B3276011E9AD82A00FD9502 /* AEViewModelTests.swift in Sources */,
+				8BC392AB2157BFCF0029D779 /* AEViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +421,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Resources/AEViewModel.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AEViewModel;
@@ -435,7 +442,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Resources/AEViewModel.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.AEViewModel;
@@ -451,7 +458,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = VL46Q749LJ;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Resources/AEViewModelTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -464,7 +471,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = VL46Q749LJ;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = Resources/AEViewModelTests.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tadija.TableTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

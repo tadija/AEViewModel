@@ -6,7 +6,7 @@ s.version = '0.8.2'
 s.license = { :type => 'MIT', :file => 'LICENSE' }
 
 s.source = { :git => 'https://github.com/tadija/AEViewModel.git', :tag => s.version }
-s.source_files = 'Sources/*.swift'
+s.source_files = 'Sources/AEViewModel/*.swift'
 
 s.swift_version = '4.2'
 
