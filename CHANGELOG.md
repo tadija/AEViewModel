@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.8.3
+
+- Bumping Swift language version to 4.2 with Xcode 10
+- Minor other changes
+
 ## Version 0.8.2
 
 - Simplified callback logic
