@@ -26,7 +26,7 @@ open class TableViewController: UITableViewController, CellDelegate {
         self.init(dataSource: BasicDataSource(), style: .grouped)
     }
     
-    public convenience init(dataSource: DataSource, style: UITableViewStyle = .grouped) {
+    public convenience init(dataSource: DataSource, style: UITableView.Style = .grouped) {
         self.init(style: style)
         self.dataSource = dataSource
     }
