@@ -80,7 +80,7 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
         collectionView?.reloadData()
     }
     
-    private func registerCells() {
+    public func registerCells() {
         dataSource.uniqueIdentifiers.forEach { id in
             registerCell(with: id)
         }
