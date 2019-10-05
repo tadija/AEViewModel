@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.9.0
+
+- Migrate to Swift 5 with Xcode 11 (11A420a)
+- Update "swift_versions" in podspec file
+
 ## Version 0.8.3
 
 - Bumping Swift language version to 4.2 with Xcode 10
