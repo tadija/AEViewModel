@@ -1,8 +1,8 @@
-[![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg?style=flat)](https://swift.org)
+[![Swift 5.1](https://img.shields.io/badge/Swift-5.1-orange.svg?style=flat)](https://swift.org)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com)
 [![CocoaPods](https://img.shields.io/cocoapods/v/AEViewModel.svg?style=flat)](https://cocoapods.org/pods/AEViewModel)
 [![Carthage](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![SPM](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![License MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat)](LICENSE)
 
 # AEViewModel
@@ -231,8 +231,8 @@ final class ExampleTVC: TableViewController {
 
 - [Swift Package Manager](https://swift.org/package-manager/):
 
-	```
-	.Package(url: "https://github.com/tadija/AEViewModel.git", majorVersion: 0)
+	```swift
+	.package(url: "https://github.com/tadija/AEViewModel.git", from: "0.9.0")
 	```
 
 - [Carthage](https://github.com/Carthage/Carthage):

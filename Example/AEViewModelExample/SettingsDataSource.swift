@@ -1,6 +1,6 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2018
+ *  Copyright (c) Marko Tadić 2017-2019
  *  Licensed under the MIT license. See LICENSE file.
  */
 
