@@ -1,4 +1,4 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.0
 
 /**
  *  https://github.com/tadija/AEViewModel
@@ -10,8 +10,14 @@ import PackageDescription
 
 let package = Package(
     name: "AEViewModel",
+    platforms: [
+        .iOS(.v8)
+    ],
     products: [
-        .library(name: "AEViewModel", targets: ["AEViewModel"])
+        .library(
+            name: "AEViewModel",
+            targets: ["AEViewModel"]
+        )
     ],
     targets: [
         .target(
