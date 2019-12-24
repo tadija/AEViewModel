@@ -1,13 +1,15 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import UIKit
 
 extension UIImageView {
-    func loadImage(from url: URL?, placeholer: UIImage? = nil, completion: (() -> Void)? = nil) {
+    func loadImage(from url: URL?,
+                   placeholer: UIImage? = nil,
+                   completion: (() -> Void)? = nil) {
         image = placeholer
         ImageLoader.shared.loadImage(with: url) { [weak self] (image) in
             self?.image = image
@@ -30,18 +32,19 @@ private class ImageLoader {
                 completion(image)
             }
         } else {
-            URLSession.shared.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
-                if let data = data, let image = UIImage(data: data) {
-                    self?.cache.setObject(image, forKey: cacheKey)
-                    DispatchQueue.main.async {
-                        completion(image)
+            URLSession.shared
+                .dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
+                    if let data = data, let image = UIImage(data: data) {
+                        self?.cache.setObject(image, forKey: cacheKey)
+                        DispatchQueue.main.async {
+                            completion(image)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(nil)
+                        }
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        completion(nil)
-                    }
-                }
-            }).resume()
+                }).resume()
         }
     }
 }

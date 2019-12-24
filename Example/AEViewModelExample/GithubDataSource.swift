@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import AEViewModel
@@ -16,7 +16,8 @@ final class GithubDataSource: DataSource {
 
     func reload(then handler: @escaping (GithubDataSource) -> Void) {
         fetchTrendingSwiftRepos { [weak self] (repos) in
-            let items = repos?.map { BasicItem(identifier: Id.repo, viewModel: $0) } ?? [BasicItem]()
+            let items = repos?
+                .map { BasicItem(identifier: Id.repo, viewModel: $0) } ?? [BasicItem]()
             self?.sections = [BasicSection(items: items)]
             DispatchQueue.main.async {
                 handler(self ?? GithubDataSource())
@@ -34,7 +35,9 @@ final class GithubDataSource: DataSource {
                 let response = try? decoder.decode(GithubResponse.self, from: data)
                 handler(response?.items)
             } else {
-                debugPrint("Error with loading data: \(String(describing: error?.localizedDescription))")
+                debugPrint(
+                    "Error with loading data: \(String(describing: error?.localizedDescription))"
+                )
                 handler(nil)
             }
         }.resume()
@@ -52,7 +55,8 @@ final class GithubDataSource: DataSource {
     }
     
     private var lastWeekDate: String {
-        let lastWeekDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())!
+        let lastWeekDate = Calendar.current
+            .date(byAdding: .weekOfYear, value: -1, to: Date())!
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd"
         let date = df.string(from: lastWeekDate)
@@ -92,7 +96,8 @@ struct Owner: Codable {
 
 extension Repo: ViewModel {
     var ownerImageURL: URL? {
-        let avatarURL = owner.avatarURL.replacingOccurrences(of: "?v=3", with: "")
+        let avatarURL = owner.avatarURL
+            .replacingOccurrences(of: "?v=3", with: "")
         return URL(string: avatarURL)
     }
     var updatedFormatted: String {

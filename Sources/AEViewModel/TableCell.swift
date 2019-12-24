@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import UIKit
@@ -245,7 +245,10 @@ open class TableCellSliderWithLabels: TableCellStack {
         public let rightText: String?
         public let value: Float
 
-        public init(leftText: String? = nil, centerText: String? = nil, rightText: String? = nil, value: Float) {
+        public init(leftText: String? = nil,
+                    centerText: String? = nil,
+                    rightText: String? = nil,
+                    value: Float) {
             self.leftText = leftText
             self.centerText = centerText
             self.rightText = rightText

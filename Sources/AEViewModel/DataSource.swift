@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import Foundation
@@ -43,7 +43,7 @@ public extension DataSource {
     var uniqueIdentifiers: Set<String> {
         var ids: Set<String> = Set<String>()
         sections.forEach { section in
-            let allSectionIdentifiers: [String] = section.items.map({ $0.identifier })
+            let allSectionIdentifiers: [String] = section.items.map { $0.identifier }
             ids.formUnion(allSectionIdentifiers)
         }
         return ids

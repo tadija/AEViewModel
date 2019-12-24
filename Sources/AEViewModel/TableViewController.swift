@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import UIKit
@@ -129,11 +129,13 @@ extension TableViewController {
         return dataSource.sections.count
     }
     
-    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open override func tableView(_ tableView: UITableView,
+                                 numberOfRowsInSection section: Int) -> Int {
         return dataSource.sections[section].items.count
     }
     
-    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open override func tableView(_ tableView: UITableView,
+                                 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let id = dataSource.identifier(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
         if let cell = cell as? TableCell {
@@ -142,11 +144,13 @@ extension TableViewController {
         return cell
     }
 
-    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    open override func tableView(_ tableView: UITableView,
+                                 titleForHeaderInSection section: Int) -> String? {
         return dataSource.sections[section].header
     }
 
-    open override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    open override func tableView(_ tableView: UITableView,
+                                 titleForFooterInSection section: Int) -> String? {
         return dataSource.sections[section].footer
     }
     
@@ -156,7 +160,8 @@ extension TableViewController {
 
 extension TableViewController {
     
-    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open override func tableView(_ tableView: UITableView,
+                                 didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? TableCell else {
             return
         }

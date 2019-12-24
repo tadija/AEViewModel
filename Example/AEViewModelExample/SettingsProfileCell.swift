@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import AEViewModel
@@ -31,7 +31,8 @@ final class SettingsProfileCell: TableCellBasic {
         if let viewModel = item.viewModel as? BasicViewModel {
             name.text = viewModel.title
             subtitle.text = viewModel.detail
-            profileImageView.loadImage(from: URL(string: "https://avatars1.githubusercontent.com/u/2762374"))
+            profileImageView
+                .loadImage(from: URL(string: "https://avatars1.githubusercontent.com/u/2762374"))
         }
     }
     
@@ -64,7 +65,9 @@ final class SettingsProfileCell: TableCellBasic {
         mainStack.axis = .horizontal
         mainStack.alignment = .center
         mainStack.isLayoutMarginsRelativeArrangement = true
-        mainStack.layoutMargins = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        mainStack.layoutMargins = UIEdgeInsets(
+            top: spacing, left: spacing, bottom: spacing, right: spacing
+        )
         mainStack.spacing = spacing
         
         textStack.axis = .vertical
