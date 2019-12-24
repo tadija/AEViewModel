@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name = 'AEViewModel'
-s.version = '0.9.0'
+s.version = '0.9.1'
 s.license = { :type => 'MIT', :file => 'LICENSE' }
 s.summary = 'Swift minion for convenient creation of table and collection views'
 

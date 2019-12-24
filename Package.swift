@@ -1,9 +1,9 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.1
 
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import PackageDescription
@@ -11,7 +11,7 @@ import PackageDescription
 let package = Package(
     name: "AEViewModel",
     platforms: [
-        .iOS(.v8)
+        .iOS(.v9)
     ],
     products: [
         .library(

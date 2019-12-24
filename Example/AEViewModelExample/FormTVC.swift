@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import UIKit
@@ -101,13 +101,15 @@ final class FormTVC: TableViewController, UITextFieldDelegate {
     }
 
     private func becomeFirstResponder(at indexPath: IndexPath?) {
-        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCellTextField {
+        if let indexPath = indexPath,
+            let cell = tableView.cellForRow(at: indexPath) as? TableCellTextField {
             cell.textField.becomeFirstResponder()
         }
     }
     
     private func updateButton(at indexPath: IndexPath?, enabled: Bool) {
-        if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) as? TableCellButton {
+        if let indexPath = indexPath,
+            let cell = tableView.cellForRow(at: indexPath) as? TableCellButton {
             cell.button.isEnabled = enabled
         }
     }

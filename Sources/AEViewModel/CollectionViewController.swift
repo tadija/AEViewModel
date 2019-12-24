@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import UIKit
@@ -26,7 +26,8 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
         self.init(dataSource: BasicDataSource())
     }
     
-    public convenience init(dataSource: DataSource, layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
+    public convenience init(dataSource: DataSource,
+                            layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         self.init(collectionViewLayout: layout)
         self.dataSource = dataSource
     }
@@ -55,7 +56,8 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
     // MARK: CellDelegate
 
     public func callback(from cell: Cell, sender: Any) {
-        if let cell = cell as? CollectionCell, let indexPath = collectionView?.indexPath(for: cell) {
+        if let cell = cell as? CollectionCell,
+            let indexPath = collectionView?.indexPath(for: cell) {
             action(for: cell, at: indexPath, sender: sender)
         }
     }
@@ -89,15 +91,30 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
     private func registerCell(with identifier: String) {
         switch cellType(forIdentifier: identifier) {
         case .basic:
-            collectionView?.register(CollectionCellBasic.self, forCellWithReuseIdentifier: identifier)
+            collectionView?.register(
+                CollectionCellBasic.self,
+                forCellWithReuseIdentifier: identifier
+            )
         case .button:
-            collectionView?.register(CollectionCellButton.self, forCellWithReuseIdentifier: identifier)
+            collectionView?.register(
+                CollectionCellButton.self,
+                forCellWithReuseIdentifier: identifier
+            )
         case .spinner:
-            collectionView?.register(CollectionCellSpinner.self, forCellWithReuseIdentifier: identifier)
+            collectionView?.register(
+                CollectionCellSpinner.self,
+                forCellWithReuseIdentifier: identifier
+            )
         case .customClass(let cellClass):
-            collectionView?.register(cellClass, forCellWithReuseIdentifier: identifier)
+            collectionView?.register(
+                cellClass,
+                forCellWithReuseIdentifier: identifier
+            )
         case .customNib(let cellClass):
-            collectionView?.register(cellClass.nib, forCellWithReuseIdentifier: identifier)
+            collectionView?.register(
+                cellClass.nib,
+                forCellWithReuseIdentifier: identifier
+            )
         }
     }
     
@@ -111,14 +128,16 @@ extension CollectionViewController {
         return dataSource.sections.count
     }
     
-    open override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open override func collectionView(_ collectionView: UICollectionView,
+                                      numberOfItemsInSection section: Int) -> Int {
         return dataSource.sections[section].items.count
     }
     
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let id = dataSource.identifier(at: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
+        let cell = collectionView
+            .dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
         if let cell = cell as? CollectionCell {
             update(cell, at: indexPath)
         }
@@ -131,9 +150,11 @@ extension CollectionViewController {
 
 extension CollectionViewController {
     
-    open override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionCell else {
-            return
+    open override func collectionView(_ collectionView: UICollectionView,
+                                      didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionCell
+            else {
+                return
         }
         action(for: cell, at: indexPath, sender: self)
     }

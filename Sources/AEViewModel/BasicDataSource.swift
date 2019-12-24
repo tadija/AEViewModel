@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import Foundation
@@ -32,7 +32,9 @@ public struct BasicSection: Section {
     public let footer: String?
     public var items: [Item]
 
-    public init(header: String? = nil, footer: String? = nil, items: [Item] = [Item]()) {
+    public init(header: String? = nil,
+                footer: String? = nil,
+                items: [Item] = [Item]()) {
         self.header = header
         self.footer = footer
         self.items = items
@@ -44,7 +46,9 @@ public struct BasicItem: Item {
     public var viewModel: ViewModel
     public let child: DataSource?
 
-    public init(identifier: String, viewModel: ViewModel = BasicViewModel(), child: DataSource? = nil) {
+    public init(identifier: String,
+                viewModel: ViewModel = BasicViewModel(),
+                child: DataSource? = nil) {
         self.identifier = identifier
         self.viewModel = viewModel
         self.child = child

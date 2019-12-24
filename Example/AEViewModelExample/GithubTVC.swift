@@ -1,7 +1,7 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright (c) Marko Tadić 2017-2019
- *  Licensed under the MIT license. See LICENSE file.
+ *  Copyright © 2017-2019 Marko Tadić
+ *  Licensed under the MIT license
  */
 
 import AEViewModel
@@ -53,7 +53,8 @@ final class GithubTVC: TableViewController {
     }
 
     override func action(for cell: TableCell, at indexPath: IndexPath, sender: Any) {
-        if let repo = dataSource.viewModel(at: indexPath) as? Repo, let url = URL(string: repo.url) {
+        if let repo = dataSource
+            .viewModel(at: indexPath) as? Repo, let url = URL(string: repo.url) {
             let browser = SFSafariViewController(url: url)
             browser.title = title
             present(browser, animated: true, completion: nil)

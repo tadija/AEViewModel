@@ -232,7 +232,7 @@ final class ExampleTVC: TableViewController {
 - [Swift Package Manager](https://swift.org/package-manager/):
 
 	```swift
-	.package(url: "https://github.com/tadija/AEViewModel.git", from: "0.9.0")
+	.package(url: "https://github.com/tadija/AEViewModel.git", from: "0.9.1")
 	```
 
 - [Carthage](https://github.com/Carthage/Carthage):
