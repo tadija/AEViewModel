@@ -78,16 +78,37 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
         if let title = dataSource.title {
             self.title = title
         }
-        registerCells()
         collectionView?.reloadData()
     }
     
-    public func registerCells() {
-        dataSource.uniqueIdentifiers.forEach { id in
-            registerCell(with: id)
-        }
+}
+
+// MARK: - UICollectionViewControllerDataSource
+
+extension CollectionViewController {
+    
+    open override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return dataSource.sections.count
     }
     
+    open override func collectionView(_ collectionView: UICollectionView,
+                                      numberOfItemsInSection section: Int) -> Int {
+        return dataSource.sections[section].items.count
+    }
+    
+    open override func collectionView(_ collectionView: UICollectionView,
+                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let id = dataSource.identifier(at: indexPath)
+        registerCell(with: id)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
+        if let cell = cell as? CollectionCell {
+            update(cell, at: indexPath)
+        }
+        return cell
+    }
+
+    // MARK: Helpers
+
     private func registerCell(with identifier: String) {
         switch cellType(forIdentifier: identifier) {
         case .basic:
@@ -116,32 +137,6 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
                 forCellWithReuseIdentifier: identifier
             )
         }
-    }
-    
-}
-
-// MARK: - UICollectionViewControllerDataSource
-
-extension CollectionViewController {
-    
-    open override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return dataSource.sections.count
-    }
-    
-    open override func collectionView(_ collectionView: UICollectionView,
-                                      numberOfItemsInSection section: Int) -> Int {
-        return dataSource.sections[section].items.count
-    }
-    
-    open override func collectionView(_ collectionView: UICollectionView,
-                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let id = dataSource.identifier(at: indexPath)
-        let cell = collectionView
-            .dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
-        if let cell = cell as? CollectionCell {
-            update(cell, at: indexPath)
-        }
-        return cell
     }
     
 }
