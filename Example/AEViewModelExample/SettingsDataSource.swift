@@ -16,7 +16,7 @@ struct SettingsDataSource: DataSource {
         static let hotspot = "hotspot"
         static let vpn = "vpn"
         static let carrier = "carrier"
-        
+
         struct Wifi {
             static let wifiSwitch = "wifiSwitch"
             static let wifiNetwork = "wifiNetwork"

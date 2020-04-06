@@ -16,13 +16,13 @@ final class GithubTVC: TableViewController {
     }
 
     // MARK: Init
-    
+
     public convenience init() {
         self.init(style: .plain)
     }
-    
+
     // MARK: Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,20 +34,20 @@ final class GithubTVC: TableViewController {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
     }
-    
+
     private var initialAppear = true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if initialAppear {
             initialAppear = false
             performManualRefresh()
         }
     }
-    
+
     // MARK: Override
-    
+
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         return .customNib(GithubRepoCell.self)
     }
@@ -60,7 +60,7 @@ final class GithubTVC: TableViewController {
             present(browser, animated: true, completion: nil)
         }
     }
-    
+
     // MARK: Helpers
 
     private func performManualRefresh() {
@@ -70,13 +70,13 @@ final class GithubTVC: TableViewController {
             refresh(refreshControl)
         }
     }
-    
+
     @objc
     private func refresh(_ sender: UIRefreshControl) {
-        github?.reload() { [weak self] (viewModel) in
+        github?.reload { [weak self] (viewModel) in
             sender.endRefreshing()
             self?.dataSource = viewModel
         }
     }
-    
+
 }

@@ -8,13 +8,13 @@ import UIKit
 import AEViewModel
 
 final class FormTVC: TableViewController, UITextFieldDelegate {
-    
+
     typealias Id = FormDataSource.Id
 
     // MARK: Propertis
 
     private var username = String()
-    
+
     // MARK: Lifecycle
 
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ final class FormTVC: TableViewController, UITextFieldDelegate {
     }
 
     // MARK: Override
-    
+
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         switch identifier {
         case Id.username, Id.password:
@@ -36,10 +36,10 @@ final class FormTVC: TableViewController, UITextFieldDelegate {
             fatalError("Identifier not supported.")
         }
     }
-    
+
     override func update(_ cell: TableCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
-        
+
         let id = dataSource.identifier(at: indexPath)
         switch id {
         case Id.username:
@@ -106,14 +106,14 @@ final class FormTVC: TableViewController, UITextFieldDelegate {
             cell.textField.becomeFirstResponder()
         }
     }
-    
+
     private func updateButton(at indexPath: IndexPath?, enabled: Bool) {
         if let indexPath = indexPath,
             let cell = tableView.cellForRow(at: indexPath) as? TableCellButton {
             cell.button.isEnabled = enabled
         }
     }
-    
+
     private func presentAlert() {
         let alert = UIAlertController(title: "Thank you \(username)",
                                       message: "Nice to have you onboard!",
@@ -122,5 +122,5 @@ final class FormTVC: TableViewController, UITextFieldDelegate {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-    
+
 }

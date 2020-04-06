@@ -17,7 +17,7 @@ public enum CollectionCellType {
 }
 
 // MARK: - Base Cells
-    
+
 open class CollectionCellBasic: CollectionCell {
     public weak var delegate: CellDelegate?
 
@@ -42,7 +42,7 @@ open class CollectionCellBasic: CollectionCell {
         super.prepareForReuse()
         reset()
     }
-    
+
     open func configure() {
         reset()
     }
@@ -102,7 +102,7 @@ open class CollectionCellSpinner: CollectionCellBasic {
 
     open override func configure() {
         super.configure()
-        
+
         contentView.addSubview(spinner)
         spinner.translatesAutoresizingMaskIntoConstraints = false
 

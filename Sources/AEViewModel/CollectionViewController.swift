@@ -7,7 +7,7 @@
 import UIKit
 
 open class CollectionViewController: UICollectionViewController, CellDelegate {
-    
+
     // MARK: Properties
 
     open var isAutomaticReloadEnabled = true
@@ -19,21 +19,21 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
             }
         }
     }
-    
+
     // MARK: Init
 
     public convenience init() {
         self.init(dataSource: BasicDataSource())
     }
-    
+
     public convenience init(dataSource: DataSource,
                             layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         self.init(collectionViewLayout: layout)
         self.dataSource = dataSource
     }
-    
+
     // MARK: Lifecycle
-    
+
     open override func viewDidLoad() {
         super.viewDidLoad()
         reload()
@@ -61,9 +61,9 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
             action(for: cell, at: indexPath, sender: sender)
         }
     }
-    
+
     // MARK: Helpers
-    
+
     private func reload() {
         if Thread.isMainThread {
             performReload()
@@ -80,22 +80,22 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
         }
         collectionView?.reloadData()
     }
-    
+
 }
 
 // MARK: - UICollectionViewControllerDataSource
 
 extension CollectionViewController {
-    
+
     open override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dataSource.sections.count
     }
-    
+
     open override func collectionView(_ collectionView: UICollectionView,
                                       numberOfItemsInSection section: Int) -> Int {
         return dataSource.sections[section].items.count
     }
-    
+
     open override func collectionView(_ collectionView: UICollectionView,
                                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let id = dataSource.identifier(at: indexPath)
@@ -138,13 +138,13 @@ extension CollectionViewController {
             )
         }
     }
-    
+
 }
 
 // MARK: - UICollectionViewControllerDelegate
 
 extension CollectionViewController {
-    
+
     open override func collectionView(_ collectionView: UICollectionView,
                                       didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionCell
@@ -153,5 +153,5 @@ extension CollectionViewController {
         }
         action(for: cell, at: indexPath, sender: self)
     }
-    
+
 }

@@ -8,22 +8,22 @@ import UIKit
 import AEViewModel
 
 final class ExampleTVC: TableViewController {
-    
+
     typealias Id = ExampleDataSource.Id
-    
+
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = ExampleDataSource()
     }
-    
+
     // MARK: Override
-    
+
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         return .subtitle
     }
-    
+
     override func update(_ cell: TableCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
         cell.accessoryType = .disclosureIndicator
@@ -43,5 +43,5 @@ final class ExampleTVC: TableViewController {
             break
         }
     }
-    
+
 }

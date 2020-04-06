@@ -43,7 +43,7 @@ struct CellsDataSource: DataSource {
                     identifier: Id.rightDetail.rawValue,
                     title: "Right",
                     detail: "Detail"
-                ),
+                )
             ]),
             BasicSection(header: "Custom", items: [
                 BasicItem(identifier: Id.toggle.rawValue,
@@ -68,8 +68,8 @@ struct CellsDataSource: DataSource {
                           title: "Text View",
                           detail: "with some text on it..."),
                 BasicItem(identifier: Id.button.rawValue, title: "Button"),
-                BasicItem(identifier: Id.spinner.rawValue, title: "Spinner"),
-            ]),
+                BasicItem(identifier: Id.spinner.rawValue, title: "Spinner")
+            ])
         ]
     }
 }

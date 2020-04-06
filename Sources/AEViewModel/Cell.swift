@@ -13,7 +13,7 @@ public protocol CellDelegate: class {
 public protocol Cell: class {
     static var reuseIdentifier: String { get }
     static var nib: UINib? { get }
-    
+
     var delegate: CellDelegate? { get set }
     var userInfo: [AnyHashable: Any] { get set }
 

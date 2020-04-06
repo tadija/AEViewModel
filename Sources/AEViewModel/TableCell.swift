@@ -31,7 +31,7 @@ public enum TableCellUserInfo: String {
 }
 
 // MARK: - Base Cells
-    
+
 open class TableCellBasic: TableCell {
     public weak var delegate: CellDelegate?
 
@@ -369,7 +369,7 @@ open class TableCellTextView: TableCellBasic, UITextViewDelegate {
 
 open class TableCellButton: TableCellBasic {
     public let button = UIButton(type: .system)
-    
+
     open override func configure() {
         super.configure()
 

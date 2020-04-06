@@ -13,7 +13,7 @@ struct FormDataSource: DataSource {
         static let accept = "accept"
         static let register = "register"
     }
-    
+
     var title: String? = "Registration"
     var sections: [Section] = [Input(), Actions()]
 

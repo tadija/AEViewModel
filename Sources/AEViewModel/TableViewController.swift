@@ -7,7 +7,7 @@
 import UIKit
 
 open class TableViewController: UITableViewController, CellDelegate {
-    
+
     // MARK: Properties
 
     open var isAutomaticReloadEnabled = true
@@ -19,18 +19,18 @@ open class TableViewController: UITableViewController, CellDelegate {
             }
         }
     }
-    
+
     // MARK: Init
 
     public convenience init() {
         self.init(dataSource: BasicDataSource(), style: .grouped)
     }
-    
+
     public convenience init(dataSource: DataSource, style: UITableView.Style = .grouped) {
         self.init(style: style)
         self.dataSource = dataSource
     }
-    
+
     // MARK: Lifecycle
 
     open override func viewDidLoad() {
@@ -61,7 +61,7 @@ open class TableViewController: UITableViewController, CellDelegate {
     }
 
     // MARK: Helpers
-    
+
     private func reload() {
         if Thread.isMainThread {
             performReload()
@@ -78,22 +78,22 @@ open class TableViewController: UITableViewController, CellDelegate {
         }
         tableView.reloadData()
     }
-    
+
 }
 
 // MARK: - UITableViewControllerDataSource
 
 extension TableViewController {
-    
+
     open override func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.sections.count
     }
-    
+
     open override func tableView(_ tableView: UITableView,
                                  numberOfRowsInSection section: Int) -> Int {
         return dataSource.sections[section].items.count
     }
-    
+
     open override func tableView(_ tableView: UITableView,
                                  cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let id = dataSource.identifier(at: indexPath)
@@ -149,13 +149,13 @@ extension TableViewController {
             tableView.register(cellClass.nib, forCellReuseIdentifier: identifier)
         }
     }
-    
+
 }
 
 // MARK: - UITableViewControllerDelegate
 
 extension TableViewController {
-    
+
     open override func tableView(_ tableView: UITableView,
                                  didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? TableCell else {
@@ -165,5 +165,5 @@ extension TableViewController {
             action(for: cell, at: indexPath, sender: self)
         }
     }
-    
+
 }

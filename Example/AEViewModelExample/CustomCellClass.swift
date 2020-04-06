@@ -10,23 +10,23 @@ import UIKit
 import Table
 
 class CustomCellClass: TableCellSubtitle {
-    
+
     // MARK: - TableCell
-    
+
     override func configureUI() {
         textLabel?.font = UIFont.preferredFont(forTextStyle: .title2)
         detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
     }
-    
+
     override func updateUI(with item: Item) {
         super.updateUI(with: item)
-        
+
         let url = URL(string: "https://avatars1.githubusercontent.com/u/2762374")!
         imageView?.setImage(from: url)
     }
-    
+
     // MARK: - Lifecycle
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -34,5 +34,5 @@ class CustomCellClass: TableCellSubtitle {
         imageView?.layer.cornerRadius = width / 2
         imageView?.layer.masksToBounds = true
     }
-    
+
 }
