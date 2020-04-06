@@ -1,13 +1,13 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright © 2017-2019 Marko Tadić
+ *  Copyright © 2017-2020 Marko Tadić
  *  Licensed under the MIT license
  */
 
 import UIKit
 
 open class TableViewController: UITableViewController, CellDelegate {
-    
+
     // MARK: Properties
 
     open var isAutomaticReloadEnabled = true
@@ -19,18 +19,18 @@ open class TableViewController: UITableViewController, CellDelegate {
             }
         }
     }
-    
+
     // MARK: Init
 
     public convenience init() {
         self.init(dataSource: BasicDataSource(), style: .grouped)
     }
-    
+
     public convenience init(dataSource: DataSource, style: UITableView.Style = .grouped) {
         self.init(style: style)
         self.dataSource = dataSource
     }
-    
+
     // MARK: Lifecycle
 
     open override func viewDidLoad() {
@@ -61,7 +61,7 @@ open class TableViewController: UITableViewController, CellDelegate {
     }
 
     // MARK: Helpers
-    
+
     private func reload() {
         if Thread.isMainThread {
             performReload()
@@ -76,16 +76,47 @@ open class TableViewController: UITableViewController, CellDelegate {
         if let title = dataSource.title {
             self.title = title
         }
-        registerCells()
         tableView.reloadData()
     }
-    
-    private func registerCells() {
-        dataSource.uniqueIdentifiers.forEach { id in
-            registerCell(with: id)
-        }
+
+}
+
+// MARK: - UITableViewControllerDataSource
+
+extension TableViewController {
+
+    open override func numberOfSections(in tableView: UITableView) -> Int {
+        return dataSource.sections.count
     }
-    
+
+    open override func tableView(_ tableView: UITableView,
+                                 numberOfRowsInSection section: Int) -> Int {
+        return dataSource.sections[section].items.count
+    }
+
+    open override func tableView(_ tableView: UITableView,
+                                 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let id = dataSource.identifier(at: indexPath)
+        registerCell(with: id)
+        let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
+        if let cell = cell as? TableCell {
+            update(cell, at: indexPath)
+        }
+        return cell
+    }
+
+    open override func tableView(_ tableView: UITableView,
+                                 titleForHeaderInSection section: Int) -> String? {
+        return dataSource.sections[section].header
+    }
+
+    open override func tableView(_ tableView: UITableView,
+                                 titleForFooterInSection section: Int) -> String? {
+        return dataSource.sections[section].footer
+    }
+
+    // MARK: Helpers
+
     private func registerCell(with identifier: String) {
         switch cellType(forIdentifier: identifier) {
         case .basic:
@@ -118,48 +149,13 @@ open class TableViewController: UITableViewController, CellDelegate {
             tableView.register(cellClass.nib, forCellReuseIdentifier: identifier)
         }
     }
-    
-}
 
-// MARK: - UITableViewControllerDataSource
-
-extension TableViewController {
-    
-    open override func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource.sections.count
-    }
-    
-    open override func tableView(_ tableView: UITableView,
-                                 numberOfRowsInSection section: Int) -> Int {
-        return dataSource.sections[section].items.count
-    }
-    
-    open override func tableView(_ tableView: UITableView,
-                                 cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let id = dataSource.identifier(at: indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
-        if let cell = cell as? TableCell {
-            update(cell, at: indexPath)
-        }
-        return cell
-    }
-
-    open override func tableView(_ tableView: UITableView,
-                                 titleForHeaderInSection section: Int) -> String? {
-        return dataSource.sections[section].header
-    }
-
-    open override func tableView(_ tableView: UITableView,
-                                 titleForFooterInSection section: Int) -> String? {
-        return dataSource.sections[section].footer
-    }
-    
 }
 
 // MARK: - UITableViewControllerDelegate
 
 extension TableViewController {
-    
+
     open override func tableView(_ tableView: UITableView,
                                  didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? TableCell else {
@@ -169,5 +165,5 @@ extension TableViewController {
             action(for: cell, at: indexPath, sender: self)
         }
     }
-    
+
 }

@@ -1,6 +1,6 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright © 2017-2019 Marko Tadić
+ *  Copyright © 2017-2020 Marko Tadić
  *  Licensed under the MIT license
  */
 
@@ -16,7 +16,7 @@ struct SettingsDataSource: DataSource {
         static let hotspot = "hotspot"
         static let vpn = "vpn"
         static let carrier = "carrier"
-        
+
         struct Wifi {
             static let wifiSwitch = "wifiSwitch"
             static let wifiNetwork = "wifiNetwork"

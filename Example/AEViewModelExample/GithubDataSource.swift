@@ -1,6 +1,6 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright © 2017-2019 Marko Tadić
+ *  Copyright © 2017-2020 Marko Tadić
  *  Licensed under the MIT license
  */
 
@@ -24,9 +24,9 @@ final class GithubDataSource: DataSource {
             }
         }
     }
-    
+
     // MARK: Helpers
-    
+
     private func fetchTrendingSwiftRepos(then handler: @escaping ([Repo]?) -> Void) {
         URLSession.shared.dataTask(with: trendingSwiftReposURL) { (data, _, error) in
             if let data = data {
@@ -42,7 +42,7 @@ final class GithubDataSource: DataSource {
             }
         }.resume()
     }
-    
+
     private var trendingSwiftReposURL: URL {
         var components = URLComponents(string: "https://api.github.com/search/repositories")!
         components.queryItems = [
@@ -53,7 +53,7 @@ final class GithubDataSource: DataSource {
         let url = components.url!
         return url
     }
-    
+
     private var lastWeekDate: String {
         let lastWeekDate = Calendar.current
             .date(byAdding: .weekOfYear, value: -1, to: Date())!
@@ -78,7 +78,7 @@ struct Repo: Codable {
     let forksCount: Int
     let starsCount: Int
     let owner: Owner
-    
+
     private enum CodingKeys: String, CodingKey {
         case name, description, url = "html_url", updated = "updated_at",
         forksCount = "forks_count", starsCount = "stargazers_count", owner
@@ -88,7 +88,7 @@ struct Repo: Codable {
 struct Owner: Codable {
     let username: String
     let avatarURL: String
-    
+
     private enum CodingKeys: String, CodingKey {
         case username = "login", avatarURL = "avatar_url"
     }

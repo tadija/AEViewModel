@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.9.2
+
+- Register cells on dequeue
+- Run swiftlint autocorrect
+
 ## Version 0.9.1
 
 - Minor fixes

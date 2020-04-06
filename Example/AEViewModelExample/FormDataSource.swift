@@ -1,6 +1,6 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright © 2017-2019 Marko Tadić
+ *  Copyright © 2017-2020 Marko Tadić
  *  Licensed under the MIT license
  */
 
@@ -13,7 +13,7 @@ struct FormDataSource: DataSource {
         static let accept = "accept"
         static let register = "register"
     }
-    
+
     var title: String? = "Registration"
     var sections: [Section] = [Input(), Actions()]
 

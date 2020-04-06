@@ -1,15 +1,15 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright © 2017-2019 Marko Tadić
+ *  Copyright © 2017-2020 Marko Tadić
  *  Licensed under the MIT license
  */
 
 import AEViewModel
 
 final class GithubRepoCell: TableCellBasic {
-    
+
     // MARK: Outlets
-    
+
     @IBOutlet weak var ownerImage: UIImageView!
     @IBOutlet weak var ownerUsername: UILabel!
     @IBOutlet weak var repoUpdateDate: UILabel!
@@ -17,17 +17,17 @@ final class GithubRepoCell: TableCellBasic {
     @IBOutlet weak var repoDescription: UILabel!
     @IBOutlet weak var forks: UILabel!
     @IBOutlet weak var stars: UILabel!
-    
+
     // MARK: Override
-    
+
     override func configure() {
         super.configure()
-        
+
         accessoryType = .disclosureIndicator
         ownerImage.layer.cornerRadius = 32
         ownerImage.layer.masksToBounds = true
     }
-    
+
     override func update(with item: Item) {
         if let repo = item.viewModel as? Repo {
             ownerImage.loadImage(from: repo.ownerImageURL)
@@ -39,5 +39,5 @@ final class GithubRepoCell: TableCellBasic {
             stars.text = "★ \(repo.starsCount)"
         }
     }
-    
+
 }

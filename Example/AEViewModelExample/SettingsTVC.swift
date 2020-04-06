@@ -1,6 +1,6 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright © 2017-2019 Marko Tadić
+ *  Copyright © 2017-2020 Marko Tadić
  *  Licensed under the MIT license
  */
 
@@ -10,7 +10,7 @@ import AEViewModel
 class SettingsTVC: TableViewController {
     override func update(_ cell: TableCell, at indexPath: IndexPath) {
         super.update(cell, at: indexPath)
-        
+
         if let child = dataSource.item(at: indexPath).child, child.sections.count > 0 {
             cell.accessoryType = .disclosureIndicator
         }
@@ -18,11 +18,11 @@ class SettingsTVC: TableViewController {
 }
 
 final class MainSettingsTVC: SettingsTVC {
-    
+
     typealias Id = SettingsDataSource.Id
-    
+
     // MARK: Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +31,7 @@ final class MainSettingsTVC: SettingsTVC {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
     }
-    
+
     // MARK: Override
 
     override func cellType(forIdentifier identifier: String) -> TableCellType {
@@ -66,17 +66,17 @@ final class MainSettingsTVC: SettingsTVC {
             break
         }
     }
-    
+
 }
 
 // MARK: - WiFiSettingsTVC
 
 final class WiFiSettingsTVC: SettingsTVC {
-    
+
     typealias Id = SettingsDataSource.Id.Wifi
-    
+
     // MARK: Override
-    
+
     override func cellType(forIdentifier identifier: String) -> TableCellType {
         switch identifier {
         case Id.wifiSwitch, Id.joinNetworksSwitch:
@@ -100,5 +100,5 @@ final class WiFiSettingsTVC: SettingsTVC {
             break
         }
     }
-    
+
 }

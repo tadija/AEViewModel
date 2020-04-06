@@ -1,13 +1,13 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright © 2017-2019 Marko Tadić
+ *  Copyright © 2017-2020 Marko Tadić
  *  Licensed under the MIT license
  */
 
 import UIKit
 
 open class CollectionViewController: UICollectionViewController, CellDelegate {
-    
+
     // MARK: Properties
 
     open var isAutomaticReloadEnabled = true
@@ -19,21 +19,21 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
             }
         }
     }
-    
+
     // MARK: Init
 
     public convenience init() {
         self.init(dataSource: BasicDataSource())
     }
-    
+
     public convenience init(dataSource: DataSource,
                             layout: UICollectionViewLayout = UICollectionViewFlowLayout()) {
         self.init(collectionViewLayout: layout)
         self.dataSource = dataSource
     }
-    
+
     // MARK: Lifecycle
-    
+
     open override func viewDidLoad() {
         super.viewDidLoad()
         reload()
@@ -61,9 +61,9 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
             action(for: cell, at: indexPath, sender: sender)
         }
     }
-    
+
     // MARK: Helpers
-    
+
     private func reload() {
         if Thread.isMainThread {
             performReload()
@@ -78,16 +78,37 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
         if let title = dataSource.title {
             self.title = title
         }
-        registerCells()
         collectionView?.reloadData()
     }
-    
-    public func registerCells() {
-        dataSource.uniqueIdentifiers.forEach { id in
-            registerCell(with: id)
-        }
+
+}
+
+// MARK: - UICollectionViewControllerDataSource
+
+extension CollectionViewController {
+
+    open override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return dataSource.sections.count
     }
-    
+
+    open override func collectionView(_ collectionView: UICollectionView,
+                                      numberOfItemsInSection section: Int) -> Int {
+        return dataSource.sections[section].items.count
+    }
+
+    open override func collectionView(_ collectionView: UICollectionView,
+                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let id = dataSource.identifier(at: indexPath)
+        registerCell(with: id)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
+        if let cell = cell as? CollectionCell {
+            update(cell, at: indexPath)
+        }
+        return cell
+    }
+
+    // MARK: Helpers
+
     private func registerCell(with identifier: String) {
         switch cellType(forIdentifier: identifier) {
         case .basic:
@@ -117,39 +138,13 @@ open class CollectionViewController: UICollectionViewController, CellDelegate {
             )
         }
     }
-    
-}
 
-// MARK: - UICollectionViewControllerDataSource
-
-extension CollectionViewController {
-    
-    open override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return dataSource.sections.count
-    }
-    
-    open override func collectionView(_ collectionView: UICollectionView,
-                                      numberOfItemsInSection section: Int) -> Int {
-        return dataSource.sections[section].items.count
-    }
-    
-    open override func collectionView(_ collectionView: UICollectionView,
-                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let id = dataSource.identifier(at: indexPath)
-        let cell = collectionView
-            .dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
-        if let cell = cell as? CollectionCell {
-            update(cell, at: indexPath)
-        }
-        return cell
-    }
-    
 }
 
 // MARK: - UICollectionViewControllerDelegate
 
 extension CollectionViewController {
-    
+
     open override func collectionView(_ collectionView: UICollectionView,
                                       didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionCell
@@ -158,5 +153,5 @@ extension CollectionViewController {
         }
         action(for: cell, at: indexPath, sender: self)
     }
-    
+
 }

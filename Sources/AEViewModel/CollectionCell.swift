@@ -1,6 +1,6 @@
 /**
  *  https://github.com/tadija/AEViewModel
- *  Copyright © 2017-2019 Marko Tadić
+ *  Copyright © 2017-2020 Marko Tadić
  *  Licensed under the MIT license
  */
 
@@ -17,7 +17,7 @@ public enum CollectionCellType {
 }
 
 // MARK: - Base Cells
-    
+
 open class CollectionCellBasic: CollectionCell {
     public weak var delegate: CellDelegate?
 
@@ -42,7 +42,7 @@ open class CollectionCellBasic: CollectionCell {
         super.prepareForReuse()
         reset()
     }
-    
+
     open func configure() {
         reset()
     }
@@ -102,7 +102,7 @@ open class CollectionCellSpinner: CollectionCellBasic {
 
     open override func configure() {
         super.configure()
-        
+
         contentView.addSubview(spinner)
         spinner.translatesAutoresizingMaskIntoConstraints = false
 
